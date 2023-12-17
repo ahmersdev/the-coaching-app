@@ -1,5 +1,5 @@
 import { NotificationIcon } from "@/app/_assets";
-import { Avatar, Box, Stack, Typography } from "@mui/material";
+import { Avatar, Badge, Box, Stack, Typography } from "@mui/material";
 import { usePathname } from "next/navigation";
 import { Fragment } from "react";
 import { StyledBadge } from "./header.data";
@@ -28,7 +28,17 @@ const Header = () => {
         </Typography>
         <Box>
           <Stack direction="row" spacing={2}>
-            <NotificationIcon />
+            <Badge
+              badgeContent={4}
+              sx={{
+                ".MuiBadge-badge": {
+                  backgroundColor: "error.lighter",
+                  color: "error.darker",
+                },
+              }}
+            >
+              <NotificationIcon />
+            </Badge>
 
             <StyledBadge
               overlap="circular"
