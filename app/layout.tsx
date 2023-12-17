@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Mulish } from "next/font/google";
-import "./globals.scss";
+import "./globals.css";
 import ThemeProvider from "./_theme";
 
 const mulish = Mulish({ subsets: ["latin"] });
@@ -17,7 +17,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={mulish.className} style={{ background: "#23232a" }}>
+      <body className={mulish.className}>
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
