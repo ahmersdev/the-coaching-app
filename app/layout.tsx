@@ -17,7 +17,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={mulish.className}>
+      <body className={mulish.className} style={{ background: "#23232a" }}>
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
