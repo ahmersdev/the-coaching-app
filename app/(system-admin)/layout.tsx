@@ -8,9 +8,6 @@ import Header from "../_layouts/main-layout/header";
 const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <main>
-      <Box width={"200vw"} bgcolor={"red"}>
-        test
-      </Box>
       <Grid container>
         <Grid item xs={2}>
           <Navbar />
