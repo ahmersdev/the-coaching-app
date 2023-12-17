@@ -1,0 +1,25 @@
+import type { Metadata } from "next";
+import { Mulish } from "next/font/google";
+import "./globals.scss";
+import ThemeProvider from "./_theme";
+
+const mulish = Mulish({ subsets: ["latin"] });
+
+export const metadata: Metadata = {
+  title: "The Coaching App",
+  description: "The Coaching App",
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en">
+      <body className={mulish.className}>
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
+    </html>
+  );
+}
