@@ -22,7 +22,7 @@ const typography = {
     ...responsiveFontSizes({ xs: 20, md: 28, lg: 32 }),
   },
   h3: {
-    fontWeight: 600,
+    fontWeight: 700,
     lineHeight: 1.5,
     fontSize: pxToRem(24),
     ...responsiveFontSizes({ xs: 20, md: 22, lg: 24 }),

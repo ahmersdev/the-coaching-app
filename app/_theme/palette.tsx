@@ -11,7 +11,7 @@ const PRIMARY = {
 };
 
 const SECONDARY = {
-  lighter: "#6D6D71",
+  lighter: "#9D9DA0",
   light: "#545459",
   main: "#0B0B12",
   dark: "#3C3C41",
@@ -72,7 +72,9 @@ const GREY: any = {
 };
 
 const GRADIENTS = {
-  primary: createGradient(PRIMARY.light, PRIMARY.main),
+  primary: "linear-gradient(90deg, #6927DA 0%, #8843FF 100%)",
+  secondary:
+    "linear-gradient(89.87deg, rgba(105, 39, 218, 0.2) 0.11%, rgba(105, 39, 218, 0) 99.9%)",
   success: createGradient(SUCCESS.light, SUCCESS.main),
   warning: createGradient(WARNING.light, WARNING.main),
   error: createGradient(ERROR.light, ERROR.main),

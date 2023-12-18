@@ -17,7 +17,7 @@ const Header = () => {
         alignItems={"center"}
         bgcolor={"secondary.main"}
         borderRadius={2}
-        p={2}
+        p={"12px 24px"}
       >
         <Typography
           variant={"h3"}
@@ -29,11 +29,16 @@ const Header = () => {
         <Box>
           <Stack direction="row" spacing={2}>
             <Badge
-              badgeContent={4}
+              badgeContent={"06"}
               sx={{
                 ".MuiBadge-badge": {
                   backgroundColor: "error.lighter",
                   color: "error.darker",
+                  width: 16,
+                  fontWeight: 500,
+                  fontSize: 8,
+                  top: 5,
+                  right: 3,
                 },
               }}
             >
@@ -48,7 +53,7 @@ const Header = () => {
               <Avatar
                 alt="Profile"
                 src="https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg"
-                sx={{ width: 35, height: 35 }}
+                sx={{ width: 38, height: 38 }}
               />
             </StyledBadge>
           </Stack>
