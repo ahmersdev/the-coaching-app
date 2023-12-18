@@ -1,4 +1,4 @@
-const ClientsIcon = ({ fill = "9D9DA0" }: any) => {
+const ClientsIcon = ({ fill = "#9D9DA0" }: any) => {
   return (
     <svg
       width="22"

@@ -14,7 +14,7 @@ import CustomShadows from "./shadows";
 
 export default function ThemeProvider({ children }: { children: ReactNode }) {
   const themeOptions: any = {
-    palette: palette.light,
+    palette: palette?.light,
     typography,
     breakpoints,
     CustomShadows: CustomShadows,

@@ -32,8 +32,8 @@ const Header = () => {
               badgeContent={"06"}
               sx={{
                 ".MuiBadge-badge": {
-                  backgroundColor: "error.lighter",
-                  color: "error.darker",
+                  backgroundColor: "error.300",
+                  color: "error.700",
                   width: 16,
                   fontWeight: 500,
                   fontSize: 8,
