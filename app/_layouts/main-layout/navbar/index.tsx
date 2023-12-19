@@ -19,7 +19,7 @@ const Navbar = () => {
     <Box
       height={"100%"}
       bgcolor={"secondary.main"}
-      p={2}
+      p={{ md: 1, lg: 2 }}
       display={{ xs: "none", md: "block" }}
     >
       <Link href={"/"} style={{ display: "flex", justifyContent: "center" }}>
@@ -38,7 +38,7 @@ const Navbar = () => {
             <ListItem key={item?.id} sx={{ px: 0 }}>
               <Link href={item?.href} style={{ width: "100%" }}>
                 <ListItemButton sx={mainStyles(item?.href, pathName, theme)}>
-                  <ListItemIcon sx={{ minWidth: "40px" }}>
+                  <ListItemIcon sx={{ minWidth: { xs: "30px", lg: "40px" } }}>
                     <item.icon
                       fill={
                         item?.href === pathName
@@ -58,7 +58,7 @@ const Navbar = () => {
           <ListItem sx={{ px: 0 }}>
             <Link href={"/settings"} style={{ width: "100%" }}>
               <ListItemButton sx={mainStyles("/settings", pathName, theme)}>
-                <ListItemIcon sx={{ minWidth: "40px" }}>
+                <ListItemIcon sx={{ minWidth: { xs: "30px", lg: "40px" } }}>
                   <SettingsIcon
                     fill={
                       "/settings" === pathName
@@ -72,11 +72,11 @@ const Navbar = () => {
             </Link>
           </ListItem>
           <ListItem sx={{ px: 0 }}>
-            <ListItemButton sx={mainStyles("/sign-out", pathName, theme)}>
-              <ListItemIcon sx={{ minWidth: "40px" }}>
+            <ListItemButton sx={mainStyles("/sign-in", pathName, theme)}>
+              <ListItemIcon sx={{ minWidth: { xs: "30px", lg: "40px" } }}>
                 <SignOutIcon
                   fill={
-                    "/sign-out" === pathName
+                    "/sign-in" === pathName
                       ? theme?.palette?.grey?.[100]
                       : theme?.palette?.secondary?.[400]
                   }

@@ -16,7 +16,7 @@ export const mainStyles = (href: any, pathName: any, theme: any) => {
         ? theme?.palette?.grey?.[100]
         : theme?.palette?.secondary?.[400]
     }`,
-    padding: "10px 16px",
+    padding: { xs: "10px 8px", lg: "10px 16px" },
     fontSize: "16px",
     borderRadius: "6px 200px 200px 6px",
     "&:hover": {

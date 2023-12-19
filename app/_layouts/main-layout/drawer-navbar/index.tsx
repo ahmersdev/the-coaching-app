@@ -35,7 +35,7 @@ const DrawerNavbar = ({ open = false, setOpen }: any) => {
         alignItems={"center"}
         justifyContent={"space-between"}
       >
-        <Link href={"/"}>
+        <Link href={"/"} onClick={() => setOpen(false)}>
           <LogoIcon />
         </Link>
         <CloseIcon

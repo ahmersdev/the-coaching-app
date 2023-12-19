@@ -11,7 +11,7 @@ export const mainRoutesArray = [
   { id: 2, icon: CoachesIcon, label: "Coaches", href: "/coaches" },
   { id: 3, icon: ClientsIcon, label: "Clients", href: "/clients" },
   { id: 4, icon: SettingsIcon, label: "Settings", href: "/settings" },
-  { id: 5, icon: SignOutIcon, label: "Sign Out", href: "/sign-out" },
+  { id: 5, icon: SignOutIcon, label: "Sign Out", href: "/sign-in" },
 ];
 
 export const mainStyles = (href: any, pathName: any, theme: any) => {
