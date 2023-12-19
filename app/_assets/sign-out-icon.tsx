@@ -31,9 +31,9 @@ const SignOutIcon = ({ fill = "#9D9DA0" }: any) => {
       <path
         d="M5.36185 7.92969L2.29102 11.0005L5.36185 14.0714"
         stroke={fill}
-        stroke-width="1.375"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.375"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

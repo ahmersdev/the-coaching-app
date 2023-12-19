@@ -16,7 +16,12 @@ const Navbar = () => {
   const theme: any = useTheme();
 
   return (
-    <Box height={"100%"} bgcolor={"secondary.main"} p={2}>
+    <Box
+      height={"100%"}
+      bgcolor={"secondary.main"}
+      p={2}
+      display={{ xs: "none", md: "block" }}
+    >
       <Link href={"/"} style={{ display: "flex", justifyContent: "center" }}>
         <LogoIcon />
       </Link>

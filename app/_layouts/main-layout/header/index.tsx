@@ -1,13 +1,17 @@
 import { NotificationIcon } from "@/app/_assets";
 import { Avatar, Badge, Box, Stack, Typography } from "@mui/material";
 import { usePathname } from "next/navigation";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { StyledBadge } from "./header.data";
+import MenuIcon from "@mui/icons-material/Menu";
+import DrawerNavbar from "../drawer-navbar";
 
 const Header = () => {
   const pathName = usePathname();
 
   const title = pathName?.slice(1);
+
+  const [open, setOpen] = useState(false);
 
   return (
     <Fragment>
@@ -17,15 +21,25 @@ const Header = () => {
         alignItems={"center"}
         bgcolor={"secondary.main"}
         borderRadius={2}
-        p={"12px 24px"}
+        p={{ xs: 1, md: "12px 24px" }}
       >
-        <Typography
-          variant={"h3"}
-          color={"grey.100"}
-          textTransform={"capitalize"}
-        >
-          {title}
-        </Typography>
+        <Box display={"flex"} alignItems={"center"} gap={1}>
+          <MenuIcon
+            sx={{
+              cursor: "pointer",
+              color: "grey.100",
+              display: { xs: "block", md: "none" },
+            }}
+            onClick={() => setOpen(true)}
+          />
+          <Typography
+            variant={"h3"}
+            color={"grey.100"}
+            textTransform={"capitalize"}
+          >
+            {title}
+          </Typography>
+        </Box>
         <Box>
           <Stack direction="row" spacing={2}>
             <Badge
@@ -59,6 +73,8 @@ const Header = () => {
           </Stack>
         </Box>
       </Box>
+
+      <DrawerNavbar setOpen={setOpen} open={open} />
     </Fragment>
   );
 };
