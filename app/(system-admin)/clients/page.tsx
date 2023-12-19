@@ -1,5 +1,7 @@
+import Clients from "@/app/_sections/system-admin/clients";
+
 const ClientsPage = () => {
-  return <>ClientsPage</>;
+  return <Clients />;
 };
 
 export default ClientsPage;

@@ -1,7 +1,6 @@
-import { Mulish } from "next/font/google";
 import { pxToRem, responsiveFontSizes } from "../_utils/getFontValue";
 
-const FONT_FAMILY = Mulish({ subsets: ["latin"] });
+const FONT_FAMILY = "__Mulish_2f1d39";
 
 const typography = {
   fontFamily: FONT_FAMILY,
@@ -45,18 +44,6 @@ const typography = {
     fontSize: pxToRem(16),
     ...responsiveFontSizes({ xs: 12, md: 14, lg: 16 }),
   },
-  // TODO: subtitle1: {
-  //   fontWeight: 700,
-  //   lineHeight: 1.5,
-  //   fontSize: pxToRem(20),
-  //   ...responsiveFontSizes({ xs: 10, md: 10, lg: 18 }),
-  // },
-  // subtitle2: {
-  //   fontWeight: 700,
-  //   lineHeight: 1.5,
-  //   fontSize: pxToRem(12),
-  //   ...responsiveFontSizes({ xs: 18, md: 18, lg: 18 }),
-  // },
   body1: {
     lineHeight: 1.5,
     fontSize: pxToRem(14),
@@ -64,6 +51,16 @@ const typography = {
   body2: {
     lineHeight: 22 / 14,
     fontSize: pxToRem(12),
+  },
+  button1: {
+    fontWeight: 500,
+    lineHeight: "20px",
+    fontSize: pxToRem(14),
+    background:
+      "linear-gradient(0deg, #F0E9FB, #F0E9FB), linear-gradient(0deg, #E1D4F8, #E1D4F8)",
+    border: "1px solid #F0E9FB",
+    borderRadius: "100px",
+    boxShadow: "none",
   },
 };
 

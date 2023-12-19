@@ -115,7 +115,7 @@ const COMMON = {
   grey: GREY,
   gradients: GRADIENTS,
 
-  divider: GREY[400],
+  divider: GREY[800],
 
   action: {
     hover: GREY[400],

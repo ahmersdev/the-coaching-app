@@ -1,5 +1,7 @@
+import Dashboard from "@/app/_sections/system-admin/dashboard";
+
 const DashboardPage = () => {
-  return <div>System Admin</div>;
+  return <Dashboard />;
 };
 
 export default DashboardPage;

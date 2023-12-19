@@ -1,8 +1,6 @@
-import { Theme, alpha } from "@mui/material";
-
-const CustomShadows = (theme: Theme) => {
+const CustomShadows = () => {
   return {
-    primary: `2px -2px 10px 21px ${alpha(theme.palette.primary.main, 0.4)}`,
+    primary: `1px 2px 0px 0px #833BFE`,
   };
 };
 export default CustomShadows;

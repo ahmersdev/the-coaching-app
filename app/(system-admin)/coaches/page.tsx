@@ -1,5 +1,7 @@
+import Coaches from "@/app/_sections/system-admin/coaches";
+
 const CoachesPage = () => {
-  return <>lorem5000</>;
+  return <Coaches />;
 };
 
 export default CoachesPage;
