@@ -2,8 +2,9 @@
 
 import { Stack } from "@mui/material";
 import Header from "./header";
-import { coachesArray, headerCardsArray } from "./dashboard.data";
+import { clientsArray, coachesArray, headerCardsArray } from "./dashboard.data";
 import Coaches from "./coaches";
+import Clients from "./clients";
 
 const Dashboard = () => {
   return (
@@ -11,6 +12,8 @@ const Dashboard = () => {
       <Header name={"John"} headerCardsArray={headerCardsArray} />
 
       <Coaches coachesArray={coachesArray} />
+
+      <Clients clientsArray={clientsArray} />
     </Stack>
   );
 };

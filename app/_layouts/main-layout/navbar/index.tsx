@@ -41,7 +41,7 @@ const Navbar = () => {
                   <ListItemIcon sx={{ minWidth: { xs: "30px", lg: "40px" } }}>
                     <item.icon
                       fill={
-                        item?.href === pathName
+                        pathName?.includes(item?.href)
                           ? theme?.palette?.grey?.[100]
                           : theme?.palette?.secondary?.[400]
                       }

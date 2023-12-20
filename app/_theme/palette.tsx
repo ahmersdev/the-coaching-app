@@ -96,6 +96,10 @@ const GRADIENTS = {
   primary: "linear-gradient(90deg, #6927DA 0%, #8843FF 100%)",
   secondary:
     "linear-gradient(89.87deg, rgba(105, 39, 218, 0.2) 0.11%, rgba(105, 39, 218, 0) 99.9%)",
+  button1:
+    "linear-gradient(0deg, #F0E9FB, #F0E9FB), linear-gradient(0deg, #E1D4F8, #E1D4F8)",
+  button1Hover:
+    "linear-gradient(0deg, #E1D4F8, #E1D4F8), linear-gradient(0deg, #D2BEF4, #D2BEF4)",
 };
 
 const COMMON = {

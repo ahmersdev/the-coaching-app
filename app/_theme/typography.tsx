@@ -52,15 +52,12 @@ const typography = {
     lineHeight: 22 / 14,
     fontSize: pxToRem(12),
   },
-  button1: {
+  button: {
     fontWeight: 500,
     lineHeight: "20px",
     fontSize: pxToRem(14),
-    background:
-      "linear-gradient(0deg, #F0E9FB, #F0E9FB), linear-gradient(0deg, #E1D4F8, #E1D4F8)",
-    border: "1px solid #F0E9FB",
+    textTransform: "capitalize",
     borderRadius: "100px",
-    boxShadow: "none",
   },
 };
 

@@ -9,7 +9,7 @@ import DrawerNavbar from "../drawer-navbar";
 const Header = () => {
   const pathName = usePathname();
 
-  const title = pathName?.slice(1);
+  const title = pathName?.replaceAll("/", " ");
 
   const [open, setOpen] = useState(false);
 

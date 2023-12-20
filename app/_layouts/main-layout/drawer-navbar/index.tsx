@@ -1,4 +1,4 @@
-import { LogoIcon } from "@/app/_assets";
+import { LogoIcon, SignOutIcon } from "@/app/_assets";
 import {
   Box,
   Drawer,
@@ -55,7 +55,7 @@ const DrawerNavbar = ({ open = false, setOpen }: any) => {
                 <ListItemIcon sx={{ minWidth: "40px" }}>
                   <item.icon
                     fill={
-                      item?.href === pathName
+                      pathName?.includes(item?.href)
                         ? theme?.palette?.grey?.[100]
                         : theme?.palette?.secondary?.[400]
                     }
@@ -66,6 +66,20 @@ const DrawerNavbar = ({ open = false, setOpen }: any) => {
             </Link>
           </ListItem>
         ))}
+        <ListItem sx={{ px: 0 }}>
+          <ListItemButton sx={mainStyles("/sign-in", pathName, theme)}>
+            <ListItemIcon sx={{ minWidth: { xs: "30px", lg: "40px" } }}>
+              <SignOutIcon
+                fill={
+                  "/sign-in" === pathName
+                    ? theme?.palette?.grey?.[100]
+                    : theme?.palette?.secondary?.[400]
+                }
+              />
+            </ListItemIcon>
+            Sign Out
+          </ListItemButton>
+        </ListItem>
       </List>
     </Drawer>
   );
