@@ -54,14 +54,14 @@ const Clients = ({ clientsArray }: any) => {
           </Grid>
         ) : (
           clientsArray?.map((item: any) => (
-            <Grid item xs={12} sm={4} md={2.4} key={item?.id}>
+            <Grid item xs={12} sm={6} md={4} lg={2.4} key={item?.id}>
               <Box
                 bgcolor={"secondary.900"}
                 borderRadius={3}
                 padding={"16px 18px"}
                 display={"flex"}
                 alignItems={"center"}
-                justifyContent={"center"}
+                justifyContent={"space-between"}
                 flexDirection={"column"}
                 gap={2}
                 sx={{

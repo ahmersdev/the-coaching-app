@@ -36,7 +36,6 @@ const Header = ({ name, headerCardsArray }: any) => {
                 setHoverStates(newHoverStates);
               }}
               sx={{
-                cursor: "pointer",
                 ":hover": {
                   boxShadow: theme?.CustomShadows?.()?.primary,
                 },
