@@ -1,104 +1,17 @@
-import React from 'react';
-import { Box, Grid, Skeleton, useTheme } from '@mui/material';
-import { styles } from './skeleton-form.style';
+import { Grid, Skeleton } from "@mui/material";
 
 function SkeletonForm() {
-  const theme: any = useTheme();
   return (
-    <Grid container>
-      <Grid item xs={12} sm={6}>
-        <Box sx={styles?.boxStyle}>
+    <Grid container spacing={2}>
+      {[1, 2, 3, 4, 5]?.map((item: any) => (
+        <Grid item xs={12} sm={6} key={item}>
           <Skeleton
-            animation="wave"
             variant="rectangular"
-            width={'100%'}
-            sx={styles?.root(theme)}
+            height={48}
+            sx={{ bgcolor: "grey.700", borderRadius: 2 }}
           />
-        </Box>
-      </Grid>
-      <Grid item xs={12} sm={6}>
-        <Box sx={styles?.boxStyle}>
-          <Skeleton
-            animation="wave"
-            variant="rectangular"
-            width={'100%'}
-            sx={styles?.root(theme)}
-          />
-        </Box>
-      </Grid>
-      <Grid item xs={12} sm={6}>
-        <Box sx={styles?.boxStyle}>
-          <Skeleton
-            animation="wave"
-            variant="rectangular"
-            width={'100%'}
-            sx={styles?.root(theme)}
-          />
-        </Box>
-      </Grid>
-      <Grid item xs={12} sm={6}>
-        <Box sx={styles?.boxStyle}>
-          <Skeleton
-            animation="wave"
-            variant="rectangular"
-            width={'100%'}
-            sx={styles?.root(theme)}
-          />
-        </Box>
-      </Grid>
-      <Grid item xs={12} sm={6}>
-        <Box sx={styles?.boxStyle}>
-          <Skeleton
-            animation="wave"
-            variant="rectangular"
-            width={'100%'}
-            sx={styles?.root(theme)}
-          />
-        </Box>
-      </Grid>
-      <Grid item xs={12} sm={6}>
-        <Box sx={styles?.boxStyle}>
-          <Skeleton
-            animation="wave"
-            variant="rectangular"
-            width={'100%'}
-            sx={styles?.root(theme)}
-          />
-        </Box>
-      </Grid>
-      <Grid item xs={12} sm={6}>
-        <Box sx={styles?.boxStyle}>
-          <Skeleton
-            animation="wave"
-            variant="rectangular"
-            width={'100%'}
-            sx={styles?.root(theme)}
-          />
-        </Box>
-      </Grid>
-      <Grid item xs={12} sm={6}></Grid>
-      <Grid item xs={12} sm={12}>
-        <Box sx={styles?.boxStyle}>
-          <Skeleton
-            animation="wave"
-            variant="rectangular"
-            width={'100%'}
-            height={70}
-            sx={styles?.root(theme)}
-          />
-        </Box>
-      </Grid>
-      <Grid item xs={12} sm={12}>
-        <Box sx={styles?.boxStyle}>
-          <Skeleton
-            animation="wave"
-            variant="rectangular"
-            width={'100%'}
-            height={70}
-            sx={styles?.root(theme)}
-          />
-        </Box>
-      </Grid>
+        </Grid>
+      ))}
     </Grid>
   );
 }

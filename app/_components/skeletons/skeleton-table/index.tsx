@@ -1,44 +1,18 @@
-import React from "react";
-import { Box, Skeleton, useTheme } from "@mui/material";
-import { styles } from "./skeleton-table.style";
+import { Grid, Skeleton } from "@mui/material";
 
 const SkeletonTable = () => {
-  const theme: any = useTheme();
-
   return (
-    <Box>
-      <Skeleton
-        animation="wave"
-        variant="rectangular"
-        width={"100%"}
-        height={50}
-        sx={styles?.root(theme)}
-      />
-      <br />
-      <Skeleton
-        animation="wave"
-        variant="rectangular"
-        width={"100%"}
-        height={50}
-        sx={styles?.root(theme)}
-      />
-      <br />
-      <Skeleton
-        animation="wave"
-        variant="rectangular"
-        width={"100%"}
-        height={50}
-        sx={styles?.root(theme)}
-      />
-      <br />
-      <Skeleton
-        animation="wave"
-        variant="rectangular"
-        width={"100%"}
-        height={50}
-        sx={styles?.root(theme)}
-      />
-    </Box>
+    <Grid container spacing={2}>
+      {[1, 2, 3, 4, 5]?.map((item: any) => (
+        <Grid item xs={12} key={item}>
+          <Skeleton
+            variant="rectangular"
+            height={48}
+            sx={{ bgcolor: "grey.700", borderRadius: 2 }}
+          />
+        </Grid>
+      ))}
+    </Grid>
   );
 };
 

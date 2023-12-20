@@ -18,13 +18,12 @@ import {
 import { flexRender } from "@tanstack/react-table";
 import SkeletonTable from "../skeletons/skeleton-table";
 import CustomPagination from "../custom-pagination";
+import { Fragment } from "react";
 
 const TanstackTable = (props: any) => {
   const {
     columns = [],
     data = [],
-    rootSX,
-    showSerialNo = false,
     isLoading = false,
     isFetching = false,
     isError = false,
@@ -40,92 +39,89 @@ const TanstackTable = (props: any) => {
     setPageLimit,
   } = props;
 
-  const table = useTanstackTable(data, columns, showSerialNo);
+  const table = useTanstackTable(data, columns);
   if (isLoading || isFetching) return <SkeletonTable />;
 
   return (
-    <>
-      <Grid container sx={{ position: "relative", ...rootSX }}>
-        <Grid item xs={12}>
-          <TableContainer>
-            <Table>
-              <TableHead>
-                {table?.getHeaderGroups()?.map((headerGroup: any) => (
-                  <TableRow key={headerGroup}>
-                    {headerGroup?.headers?.map((header: any) => (
-                      <StyledTableCell key={header}>
-                        <Box sx={styles?.cell}>
-                          {header?.isPlaceholder
-                            ? null
-                            : flexRender(
-                                header?.column?.columnDef?.header,
-                                header?.getContext()
-                              )}
-
-                          {header?.column?.columnDef?.isSortable && (
-                            <Box
-                              display={"flex"}
-                              flexDirection={"column"}
-                              marginLeft={"4px"}
-                              gap={"2px"}
-                              {...{
-                                onClick:
-                                  header?.column?.getToggleSortingHandler(),
-                              }}
-                            >
-                              <ArrowDropUpIcon />
-                              <ArrowDropDownIcon />
-                            </Box>
+    <Fragment>
+      <TableContainer
+        sx={{
+          border: "1px solid",
+          borderColor: "secondary.800",
+          borderRadius: 4.5,
+        }}
+      >
+        <Table>
+          <TableHead>
+            {table?.getHeaderGroups()?.map((headerGroup: any) => (
+              <TableRow key={headerGroup}>
+                {headerGroup?.headers?.map((header: any) => (
+                  <StyledTableCell key={header}>
+                    <Box sx={styles?.cell}>
+                      {header?.isPlaceholder
+                        ? null
+                        : flexRender(
+                            header?.column?.columnDef?.header,
+                            header?.getContext()
                           )}
+
+                      {header?.column?.columnDef?.isSortable && (
+                        <Box
+                          display={"flex"}
+                          flexDirection={"column"}
+                          marginLeft={"4px"}
+                          gap={"2px"}
+                          {...{
+                            onClick: header?.column?.getToggleSortingHandler(),
+                          }}
+                        >
+                          <ArrowDropUpIcon />
+                          <ArrowDropDownIcon />
                         </Box>
-                      </StyledTableCell>
-                    ))}
-                  </TableRow>
+                      )}
+                    </Box>
+                  </StyledTableCell>
                 ))}
-              </TableHead>
+              </TableRow>
+            ))}
+          </TableHead>
 
-              <TableBody>
-                {isSuccess &&
-                  !isError &&
-                  table?.getRowModel()?.rows?.map((row: any) => (
-                    <StyledTableRow key={row}>
-                      {row?.getVisibleCells()?.map((cell: any) => (
-                        <StyledTableCell key={cell}>
-                          {flexRender(
-                            cell?.column?.columnDef?.cell,
-                            cell?.getContext()
-                          )}
-                        </StyledTableCell>
-                      ))}
-                    </StyledTableRow>
+          <TableBody>
+            {isSuccess &&
+              !isError &&
+              table?.getRowModel()?.rows?.map((row: any) => (
+                <StyledTableRow key={row}>
+                  {row?.getVisibleCells()?.map((cell: any) => (
+                    <StyledTableCell key={cell}>
+                      {flexRender(
+                        cell?.column?.columnDef?.cell,
+                        cell?.getContext()
+                      )}
+                    </StyledTableCell>
                   ))}
-              </TableBody>
-            </Table>
-            {isError ? (
-              <>Error</>
-            ) : (
-              !!!table?.getRowModel()?.rows?.length && isSuccess && <>No Data</>
-            )}
-          </TableContainer>
-        </Grid>
-      </Grid>
+                </StyledTableRow>
+              ))}
+          </TableBody>
+        </Table>
+        {isError ? (
+          <>Error</>
+        ) : (
+          !!!table?.getRowModel()?.rows?.length && isSuccess && <>No Data</>
+        )}
+      </TableContainer>
       {isPagination && (
-        <>
-          <br />
-          <br />
-          <CustomPagination
-            count={count}
-            pageLimit={pageLimit}
-            rowsPerPageOptions={rowsPerPageOptions}
-            currentPage={currentPage}
-            totalRecords={totalRecords}
-            onPageChange={(page: any) => onPageChange?.(page)}
-            setPage={setPage}
-            setPageLimit={setPageLimit}
-          />
-        </>
+        <CustomPagination
+          count={count}
+          pageLimit={pageLimit}
+          rowsPerPageOptions={rowsPerPageOptions}
+          currentPage={currentPage}
+          totalRecords={totalRecords}
+          onPageChange={(page: any) => onPageChange?.(page)}
+          setPage={setPage}
+          setPageLimit={setPageLimit}
+        />
       )}
-    </>
+    </Fragment>
   );
 };
 
