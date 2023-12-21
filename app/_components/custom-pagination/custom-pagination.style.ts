@@ -1,6 +1,6 @@
 export const styles = {
   tablePaginationStyle: {
-    "& .MuiTablePagination-select": {
+    ".MuiTablePagination-select": {
       border: `1px solid`,
       borderColor: "grey.400",
       borderRadius: 1,
@@ -15,44 +15,46 @@ export const styles = {
       justifyContent: "center",
     },
 
-    "& .MuiTablePagination-selectLabel": {
+    ".MuiTablePagination-selectLabel": {
       fontWeight: 500,
       color: "grey.400",
       fontSize: "14px",
     },
 
-    "& .MuiTablePagination-displayedRows": {
+    ".MuiTablePagination-displayedRows": {
       fontWeight: 500,
       marginLeft: "-18px",
       color: "grey.400",
       fontSize: "14px",
     },
 
-    "& .MuiTablePagination-actions": {
+    ".MuiTablePagination-actions": {
       display: "none",
     },
 
-    "& .MuiTablePagination-selectIcon": {
+    ".MuiTablePagination-selectIcon": {
       color: "grey.400",
     },
 
     ".MuiToolbar-root": {
       padding: 0,
+      paddingLeft: 2.5,
     },
   },
 
   counterStyle: {
-    "& .Mui-selected": {
+    ".Mui-selected": {
       backgroundColor: "secondary.800",
+      color: "grey.400",
     },
 
-    "& .MuiPaginationItem-root": {
+    ".MuiPaginationItem-root": {
       height: "40px",
       width: "40px",
       borderRadius: 0,
       fontSize: "14px",
-      backgroundColor: "secondary.main",
-      color: "grey.400",
+      backgroundColor: "secondary.main !important",
+      color: "grey.400 !important",
     },
   },
 };

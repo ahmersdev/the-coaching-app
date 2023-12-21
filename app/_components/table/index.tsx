@@ -5,20 +5,14 @@ import {
   TableHead,
   TableRow,
   Box,
-  Grid,
 } from "@mui/material";
 import useTanstackTable from "./useTanstackTable";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
-import {
-  StyledTableCell,
-  StyledTableRow,
-  styles,
-} from "./tanstack-table.styles";
+import { StyledTableCell } from "./tanstack-table.styles";
 import { flexRender } from "@tanstack/react-table";
 import SkeletonTable from "../skeletons/skeleton-table";
 import CustomPagination from "../custom-pagination";
 import { Fragment } from "react";
+import { TableDownArrow, TableUpArrow } from "@/app/_assets";
 
 const TanstackTable = (props: any) => {
   const {
@@ -57,7 +51,12 @@ const TanstackTable = (props: any) => {
               <TableRow key={headerGroup}>
                 {headerGroup?.headers?.map((header: any) => (
                   <StyledTableCell key={header}>
-                    <Box sx={styles?.cell}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                    >
                       {header?.isPlaceholder
                         ? null
                         : flexRender(
@@ -69,14 +68,14 @@ const TanstackTable = (props: any) => {
                         <Box
                           display={"flex"}
                           flexDirection={"column"}
-                          marginLeft={"4px"}
-                          gap={"2px"}
+                          marginLeft={0.7}
+                          gap={0.2}
                           {...{
                             onClick: header?.column?.getToggleSortingHandler(),
                           }}
                         >
-                          <ArrowDropUpIcon />
-                          <ArrowDropDownIcon />
+                          <TableUpArrow />
+                          <TableDownArrow />
                         </Box>
                       )}
                     </Box>
@@ -89,17 +88,22 @@ const TanstackTable = (props: any) => {
           <TableBody>
             {isSuccess &&
               !isError &&
-              table?.getRowModel()?.rows?.map((row: any) => (
-                <StyledTableRow key={row}>
+              table?.getRowModel()?.rows?.map((row: any, rowIndex: number) => (
+                <TableRow key={row}>
                   {row?.getVisibleCells()?.map((cell: any) => (
-                    <StyledTableCell key={cell}>
+                    <StyledTableCell
+                      key={cell}
+                      sx={{
+                        bgcolor: rowIndex % 2 === 0 ? "initial" : "grey.800",
+                      }}
+                    >
                       {flexRender(
                         cell?.column?.columnDef?.cell,
                         cell?.getContext()
                       )}
                     </StyledTableCell>
                   ))}
-                </StyledTableRow>
+                </TableRow>
               ))}
           </TableBody>
         </Table>
@@ -109,6 +113,7 @@ const TanstackTable = (props: any) => {
           !!!table?.getRowModel()?.rows?.length && isSuccess && <>No Data</>
         )}
       </TableContainer>
+
       {isPagination && (
         <CustomPagination
           count={count}

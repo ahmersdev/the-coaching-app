@@ -1,57 +1,22 @@
-import { TableCell, TableRow, styled, tableCellClasses } from '@mui/material';
+import { TableCell, styled, tableCellClasses } from "@mui/material";
 
-// ----------------------------------------------------------------------
-// STYLED COMPONENTS
-export const StyledTableCell = styled(TableCell)(({ theme }) => ({
+export const StyledTableCell = styled(TableCell)(({ theme }: any) => ({
   [`&.${tableCellClasses?.head}`]: {
-    color: 'slateBlue.dark',
-    fontSize: '14px',
-    lineHeight: '18px',
-    borderBottom: `1px solid  ${theme?.palette?.custom?.off_white_three}`,
-    background: 'grey.100',
-    fontWeight: theme?.typography?.fontWeightMedium,
-    backgroundImage: 'unset',
-    textTransform: 'capitalize',
-    whiteSpace: 'nowrap',
-    cursor: 'pointer',
-    zIndex: '1',
-    '&:first-of-type': {
-      borderLeft: `1px solid  ${theme?.palette?.custom?.off_white_three}`,
-    },
-    '&:last-of-type': {
-      borderRight: `1px solid  ${theme?.palette?.custom?.off_white_three}`,
-    },
-  },
-  [`&.${tableCellClasses?.root}`]: {
-    boxShadow: 'unset !important',
+    color: theme?.palette?.grey?.[100],
+    fontSize: "14px",
+    lineHeight: "18px",
+    borderBottom: "1px solid",
+    borderColor: theme?.palette?.secondary?.[800],
+    background: theme?.palette?.secondary?.main,
+    fontWeight: 500,
+    whiteSpace: "nowrap",
+    cursor: "pointer",
   },
 
   [`&.${tableCellClasses?.body}`]: {
-    fontSize: '14px',
-    fontStyle: 'initial',
-    color: theme?.palette?.custom?.main,
-    textTransform: 'capitalize',
-    lineHeight: '18px',
-    fontFamily: theme?.typography?.fontFamily,
-    fontWeight: theme?.typography?.fontWeightRegular,
-    borderBottom: 'none',
-    whiteSpace: 'pre-wrap',
-    '&:first-of-type': {
-      borderLeft: `1px solid  ${theme?.palette?.custom?.off_white_three}`,
-    },
-    '&:last-of-type': {
-      borderRight: `1px solid  ${theme?.palette?.custom?.off_white_three}`,
-    },
+    fontSize: "12px",
+    color: theme?.palette?.grey?.[400],
+    borderBottom: "none",
+    whiteSpace: "nowrap",
   },
 }));
-
-export const StyledTableRow = styled(TableRow)((theme: any) => ({
-  borderBottom: `1px solid  ${theme?.palette?.custom?.off_white_three}`,
-}));
-
-export const styles = {
-  cell: {
-    display: 'flex',
-    alignItems: 'center',
-  },
-};

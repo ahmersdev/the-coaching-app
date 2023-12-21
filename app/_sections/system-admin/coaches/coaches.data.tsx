@@ -17,6 +17,14 @@ export const coachesDataArray = [
     registrationDate: "2023-11-06T10:34:00.891Z",
     status: "Unpaid",
   },
+  {
+    id: 3,
+    name: "Andrea's laptop",
+    email: "Andrea",
+    gymName: "IT",
+    registrationDate: "2023-11-06T10:34:00.891Z",
+    status: "Unpaid",
+  },
 ];
 
 export const coachesColumns = [
@@ -45,13 +53,14 @@ export const coachesColumns = [
     accessorFn: (row: any) => row?.registrationDate,
     id: "registrationDate",
     isSortable: true,
-    header: "Registration Date",
+    header: "Registration date",
     cell: (info: any) => dayjs(info?.getValue()).format("MMM DD, YYYY"),
   },
   {
     accessorFn: (row: any) => row?.status,
     id: "status",
     header: "Subscription Status",
+    isSortable: true,
     cell: (info: any) => info?.getValue(),
   },
 ];

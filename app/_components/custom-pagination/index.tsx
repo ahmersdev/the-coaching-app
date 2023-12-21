@@ -24,7 +24,7 @@ const CustomPagination = (props: any) => {
         alignItems={"center"}
         flexWrap={"wrap"}
         gap={2}
-        mt={3}
+        mt={2}
       >
         <TablePagination
           component="div"
@@ -54,7 +54,7 @@ const CustomPagination = (props: any) => {
             disabled={currentPage === 1}
             onClick={() => setPage?.((page: any) => page - 1)}
           >
-            <ArrowBackIcon />
+            <ArrowBackIcon sx={{ color: "grey.400" }} />
           </IconButton>
 
           <Pagination
@@ -74,7 +74,7 @@ const CustomPagination = (props: any) => {
             disabled={currentPage === count}
             onClick={() => setPage?.((page: any) => page + 1)}
           >
-            <ArrowForwardIcon />
+            <ArrowForwardIcon sx={{ color: "grey.400" }} />
           </IconButton>
         </Box>
       </Box>
