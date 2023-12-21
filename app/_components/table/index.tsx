@@ -94,7 +94,8 @@ const TanstackTable = (props: any) => {
                     <StyledTableCell
                       key={cell}
                       sx={{
-                        bgcolor: rowIndex % 2 === 0 ? "initial" : "grey.800",
+                        bgcolor:
+                          rowIndex % 2 === 0 ? "initial" : "secondary.800",
                       }}
                     >
                       {flexRender(
