@@ -172,6 +172,7 @@ export const coachesColumns = [
             bgcolor: info?.getValue() === "Paid" ? "primary.main" : "error.700",
             width: "73px",
             height: "22px",
+            fontSize: "12px",
           }}
         />
         {info?.getValue() === "Unpaid" && (
