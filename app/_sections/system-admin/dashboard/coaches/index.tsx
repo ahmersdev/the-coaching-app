@@ -70,7 +70,7 @@ const Coaches = ({ coachesArray }: any) => {
                 }}
                 height={"100%"}
               >
-                <Box display={"flex"} gap={2}>
+                <Box display={"flex"} alignItems={"center"} gap={2}>
                   <Avatar src={item?.src} sx={{ width: 44, height: 44 }} />
                   <Box>
                     <Typography variant={"h6"} fontWeight={600}>

@@ -12,7 +12,7 @@ import { flexRender } from "@tanstack/react-table";
 import SkeletonTable from "../skeletons/skeleton-table";
 import CustomPagination from "../custom-pagination";
 import { Fragment } from "react";
-import { TableDownArrow, TableUpArrow } from "@/app/_assets";
+import { TableDownArrowIcon, TableUpArrowIcon } from "@/app/_assets";
 
 const TanstackTable = (props: any) => {
   const {
@@ -74,8 +74,8 @@ const TanstackTable = (props: any) => {
                             onClick: header?.column?.getToggleSortingHandler(),
                           }}
                         >
-                          <TableUpArrow />
-                          <TableDownArrow />
+                          <TableUpArrowIcon />
+                          <TableDownArrowIcon />
                         </Box>
                       )}
                     </Box>

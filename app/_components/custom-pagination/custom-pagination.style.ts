@@ -41,20 +41,4 @@ export const styles = {
       paddingLeft: 2.5,
     },
   },
-
-  counterStyle: {
-    ".Mui-selected": {
-      backgroundColor: "secondary.800",
-      color: "grey.400",
-    },
-
-    ".MuiPaginationItem-root": {
-      height: "40px",
-      width: "40px",
-      borderRadius: 0,
-      fontSize: "14px",
-      backgroundColor: "secondary.main !important",
-      color: "grey.400 !important",
-    },
-  },
 };

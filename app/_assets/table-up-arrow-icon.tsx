@@ -1,4 +1,4 @@
-const TableUpArrow = ({ fill = "#F9FAFB" }: any) => {
+const TableUpArrowIcon = ({ fill = "#F9FAFB" }: any) => {
   return (
     <svg
       width="12"
@@ -14,4 +14,4 @@ const TableUpArrow = ({ fill = "#F9FAFB" }: any) => {
     </svg>
   );
 };
-export default TableUpArrow;
+export default TableUpArrowIcon;

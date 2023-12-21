@@ -7,5 +7,6 @@ export { default as SettingsIcon } from "./settings-icon";
 export { default as SignOutIcon } from "./sign-out-icon";
 export { default as LoadingIcon } from "./loading-icon";
 export { default as EyeIcon } from "./eye-icon";
-export { default as TableDownArrow } from "./table-down-arrow";
-export { default as TableUpArrow } from "./table-up-arrow";
+export { default as TableDownArrowIcon } from "./table-down-arrow-icon";
+export { default as TableUpArrowIcon } from "./table-up-arrow-icon";
+export { default as RotateLeftIcon } from "./rotate-left-icon";

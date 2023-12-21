@@ -1,6 +1,12 @@
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import { Box, IconButton, Pagination, TablePagination } from "@mui/material";
+import {
+  Box,
+  IconButton,
+  Pagination,
+  TablePagination,
+  useTheme,
+} from "@mui/material";
 import { styles } from "./custom-pagination.style";
 import { Fragment } from "react";
 
@@ -15,6 +21,8 @@ const CustomPagination = (props: any) => {
     setPageLimit,
     totalRecords = 0,
   } = props;
+
+  const theme: any = useTheme();
 
   return (
     <Fragment>
@@ -67,7 +75,19 @@ const CustomPagination = (props: any) => {
             }}
             hidePrevButton
             hideNextButton
-            sx={styles?.counterStyle}
+            sx={{
+              ".MuiPaginationItem-root": {
+                width: 40,
+                height: 40,
+                borderRadius: 0,
+                fontSize: "14px",
+                color: "grey.400",
+                backgroundColor: `${theme?.palette?.secondary?.main} !important`,
+              },
+              // ".Mui-selected": {
+              //   backgroundColor: theme?.palette?.secondary?.[800],
+              // },
+            }}
           />
 
           <IconButton
