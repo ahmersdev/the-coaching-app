@@ -1,5 +1,8 @@
 import { styled } from "@mui/material/styles";
 import Badge from "@mui/material/Badge";
+import { SYSTEM_ADMIN } from "@/app/_constants/routes";
+import { Typography } from "@mui/material";
+import { Fragment } from "react";
 
 export const StyledBadge = styled(Badge)(({ theme }: any) => ({
   "& .MuiBadge-badge": {
@@ -29,3 +32,52 @@ export const StyledBadge = styled(Badge)(({ theme }: any) => ({
     },
   },
 }));
+
+export const headerTitle = (pathName: any) => {
+  let title;
+
+  switch (pathName) {
+    case SYSTEM_ADMIN?.DASHBOARD:
+      title = "Dashbaord";
+      break;
+
+    case SYSTEM_ADMIN?.COACHES:
+      title = "Coaches";
+      break;
+
+    case SYSTEM_ADMIN?.COACHES_OVERVIEW:
+      title = (
+        <Fragment>
+          <Typography component={"span"} variant={"h3"} color={"grey.500"}>
+            Coach /
+          </Typography>{" "}
+          Overview
+        </Fragment>
+      );
+      break;
+
+    case SYSTEM_ADMIN?.CLIENTS:
+      title = "Clients";
+      break;
+
+    case SYSTEM_ADMIN?.CLIENTS_OVERVIEW:
+      title = (
+        <Fragment>
+          <Typography component={"span"} variant={"h3"} color={"grey.500"}>
+            Client /
+          </Typography>{" "}
+          Overview
+        </Fragment>
+      );
+      break;
+
+    case SYSTEM_ADMIN?.SETTINGS:
+      title = "Settings";
+      break;
+
+    default:
+      title = "Unknown Page";
+      break;
+  }
+  return title;
+};

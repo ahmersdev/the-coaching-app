@@ -10,3 +10,6 @@ export { default as EyeIcon } from "./eye-icon";
 export { default as TableDownArrowIcon } from "./table-down-arrow-icon";
 export { default as TableUpArrowIcon } from "./table-up-arrow-icon";
 export { default as RotateLeftIcon } from "./rotate-left-icon";
+export { default as ArrowBackIcon } from "./arrow-back-icon";
+export { default as TwoPersonIcon } from "./two-person-icon";
+export { default as ThreePersonIcon } from "./three-person-icon";

@@ -2,14 +2,12 @@ import { NotificationIcon } from "@/app/_assets";
 import { Avatar, Badge, Box, Stack, Typography } from "@mui/material";
 import { usePathname } from "next/navigation";
 import { Fragment, useState } from "react";
-import { StyledBadge } from "./header.data";
+import { StyledBadge, headerTitle } from "./header.data";
 import MenuIcon from "@mui/icons-material/Menu";
 import DrawerNavbar from "../drawer-navbar";
 
 const Header = () => {
   const pathName = usePathname();
-
-  const title = pathName?.replaceAll("/", " ");
 
   const [open, setOpen] = useState(false);
 
@@ -32,12 +30,8 @@ const Header = () => {
             }}
             onClick={() => setOpen(true)}
           />
-          <Typography
-            variant={"h3"}
-            color={"grey.100"}
-            textTransform={"capitalize"}
-          >
-            {title}
+          <Typography variant={"h3"} color={"grey.100"}>
+            {headerTitle(pathName)}
           </Typography>
         </Box>
         <Box>
