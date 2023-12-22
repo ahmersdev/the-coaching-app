@@ -68,7 +68,12 @@ const HorizontalTabs = (props: any) => {
             }
             iconPosition="start"
             label={
-              <Typography variant="body1" component="span" fontWeight={600}>
+              <Typography
+                variant="body1"
+                component="span"
+                fontWeight={600}
+                ml={0.5}
+              >
                 {tabData?.title}
               </Typography>
             }
