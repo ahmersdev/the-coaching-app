@@ -13,3 +13,5 @@ export { default as RotateLeftIcon } from "./rotate-left-icon";
 export { default as ArrowBackIcon } from "./arrow-back-icon";
 export { default as TwoPersonIcon } from "./two-person-icon";
 export { default as ThreePersonIcon } from "./three-person-icon";
+export { default as ProfileIcon } from "./profile-icon";
+export { default as PaymentIcon } from "./payment-icon";
