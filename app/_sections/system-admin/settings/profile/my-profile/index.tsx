@@ -41,15 +41,12 @@ const MyProfile = () => {
               <LoadingButton
                 variant={"contained"}
                 sx={{
-                  color: "primary.main",
+                  color: "grey.100",
                   width: 132,
                   borderRadius: 25,
                   border: "1px solid",
-                  borderColor: "primary.100",
-                  background: theme?.palette?.gradients?.button1,
-                  ":hover": {
-                    background: theme?.palette?.gradients?.button1Hover,
-                  },
+                  borderColor: "primary.main",
+                  background: theme?.palette?.primary?.main,
                 }}
                 disableElevation
                 type={"submit"}
