@@ -1,4 +1,4 @@
-const EyeSlashIcon = ({ fill = "#F9FAFB" }: any) => {
+const EyeSlashIcon = ({ fill = "#6D6D71" }: any) => {
   return (
     <svg
       width="20"

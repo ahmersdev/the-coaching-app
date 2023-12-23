@@ -1,5 +1,5 @@
 import { FormProvider } from "@/app/_components/react-hook-form";
-import { Box, Grid, Stack, Typography, useTheme } from "@mui/material";
+import { Box, Grid, Stack, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { LoadingButton } from "@mui/lab";
@@ -11,8 +11,6 @@ import {
 import { useState } from "react";
 
 const Password = () => {
-  const theme: any = useTheme();
-
   const [passwordVisibility, setPasswordVisibility] = useState({
     currentPassword: false,
     newPassword: false,
@@ -65,7 +63,6 @@ const Password = () => {
                   borderRadius: 25,
                   border: "1px solid",
                   borderColor: "primary.main",
-                  background: theme?.palette?.primary?.main,
                 }}
                 disableElevation
                 type={"submit"}

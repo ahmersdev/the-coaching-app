@@ -19,3 +19,5 @@ export { default as NotFoundImage } from "./not-found-image";
 export { default as ShortLogoIcon } from "./short-logo-icon";
 export { default as EyeSlashIcon } from "./eye-slash-icon";
 export { default as EyeWithoutBgIcon } from "./eye-without-bg-icon";
+export { default as LineIcon } from "./line-icon";
+export { default as EmailIcon } from "./email-icon";

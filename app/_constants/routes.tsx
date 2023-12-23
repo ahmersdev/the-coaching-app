@@ -6,3 +6,9 @@ export const SYSTEM_ADMIN = {
   CLIENTS_OVERVIEW: `/clients/overview`,
   SETTINGS: `/settings`,
 };
+
+export const AUTH = {
+  SIGN_IN: `/sign-in`,
+  SIGN_UP: `/sign-up`,
+  FORGOT_PASSWORD: `forgot-password`,
+};

@@ -1,5 +1,5 @@
 import { FormProvider } from "@/app/_components/react-hook-form";
-import { Box, Grid, Stack, Typography, useTheme } from "@mui/material";
+import { Box, Grid, Stack, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { LoadingButton } from "@mui/lab";
@@ -10,8 +10,6 @@ import {
 } from "./address.data";
 
 const Address = () => {
-  const theme: any = useTheme();
-
   const methods: any = useForm({
     resolver: yupResolver(addressFormValidationSchema),
     defaultValues: addressFormDefaultValues,
@@ -46,7 +44,6 @@ const Address = () => {
                   borderRadius: 25,
                   border: "1px solid",
                   borderColor: "primary.main",
-                  background: theme?.palette?.primary?.main,
                 }}
                 disableElevation
                 type={"submit"}

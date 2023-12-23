@@ -1,4 +1,4 @@
-const EyeWithoutBgIcon = ({ fill = "#F9FAFB" }: any) => {
+const EyeWithoutBgIcon = ({ fill = "#6D6D71" }: any) => {
   return (
     <svg
       width="20"

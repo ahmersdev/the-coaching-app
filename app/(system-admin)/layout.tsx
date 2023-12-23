@@ -6,7 +6,7 @@ import Header from "../_layouts/main-layout/header";
 
 const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <main>
+    <main style={{ background: "#23232a", color: "#f9fafb" }}>
       <Grid container>
         <Grid item xs={0} md={2} height={"100vh"} overflow={"hidden"}>
           <Navbar />

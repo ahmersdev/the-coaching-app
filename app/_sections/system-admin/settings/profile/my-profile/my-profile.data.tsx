@@ -4,7 +4,10 @@ import * as Yup from "yup";
 export const myProfileFormValidationSchema = Yup?.object()?.shape({
   name: Yup?.string()?.trim()?.required("Required"),
   username: Yup?.string()?.trim()?.required("Required"),
-  email: Yup?.string()?.trim()?.required("Required"),
+  email: Yup?.string()
+    ?.trim()
+    ?.required("Required")
+    ?.email("Enter Valid Email, this email doesn’t exist"),
 });
 
 export const myProfileFormDefaultValues = {
