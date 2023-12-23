@@ -16,3 +16,6 @@ export { default as ThreePersonIcon } from "./three-person-icon";
 export { default as ProfileIcon } from "./profile-icon";
 export { default as PaymentIcon } from "./payment-icon";
 export { default as NotFoundImage } from "./not-found-image";
+export { default as ShortLogoIcon } from "./short-logo-icon";
+export { default as EyeSlashIcon } from "./eye-slash-icon";
+export { default as EyeWithoutBgIcon } from "./eye-without-bg-icon";

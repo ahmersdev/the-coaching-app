@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import Navbar from "../_layouts/main-layout/navbar";
 import { Box, Grid } from "@mui/material";
 import Header from "../_layouts/main-layout/header";

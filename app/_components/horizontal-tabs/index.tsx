@@ -51,12 +51,13 @@ const HorizontalTabs = (props: any) => {
               color: "grey.500",
               fontSize: "14px",
               fontWeight: 400,
+              borderRadius: 0,
+              borderRight: index < tabsDataArray?.length - 1 ? 1 : 0,
+              borderColor: "grey.100",
               "&.Mui-selected": {
                 color: "grey.100",
                 backgroundColor: "primary.main",
                 borderRadius: 0,
-                borderRight: 1,
-                borderColor: "grey.100",
               },
             }}
             key={tabData?.title}

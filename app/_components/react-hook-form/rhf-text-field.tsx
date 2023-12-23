@@ -1,7 +1,12 @@
 import { useFormContext, Controller } from "react-hook-form";
 import { FormLabel, TextField, Typography, useTheme } from "@mui/material";
 
-export default function RHFTextField({ name, required, ...other }: any) {
+export default function RHFTextField({
+  name,
+  required,
+  borderRadius = 3,
+  ...other
+}: any) {
   const { control } = useFormContext();
 
   const theme: any = useTheme();
@@ -25,15 +30,21 @@ export default function RHFTextField({ name, required, ...other }: any) {
             sx={{
               mt: 0.5,
               ".MuiInputBase-root": {
+                borderRadius: borderRadius,
                 border: 1.5,
                 borderColor: theme?.palette?.secondary?.[600],
                 "&:hover": {
-                  borderColor: theme?.palette?.primary?.[600],
+                  borderColor: theme?.palette?.primary?.[900],
                 },
               },
             }}
             helperText={
-              <Typography component={"span"} sx={{ display: "block", ml: -1 }}>
+              <Typography
+                variant={"body2"}
+                component={"span"}
+                sx={{ display: "block", textAlign: "center" }}
+                color={"error.700"}
+              >
                 {error?.message}
               </Typography>
             }

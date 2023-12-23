@@ -1,8 +1,7 @@
 import { RHFTextField } from "@/app/_components/react-hook-form";
 import * as Yup from "yup";
-import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
-import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
 import { IconButton, InputAdornment } from "@mui/material";
+import { EyeWithoutBgIcon, EyeSlashIcon } from "@/app/_assets";
 
 export const passwordFormValidationSchema = Yup?.object()?.shape({
   currentPassword: Yup?.string()?.trim()?.required("Required"),
@@ -45,9 +44,9 @@ export const getPasswordDataArray = (
                 onClick={() => togglePasswordVisibility("currentPassword")}
               >
                 {passwordVisibility.currentPassword ? (
-                  <VisibilityOffOutlinedIcon />
+                  <EyeSlashIcon />
                 ) : (
-                  <RemoveRedEyeOutlinedIcon />
+                  <EyeWithoutBgIcon />
                 )}
               </IconButton>
             </InputAdornment>
@@ -71,9 +70,9 @@ export const getPasswordDataArray = (
                 onClick={() => togglePasswordVisibility("newPassword")}
               >
                 {passwordVisibility.newPassword ? (
-                  <VisibilityOffOutlinedIcon />
+                  <EyeSlashIcon />
                 ) : (
-                  <RemoveRedEyeOutlinedIcon />
+                  <EyeWithoutBgIcon />
                 )}
               </IconButton>
             </InputAdornment>
@@ -97,9 +96,9 @@ export const getPasswordDataArray = (
                 onClick={() => togglePasswordVisibility("confirmPassword")}
               >
                 {passwordVisibility.confirmPassword ? (
-                  <VisibilityOffOutlinedIcon />
+                  <EyeSlashIcon />
                 ) : (
-                  <RemoveRedEyeOutlinedIcon />
+                  <EyeWithoutBgIcon />
                 )}
               </IconButton>
             </InputAdornment>
