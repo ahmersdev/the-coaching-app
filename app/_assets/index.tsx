@@ -1,6 +1,6 @@
 export { default as NotificationIcon } from "./notification-icon";
 export { default as LogoIcon } from "./logo-icon";
-export { default as DashboardIcon } from "./dashbaord-icon";
+export { default as DashboardIcon } from "./dashboard-icon";
 export { default as CoachesIcon } from "./coaches-icon";
 export { default as ClientsIcon } from "./clients-icon";
 export { default as SettingsIcon } from "./settings-icon";
@@ -15,3 +15,4 @@ export { default as TwoPersonIcon } from "./two-person-icon";
 export { default as ThreePersonIcon } from "./three-person-icon";
 export { default as ProfileIcon } from "./profile-icon";
 export { default as PaymentIcon } from "./payment-icon";
+export { default as NotFoundImage } from "./not-found-image";
