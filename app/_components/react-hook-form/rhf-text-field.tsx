@@ -4,7 +4,7 @@ import { FormLabel, TextField, Typography, useTheme } from "@mui/material";
 export default function RHFTextField({
   name,
   required,
-  borderRadius = 3,
+  borderRadius = 2,
   ...other
 }: any) {
   const { control } = useFormContext();

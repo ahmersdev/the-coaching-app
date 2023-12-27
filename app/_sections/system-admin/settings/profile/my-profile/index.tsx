@@ -1,5 +1,5 @@
 import { FormProvider } from "@/app/_components/react-hook-form";
-import { Box, Grid, Stack, Typography } from "@mui/material";
+import { Box, Divider, Grid, Stack, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { LoadingButton } from "@mui/lab";
@@ -8,6 +8,7 @@ import {
   myProfileDataArray,
   myProfileFormDefaultValues,
 } from "./my-profile.data";
+import { MyProfileIcon } from "@/app/_assets";
 
 const MyProfile = () => {
   const methods: any = useForm({
@@ -24,9 +25,14 @@ const MyProfile = () => {
   return (
     <Stack direction={"column"} spacing={2}>
       <Box bgcolor={"secondary.main"} p={2.4} borderRadius={3}>
-        <Typography variant={"h6"} fontWeight={700} color={"grey.100"} mb={1}>
-          My Profile
-        </Typography>
+        <Box display={"flex"} alignItems={"flex-end"} gap={1}>
+          <MyProfileIcon />
+          <Typography variant={"h6"} fontWeight={700} color={"grey.100"} mb={1}>
+            My Profile
+          </Typography>
+        </Box>
+
+        <Divider sx={{ my: 2 }} />
 
         <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
           <Grid container spacing={2}>

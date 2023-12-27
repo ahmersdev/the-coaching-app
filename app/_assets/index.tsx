@@ -21,3 +21,6 @@ export { default as EyeSlashIcon } from "./eye-slash-icon";
 export { default as EyeWithoutBgIcon } from "./eye-without-bg-icon";
 export { default as LineIcon } from "./line-icon";
 export { default as EmailIcon } from "./email-icon";
+export { default as MyProfileIcon } from "./my-profile-icon";
+export { default as PasswordIcon } from "./password-icon";
+export { default as AddressIcon } from "./address-icon";
