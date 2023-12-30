@@ -14,7 +14,7 @@ export const passwordFormValidationSchema = Yup?.object()?.shape({
     ),
   confirmPassword: Yup?.string()
     ?.required("Required")
-    ?.oneOf([Yup.ref("password")], "Password must match"),
+    ?.oneOf([Yup.ref("newPassword")], "Password must match"),
 });
 
 export const passwordFormDefaultValues = {

@@ -6,7 +6,7 @@ import { SYSTEM_ADMIN } from "@/app/_constants/routes";
 import Link from "next/link";
 import { ArrowBackIcon, ThreePersonIcon, TwoPersonIcon } from "@/app/_assets";
 import {
-  caochOverviewColumns,
+  coachOverviewColumns,
   coachesOverviewDataArray,
   headerOverviewData,
 } from "./overview.data";
@@ -36,8 +36,8 @@ const Overview = () => {
         </Box>
 
         <Grid container spacing={2}>
-          {headerOverviewData?.map((item: any) => (
-            <Grid item xs={12} sm={6} md={4} lg={3} key={item}>
+          {headerOverviewData?.map((item: any, index: any) => (
+            <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
               <Typography variant={"body1"} fontWeight={500} color={"grey.400"}>
                 {Object?.keys?.(item)?.[0]}:
               </Typography>
@@ -77,7 +77,7 @@ const Overview = () => {
 
         <TanstackTable
           data={coachesOverviewDataArray}
-          columns={caochOverviewColumns}
+          columns={coachOverviewColumns}
           isPagination
         />
       </Box>

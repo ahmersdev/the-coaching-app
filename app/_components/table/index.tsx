@@ -47,16 +47,11 @@ const TanstackTable = (props: any) => {
       >
         <Table>
           <TableHead>
-            {table?.getHeaderGroups()?.map((headerGroup: any) => (
-              <TableRow key={headerGroup}>
-                {headerGroup?.headers?.map((header: any) => (
-                  <StyledTableCell key={header}>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        alignItems: "center",
-                      }}
-                    >
+            {table?.getHeaderGroups()?.map((headerGroup: any, index: any) => (
+              <TableRow key={index}>
+                {headerGroup?.headers?.map((header: any, index: any) => (
+                  <StyledTableCell key={index}>
+                    <Box display={"flex"} alignItems={"center"}>
                       {header?.isPlaceholder
                         ? null
                         : flexRender(
@@ -89,10 +84,10 @@ const TanstackTable = (props: any) => {
             {isSuccess &&
               !isError &&
               table?.getRowModel()?.rows?.map((row: any, rowIndex: number) => (
-                <TableRow key={row}>
-                  {row?.getVisibleCells()?.map((cell: any) => (
+                <TableRow key={rowIndex}>
+                  {row?.getVisibleCells()?.map((cell: any, index: any) => (
                     <StyledTableCell
-                      key={cell}
+                      key={index}
                       sx={{
                         bgcolor:
                           rowIndex % 2 === 0 ? "initial" : "secondary.800",

@@ -58,7 +58,7 @@ export const coachesOverviewDataArray = [
   },
 ];
 
-export const caochOverviewColumns = [
+export const coachOverviewColumns = [
   {
     accessorFn: (row: any) => row?.id,
     id: "name",

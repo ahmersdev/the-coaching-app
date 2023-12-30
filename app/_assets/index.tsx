@@ -26,3 +26,7 @@ export { default as PasswordIcon } from "./password-icon";
 export { default as AddressIcon } from "./address-icon";
 export { default as FaqsIcon } from "./faqs-icon";
 export { default as ComplaintsIcon } from "./complaints-icon";
+export { default as AccordionExpandIcon } from "./accordion-expand-icon";
+export { default as AccordionCloseIcon } from "./accordion-close-icon";
+export { default as DeleteIcon } from "./delete-icon";
+export { default as AlertDialogDeleteIcon } from "./alert-dialog-delete-icon";

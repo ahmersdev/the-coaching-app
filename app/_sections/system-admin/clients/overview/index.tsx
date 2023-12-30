@@ -36,8 +36,8 @@ const Overview = () => {
         </Box>
 
         <Grid container spacing={2}>
-          {headerOverviewData?.map((item: any) => (
-            <Grid item xs={12} sm={6} md={4} lg={3} key={item}>
+          {headerOverviewData?.map((item: any, index: any) => (
+            <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
               <Typography variant={"body1"} fontWeight={500} color={"grey.400"}>
                 {Object?.keys?.(item)?.[0]}:
               </Typography>
@@ -55,7 +55,7 @@ const Overview = () => {
         <Box display={"flex"} alignItems={"center"} gap={1} mb={2}>
           <TwoPersonIcon />
           <Typography variant={"h6"} fontWeight={700}>
-            Templeton Recent Coaches
+            John Recent Coaches
           </Typography>
         </Box>
 
