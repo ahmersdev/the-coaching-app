@@ -38,7 +38,7 @@ export const headerTitle = (pathName: any) => {
 
   switch (pathName) {
     case SYSTEM_ADMIN?.DASHBOARD:
-      title = "Dashbaord";
+      title = "Dashboard";
       break;
 
     case SYSTEM_ADMIN?.COACHES:
@@ -69,6 +69,14 @@ export const headerTitle = (pathName: any) => {
           Overview
         </Fragment>
       );
+      break;
+
+    case SYSTEM_ADMIN?.FAQS:
+      title = "FAQ's";
+      break;
+
+    case SYSTEM_ADMIN?.COMPLAINTS:
+      title = "Complaints";
       break;
 
     case SYSTEM_ADMIN?.SETTINGS:

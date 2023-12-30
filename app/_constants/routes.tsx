@@ -4,6 +4,8 @@ export const SYSTEM_ADMIN = {
   COACHES_OVERVIEW: `/coaches/overview`,
   CLIENTS: `/clients`,
   CLIENTS_OVERVIEW: `/clients/overview`,
+  FAQS: `/faqs`,
+  COMPLAINTS: `/complaints`,
   SETTINGS: `/settings`,
 };
 

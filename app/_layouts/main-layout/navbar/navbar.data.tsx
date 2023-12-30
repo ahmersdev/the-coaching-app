@@ -1,9 +1,17 @@
-import { ClientsIcon, CoachesIcon, DashboardIcon } from "@/app/_assets";
+import {
+  ClientsIcon,
+  CoachesIcon,
+  ComplaintsIcon,
+  DashboardIcon,
+  FaqsIcon,
+} from "@/app/_assets";
 
 export const mainRoutesArray = [
-  { id: 1, icon: DashboardIcon, label: "Dashbaord", href: "/dashboard" },
+  { id: 1, icon: DashboardIcon, label: "Dashboard", href: "/dashboard" },
   { id: 2, icon: CoachesIcon, label: "Coaches", href: "/coaches" },
   { id: 3, icon: ClientsIcon, label: "Clients", href: "/clients" },
+  { id: 4, icon: FaqsIcon, label: "FAQ's", href: "/faqs" },
+  { id: 5, icon: ComplaintsIcon, label: "Complaints", href: "/complaints" },
 ];
 
 export const mainStyles = (href: any, pathName: any, theme: any) => {

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Mulish } from "next/font/google";
 import "./globals.css";
 import ThemeProvider from "./_theme";
+import Loader from "./_components/loader";
 
 const mulish = Mulish({ subsets: ["latin"] });
 
@@ -21,7 +22,10 @@ export default function RootLayout({
         className={mulish.className}
         style={{ background: "#0B0B12", color: "#f9fafb" }}
       >
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <Loader />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

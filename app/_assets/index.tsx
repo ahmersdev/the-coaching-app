@@ -24,3 +24,5 @@ export { default as EmailIcon } from "./email-icon";
 export { default as MyProfileIcon } from "./my-profile-icon";
 export { default as PasswordIcon } from "./password-icon";
 export { default as AddressIcon } from "./address-icon";
+export { default as FaqsIcon } from "./faqs-icon";
+export { default as ComplaintsIcon } from "./complaints-icon";
