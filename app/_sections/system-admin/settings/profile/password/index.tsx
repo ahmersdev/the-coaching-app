@@ -10,6 +10,7 @@ import {
 } from "./password.data";
 import { useState } from "react";
 import { PasswordIcon } from "@/app/_assets";
+import { enqueueSnackbar } from "notistack";
 
 const Password = () => {
   const [passwordVisibility, setPasswordVisibility] = useState({
@@ -35,10 +36,14 @@ const Password = () => {
     passwordVisibility
   );
 
-  const { handleSubmit } = methods;
+  const { handleSubmit, reset } = methods;
 
   const onSubmit = async (data: any) => {
     console.log(data);
+    enqueueSnackbar("Password Updated Successfully!", {
+      variant: "success",
+    });
+    reset(passwordFormDefaultValues);
   };
 
   return (

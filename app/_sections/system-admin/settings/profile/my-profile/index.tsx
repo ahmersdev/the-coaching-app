@@ -9,6 +9,7 @@ import {
   myProfileFormDefaultValues,
 } from "./my-profile.data";
 import { MyProfileIcon } from "@/app/_assets";
+import { enqueueSnackbar } from "notistack";
 
 const MyProfile = () => {
   const methods: any = useForm({
@@ -16,10 +17,14 @@ const MyProfile = () => {
     defaultValues: myProfileFormDefaultValues,
   });
 
-  const { handleSubmit } = methods;
+  const { handleSubmit, reset } = methods;
 
   const onSubmit = async (data: any) => {
     console.log(data);
+    enqueueSnackbar("Profile Updated Successfully!", {
+      variant: "success",
+    });
+    reset(myProfileFormDefaultValues);
   };
 
   return (

@@ -9,6 +9,7 @@ import {
   addressFormValidationSchema,
 } from "./address.data";
 import { AddressIcon } from "@/app/_assets";
+import { enqueueSnackbar } from "notistack";
 
 const Address = () => {
   const methods: any = useForm({
@@ -16,10 +17,14 @@ const Address = () => {
     defaultValues: addressFormDefaultValues,
   });
 
-  const { handleSubmit } = methods;
+  const { handleSubmit, reset } = methods;
 
   const onSubmit = async (data: any) => {
     console.log(data);
+    enqueueSnackbar("Address Updated Successfully!", {
+      variant: "success",
+    });
+    reset(addressFormDefaultValues);
   };
 
   return (

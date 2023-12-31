@@ -44,7 +44,7 @@ const CustomAccordion = ({ accordions, CustomIcon, customIconClick }: any) => {
               <Box
                 width={"100%"}
                 display={"flex"}
-                flexWrap={"wrap"}
+                gap={1}
                 alignItems={"center"}
                 justifyContent={"space-between"}
               >

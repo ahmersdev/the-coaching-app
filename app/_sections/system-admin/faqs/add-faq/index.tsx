@@ -17,6 +17,7 @@ import {
   addFaqFormDefaultValues,
   addFaqFormValidationSchema,
 } from "./add-faq.data";
+import { enqueueSnackbar } from "notistack";
 
 const AddFaq = ({ addFaq, setAddFaq }: any) => {
   const methods: any = useForm({
@@ -24,10 +25,15 @@ const AddFaq = ({ addFaq, setAddFaq }: any) => {
     defaultValues: addFaqFormDefaultValues,
   });
 
-  const { handleSubmit } = methods;
+  const { handleSubmit, reset } = methods;
 
   const onSubmit = async (data: any) => {
     console.log(data);
+    enqueueSnackbar("FAQ Added in List Successfully!", {
+      variant: "success",
+    });
+    reset(addFaqFormDefaultValues);
+    setAddFaq(false);
   };
 
   return (

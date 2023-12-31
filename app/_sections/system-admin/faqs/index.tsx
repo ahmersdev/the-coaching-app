@@ -7,13 +7,17 @@ import { Fragment, useState } from "react";
 import AddFaq from "./add-faq";
 import { DeleteIcon } from "@/app/_assets";
 import AlertDialog from "@/app/_components/alert-dialog";
+import { enqueueSnackbar } from "notistack";
 
 const Faqs = () => {
   const [addFaq, setAddFaq] = useState(false);
   const [deleteFaq, setDeleteFaq] = useState<any>(null);
 
   const handleDelete = (faq: any) => {
-    console.log(`Accordion with ID ${faq.id} is deleted.`);
+    console.log(faq);
+    enqueueSnackbar("FAQ Deleted Successfully!", {
+      variant: "success",
+    });
   };
 
   return (
