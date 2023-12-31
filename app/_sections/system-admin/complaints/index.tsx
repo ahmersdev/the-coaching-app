@@ -21,12 +21,19 @@ const Complaints = () => {
           borderRadius={3}
           padding={2.4}
           display={"flex"}
-          justifyContent={"space-between"}
+          flexDirection={{ xs: "column", sm: "row" }}
+          justifyContent={{ xs: "center", sm: "space-between" }}
           alignItems={"center"}
           my={1}
           gap={1}
         >
-          <Box display={"flex"} alignItems={"center"} gap={2}>
+          <Box
+            display={"flex"}
+            alignItems={"center"}
+            flexDirection={{ xs: "column", sm: "row" }}
+            justifyContent={"center"}
+            gap={2}
+          >
             <Avatar src={item?.src} variant="rounded" />
             <Typography variant={"h5"} fontWeight={400}>
               {item?.message}
