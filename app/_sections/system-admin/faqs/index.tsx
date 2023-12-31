@@ -18,6 +18,7 @@ const Faqs = () => {
     enqueueSnackbar("FAQ Deleted Successfully!", {
       variant: "success",
     });
+    setDeleteFaq(false);
   };
 
   return (
