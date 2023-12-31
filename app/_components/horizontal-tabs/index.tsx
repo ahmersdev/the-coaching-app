@@ -1,5 +1,5 @@
 import { useState, Children, cloneElement } from "react";
-import { Tabs, Tab, Typography, Box, Card } from "@mui/material";
+import { Tabs, Tab, Typography, Box, Card, useTheme } from "@mui/material";
 
 const HorizontalTabs = (props: any) => {
   const {
@@ -9,6 +9,8 @@ const HorizontalTabs = (props: any) => {
     variant = "scrollable",
     defaultValue = 0,
   } = props;
+
+  const theme: any = useTheme();
 
   const [value, setValue] = useState(defaultValue);
   const handleChange = (_: any, newValue: number) => {
@@ -65,7 +67,13 @@ const HorizontalTabs = (props: any) => {
               setActiveTab ? setActiveTab(tabData?.title) : null;
             }}
             icon={
-              <tabData.icon fill={value === index ? "#F9FAFB" : "#9CA3AF"} />
+              <tabData.icon
+                fill={
+                  value === index
+                    ? theme?.palette?.grey?.[100]
+                    : theme?.palette?.grey?.[500]
+                }
+              />
             }
             iconPosition="start"
             label={

@@ -23,7 +23,7 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
         borderRadius={"50%"}
         sx={{ opacity: 0.3, filter: "blur(100px)" }}
       />
-      <Box p={2}>{children}</Box>
+      {children}
       <Box
         position={"absolute"}
         bottom={0}

@@ -1,9 +1,9 @@
 "use client";
 
 import { LineIcon, ShortLogoIcon } from "@/app/_assets";
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid, Typography, useTheme } from "@mui/material";
 import {
-  signInDataArray,
+  getSignInDataArray,
   signInFormDefaultValues,
   signInFormValidationSchema,
 } from "./sign-in.data";
@@ -13,17 +13,41 @@ import { FormProvider } from "@/app/_components/react-hook-form";
 import { LoadingButton } from "@mui/lab";
 import Link from "next/link";
 import { AUTH } from "@/app/_constants/routes";
+import { useState } from "react";
+import { enqueueSnackbar } from "notistack";
 
 const SignIn = () => {
+  const theme: any = useTheme();
+  const [passwordVisibility, setPasswordVisibility] = useState({
+    password: false,
+  });
+
+  const togglePasswordVisibility = (field: any) => {
+    setPasswordVisibility((prev: any) => ({
+      ...prev,
+      [field]: !prev[field],
+    }));
+  };
+
+  const signInDataArray = getSignInDataArray(
+    togglePasswordVisibility,
+    passwordVisibility,
+    theme
+  );
+
   const methods: any = useForm({
     resolver: yupResolver(signInFormValidationSchema),
     defaultValues: signInFormDefaultValues,
   });
 
-  const { handleSubmit } = methods;
+  const { handleSubmit, reset } = methods;
 
   const onSubmit = async (data: any) => {
     console.log(data);
+    enqueueSnackbar("Sign In Successfully!", {
+      variant: "success",
+    });
+    reset(signInFormDefaultValues);
   };
 
   return (
@@ -33,6 +57,7 @@ const SignIn = () => {
       alignItems="center"
       justifyContent="center"
       height="100vh"
+      p={2}
     >
       <ShortLogoIcon />
       <Box display={"flex"} flexDirection={"column"} textAlign={"center"}>
@@ -45,7 +70,7 @@ const SignIn = () => {
       </Box>
 
       <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-        <Grid container maxWidth={"sm"}>
+        <Grid container maxWidth={500} mx={"auto"} width={"100%"}>
           {signInDataArray?.map((item: any) => (
             <Grid item xs={12} key={item?.id} mt={2}>
               <item.component {...item?.componentProps} size={"small"} />
@@ -90,7 +115,7 @@ const SignIn = () => {
           </Typography>
         </Link>
       </Typography>
-      <Typography variant={"body2"} fontWeight={700}>
+      <Typography variant={"body2"} fontWeight={700} textAlign={"center"}>
         By continuing, you agree to our{" "}
         <Typography
           variant={"body2"}

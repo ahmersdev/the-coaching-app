@@ -1,6 +1,6 @@
-import { EmailIcon } from "@/app/_assets";
+import { EmailIcon, EyeSlashIcon, EyeWithoutBgIcon } from "@/app/_assets";
 import { RHFTextField } from "@/app/_components/react-hook-form";
-import { InputAdornment } from "@mui/material";
+import { IconButton, InputAdornment } from "@mui/material";
 import * as Yup from "yup";
 
 export const signInFormValidationSchema = Yup?.object()?.shape({
@@ -16,7 +16,11 @@ export const signInFormDefaultValues = {
   password: "",
 };
 
-export const signInDataArray = [
+export const getSignInDataArray = (
+  togglePasswordVisibility: any,
+  passwordVisibility: any,
+  theme: any
+) => [
   {
     id: 1,
     componentProps: {
@@ -41,6 +45,23 @@ export const signInDataArray = [
       name: "password",
       placeholder: "Enter Password",
       borderRadius: 25,
+      type: passwordVisibility?.password ? "text" : "password",
+      InputProps: {
+        endAdornment: (
+          <InputAdornment position="end">
+            <IconButton
+              aria-label="toggle password visibility"
+              onClick={() => togglePasswordVisibility("password")}
+            >
+              {passwordVisibility.password ? (
+                <EyeSlashIcon fill={theme?.palette?.grey?.[500]} />
+              ) : (
+                <EyeWithoutBgIcon fill={theme?.palette?.grey?.[500]} />
+              )}
+            </IconButton>
+          </InputAdornment>
+        ),
+      },
     },
     component: RHFTextField,
     md: 5,
