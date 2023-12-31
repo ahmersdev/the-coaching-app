@@ -1,13 +1,25 @@
 "use client";
 
-import { Box } from "@mui/material";
+import { SnackbarProvider } from "notistack";
+import AuthLayout from "../_layouts/auth";
 
-const AuthLayout = ({ children }: { children: React.ReactNode }) => {
+const Auth = ({ children }: { children: React.ReactNode }) => {
   return (
     <main style={{ background: "#0B0B12", color: "#f9fafb" }}>
-      <Box p={2}>{children}</Box>
+      <AuthLayout>
+        <SnackbarProvider
+          preventDuplicate
+          maxSnack={3}
+          anchorOrigin={{
+            horizontal: "center",
+            vertical: "top",
+          }}
+        >
+          {children}
+        </SnackbarProvider>
+      </AuthLayout>
     </main>
   );
 };
 
-export default AuthLayout;
+export default Auth;
