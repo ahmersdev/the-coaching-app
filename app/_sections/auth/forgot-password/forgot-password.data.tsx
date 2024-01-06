@@ -1,4 +1,4 @@
-import { EmailIcon } from "@/app/_assets";
+import { ForgotPasswordIcon } from "@/app/_assets";
 import { RHFTextField } from "@/app/_components/react-hook-form";
 import { InputAdornment } from "@mui/material";
 import * as Yup from "yup";
@@ -25,7 +25,7 @@ export const forgotPasswordDataArray = [
       InputProps: {
         endAdornment: (
           <InputAdornment position="end">
-            <EmailIcon />
+            <ForgotPasswordIcon />
           </InputAdornment>
         ),
       },
