@@ -12,5 +12,7 @@ export const SYSTEM_ADMIN = {
 export const AUTH = {
   SIGN_IN: `/sign-in`,
   SIGN_UP: `/sign-up`,
-  FORGOT_PASSWORD: `forgot-password`,
+  FORGOT_PASSWORD: `/forgot-password`,
+  OTP: `/otp`,
+  CREATE_PASSWORD: `/create-password`,
 };
