@@ -76,9 +76,13 @@ const SignIn = () => {
               <item.component {...item?.componentProps} size={"small"} />
             </Grid>
           ))}
-          <Grid item xs={12} textAlign={"end"}>
+          <Grid item xs={12} display={"flex"} justifyContent={"flex-end"}>
             <Link href={AUTH?.FORGOT_PASSWORD}>
-              <Typography variant={"body1"} fontWeight={500}>
+              <Typography
+                variant={"body1"}
+                fontWeight={500}
+                width={"fit-content"}
+              >
                 Forgot Password?
               </Typography>
             </Link>
