@@ -8,58 +8,54 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
         top={0}
         left={0}
         bgcolor={"warning.700"}
-        width={{ xs: 100, md: 152 }}
-        height={{ xs: 100, md: 152 }}
+        width={150}
+        height={150}
         borderRadius={"50%"}
         sx={{
           opacity: 0.3,
           filter: "blur(90px)",
         }}
-        zIndex={0}
       />
       <Box
         position={"absolute"}
         top={0}
         right={0}
         bgcolor={"error.700"}
-        width={{ xs: 100, md: 212 }}
-        height={{ xs: 100, md: 212 }}
+        width={200}
+        height={200}
         borderRadius={"50%"}
         sx={{
           opacity: 0.3,
-          filter: "blur(100px)",
+          filter: "blur(110px)",
         }}
-        zIndex={0}
       />
-      {children}
       <Box
         position={"absolute"}
         bottom={0}
         left={0}
         bgcolor={"primary.main"}
-        width={{ xs: 0, md: 332 }}
-        height={{ xs: 0, md: 332 }}
+        width={300}
+        height={300}
         borderRadius={"50%"}
         sx={{
           opacity: 0.3,
-          filter: "blur(170px)",
+          filter: "blur(200px)",
         }}
-        zIndex={0}
       />
       <Box
         position={"absolute"}
         bottom={0}
         right={0}
         bgcolor={"warning.700"}
-        width={{ xs: 0, md: 282 }}
-        height={{ xs: 0, md: 282 }}
+        width={250}
+        height={250}
         borderRadius={"50%"}
         sx={{
           opacity: 0.3,
-          filter: "blur(140px)",
+          filter: "blur(130px)",
         }}
-        zIndex={0}
       />
+      {children}
     </Box>
   );
 };
