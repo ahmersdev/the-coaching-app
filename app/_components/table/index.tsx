@@ -11,7 +11,6 @@ import { StyledTableCell } from "./tanstack-table.styles";
 import { flexRender } from "@tanstack/react-table";
 import SkeletonTable from "../skeletons/skeleton-table";
 import CustomPagination from "../custom-pagination";
-import { Fragment } from "react";
 import { TableDownArrowIcon, TableUpArrowIcon } from "@/app/_assets";
 
 const TanstackTable = (props: any) => {
@@ -37,7 +36,7 @@ const TanstackTable = (props: any) => {
   if (isLoading || isFetching) return <SkeletonTable />;
 
   return (
-    <Fragment>
+    <>
       <TableContainer
         sx={{
           border: "1px solid",
@@ -122,7 +121,7 @@ const TanstackTable = (props: any) => {
           setPageLimit={setPageLimit}
         />
       )}
-    </Fragment>
+    </>
   );
 };
 

@@ -8,7 +8,6 @@ import {
   useTheme,
 } from "@mui/material";
 import { styles } from "./custom-pagination.style";
-import { Fragment } from "react";
 
 const CustomPagination = (props: any) => {
   const {
@@ -25,7 +24,7 @@ const CustomPagination = (props: any) => {
   const theme: any = useTheme();
 
   return (
-    <Fragment>
+    <>
       <Box
         display={"flex"}
         justifyContent={"space-between"}
@@ -98,7 +97,7 @@ const CustomPagination = (props: any) => {
           </IconButton>
         </Box>
       </Box>
-    </Fragment>
+    </>
   );
 };
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { Avatar, Box, Button, Typography } from "@mui/material";
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import { complaintsDataArray } from "./complaints.data";
 import Reply from "./reply";
 
@@ -9,7 +9,7 @@ const Complaints = () => {
   const [reply, setReply] = useState(false);
 
   return (
-    <Fragment>
+    <>
       <Typography variant={"h5"} fontWeight={700} pb={1}>
         All complaints from different clients
       </Typography>
@@ -61,7 +61,7 @@ const Complaints = () => {
       ))}
 
       {reply && <Reply reply={reply} setReply={setReply} />}
-    </Fragment>
+    </>
   );
 };
 

@@ -1,6 +1,6 @@
 import TanstackTable from "@/app/_components/table";
 import { Box, Chip, Grid, Typography, useTheme } from "@mui/material";
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import { paymentsColumns, paymentsDataArray } from "./payments.data";
 
 const Payments = () => {
@@ -9,7 +9,7 @@ const Payments = () => {
   const theme: any = useTheme();
 
   return (
-    <Fragment>
+    <>
       <Grid container spacing={2}>
         <Grid item xs={12} md={4}>
           <Box
@@ -68,7 +68,7 @@ const Payments = () => {
           />
         </Grid>
       </Grid>
-    </Fragment>
+    </>
   );
 };
 

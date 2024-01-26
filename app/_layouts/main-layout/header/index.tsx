@@ -1,7 +1,7 @@
 import { NotificationIcon } from "@/app/_assets";
 import { Avatar, Badge, Box, Stack, Typography } from "@mui/material";
 import { usePathname } from "next/navigation";
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import { StyledBadge, headerTitle } from "./header.data";
 import MenuIcon from "@mui/icons-material/Menu";
 import DrawerNavbar from "../drawer-navbar";
@@ -12,7 +12,7 @@ const Header = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <Fragment>
+    <>
       <Box
         display={"flex"}
         justifyContent={"space-between"}
@@ -69,7 +69,7 @@ const Header = () => {
       </Box>
 
       <DrawerNavbar setOpen={setOpen} open={open} />
-    </Fragment>
+    </>
   );
 };
 

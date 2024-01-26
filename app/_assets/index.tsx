@@ -31,3 +31,4 @@ export { default as AccordionCloseIcon } from "./accordion-close-icon";
 export { default as DeleteIcon } from "./delete-icon";
 export { default as AlertDialogDeleteIcon } from "./alert-dialog-delete-icon";
 export { default as ForgotPasswordIcon } from "./forgot-password-icon";
+export { default as Logo52Icon } from "./logo-52-icon";

@@ -6,7 +6,7 @@ import {
   Box,
   Typography,
 } from "@mui/material";
-import { Fragment, useState } from "react";
+import { useState } from "react";
 
 const CustomAccordion = ({ accordions, CustomIcon, customIconClick }: any) => {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
@@ -16,7 +16,7 @@ const CustomAccordion = ({ accordions, CustomIcon, customIconClick }: any) => {
   };
 
   return (
-    <Fragment>
+    <>
       {accordions.map((item: any, index: number) => (
         <Box key={index} borderBottom={1} borderColor={"secondary.800"} mb={2}>
           <Accordion
@@ -66,7 +66,7 @@ const CustomAccordion = ({ accordions, CustomIcon, customIconClick }: any) => {
           </Accordion>
         </Box>
       ))}
-    </Fragment>
+    </>
   );
 };
 

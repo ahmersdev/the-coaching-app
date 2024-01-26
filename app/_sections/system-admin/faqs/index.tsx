@@ -3,7 +3,7 @@
 import CustomAccordion from "@/app/_components/custom-accordion";
 import { Box, Button, Typography } from "@mui/material";
 import { FaqsArray } from "./faqs.data";
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import AddFaq from "./add-faq";
 import { DeleteIcon } from "@/app/_assets";
 import AlertDialog from "@/app/_components/alert-dialog";
@@ -22,7 +22,7 @@ const Faqs = () => {
   };
 
   return (
-    <Fragment>
+    <>
       <Box
         display={"flex"}
         justifyContent={"space-between"}
@@ -68,7 +68,7 @@ const Faqs = () => {
           handleSubmitBtn={() => handleDelete(deleteFaq)}
         />
       )}
-    </Fragment>
+    </>
   );
 };
 

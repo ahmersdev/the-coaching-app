@@ -2,7 +2,6 @@ import { styled } from "@mui/material/styles";
 import Badge from "@mui/material/Badge";
 import { SYSTEM_ADMIN } from "@/app/_constants/routes";
 import { Typography } from "@mui/material";
-import { Fragment } from "react";
 
 export const StyledBadge = styled(Badge)(({ theme }: any) => ({
   "& .MuiBadge-badge": {
@@ -47,12 +46,12 @@ export const headerTitle = (pathName: any) => {
 
     case SYSTEM_ADMIN?.COACHES_OVERVIEW:
       title = (
-        <Fragment>
+        <>
           <Typography component={"span"} variant={"h3"} color={"grey.500"}>
             Coach /
           </Typography>{" "}
           Overview
-        </Fragment>
+        </>
       );
       break;
 
@@ -62,12 +61,12 @@ export const headerTitle = (pathName: any) => {
 
     case SYSTEM_ADMIN?.CLIENTS_OVERVIEW:
       title = (
-        <Fragment>
+        <>
           <Typography component={"span"} variant={"h3"} color={"grey.500"}>
             Client /
           </Typography>{" "}
           Overview
-        </Fragment>
+        </>
       );
       break;
 

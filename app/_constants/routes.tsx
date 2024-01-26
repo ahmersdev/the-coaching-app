@@ -16,3 +16,9 @@ export const AUTH = {
   OTP: `/otp`,
   CREATE_PASSWORD: `/create-password`,
 };
+
+export const SALE_SITE = {
+  SERVICES: `/services`,
+  ABOUT_US: `/about-us`,
+  CONTACT_US: `/contact-us`,
+};
