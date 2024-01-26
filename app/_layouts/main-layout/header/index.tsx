@@ -68,7 +68,7 @@ const Header = () => {
         </Box>
       </Box>
 
-      <DrawerNavbar setOpen={setOpen} open={open} />
+      {open && <DrawerNavbar setOpen={setOpen} open={open} />}
     </>
   );
 };

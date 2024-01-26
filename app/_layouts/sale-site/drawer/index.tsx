@@ -1,62 +1,63 @@
-import { Logo52Icon, LogoIcon } from "@/app/_assets";
-import { Box, Drawer, useTheme } from "@mui/material";
+import { LogoIcon } from "@/app/_assets";
+import {
+  Box,
+  Drawer,
+  List,
+  ListItem,
+  ListItemButton,
+  useTheme,
+} from "@mui/material";
 import Link from "next/link";
-import MenuIcon from "@mui/icons-material/Menu";
-import { useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
+import { mainStyles, saleSiteDrawerArray } from "./drawer.data";
+import { usePathname } from "next/navigation";
 
-export default function DrawerSaleSite() {
-  const [open, setOpen] = useState(false);
+export default function DrawerSaleSite({ open, setOpen }: any) {
   const theme: any = useTheme();
+  const pathName: any = usePathname();
 
   return (
-    <>
+    <Drawer
+      anchor={"left"}
+      open={open}
+      onClose={() => setOpen(false)}
+      PaperProps={{
+        style: {
+          width: "280px",
+          backgroundColor: `${theme?.palette?.secondary?.main}`,
+          padding: "20px",
+        },
+      }}
+    >
       <Box
-        display={{ xs: "flex", md: "none" }}
-        justifyContent={"space-between"}
+        display={"flex"}
         alignItems={"center"}
-        p={2}
+        justifyContent={"space-between"}
       >
-        <Link href={"/"}>
-          <Logo52Icon />
+        <Link href={"/"} onClick={() => setOpen(false)}>
+          <LogoIcon />
         </Link>
-
-        <MenuIcon
-          sx={{
-            cursor: "pointer",
-            color: "grey.100",
-            display: { xs: "block", md: "none" },
-          }}
-          onClick={() => setOpen(true)}
+        <CloseIcon
+          sx={{ cursor: "pointer", color: "secondary.100" }}
+          onClick={() => setOpen(false)}
         />
       </Box>
 
-      <Drawer
-        anchor={"left"}
-        open={open}
-        onClose={() => setOpen(false)}
-        PaperProps={{
-          style: {
-            width: "280px",
-            backgroundColor: `${theme?.palette?.secondary?.main}`,
-            padding: "20px",
-          },
-        }}
-      >
-        <Box
-          display={"flex"}
-          alignItems={"center"}
-          justifyContent={"space-between"}
-        >
-          <Link href={"/"} onClick={() => setOpen(false)}>
-            <LogoIcon />
-          </Link>
-          <CloseIcon
-            sx={{ cursor: "pointer", color: "secondary.100" }}
-            onClick={() => setOpen(false)}
-          />
-        </Box>
-      </Drawer>
-    </>
+      <List>
+        {saleSiteDrawerArray?.map((item: any) => (
+          <ListItem key={item?.id} sx={{ px: 0 }}>
+            <Link
+              href={item?.href}
+              style={{ width: "100%" }}
+              onClick={() => setOpen(false)}
+            >
+              <ListItemButton sx={mainStyles(item?.href, pathName, theme)}>
+                {item?.label}
+              </ListItemButton>
+            </Link>
+          </ListItem>
+        ))}
+      </List>
+    </Drawer>
   );
 }

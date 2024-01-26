@@ -15,6 +15,7 @@ import {
 } from "./navbar.data";
 import { usePathname } from "next/navigation";
 import { AUTH } from "@/app/_constants/routes";
+import { pxToRem } from "@/app/_utils/getFontValue";
 
 export default function Navbar() {
   const pathName = usePathname();
@@ -55,6 +56,10 @@ export default function Navbar() {
               border: "1px dashed",
               borderColor: "grey.100",
               background: "transparent",
+              height: 54,
+              width: 132,
+              fontSize: pxToRem(18),
+              fontWeight: "normal",
               mr: 2,
               ":hover": {
                 backgroundColor: "grey.100",
@@ -74,6 +79,10 @@ export default function Navbar() {
               borderRadius: 25,
               border: "1px solid",
               borderColor: "primary.main",
+              height: 54,
+              width: 132,
+              fontSize: pxToRem(18),
+              fontWeight: "normal",
             }}
             disableElevation
           >
