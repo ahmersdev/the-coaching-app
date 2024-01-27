@@ -2,9 +2,6 @@ import { useSpring, useInView } from "react-spring";
 
 export default function useAbout() {
   const [refImg, inViewImg] = useInView({ once: true });
-  const [refText, inViewText] = useInView({ once: true });
-  const [refButton, inViewButton] = useInView({ once: true });
-
   const fadeInFromLeft: any = useSpring({
     from: { transform: "translateX(-50%)", opacity: 0 },
     to: {
@@ -14,6 +11,7 @@ export default function useAbout() {
     config: { duration: 500, delay: 500 },
   });
 
+  const [refText, inViewText] = useInView({ once: true });
   const slideInRight: any = useSpring({
     from: { transform: "translateX(100%)", opacity: 0 },
     to: {
@@ -29,6 +27,7 @@ export default function useAbout() {
     config: { duration: 800, delay: 300 },
   });
 
+  const [refButton, inViewButton] = useInView({ once: true });
   const bounce: any = useSpring({
     from: { transform: "scale(0.8)", opacity: 0 },
     to: {

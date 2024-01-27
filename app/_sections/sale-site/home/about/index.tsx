@@ -29,7 +29,7 @@ export default function About() {
       bgcolor={"secondary.900"}
       sx={{
         backgroundImage: `url(${HomeAboutBgImg.src})`,
-        backgroundPosition: { xs: "100%", md: "center bottom" },
+        backgroundPosition: { xs: "100% 100%", md: "center bottom" },
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
       }}
