@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowBackIcon, ThreePersonIcon, TwoPersonIcon } from "@/app/_assets";
+import { ArrowBackIcon, ThreePersonIcon, TwoPersonIcon } from "@/app/_assets/icons";
 import { SYSTEM_ADMIN } from "@/app/_constants/routes";
 import { Box, Grid, Stack, Typography } from "@mui/material";
 import Link from "next/link";

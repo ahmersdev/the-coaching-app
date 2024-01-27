@@ -1,4 +1,4 @@
-import { RotateLeftIcon } from "@/app/_assets";
+import { RotateLeftIcon } from "@/app/_assets/icons";
 import { SYSTEM_ADMIN } from "@/app/_constants/routes";
 import { Avatar, Box, Chip, Typography } from "@mui/material";
 import dayjs from "dayjs";

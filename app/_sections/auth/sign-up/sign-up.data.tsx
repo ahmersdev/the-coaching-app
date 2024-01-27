@@ -1,4 +1,4 @@
-import { ForgotPasswordIcon } from "@/app/_assets";
+import { ForgotPasswordIcon } from "@/app/_assets/icons";
 import { RHFTextField } from "@/app/_components/react-hook-form";
 import { InputAdornment } from "@mui/material";
 import * as Yup from "yup";

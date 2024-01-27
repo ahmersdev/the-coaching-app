@@ -5,7 +5,7 @@ import {
   DashboardIcon,
   FaqsIcon,
   SettingsIcon,
-} from "@/app/_assets";
+} from "@/app/_assets/icons";
 
 export const mainRoutesArray = [
   { id: 1, icon: DashboardIcon, label: "Dashboard", href: "/dashboard" },

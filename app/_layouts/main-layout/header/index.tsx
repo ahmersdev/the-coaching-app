@@ -1,4 +1,4 @@
-import { NotificationIcon } from "@/app/_assets";
+import { NotificationIcon } from "@/app/_assets/icons";
 import { Avatar, Badge, Box, Stack, Typography } from "@mui/material";
 import { usePathname } from "next/navigation";
 import { useState } from "react";

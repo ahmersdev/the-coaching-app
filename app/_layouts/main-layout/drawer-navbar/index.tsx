@@ -1,4 +1,4 @@
-import { LogoIcon, SignOutIcon } from "@/app/_assets";
+import { LogoIcon, SignOutIcon } from "@/app/_assets/icons";
 import {
   Box,
   Drawer,

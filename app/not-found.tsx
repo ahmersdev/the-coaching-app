@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { NotFoundImage } from "./_assets";
+import { NotFoundImage } from "./_assets/icons";
 import { Box, Button, Typography } from "@mui/material";
 
 export default function NotFound() {

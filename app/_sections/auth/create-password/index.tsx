@@ -12,7 +12,7 @@ import {
   createPasswordFormValidationSchema,
   getCreatePasswordDataArray,
 } from "./create-password.data";
-import { LineIcon, ShortLogoIcon } from "@/app/_assets";
+import { LineIcon, ShortLogoIcon } from "@/app/_assets/icons";
 import Link from "next/link";
 import { AUTH } from "@/app/_constants/routes";
 

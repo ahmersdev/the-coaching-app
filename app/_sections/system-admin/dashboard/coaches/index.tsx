@@ -1,4 +1,4 @@
-import { EyeIcon } from "@/app/_assets";
+import { EyeIcon } from "@/app/_assets/icons";
 import { SYSTEM_ADMIN } from "@/app/_constants/routes";
 import {
   Avatar,

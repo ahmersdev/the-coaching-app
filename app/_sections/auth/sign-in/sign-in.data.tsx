@@ -1,4 +1,4 @@
-import { EmailIcon, EyeSlashIcon, EyeWithoutBgIcon } from "@/app/_assets";
+import { EmailIcon, EyeSlashIcon, EyeWithoutBgIcon } from "@/app/_assets/icons";
 import { RHFTextField } from "@/app/_components/react-hook-form";
 import { IconButton, InputAdornment } from "@mui/material";
 import * as Yup from "yup";

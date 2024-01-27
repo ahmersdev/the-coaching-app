@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import OTPInput from "react-otp-input";
-import { LineIcon, ShortLogoIcon } from "@/app/_assets";
+import { LineIcon, ShortLogoIcon } from "@/app/_assets/icons";
 import { Box, Grid, Typography, useTheme } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import Link from "next/link";

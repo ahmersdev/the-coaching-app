@@ -1,4 +1,4 @@
-import { AccordionCloseIcon, AccordionExpandIcon } from "@/app/_assets";
+import { AccordionCloseIcon, AccordionExpandIcon } from "@/app/_assets/icons";
 import {
   Accordion,
   AccordionDetails,

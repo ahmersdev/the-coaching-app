@@ -9,7 +9,7 @@ import {
   passwordFormValidationSchema,
 } from "./password.data";
 import { useState } from "react";
-import { PasswordIcon } from "@/app/_assets";
+import { PasswordIcon } from "@/app/_assets/icons";
 import { enqueueSnackbar } from "notistack";
 
 const Password = () => {

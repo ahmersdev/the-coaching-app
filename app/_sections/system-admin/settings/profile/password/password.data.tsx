@@ -1,7 +1,7 @@
 import { RHFTextField } from "@/app/_components/react-hook-form";
 import * as Yup from "yup";
 import { IconButton, InputAdornment } from "@mui/material";
-import { EyeWithoutBgIcon, EyeSlashIcon } from "@/app/_assets";
+import { EyeWithoutBgIcon, EyeSlashIcon } from "@/app/_assets/icons";
 
 export const passwordFormValidationSchema = Yup?.object()?.shape({
   currentPassword: Yup?.string()?.trim()?.required("Required"),

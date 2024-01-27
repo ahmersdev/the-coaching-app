@@ -1,4 +1,4 @@
-import { LogoIcon } from "@/app/_assets";
+import { LogoIcon } from "@/app/_assets/icons";
 import {
   Box,
   Drawer,

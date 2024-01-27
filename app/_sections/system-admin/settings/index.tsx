@@ -3,7 +3,7 @@
 import HorizontalTabs from "@/app/_components/horizontal-tabs";
 import Profile from "./profile";
 import Payments from "./payments";
-import { PaymentIcon, ProfileIcon } from "@/app/_assets";
+import { PaymentIcon, ProfileIcon } from "@/app/_assets/icons";
 
 const Settings = () => {
   const tabsDataArray = [

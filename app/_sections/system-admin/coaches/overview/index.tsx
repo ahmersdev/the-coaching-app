@@ -4,7 +4,7 @@ import { Box, Chip, Grid, Stack, Typography } from "@mui/material";
 import { useSearchParams } from "next/navigation";
 import { SYSTEM_ADMIN } from "@/app/_constants/routes";
 import Link from "next/link";
-import { ArrowBackIcon, ThreePersonIcon, TwoPersonIcon } from "@/app/_assets";
+import { ArrowBackIcon, ThreePersonIcon, TwoPersonIcon } from "@/app/_assets/icons";
 import {
   coachOverviewColumns,
   coachesOverviewDataArray,

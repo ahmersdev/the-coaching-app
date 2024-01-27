@@ -5,7 +5,7 @@ import { Box, Button, Typography } from "@mui/material";
 import { FaqsArray } from "./faqs.data";
 import { useState } from "react";
 import AddFaq from "./add-faq";
-import { DeleteIcon } from "@/app/_assets";
+import { DeleteIcon } from "@/app/_assets/icons";
 import AlertDialog from "@/app/_components/alert-dialog";
 import { enqueueSnackbar } from "notistack";
 

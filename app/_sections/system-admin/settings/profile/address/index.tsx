@@ -8,7 +8,7 @@ import {
   addressFormDefaultValues,
   addressFormValidationSchema,
 } from "./address.data";
-import { AddressIcon } from "@/app/_assets";
+import { AddressIcon } from "@/app/_assets/icons";
 import { enqueueSnackbar } from "notistack";
 
 const Address = () => {

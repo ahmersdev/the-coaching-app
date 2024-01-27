@@ -8,7 +8,7 @@ import {
   myProfileDataArray,
   myProfileFormDefaultValues,
 } from "./my-profile.data";
-import { MyProfileIcon } from "@/app/_assets";
+import { MyProfileIcon } from "@/app/_assets/icons";
 import { enqueueSnackbar } from "notistack";
 
 const MyProfile = () => {

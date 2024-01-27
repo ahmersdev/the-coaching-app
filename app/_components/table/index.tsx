@@ -11,7 +11,7 @@ import { StyledTableCell } from "./tanstack-table.styles";
 import { flexRender } from "@tanstack/react-table";
 import SkeletonTable from "../skeletons/skeleton-table";
 import CustomPagination from "../custom-pagination";
-import { TableDownArrowIcon, TableUpArrowIcon } from "@/app/_assets";
+import { TableDownArrowIcon, TableUpArrowIcon } from "@/app/_assets/icons";
 
 const TanstackTable = (props: any) => {
   const {

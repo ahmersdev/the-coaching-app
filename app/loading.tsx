@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { LoadingIcon } from "./_assets";
+import { LoadingIcon } from "./_assets/icons";
 
 export default function Loading() {
   return (

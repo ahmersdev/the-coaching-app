@@ -1,6 +1,6 @@
 "use client";
 
-import { LineIcon, ShortLogoIcon } from "@/app/_assets";
+import { LineIcon, ShortLogoIcon } from "@/app/_assets/icons";
 import { Box, Grid, Typography, useTheme } from "@mui/material";
 import {
   getSignInDataArray,
