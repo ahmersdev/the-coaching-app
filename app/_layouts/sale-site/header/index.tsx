@@ -10,7 +10,7 @@ export default function Header() {
   const [open, setOpen] = useState(false);
 
   return (
-    <Box p={{ xs: 2, md: 0 }}>
+    <Box p={{ xs: 2, md: 0 }} bgcolor={"common.black"}>
       <Box
         display={{ xs: "flex", md: "none" }}
         justifyContent={"space-between"}

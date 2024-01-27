@@ -19,7 +19,7 @@ export default function HeroBanner() {
       py={6}
       sx={{
         backgroundImage: `url(${HeroBannerImg.src})`,
-        backgroundPosition: "center bottom",
+        backgroundPosition: { xs: "100%", md: "center bottom" },
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
       }}

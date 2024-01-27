@@ -1,9 +1,9 @@
 import { useSpring, useInView } from "react-spring";
 
 export default function useAbout() {
-  const [refImg, inViewImg] = useInView();
-  const [refText, inViewText] = useInView();
-  const [refButton, inViewButton] = useInView();
+  const [refImg, inViewImg] = useInView({ once: true });
+  const [refText, inViewText] = useInView({ once: true });
+  const [refButton, inViewButton] = useInView({ once: true });
 
   const fadeInFromLeft: any = useSpring({
     from: { transform: "translateX(-50%)", opacity: 0 },
