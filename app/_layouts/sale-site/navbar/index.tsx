@@ -26,8 +26,9 @@ export default function Navbar() {
       display={{ xs: "none", md: "flex" }}
       justifyContent={"space-between"}
       alignItems={"center"}
-      py={3}
+      pt={3}
       px={12}
+      bgcolor={"common.black"}
     >
       <Link href={"/"}>
         <Logo52Icon />
