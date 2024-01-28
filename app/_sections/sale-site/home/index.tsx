@@ -8,6 +8,7 @@ import Philosophy from "./philosophy";
 import Trainers from "./trainers";
 import { HomeTestimonialBgImg } from "@/app/_assets/images";
 import Features from "./features";
+import Workout from "./workout";
 
 export default function SaleSiteHome() {
   return (
@@ -18,6 +19,7 @@ export default function SaleSiteHome() {
       <Philosophy />
       <Trainers />
       <Features />
+      <Workout />
       <Testimonial bgImg={HomeTestimonialBgImg} />
     </>
   );

@@ -10,3 +10,6 @@ export { default as HomeTrainersTwoImg } from "./home-trainers-two-img.png";
 export { default as HomeTrainersThreeImg } from "./home-trainers-three-img.png";
 export { default as HomeTestimonialBgImg } from "./home-testimonial-bg-img.png";
 export { default as HomeFeaturesBgImg } from "./home-features-bg-img.png";
+export { default as HomeWorkoutBgImg } from "./home-workout-bg-img.png";
+export { default as HomeWorkoutOneImg } from "./home-workout-one-img.png";
+export { default as HomeWorkoutTwoImg } from "./home-workout-two-img.png";
