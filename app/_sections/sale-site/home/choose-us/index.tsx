@@ -1,5 +1,3 @@
-"use client";
-
 import { HomeChooseUsBgImg, HomeChooseUsImg } from "@/app/_assets/images";
 import { Box, Grid, Typography } from "@mui/material";
 import Image from "next/image";

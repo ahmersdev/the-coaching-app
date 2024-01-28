@@ -1,5 +1,3 @@
-"use client";
-
 import { HomeAboutBgImg, HomeAboutImg } from "@/app/_assets/images";
 import { SALE_SITE } from "@/app/_constants/routes";
 import { pxToRem } from "@/app/_utils/getFontValue";

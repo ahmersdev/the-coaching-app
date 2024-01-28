@@ -1,5 +1,3 @@
-"use client";
-
 import { Avatar, Box, Divider, Rating, Typography } from "@mui/material";
 import useTestimonial from "./use-testimonial";
 import { animated } from "react-spring";

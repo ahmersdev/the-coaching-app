@@ -1,5 +1,3 @@
-"use client";
-
 import { HomePhilosophyImg } from "@/app/_assets/images";
 import { pxToRem } from "@/app/_utils/getFontValue";
 import { Box, Button, Grid, Typography } from "@mui/material";

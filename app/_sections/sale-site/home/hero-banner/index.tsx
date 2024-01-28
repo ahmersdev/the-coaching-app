@@ -1,5 +1,3 @@
-"use client";
-
 import { HeroBannerImg, HomeAboutImg } from "@/app/_assets/images";
 import { pxToRem } from "@/app/_utils/getFontValue";
 import { Button, Grid, Typography } from "@mui/material";

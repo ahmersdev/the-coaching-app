@@ -1,5 +1,3 @@
-"use client";
-
 import { HomeTrainersBgImg } from "@/app/_assets/images";
 import { Box, Typography } from "@mui/material";
 import { animated } from "react-spring";
