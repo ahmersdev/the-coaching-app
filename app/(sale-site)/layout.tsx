@@ -3,6 +3,10 @@
 import { SnackbarProvider } from "notistack";
 import Navbar from "../_layouts/sale-site/navbar";
 import Header from "../_layouts/sale-site/header";
+import "swiper/css";
+import "swiper/css/effect-coverflow";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 
 const SaleSiteLayout = ({ children }: { children: React.ReactNode }) => {
   return (

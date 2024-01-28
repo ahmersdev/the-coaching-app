@@ -32,3 +32,5 @@ export { default as DeleteIcon } from "./delete-icon";
 export { default as AlertDialogDeleteIcon } from "./alert-dialog-delete-icon";
 export { default as ForgotPasswordIcon } from "./forgot-password-icon";
 export { default as Logo52Icon } from "./logo-52-icon";
+export { default as CarousalBackArrowIcon } from "./carousal-back-arrow-icon";
+export { default as CarousalNextArrowIcon } from "./carousal-next-arrow-icon";

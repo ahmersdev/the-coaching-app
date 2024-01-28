@@ -9,7 +9,7 @@ import { animated } from "react-spring";
 import useHeroBanner from "./use-hero-banner";
 
 export default function HeroBanner() {
-  const { slideInLeft, fadeIn, bounce } = useHeroBanner();
+  const { slideInLeft, fadeIn, bounce, ref } = useHeroBanner();
 
   return (
     <Grid
@@ -23,6 +23,7 @@ export default function HeroBanner() {
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
       }}
+      ref={ref}
     >
       <Grid item xs={12} md={6} margin={"auto 0"}>
         <animated.div style={slideInLeft}>
