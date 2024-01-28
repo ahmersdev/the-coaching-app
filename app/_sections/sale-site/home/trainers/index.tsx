@@ -87,7 +87,8 @@ export default function Trainers() {
           <SwiperSlide
             key={index}
             style={{
-              paddingTop: centeredIndex !== index ? "150px" : "0px",
+              paddingTop:
+                centeredIndex !== index ? ({ xs: 0, md: "150px" } as any) : 0,
             }}
           >
             <Image
