@@ -7,6 +7,7 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import Footer from "../_layouts/sale-site/footer";
 
 const SaleSiteLayout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -22,6 +23,7 @@ const SaleSiteLayout = ({ children }: { children: React.ReactNode }) => {
         <Navbar />
         <Header />
         {children}
+        <Footer />
       </SnackbarProvider>
     </main>
   );

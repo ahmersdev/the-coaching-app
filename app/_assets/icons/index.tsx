@@ -34,3 +34,5 @@ export { default as ForgotPasswordIcon } from "./forgot-password-icon";
 export { default as Logo52Icon } from "./logo-52-icon";
 export { default as CarousalBackArrowIcon } from "./carousal-back-arrow-icon";
 export { default as CarousalNextArrowIcon } from "./carousal-next-arrow-icon";
+export { default as FooterEmailIcon } from "./footer-email-icon";
+export { default as FooterPhoneIcon } from "./footer-phone-icon";

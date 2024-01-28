@@ -13,3 +13,4 @@ export { default as HomeFeaturesBgImg } from "./home-features-bg-img.png";
 export { default as HomeWorkoutBgImg } from "./home-workout-bg-img.png";
 export { default as HomeWorkoutOneImg } from "./home-workout-one-img.png";
 export { default as HomeWorkoutTwoImg } from "./home-workout-two-img.png";
+export { default as LayoutFooterBgImg } from "./layout-footer-bg-img.png";
