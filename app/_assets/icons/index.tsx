@@ -36,3 +36,8 @@ export { default as CarousalBackArrowIcon } from "./carousal-back-arrow-icon";
 export { default as CarousalNextArrowIcon } from "./carousal-next-arrow-icon";
 export { default as FooterEmailIcon } from "./footer-email-icon";
 export { default as FooterPhoneIcon } from "./footer-phone-icon";
+export { default as FooterInstagramIcon } from "./footer-instagram-icon";
+export { default as FooterLinkedinIcon } from "./footer-linkedin-icon";
+export { default as FooterXIcon } from "./footer-x-icon";
+export { default as FooterFacebookIcon } from "./footer-facebook-icon";
+export { default as FooterYoutubeIcon } from "./footer-youtube-icon";
