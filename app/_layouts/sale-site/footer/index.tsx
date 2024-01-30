@@ -7,7 +7,7 @@ export default function Footer() {
     <>
       <Box
         px={{ xs: 2, md: 12 }}
-        pt={8}
+        py={6}
         bgcolor={"secondary.900"}
         position={"relative"}
       >
