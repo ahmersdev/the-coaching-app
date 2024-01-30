@@ -1,4 +1,4 @@
-export { default as HeroBannerImg } from "./hero-banner-img.png";
+export { default as HomeHeroBannerBgImg } from "./home-hero-banner-bg-img.png";
 export { default as HomeAboutImg } from "./home-about-img.png";
 export { default as HomeAboutBgImg } from "./home-about-bg-img.png";
 export { default as HomeChooseUsBgImg } from "./home-choose-us-bg-img.png";
@@ -14,3 +14,5 @@ export { default as HomeWorkoutBgImg } from "./home-workout-bg-img.png";
 export { default as HomeWorkoutOneImg } from "./home-workout-one-img.png";
 export { default as HomeWorkoutTwoImg } from "./home-workout-two-img.png";
 export { default as LayoutNewsLetterImg } from "./layout-news-letter-img.png";
+export { default as ServicesTestimonialBgImg } from "./services-testimonial-bg-img.png";
+export { default as ServicesHeroBannerBgImg } from "./services-hero-banner-bg-img.png";

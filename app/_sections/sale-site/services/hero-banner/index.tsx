@@ -1,4 +1,4 @@
-import { HomeHeroBannerBgImg, HomeAboutImg } from "@/app/_assets/images";
+import { ServicesHeroBannerBgImg, HomeAboutImg } from "@/app/_assets/images";
 import { pxToRem } from "@/app/_utils/getFontValue";
 import { Button, Grid, Typography } from "@mui/material";
 import Image from "next/image";
@@ -16,7 +16,7 @@ export default function HeroBanner() {
       px={{ xs: 2, md: 12 }}
       py={6}
       sx={{
-        backgroundImage: `url(${HomeHeroBannerBgImg.src})`,
+        backgroundImage: `url(${ServicesHeroBannerBgImg.src})`,
         backgroundPosition: { xs: "100% 100%", md: "center bottom" },
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
