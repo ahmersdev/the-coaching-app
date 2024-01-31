@@ -28,3 +28,6 @@ export { default as ServicesChallengesFourImg } from "./services-challenges-four
 export { default as ServicesChallengesFiveImg } from "./services-challenges-five-img.png";
 export { default as ServicesChallengesSixImg } from "./services-challenges-six-img.png";
 export { default as ServicesChallengesSevenImg } from "./services-challenges-seven-img.png";
+export { default as AboutUsTestimonialBgImg } from "./about-us-testimonial-bg-img.png";
+export { default as AboutUsHeroBannerBgImg } from "./about-us-hero-banner-bg-img.png";
+export { default as AboutUsMoreAboutUsImg } from "./about-us-more-about-us-img.png";
