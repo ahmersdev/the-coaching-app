@@ -90,7 +90,7 @@ export default function Trainers() {
             }}
           >
             <Image
-              src={item?.img?.src}
+              src={item?.img.src}
               alt="The Coaching App"
               width={372}
               height={442}

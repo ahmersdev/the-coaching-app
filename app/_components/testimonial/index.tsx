@@ -17,7 +17,7 @@ export default function Testimonial({ bgImg }: any) {
       px={{ xs: 2, md: 12 }}
       py={6}
       sx={{
-        backgroundImage: `url(${bgImg?.src})`,
+        backgroundImage: `url(${bgImg.src})`,
         backgroundPosition: { xs: "100% 100%", md: "center bottom" },
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",

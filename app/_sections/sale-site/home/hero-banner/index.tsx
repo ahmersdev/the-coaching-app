@@ -92,7 +92,7 @@ export default function HeroBanner() {
 
       <Grid item xs={0} md={6} py={2}>
         <Image
-          src={HomeAboutImg?.src}
+          src={HomeAboutImg.src}
           alt={"The Coaching App"}
           width={539}
           height={641}

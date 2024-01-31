@@ -35,7 +35,7 @@ export default function About() {
       <Grid item xs={12} md={6} position={"relative"}>
         <animated.div style={fadeInFromLeft} ref={refImg}>
           <Image
-            src={HomeAboutImg?.src}
+            src={HomeAboutImg.src}
             alt={"The Coaching App"}
             width={539}
             height={641}

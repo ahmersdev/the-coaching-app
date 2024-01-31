@@ -88,7 +88,7 @@ export default function Philosophy() {
       <Grid item xs={12} md={6} position={"relative"}>
         <animated.div style={slideInRight} ref={refImg}>
           <Image
-            src={HomePhilosophyImg?.src}
+            src={HomePhilosophyImg.src}
             alt={"The Coaching App"}
             width={580}
             height={611}

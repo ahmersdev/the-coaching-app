@@ -136,7 +136,7 @@ export default function NewsLetter() {
       <Grid item xs={12} md={6} position={"relative"}>
         <animated.div style={slideInRight} ref={refImg}>
           <Image
-            src={LayoutNewsLetterImg?.src}
+            src={LayoutNewsLetterImg.src}
             alt={"The Coaching App"}
             width={538}
             height={642}

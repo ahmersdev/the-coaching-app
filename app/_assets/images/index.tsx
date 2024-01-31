@@ -16,3 +16,4 @@ export { default as HomeWorkoutTwoImg } from "./home-workout-two-img.png";
 export { default as LayoutNewsLetterImg } from "./layout-news-letter-img.png";
 export { default as ServicesTestimonialBgImg } from "./services-testimonial-bg-img.png";
 export { default as ServicesHeroBannerBgImg } from "./services-hero-banner-bg-img.png";
+export { default as ServicesOurServicesImg } from "./services-our-services-img.png";

@@ -76,7 +76,7 @@ export default function ChooseUs() {
         <Grid item xs={12} md={6} mt={{ xs: 2, md: 0 }}>
           <animated.div style={bounce} ref={refImg}>
             <Image
-              src={HomeChooseUsImg?.src}
+              src={HomeChooseUsImg.src}
               alt={"The Coaching App"}
               width={532}
               height={689}
