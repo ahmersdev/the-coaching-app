@@ -1,6 +1,6 @@
 import { ServicesHeroBannerBgImg, HomeAboutImg } from "@/app/_assets/images";
 import { pxToRem } from "@/app/_utils/getFontValue";
-import { Button, Grid, Typography } from "@mui/material";
+import { Avatar, Button, Grid, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import { animated } from "react-spring";
@@ -91,16 +91,12 @@ export default function HeroBanner() {
       </Grid>
 
       <Grid item xs={0} md={6} py={2}>
-        <Image
+        <Avatar
           src={HomeAboutImg.src}
           alt={"The Coaching App"}
-          width={539}
-          height={641}
-          style={{
-            zIndex: 9,
-            position: "relative",
-            width: "100%",
-            height: "auto",
+          sx={{
+            width: { xs: "100%", md: 539 },
+            height: { xs: "auto", md: 850 },
             opacity: 0,
           }}
         />

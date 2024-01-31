@@ -1,12 +1,14 @@
-import { Grid, Typography } from "@mui/material";
+import { Avatar, Grid, Typography } from "@mui/material";
 import { animated } from "react-spring";
 import useHeroBanner from "./use-hero-banner";
-import Image from "next/image";
 import { ContactUsHeroBannerBgImg, HomeAboutImg } from "@/app/_assets/images";
 import { pxToRem } from "@/app/_utils/getFontValue";
+import { LoadingButton } from "@mui/lab";
+import { FormProvider } from "@/app/_components/react-hook-form";
+import { contactUsDataArray } from "./hero-banner.data";
 
 export default function HeroBanner() {
-  const { slideInLeft, ref } = useHeroBanner();
+  const { methods, handleSubmit, onSubmit, slideInLeft, ref } = useHeroBanner();
 
   return (
     <Grid
@@ -36,18 +38,44 @@ export default function HeroBanner() {
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
             nonumy.
           </Typography>
+
+          <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
+            <Grid container spacing={2} mt={3}>
+              {contactUsDataArray?.map((item: any) => (
+                <Grid item xs={12} md={item?.md} key={item?.id}>
+                  <item.component {...item?.componentProps} size={"small"} />
+                </Grid>
+              ))}
+
+              <Grid item xs={12}>
+                <LoadingButton
+                  variant={"contained"}
+                  sx={{
+                    color: "grey.100",
+                    width: 212,
+                    height: 54,
+                    borderRadius: 25,
+                    border: "1px solid",
+                    borderColor: "primary.main",
+                  }}
+                  disableElevation
+                  type={"submit"}
+                >
+                  Send
+                </LoadingButton>
+              </Grid>
+            </Grid>
+          </FormProvider>
         </animated.div>
       </Grid>
 
       <Grid item xs={0} md={6} py={2}>
-        <Image
+        <Avatar
           src={HomeAboutImg.src}
           alt={"The Coaching App"}
-          width={539}
-          height={641}
-          style={{
-            width: "100%",
-            height: "auto",
+          sx={{
+            width: { xs: "100%", md: 539 },
+            height: { xs: "auto", md: 900 },
             opacity: 0,
           }}
         />

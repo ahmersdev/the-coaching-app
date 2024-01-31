@@ -1,6 +1,28 @@
 import { useInView, useSpring } from "react-spring";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { enqueueSnackbar } from "notistack";
+import {
+  contactUsDefaultValues,
+  contactUsValidationSchema,
+} from "./hero-banner.data";
 
 export default function useHeroBanner() {
+  const methods: any = useForm({
+    resolver: yupResolver(contactUsValidationSchema),
+    defaultValues: contactUsDefaultValues,
+  });
+
+  const { handleSubmit, reset } = methods;
+
+  const onSubmit = async (data: any) => {
+    console.log(data);
+    enqueueSnackbar("Message Sent Successfully!", {
+      variant: "success",
+    });
+    reset(contactUsDefaultValues);
+  };
+
   const [ref, inView] = useInView({
     once: true,
   });
@@ -14,5 +36,5 @@ export default function useHeroBanner() {
     config: { duration: 500 },
   });
 
-  return { slideInLeft, ref };
+  return { methods, handleSubmit, onSubmit, slideInLeft, ref };
 }

@@ -15,11 +15,11 @@ export default function HeroBanner() {
       pb={6}
       sx={{
         backgroundImage: `url(${AboutUsHeroBannerBgImg.src})`,
-        backgroundPosition: { xs: "100% 100%", md: "center bottom" },
+        backgroundPosition: { xs: "center center", md: "center bottom" },
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
       }}
-      height={850}
+      height={{ xs: "auto", md: 850 }}
       ref={ref}
     >
       <Grid item xs={12} md={6} margin={"auto 0"}>
