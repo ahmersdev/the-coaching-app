@@ -20,4 +20,9 @@ export const coreValuesData = [
     title: "Fitness",
     desc: "Lorem ipsum is a placeholder text commonly used to demonstrate the",
   },
+  {
+    img: AboutUsFitnessImg,
+    title: "Fitness",
+    desc: "Lorem ipsum is a placeholder text commonly used to demonstrate the",
+  },
 ];

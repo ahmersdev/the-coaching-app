@@ -25,7 +25,6 @@ export default function MoreAboutUs() {
       bgcolor={"secondary.900"}
       position={"relative"}
     >
-      Video Player
       <Box
         position={"absolute"}
         top={0}
@@ -36,6 +35,7 @@ export default function MoreAboutUs() {
         borderRadius={"50%"}
         sx={{ opacity: 0.3, filter: "blur(100px)" }}
       />
+
       <Grid container spacing={2} mt={6}>
         <Grid item xs={12} md={6} margin={"auto 0"}>
           <animated.div style={slideInLeft} ref={refHead}>
