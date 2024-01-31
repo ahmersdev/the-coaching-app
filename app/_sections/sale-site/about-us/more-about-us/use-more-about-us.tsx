@@ -4,6 +4,16 @@ import { useInView, useSpring } from "react-spring";
 export default function useMoreAboutUs() {
   const theme: any = useTheme();
 
+  const [refVideo, inViewVideo] = useInView({ once: true });
+  const bounceVideo: any = useSpring({
+    from: { transform: "scale(0.8)", opacity: 0 },
+    to: {
+      transform: inViewVideo ? "scale(1)" : "scale(0.8)",
+      opacity: inViewVideo ? 1 : 0,
+    },
+    config: { tension: 200, friction: 12 },
+  });
+
   const [refHead, inViewHead] = useInView({
     once: true,
   });
@@ -45,6 +55,8 @@ export default function useMoreAboutUs() {
 
   return {
     theme,
+    bounceVideo,
+    refVideo,
     slideInLeft,
     refHead,
     fadeIn,

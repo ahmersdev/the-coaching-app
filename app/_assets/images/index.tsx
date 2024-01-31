@@ -35,3 +35,4 @@ export { default as AboutUsCoreValuesBgImg } from "./about-us-core-values-bg-img
 export { default as AboutUsYogaImg } from "./about-us-yoga-img.png";
 export { default as AboutUsGymImg } from "./about-us-gym-img.png";
 export { default as AboutUsFitnessImg } from "./about-us-fitness-img.png";
+export { default as ContactUsHeroBannerBgImg } from "./contact-us-hero-banner-bg-img.png";

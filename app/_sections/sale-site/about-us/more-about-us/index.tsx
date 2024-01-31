@@ -9,6 +9,8 @@ import { AboutUsMoreAboutUsImg } from "@/app/_assets/images";
 export default function MoreAboutUs() {
   const {
     theme,
+    bounceVideo,
+    refVideo,
     slideInLeft,
     refHead,
     fadeIn,
@@ -26,6 +28,17 @@ export default function MoreAboutUs() {
       bgcolor={"secondary.900"}
       position={"relative"}
     >
+      <Box
+        position={"absolute"}
+        top={0}
+        right={0}
+        bgcolor={"error.700"}
+        width={212}
+        height={212}
+        borderRadius={"50%"}
+        sx={{ opacity: 0.3, filter: "blur(100px)" }}
+      />
+
       <video
         width={"100%"}
         height={"100%"}
@@ -41,16 +54,37 @@ export default function MoreAboutUs() {
         <source src={"/fitness.mp4"} type="video/mp4" />
       </video>
 
-      <Box
-        position={"absolute"}
-        top={0}
-        right={0}
-        bgcolor={"error.700"}
-        width={212}
-        height={212}
-        borderRadius={"50%"}
-        sx={{ opacity: 0.3, filter: "blur(100px)" }}
-      />
+      <animated.div style={bounceVideo} ref={refVideo}>
+        <Box
+          display={"flex"}
+          alignItems={"center"}
+          justifyContent={"center"}
+          flexWrap={"wrap"}
+          mt={4}
+        >
+          <Typography variant={"h5"} fontWeight={"normal"} color={"grey.100"}>
+            Interested in working with us? Join our team 🎉
+          </Typography>
+          <Link href={"/"}>
+            <Button
+              variant={"contained"}
+              sx={{
+                color: "grey.100",
+                borderRadius: 25,
+                border: "1px solid",
+                borderColor: "primary.main",
+                height: 54,
+                width: 212,
+                fontSize: pxToRem(18),
+                fontWeight: "normal",
+              }}
+              disableElevation
+            >
+              Let&rsquo;s Get Started
+            </Button>
+          </Link>
+        </Box>
+      </animated.div>
 
       <Grid container spacing={2} mt={6}>
         <Grid item xs={12} md={6} margin={"auto 0"}>
