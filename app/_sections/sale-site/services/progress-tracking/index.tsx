@@ -1,35 +1,66 @@
-import { HomePhilosophyImg } from "@/app/_assets/images";
-import { pxToRem } from "@/app/_utils/getFontValue";
+import { ServicesProgressTrackerImg } from "@/app/_assets/images";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import Image from "next/image";
-import Link from "next/link";
 import { animated } from "react-spring";
-import usePhilosophy from "./use-philosophy";
+import useProgressTracking from "./use-progress-tracking";
+import { pxToRem } from "@/app/_utils/getFontValue";
+import Link from "next/link";
 
-export default function Philosophy() {
+export default function ProgressTracking() {
   const {
-    slideInLeft,
-    refHead,
-    fadeIn,
-    refText,
-    bounce,
-    refButton,
-    slideInRight,
     refImg,
-  } = usePhilosophy();
+    refText,
+    refButton,
+    fadeInFromLeft,
+    slideInRight,
+    fadeIn,
+    bounce,
+  } = useProgressTracking();
 
   return (
-    <Grid container spacing={2} px={{ xs: 2, md: 12 }} py={6} bgcolor={"secondary.900"}>
-      <Grid item xs={12} md={6} margin={"auto 0"}>
-        <animated.div style={slideInLeft} ref={refHead}>
+    <Grid
+      container
+      spacing={2}
+      px={{ xs: 2, md: 12 }}
+      py={6}
+      bgcolor={"secondary.900"}
+      position={"relative"}
+    >
+      <Box
+        position={"absolute"}
+        top={0}
+        right={0}
+        bgcolor={"success.700"}
+        width={212}
+        height={212}
+        borderRadius={"50%"}
+        sx={{ opacity: 0.3, filter: "blur(100px)" }}
+      />
+
+      <Grid item xs={12} md={8}>
+        <animated.div style={fadeInFromLeft} ref={refImg}>
+          <Image
+            src={ServicesProgressTrackerImg.src}
+            alt={"The Coaching App"}
+            width={710}
+            height={625}
+            style={{
+              width: "100%",
+              height: "auto",
+            }}
+          />
+        </animated.div>
+      </Grid>
+
+      <Grid item xs={12} md={4} margin={"auto 0"}>
+        <animated.div style={slideInRight} ref={refImg}>
           <Typography
             variant={"h1"}
             fontWeight={900}
             fontSize={pxToRem(36)}
             color={"grey.100"}
           >
-            Our Training
-            <br />
+            Progress{" "}
             <Typography
               component={"span"}
               color={"primary.800"}
@@ -37,7 +68,7 @@ export default function Philosophy() {
               fontWeight={900}
               fontSize={pxToRem(36)}
             >
-              Philosophy
+              Tracking
             </Typography>
           </Typography>
         </animated.div>
@@ -83,34 +114,6 @@ export default function Philosophy() {
             </Button>
           </Link>
         </animated.div>
-      </Grid>
-
-      <Grid item xs={12} md={6} position={"relative"}>
-        <animated.div style={slideInRight} ref={refImg}>
-          <Image
-            src={HomePhilosophyImg.src}
-            alt={"The Coaching App"}
-            width={580}
-            height={611}
-            style={{
-              zIndex: 9,
-              position: "relative",
-              width: "100%",
-              height: "auto",
-            }}
-          />
-        </animated.div>
-
-        <Box
-          position={"absolute"}
-          top={0}
-          right={0}
-          bgcolor={"error.700"}
-          width={212}
-          height={212}
-          borderRadius={"50%"}
-          sx={{ opacity: 0.3, filter: "blur(100px)" }}
-        />
       </Grid>
     </Grid>
   );

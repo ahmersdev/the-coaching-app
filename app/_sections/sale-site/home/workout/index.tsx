@@ -76,7 +76,7 @@ export default function Workout() {
             Explore our unique training approach that focuses on personalized
             fitness plans, motivation, and a holistic understanding of
             well-being. See how we empower our trainers to make a lasting impact
-            on clients lives
+            on clients&apos; lives
           </Typography>
         </animated.div>
 
