@@ -12,8 +12,8 @@ export default function AboutUs() {
     <>
       <HeroBanner />
       <MoreAboutUs />
-      <FaqsSaleSite />
       <CoreValues />
+      <FaqsSaleSite />
       <Testimonial bgImg={AboutUsTestimonialBgImg} />
     </>
   );

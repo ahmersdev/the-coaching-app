@@ -31,3 +31,7 @@ export { default as ServicesChallengesSevenImg } from "./services-challenges-sev
 export { default as AboutUsTestimonialBgImg } from "./about-us-testimonial-bg-img.png";
 export { default as AboutUsHeroBannerBgImg } from "./about-us-hero-banner-bg-img.png";
 export { default as AboutUsMoreAboutUsImg } from "./about-us-more-about-us-img.png";
+export { default as AboutUsCoreValuesBgImg } from "./about-us-core-values-bg-img.png";
+export { default as AboutUsYogaImg } from "./about-us-yoga-img.png";
+export { default as AboutUsGymImg } from "./about-us-gym-img.png";
+export { default as AboutUsFitnessImg } from "./about-us-fitness-img.png";

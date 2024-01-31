@@ -25,6 +25,7 @@ export default function MoreAboutUs() {
       bgcolor={"secondary.900"}
       position={"relative"}
     >
+      Video Player
       <Box
         position={"absolute"}
         top={0}
