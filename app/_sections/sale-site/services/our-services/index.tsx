@@ -43,7 +43,7 @@ export default function OurServices() {
       <animated.div style={fadeInBottomToTop} ref={refHead}>
         <Typography variant={"h1"} color={"grey.100"} textAlign={"center"}>
           <Typography variant={"h1"} color={"primary.800"} component={"span"}>
-            Out&nbsp;
+            Our&nbsp;
           </Typography>
           Services
         </Typography>

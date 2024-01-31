@@ -17,3 +17,5 @@ export { default as LayoutNewsLetterImg } from "./layout-news-letter-img.png";
 export { default as ServicesTestimonialBgImg } from "./services-testimonial-bg-img.png";
 export { default as ServicesHeroBannerBgImg } from "./services-hero-banner-bg-img.png";
 export { default as ServicesOurServicesImg } from "./services-our-services-img.png";
+export { default as ServicesNutritionalBgImg } from "./services-nutritional-bg-img.png";
+export { default as ServicesNutritionalImg } from "./services-nutritional-img.png";
