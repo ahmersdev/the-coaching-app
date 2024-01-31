@@ -96,7 +96,7 @@ export default function HeroBanner() {
           alt={"The Coaching App"}
           sx={{
             width: { xs: "100%", md: 539 },
-            height: { xs: "auto", md: 850 },
+            height: { xs: "auto", md: 1000 },
             opacity: 0,
           }}
         />

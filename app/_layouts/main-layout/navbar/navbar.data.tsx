@@ -7,11 +7,16 @@ import {
 } from "@/app/_assets/icons";
 
 export const mainRoutesArray = [
-  { id: 1, icon: DashboardIcon, label: "Dashboard", href: "/dashboard" },
-  { id: 2, icon: CoachesIcon, label: "Coaches", href: "/coaches" },
-  { id: 3, icon: ClientsIcon, label: "Clients", href: "/clients" },
-  { id: 4, icon: FaqsIcon, label: "FAQ's", href: "/faqs" },
-  { id: 5, icon: ComplaintsIcon, label: "Complaints", href: "/complaints" },
+  { id: 1, icon: DashboardIcon, label: "Dashboard", href: "/admin-dashboard" },
+  { id: 2, icon: CoachesIcon, label: "Coaches", href: "/admin-coaches" },
+  { id: 3, icon: ClientsIcon, label: "Clients", href: "/admin-clients" },
+  { id: 4, icon: FaqsIcon, label: "FAQ's", href: "/admin-faqs" },
+  {
+    id: 5,
+    icon: ComplaintsIcon,
+    label: "Complaints",
+    href: "/admin-complaints",
+  },
 ];
 
 export const mainStyles = (href: any, pathName: any, theme: any) => {

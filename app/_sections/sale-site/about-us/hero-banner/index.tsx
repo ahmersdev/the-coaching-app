@@ -19,7 +19,7 @@ export default function HeroBanner() {
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
       }}
-      height={{ xs: "auto", md: 850 }}
+      height={{ xs: "auto", md: 1000 }}
       ref={ref}
     >
       <Grid item xs={12} md={6} margin={"auto 0"}>

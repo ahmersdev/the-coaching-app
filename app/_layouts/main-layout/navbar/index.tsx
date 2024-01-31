@@ -56,12 +56,14 @@ const Navbar = () => {
 
         <List>
           <ListItem sx={{ px: 0 }}>
-            <Link href={"/settings"} style={{ width: "100%" }}>
-              <ListItemButton sx={mainStyles("/settings", pathName, theme)}>
+            <Link href={"/admin-settings"} style={{ width: "100%" }}>
+              <ListItemButton
+                sx={mainStyles("/admin-settings", pathName, theme)}
+              >
                 <ListItemIcon sx={{ minWidth: { xs: "30px", lg: "40px" } }}>
                   <SettingsIcon
                     fill={
-                      "/settings" === pathName
+                      "/admin-settings" === pathName
                         ? theme?.palette?.grey?.[100]
                         : theme?.palette?.secondary?.[400]
                     }

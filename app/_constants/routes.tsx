@@ -1,12 +1,12 @@
 export const SYSTEM_ADMIN = {
-  DASHBOARD: `/dashboard`,
-  COACHES: `/coaches`,
-  COACHES_OVERVIEW: `/coaches/overview`,
-  CLIENTS: `/clients`,
-  CLIENTS_OVERVIEW: `/clients/overview`,
-  FAQS: `/faqs`,
-  COMPLAINTS: `/complaints`,
-  SETTINGS: `/settings`,
+  DASHBOARD: `/admin-dashboard`,
+  COACHES: `/admin-coaches`,
+  COACHES_OVERVIEW: `/admin-coaches/overview`,
+  CLIENTS: `/admin-clients`,
+  CLIENTS_OVERVIEW: `/admin-clients/overview`,
+  FAQS: `/admin-faqs`,
+  COMPLAINTS: `/admin-complaints`,
+  SETTINGS: `/admin-settings`,
 };
 
 export const AUTH = {
