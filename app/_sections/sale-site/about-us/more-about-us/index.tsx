@@ -8,6 +8,7 @@ import { AboutUsMoreAboutUsImg } from "@/app/_assets/images";
 
 export default function MoreAboutUs() {
   const {
+    theme,
     slideInLeft,
     refHead,
     fadeIn,
@@ -25,6 +26,21 @@ export default function MoreAboutUs() {
       bgcolor={"secondary.900"}
       position={"relative"}
     >
+      <video
+        width={"100%"}
+        height={"100%"}
+        autoPlay
+        muted
+        playsInline
+        loop
+        style={{
+          borderRadius: 24,
+          boxShadow: `30px -30px ${theme.palette.primary.main}`,
+        }}
+      >
+        <source src={"/fitness.mp4"} type="video/mp4" />
+      </video>
+
       <Box
         position={"absolute"}
         top={0}

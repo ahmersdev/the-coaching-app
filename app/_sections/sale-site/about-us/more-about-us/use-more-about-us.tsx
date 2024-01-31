@@ -1,6 +1,9 @@
+import { useTheme } from "@mui/material";
 import { useInView, useSpring } from "react-spring";
 
 export default function useMoreAboutUs() {
+  const theme: any = useTheme();
+
   const [refHead, inViewHead] = useInView({
     once: true,
   });
@@ -41,6 +44,7 @@ export default function useMoreAboutUs() {
   });
 
   return {
+    theme,
     slideInLeft,
     refHead,
     fadeIn,
