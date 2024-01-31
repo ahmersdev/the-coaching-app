@@ -21,3 +21,10 @@ export { default as ServicesNutritionalBgImg } from "./services-nutritional-bg-i
 export { default as ServicesNutritionalImg } from "./services-nutritional-img.png";
 export { default as ServicesProgressTrackerImg } from "./services-progress-tracker-img.png";
 export { default as ServicesChallengesBgImg } from "./services-challenges-bg-img.png";
+export { default as ServicesChallengesOneImg } from "./services-challenges-one-img.png";
+export { default as ServicesChallengesTwoImg } from "./services-challenges-two-img.png";
+export { default as ServicesChallengesThreeImg } from "./services-challenges-three-img.png";
+export { default as ServicesChallengesFourImg } from "./services-challenges-four-img.png";
+export { default as ServicesChallengesFiveImg } from "./services-challenges-five-img.png";
+export { default as ServicesChallengesSixImg } from "./services-challenges-six-img.png";
+export { default as ServicesChallengesSevenImg } from "./services-challenges-seven-img.png";

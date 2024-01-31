@@ -68,6 +68,10 @@ export default function Challenges() {
           </Typography>
         </Typography>
       </animated.div>
+
+      <Box mt={4}>
+        <animated.div style={bounce} ref={refBounce}></animated.div>
+      </Box>
     </Box>
   );
 }
