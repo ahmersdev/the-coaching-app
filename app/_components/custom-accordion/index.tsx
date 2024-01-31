@@ -8,7 +8,14 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 
-const CustomAccordion = ({ accordions, CustomIcon, customIconClick }: any) => {
+const CustomAccordion = ({
+  accordions,
+  CustomIcon,
+  customIconClick,
+  bgcolor = "transparent",
+  CloseIcon = <AccordionCloseIcon />,
+  ExpandIcon = <AccordionExpandIcon />,
+}: any) => {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
   const handleChange = (index: number) => {
@@ -24,20 +31,14 @@ const CustomAccordion = ({ accordions, CustomIcon, customIconClick }: any) => {
             onChange={() => handleChange(index)}
             elevation={0}
             sx={{
-              bgcolor: "transparent",
+              bgcolor,
               "&.Mui-expanded": {
                 margin: 0,
               },
             }}
           >
             <AccordionSummary
-              expandIcon={
-                expandedIndex === index ? (
-                  <AccordionCloseIcon />
-                ) : (
-                  <AccordionExpandIcon />
-                )
-              }
+              expandIcon={expandedIndex === index ? CloseIcon : ExpandIcon}
               aria-controls={`panel${index + 1}-content`}
               id={`panel${index + 1}-header`}
             >

@@ -7,6 +7,7 @@ import OurServices from "./our-services";
 import Nutritional from "./nutritional";
 import ProgressTracking from "./progress-tracking";
 import Challenges from "./challenges";
+import FaqsSaleSite from "@/app/_components/faqs-sale-site";
 
 export default function Services() {
   return (
@@ -16,6 +17,7 @@ export default function Services() {
       <Nutritional />
       <ProgressTracking />
       <Challenges />
+      <FaqsSaleSite />
       <Testimonial bgImg={ServicesTestimonialBgImg} />
     </>
   );
