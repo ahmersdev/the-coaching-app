@@ -1,7 +1,17 @@
-import { ServicesChallengesBgImg } from "@/app/_assets/images";
-import { Box, Typography } from "@mui/material";
+import {
+  ServicesChallengesBgImg,
+  ServicesChallengesFiveImg,
+  ServicesChallengesFourImg,
+  ServicesChallengesOneImg,
+  ServicesChallengesSevenImg,
+  ServicesChallengesSixImg,
+  ServicesChallengesThreeImg,
+  ServicesChallengesTwoImg,
+} from "@/app/_assets/images";
+import { Box, Grid, Typography } from "@mui/material";
 import useChallenges from "./use-challenges";
 import { animated } from "react-spring";
+import Image from "next/image";
 
 export default function Challenges() {
   const { fadeInBottomToTop, refHead, fadeIn, refText, bounce, refBounce } =
@@ -69,9 +79,102 @@ export default function Challenges() {
         </Typography>
       </animated.div>
 
-      <Box mt={4}>
-        <animated.div style={bounce} ref={refBounce}></animated.div>
-      </Box>
+      <animated.div style={bounce} ref={refBounce}>
+        <Grid container spacing={2} mt={4} position={"relative"} zIndex={9}>
+          <Grid item xs={12} md={5}>
+            <Grid container spacing={2}>
+              <Grid item xs={12} md={4}>
+                <Image
+                  src={ServicesChallengesOneImg.src}
+                  alt={"The Coaching App"}
+                  width={148}
+                  height={240}
+                  style={{
+                    width: "100%",
+                    height: "auto",
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12} md={8}>
+                <Image
+                  src={ServicesChallengesTwoImg.src}
+                  alt={"The Coaching App"}
+                  width={336}
+                  height={240}
+                  style={{
+                    width: "100%",
+                    height: "auto",
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Image
+                  src={ServicesChallengesFiveImg.src}
+                  alt={"The Coaching App"}
+                  width={508}
+                  height={240}
+                  style={{
+                    width: "100%",
+                    height: "auto",
+                  }}
+                />
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item xs={12} md={3}>
+            <Image
+              src={ServicesChallengesThreeImg.src}
+              alt={"The Coaching App"}
+              width={306}
+              height={506}
+              style={{
+                width: "100%",
+                height: "auto",
+              }}
+            />
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <Image
+                  src={ServicesChallengesFourImg.src}
+                  alt={"The Coaching App"}
+                  width={398}
+                  height={240}
+                  style={{
+                    width: "100%",
+                    height: "auto",
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12} md={4}>
+                <Image
+                  src={ServicesChallengesSixImg.src}
+                  alt={"The Coaching App"}
+                  width={148}
+                  height={240}
+                  style={{
+                    width: "100%",
+                    height: "auto",
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12} md={8}>
+                <Image
+                  src={ServicesChallengesSevenImg.src}
+                  alt={"The Coaching App"}
+                  width={224}
+                  height={240}
+                  style={{
+                    width: "100%",
+                    height: "auto",
+                  }}
+                />
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+      </animated.div>
     </Box>
   );
 }
