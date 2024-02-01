@@ -3,6 +3,7 @@ export { default as LogoIcon } from "./logo-icon";
 export { default as DashboardIcon } from "./dashboard-icon";
 export { default as CoachesIcon } from "./coaches-icon";
 export { default as ClientsIcon } from "./clients-icon";
+export { default as ClientAlertsIcon } from "./client-alerts-icon";
 export { default as SettingsIcon } from "./settings-icon";
 export { default as SignOutIcon } from "./sign-out-icon";
 export { default as LoadingIcon } from "./loading-icon";

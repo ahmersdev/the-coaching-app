@@ -22,3 +22,15 @@ export const SALE_SITE = {
   ABOUT_US: `/about-us`,
   CONTACT_US: `/contact-us`,
 };
+
+export const COACH_SITE = {
+  DASHBOARD: `/coach-dashboard`,
+  CLIENTS: `/coach-clients`,
+  CLIENTS_OVERVIEW: `/coach-clients/overview`,
+  CLIENTS_ASSIGN_WORKOUT: `/coach-clients/assign-workout`,
+  CLIENTS_ASSIGN_DIET: `/coach-clients/assign-diet`,
+  CLIENTS_ASSIGN_MICRO_PLANS: `/coach-clients/assign-micro-plans`,
+  CLIENTS_ALERTS: `/coach-alerts`,
+  CLIENTS_ALERTS_OVERVIEW: `/coach-alerts/overview`,
+  SETTINGS: `/coach-settings`,
+};
