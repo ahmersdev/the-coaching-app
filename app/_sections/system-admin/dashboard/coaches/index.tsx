@@ -10,10 +10,8 @@ import {
   useTheme,
 } from "@mui/material";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 const Coaches = ({ coachesArray }: any) => {
-  const router = useRouter();
   const theme: any = useTheme();
 
   return (
@@ -27,23 +25,24 @@ const Coaches = ({ coachesArray }: any) => {
           New Coaches Registered
         </Typography>
 
-        <Button
-          variant={"contained"}
-          sx={{
-            color: "primary.main",
-            borderRadius: 25,
-            border: "1px solid",
-            borderColor: "primary.100",
-            background: theme?.palette?.gradients?.button1,
-            ":hover": {
-              background: theme?.palette?.gradients?.button1Hover,
-            },
-          }}
-          onClick={() => router?.push(SYSTEM_ADMIN?.COACHES)}
-          disableElevation
-        >
-          View All
-        </Button>
+        <Link href={SYSTEM_ADMIN?.COACHES}>
+          <Button
+            variant={"contained"}
+            sx={{
+              color: "primary.main",
+              borderRadius: 25,
+              border: "1px solid",
+              borderColor: "primary.100",
+              background: theme?.palette?.gradients?.button1,
+              ":hover": {
+                background: theme?.palette?.gradients?.button1Hover,
+              },
+            }}
+            disableElevation
+          >
+            View All
+          </Button>
+        </Link>
       </Box>
 
       <Divider sx={{ my: 2 }} />

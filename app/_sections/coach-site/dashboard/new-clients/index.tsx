@@ -1,4 +1,4 @@
-import { SYSTEM_ADMIN } from "@/app/_constants/routes";
+import { COACH_SITE } from "@/app/_constants/routes";
 import {
   Avatar,
   Box,
@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 
-const Clients = ({ clientsArray }: any) => {
+const NewClients = ({ newClientsArray }: any) => {
   const theme: any = useTheme();
 
   return (
@@ -21,10 +21,10 @@ const Clients = ({ clientsArray }: any) => {
         justifyContent={"space-between"}
       >
         <Typography variant={"h5"} fontWeight={700}>
-          New Clients Registered
+          New Clients
         </Typography>
 
-        <Link href={SYSTEM_ADMIN?.CLIENTS}>
+        <Link href={COACH_SITE?.CLIENTS}>
           <Button
             variant={"contained"}
             sx={{
@@ -47,12 +47,12 @@ const Clients = ({ clientsArray }: any) => {
       <Divider sx={{ my: 2 }} />
 
       <Grid container spacing={2}>
-        {!clientsArray?.length ? (
+        {!newClientsArray?.length ? (
           <Grid item xs={12} textAlign={"center"}>
             <Typography variant={"h6"}>Nothing in the List</Typography>
           </Grid>
         ) : (
-          clientsArray?.map((item: any) => (
+          newClientsArray?.map((item: any) => (
             <Grid item xs={12} sm={6} md={4} lg={2.4} key={item?.id}>
               <Box
                 bgcolor={"secondary.900"}
@@ -85,7 +85,7 @@ const Clients = ({ clientsArray }: any) => {
                 </Box>
                 <Link
                   href={{
-                    pathname: SYSTEM_ADMIN?.CLIENTS_OVERVIEW,
+                    pathname: COACH_SITE?.CLIENTS_OVERVIEW,
                     query: { clientId: item?.id },
                   }}
                 >
@@ -116,4 +116,4 @@ const Clients = ({ clientsArray }: any) => {
   );
 };
 
-export default Clients;
+export default NewClients;
