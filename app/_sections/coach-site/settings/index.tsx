@@ -1,5 +1,20 @@
 "use client";
 
+import { SubscriptionIcon, ProfileIcon } from "@/app/_assets/icons";
+import HorizontalTabs from "@/app/_components/horizontal-tabs";
+import Profile from "./profile";
+import Subscription from "./subscription";
+
 export default function Settings() {
-  return <>Settings</>;
+  const tabsDataArray = [
+    { title: "Profile", icon: ProfileIcon },
+    { title: "Subscription", icon: SubscriptionIcon },
+  ];
+
+  return (
+    <HorizontalTabs tabsDataArray={tabsDataArray}>
+      <Profile />
+      <Subscription />
+    </HorizontalTabs>
+  );
 }

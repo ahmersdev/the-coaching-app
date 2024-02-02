@@ -42,3 +42,4 @@ export { default as FooterLinkedinIcon } from "./footer-linkedin-icon";
 export { default as FooterXIcon } from "./footer-x-icon";
 export { default as FooterFacebookIcon } from "./footer-facebook-icon";
 export { default as FooterYoutubeIcon } from "./footer-youtube-icon";
+export { default as SubscriptionIcon } from "./subscription-icon";
