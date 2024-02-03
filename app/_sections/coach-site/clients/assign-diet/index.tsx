@@ -24,9 +24,9 @@ import * as Yup from "yup";
 
 const dietValidationSchema: any = Yup?.object()?.shape({
   mealName: Yup?.string()?.trim()?.required("Required"),
-  includes: Yup?.string()?.trim()?.required("Required"),
-  quantity: Yup?.string()?.required("Required"),
-  note: Yup?.string()?.required("Required"),
+  includes: Yup?.string()?.trim(),
+  quantity: Yup?.string()?.trim(),
+  note: Yup?.string()?.trim(),
 });
 
 const dietFormDefaultValues: any = {
@@ -44,25 +44,54 @@ export default function AssignDiet() {
 
   const { handleSubmit, reset, control } = methods;
 
-  const { fields, append, remove } = useFieldArray({
+  const {
+    fields: fieldsDiet,
+    append: appendDiet,
+    remove: removeDiet,
+  } = useFieldArray({
     control,
-    name: "meals",
+    name: "diet",
   });
 
   const onSubmit = async (data: any) => {
-    console.log(data);
+    const meal1 = {
+      mealName: data?.mealName || "",
+      note: data?.note || "",
+      diet: [
+        {
+          includes: data?.includes || "",
+          quantity: data?.quantity || "",
+        },
+        ...data?.diet?.map((item: any) => ({
+          includes: item.includes || "",
+          quantity: item.quantity || "",
+        })),
+      ],
+    };
+    const otherMeals = data?.meals?.map((meal: any) => ({
+      mealName: meal?.mealName || "",
+      includes: meal?.includes || "",
+      quantity: meal?.quantity || "",
+      note: meal?.note || "",
+      diet: data?.diet?.map((item: any) => ({
+        includes: item?.includes || "",
+        quantity: item?.quantity || "",
+      })),
+    }));
+    console.log(meal1, otherMeals);
     enqueueSnackbar("Diet Added Successfully!", {
       variant: "success",
     });
-    reset(dietFormDefaultValues);
+    reset();
+    removeDiet();
   };
 
-  const handleAddMeal = () => {
-    append({ includes: "", quantity: "" });
+  const handleAddDiet = () => {
+    appendDiet({ includes: "", quantity: "" });
   };
 
-  const handleRemoveMeal = (index: any) => {
-    remove(index);
+  const handleRemoveDiet = (dietIndex: any) => {
+    removeDiet(dietIndex);
   };
 
   return (
@@ -170,19 +199,19 @@ export default function AssignDiet() {
                             type={"number"}
                           />
                         </Grid>
-                        {fields?.map((meal: any, index: number) => (
+                        {fieldsDiet?.map((diet: any, dietIndex: number) => (
                           <Grid
                             item
                             xs={12}
                             md={3}
-                            key={meal.id}
+                            key={diet.id}
                             position={"relative"}
                           >
                             <Typography
                               variant={"body1"}
                               color={"grey.100"}
                               fontWeight={900}
-                              onClick={() => handleRemoveMeal(index)}
+                              onClick={() => handleRemoveDiet(dietIndex)}
                               sx={{ cursor: "pointer" }}
                               position={"absolute"}
                               right={5}
@@ -190,12 +219,12 @@ export default function AssignDiet() {
                               X
                             </Typography>
                             <RHFTextField
-                              name={`meals[${index}].includes`}
+                              name={`diet[${dietIndex}].includes`}
                               label={"Includes"}
                               placeholder={"-----"}
                             />
                             <RHFTextField
-                              name={`meals[${index}].quantity`}
+                              name={`diet[${dietIndex}].quantity`}
                               placeholder={"Enter Quantity"}
                               type={"number"}
                             />
@@ -220,7 +249,7 @@ export default function AssignDiet() {
                             },
                           }}
                           disableElevation
-                          onClick={handleAddMeal}
+                          onClick={handleAddDiet}
                         >
                           Add
                         </Button>
@@ -247,8 +276,9 @@ export default function AssignDiet() {
                           borderColor: "primary.main",
                         }}
                         disableElevation
+                        type={"submit"}
                       >
-                        Add Meal
+                        Add
                       </Button>
                     </Grid>
                   </Grid>
