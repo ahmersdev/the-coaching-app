@@ -4,6 +4,10 @@ import { Box, Grid } from "@mui/material";
 import { SnackbarProvider } from "notistack";
 import Navbar from "../_layouts/coach-site/navbar";
 import Header from "../_layouts/coach-site/header";
+import "swiper/css";
+import "swiper/css/effect-coverflow";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 
 const CoachLayout = ({ children }: { children: React.ReactNode }) => {
   return (

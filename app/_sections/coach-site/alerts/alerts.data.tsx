@@ -37,7 +37,7 @@ export const alertsDataArray = [
   },
 ];
 
-export const getAlertsColumns = ({ theme }: any) => [
+export const alertsColumns = [
   {
     accessorFn: (row: any) => row?.id,
     id: "name",

@@ -1,13 +1,10 @@
 "use client";
 
 import TanstackTable from "@/app/_components/table";
-import { Typography, useTheme } from "@mui/material";
-import { getAlertsColumns, alertsDataArray } from "./alerts.data";
+import { Typography } from "@mui/material";
+import { alertsColumns, alertsDataArray } from "./alerts.data";
 
 export default function Alerts() {
-  const theme: any = useTheme();
-  const alertsColumns = getAlertsColumns(theme);
-
   return (
     <>
       <Typography variant={"h2"} color={"grey.100"}>
