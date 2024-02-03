@@ -13,7 +13,7 @@ export default function Alerts() {
       <Typography variant={"h2"} color={"grey.100"}>
         Clients Who Preferred You!
       </Typography>
-      <Typography variant={"h6"} fontWeight={400} color={"grey.100"}>
+      <Typography variant={"h6"} fontWeight={400} color={"grey.100"} mb={2}>
         Please check details & join you clients clients
       </Typography>
 

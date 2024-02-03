@@ -1,10 +1,14 @@
 "use client";
 
-import { Box, Chip, Grid, Stack, Typography } from "@mui/material";
+import { Box, Chip, Divider, Grid, Stack, Typography } from "@mui/material";
 import { useSearchParams } from "next/navigation";
 import { SYSTEM_ADMIN } from "@/app/_constants/routes";
 import Link from "next/link";
-import { ArrowBackIcon, ThreePersonIcon, TwoPersonIcon } from "@/app/_assets/icons";
+import {
+  ArrowBackIcon,
+  ThreePersonIcon,
+  TwoPersonIcon,
+} from "@/app/_assets/icons";
 import {
   coachOverviewColumns,
   coachesOverviewDataArray,
@@ -35,33 +39,41 @@ const Overview = () => {
           </Typography>
         </Box>
 
+        <Divider sx={{ my: 2 }} />
+
         <Grid container spacing={2}>
           {headerOverviewData?.map((item: any, index: any) => (
             <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
-              <Typography variant={"body1"} fontWeight={500} color={"grey.400"}>
-                {Object?.keys?.(item)?.[0]}:
-              </Typography>
-              <Typography variant={"h6"} color={"grey.100"} mt={0.5}>
-                {Object?.keys(item)?.includes("Registration Date") ? (
-                  dayjs(item["Registration Date"])?.format("MMM DD, YYYY")
-                ) : Object?.keys(item)?.includes("Subscription Status") ? (
-                  <Chip
-                    label={item["Subscription Status"]}
-                    sx={{
-                      color: "grey.100",
-                      bgcolor:
-                        item["Subscription Status"] === "Paid"
-                          ? "primary.main"
-                          : "error.700",
-                      width: "73px",
-                      height: "22px",
-                      fontSize: "12px",
-                    }}
-                  />
-                ) : (
-                  item[Object?.keys?.(item)?.[0]]
-                )}
-              </Typography>
+              <Box borderRight={1} borderColor={"grey.800"}>
+                <Typography
+                  variant={"body1"}
+                  fontWeight={500}
+                  color={"grey.400"}
+                >
+                  {Object?.keys?.(item)?.[0]}:
+                </Typography>
+                <Typography variant={"h6"} color={"grey.100"} mt={0.5}>
+                  {Object?.keys(item)?.includes("Registration Date") ? (
+                    dayjs(item["Registration Date"])?.format("MMM DD, YYYY")
+                  ) : Object?.keys(item)?.includes("Subscription Status") ? (
+                    <Chip
+                      label={item["Subscription Status"]}
+                      sx={{
+                        color: "grey.100",
+                        bgcolor:
+                          item["Subscription Status"] === "Paid"
+                            ? "primary.main"
+                            : "error.700",
+                        width: "73px",
+                        height: "22px",
+                        fontSize: "12px",
+                      }}
+                    />
+                  ) : (
+                    item[Object?.keys?.(item)?.[0]]
+                  )}
+                </Typography>
+              </Box>
             </Grid>
           ))}
         </Grid>
@@ -74,6 +86,8 @@ const Overview = () => {
             Angus Clients
           </Typography>
         </Box>
+
+        <Divider sx={{ my: 2 }} />
 
         <TanstackTable
           data={coachesOverviewDataArray}
