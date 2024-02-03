@@ -41,9 +41,12 @@ export default function RHFUploadFile({
                 {field?.value ? (
                   <video
                     src={URL.createObjectURL(field.value)}
-                    width={24}
-                    height={24}
+                    width={52}
+                    height={52}
+                    autoPlay
                     muted
+                    playsInline
+                    loop
                   />
                 ) : (
                   <UploadFileIcon />
