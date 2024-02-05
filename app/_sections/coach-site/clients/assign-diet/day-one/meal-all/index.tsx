@@ -1,5 +1,4 @@
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
 import {
   Accordion,
   AccordionDetails,
@@ -13,6 +12,7 @@ import { MealIcon } from "@/app/_assets/icons";
 import { RHFTextField } from "@/app/_components/react-hook-form";
 import { useState } from "react";
 import { useFieldArray } from "react-hook-form";
+import Diets from "./diets";
 
 export default function MealAll({ control }: any) {
   const {
@@ -32,26 +32,6 @@ export default function MealAll({ control }: any) {
 
   const handleRemoveMeals = (mealIndex: any) => {
     remove(mealIndex);
-  };
-
-  const handleAddMealsDiet = (mealIndex: any) => {
-    const updatedMeals: any = [...diets];
-    updatedMeals[mealIndex] = {
-      ...updatedMeals[mealIndex],
-      mealDiet: [...(updatedMeals[mealIndex]?.mealDiet || []), {}],
-    };
-    setDiets(updatedMeals);
-  };
-
-  const handleRemoveMealsDiet = (mealIndex: any, dietIndex: any) => {
-    const updatedMeals: any = [...diets];
-    updatedMeals[mealIndex] = {
-      ...updatedMeals[mealIndex],
-      mealDiet: updatedMeals[mealIndex]?.mealDiet?.filter(
-        (_: any, index: any) => index !== dietIndex
-      ),
-    };
-    setDiets(updatedMeals);
   };
 
   return (
@@ -126,66 +106,7 @@ export default function MealAll({ control }: any) {
                       />
                     </Grid>
 
-                    {diets[mealIndex]?.mealDiet &&
-                      diets[mealIndex]?.mealDiet?.map(
-                        (diet: any, dietIndex: any) => (
-                          <Grid
-                            item
-                            xs={12}
-                            md={3}
-                            key={diet.id}
-                            position={"relative"}
-                          >
-                            <Typography
-                              variant={"body1"}
-                              color={"grey.100"}
-                              fontWeight={900}
-                              onClick={() =>
-                                handleRemoveMealsDiet(mealIndex, dietIndex)
-                              }
-                              sx={{ cursor: "pointer" }}
-                              position={"absolute"}
-                              right={5}
-                            >
-                              X
-                            </Typography>
-                            <RHFTextField
-                              name={`meals[${mealIndex}].diets[${dietIndex}].includes`}
-                              label={"Includes"}
-                              placeholder={"-----"}
-                            />
-                            <RHFTextField
-                              name={`meals[${mealIndex}].diets[${dietIndex}].quantity`}
-                              placeholder={"Enter Quantity"}
-                              type={"number"}
-                            />
-                          </Grid>
-                        )
-                      )}
-
-                    <Button
-                      variant={"contained"}
-                      startIcon={<AddCircleIcon />}
-                      sx={{
-                        color: "grey.100",
-                        borderRadius: 25,
-                        height: 36,
-                        width: 90,
-                        border: "1px dashed",
-                        borderColor: "grey.100",
-                        background: "transparent",
-                        ml: 1,
-                        mt: 1,
-                        ":hover": {
-                          backgroundColor: "grey.100",
-                          color: "grey.900",
-                        },
-                      }}
-                      disableElevation
-                      onClick={() => handleAddMealsDiet(mealIndex)}
-                    >
-                      Add
-                    </Button>
+                    <Diets control={control} mealIndex={mealIndex} />
                   </Grid>
                 </Grid>
 
