@@ -11,19 +11,20 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { MealIcon } from "@/app/_assets/icons";
 import { RHFTextField } from "@/app/_components/react-hook-form";
-import { useState } from "react";
+import { useFieldArray } from "react-hook-form";
 
-export default function MealOne() {
-  const [diets, setDiets] = useState<any>([]);
+export default function MealOne({ control }: any) {
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "diets",
+  });
 
   const handleAddDiet = () => {
-    setDiets([...diets, {}]);
+    append({});
   };
 
   const handleRemoveDiet = (dietIndex: any) => {
-    const updatedFieldsDiets = [...diets];
-    updatedFieldsDiets.splice(dietIndex, 1);
-    setDiets(updatedFieldsDiets);
+    remove(dietIndex);
   };
 
   return (
@@ -72,7 +73,7 @@ export default function MealOne() {
                     type={"number"}
                   />
                 </Grid>
-                {diets?.map((_: any, dietIndex: number) => (
+                {fields?.map((_: any, dietIndex: number) => (
                   <Grid
                     item
                     xs={12}

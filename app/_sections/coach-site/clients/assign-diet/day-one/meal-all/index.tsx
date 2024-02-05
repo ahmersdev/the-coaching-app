@@ -13,7 +13,7 @@ import { MealIcon } from "@/app/_assets/icons";
 import { RHFTextField } from "@/app/_components/react-hook-form";
 import { useState } from "react";
 
-export default function MealAll() {
+export default function MealAll({ control }: any) {
   const [fieldsMeals, setFieldsMeals] = useState<any>([]);
   const [diets, setDiets] = useState<any>([]);
 

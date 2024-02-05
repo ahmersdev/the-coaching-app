@@ -11,7 +11,7 @@ import { DietDayIcon } from "@/app/_assets/icons";
 import MealOne from "./meal-one";
 import MealAll from "./meal-all";
 
-export default function DayOne() {
+export default function DayOne({ control }: any) {
   return (
     <Box bgcolor={"secondary.main"} borderRadius={3} mt={2}>
       <Accordion
@@ -36,9 +36,9 @@ export default function DayOne() {
         </AccordionSummary>
         <AccordionDetails>
           <Divider sx={{ mb: 2 }} />
-          <MealOne />
+          <MealOne control={control} />
 
-          <MealAll />
+          <MealAll control={control} />
         </AccordionDetails>
       </Accordion>
     </Box>

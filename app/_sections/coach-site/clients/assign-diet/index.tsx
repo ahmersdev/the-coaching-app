@@ -18,7 +18,6 @@ const dietValidationSchema: any = Yup.object().shape({
 
 const defaultValues: any = {
   mealName: "",
-  diets: [],
 };
 
 export default function AssignDiet() {
@@ -27,7 +26,7 @@ export default function AssignDiet() {
     defaultValues,
   });
 
-  const { handleSubmit } = methods;
+  const { handleSubmit, control } = methods;
 
   const onSubmit = async (data: any) => {
     const mealOne = {
@@ -103,7 +102,7 @@ export default function AssignDiet() {
         </LoadingButton>
       </Box>
 
-      <DayOne />
+      <DayOne control={control} />
 
       <Button
         variant={"contained"}
