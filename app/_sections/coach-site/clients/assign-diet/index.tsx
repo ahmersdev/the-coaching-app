@@ -11,6 +11,7 @@ import { ArrowBackIcon } from "@/app/_assets/icons";
 import { LoadingButton } from "@mui/lab";
 import * as Yup from "yup";
 import DayOne from "./day-one";
+import DayAll from "./day-all";
 
 const dietValidationSchema: any = Yup.object().shape({
   mealName: Yup.string().trim().required("Required"),
@@ -79,7 +80,7 @@ export default function AssignDiet() {
       ],
     };
 
-    console.log(dayOne);
+    console.log(data);
     enqueueSnackbar("Diet Added Successfully!", {
       variant: "success",
     });
@@ -119,19 +120,7 @@ export default function AssignDiet() {
 
       <DayOne control={control} />
 
-      <Button
-        variant={"contained"}
-        fullWidth
-        sx={{
-          color: "grey.100",
-          borderRadius: 25,
-          height: 54,
-          mt: 2,
-        }}
-        disableElevation
-      >
-        Add Diet for another day
-      </Button>
+      <DayAll control={control} />
     </FormProvider>
   );
 }

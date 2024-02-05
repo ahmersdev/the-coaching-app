@@ -57,7 +57,7 @@ export default function MealAll({ control }: any) {
   return (
     <>
       {fieldsMeals?.map((meal: any, mealIndex: any) => (
-        <Box bgcolor={"secondary.900"} key={meal?.id} borderRadius={3} mt={2}>
+        <Box bgcolor={"secondary.900"} key={meal.id} borderRadius={3} mt={2}>
           <Accordion
             elevation={0}
             defaultExpanded
