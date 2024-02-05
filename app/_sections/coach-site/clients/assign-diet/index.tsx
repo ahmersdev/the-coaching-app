@@ -38,7 +38,7 @@ export default function AssignDiet() {
           includes: data?.includes || "",
           quantity: data?.quantity || "",
         },
-        ...data?.diets?.map((mealDiets: any) => ({
+        ...(data?.diets || [])?.map((mealDiets: any) => ({
           includes: mealDiets.includes || "",
           quantity: mealDiets.quantity || "",
         })),
@@ -48,7 +48,7 @@ export default function AssignDiet() {
     const dayOne = {
       meals: [
         mealOne,
-        ...data?.meals?.map((allMeals: any) => ({
+        ...(data?.meals || [])?.map((allMeals: any) => ({
           mealName: allMeals?.mealName || "",
           note: allMeals?.note || "",
           diets: [
@@ -56,7 +56,7 @@ export default function AssignDiet() {
               includes: allMeals?.includes || "",
               quantity: allMeals?.quantity || "",
             },
-            ...allMeals?.diets?.map((mealDiets: any) => ({
+            ...(allMeals?.diets || [])?.map((mealDiets: any) => ({
               includes: mealDiets.includes || "",
               quantity: mealDiets.quantity || "",
             })),
