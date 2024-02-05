@@ -16,6 +16,7 @@ export default function DayOne({ control }: any) {
     <Box bgcolor={"secondary.main"} borderRadius={3} mt={2}>
       <Accordion
         elevation={0}
+        defaultExpanded
         sx={{
           bgcolor: "transparent",
           p: 1,

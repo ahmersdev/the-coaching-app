@@ -31,6 +31,7 @@ export default function MealOne({ control }: any) {
     <Box bgcolor={"secondary.900"} borderRadius={3} mt={2}>
       <Accordion
         elevation={0}
+        defaultExpanded
         sx={{
           bgcolor: "transparent",
           p: 1,
