@@ -12,23 +12,26 @@ import {
 import { MealIcon } from "@/app/_assets/icons";
 import { RHFTextField } from "@/app/_components/react-hook-form";
 import { useState } from "react";
+import { useFieldArray } from "react-hook-form";
 
 export default function MealAll({ control }: any) {
-  const [fieldsMeals, setFieldsMeals] = useState<any>([]);
+  const {
+    fields: fieldsMeals,
+    append,
+    remove,
+  } = useFieldArray({
+    control,
+    name: "meals",
+  });
+
   const [diets, setDiets] = useState<any>([]);
 
   const handleAddMeals = () => {
-    setFieldsMeals([...fieldsMeals, {}]);
+    append({});
   };
 
   const handleRemoveMeals = (mealIndex: any) => {
-    const updatedFieldsMeals = [...fieldsMeals];
-    updatedFieldsMeals.splice(mealIndex, 1);
-    setFieldsMeals(updatedFieldsMeals);
-
-    const updatedMeals = [...diets];
-    updatedMeals.splice(mealIndex, 1);
-    setDiets(updatedMeals);
+    remove(mealIndex);
   };
 
   const handleAddMealsDiet = (mealIndex: any) => {

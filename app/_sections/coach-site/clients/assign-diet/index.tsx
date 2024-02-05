@@ -14,16 +14,16 @@ import DayOne from "./day-one";
 
 const dietValidationSchema: any = Yup.object().shape({
   mealName: Yup.string().trim().required("Required"),
+  meals: Yup.array().of(
+    Yup.object().shape({
+      mealName: Yup.string().required("Required"),
+    })
+  ),
 });
-
-const defaultValues: any = {
-  mealName: "",
-};
 
 export default function AssignDiet() {
   const methods: any = useForm({
     resolver: yupResolver(dietValidationSchema),
-    defaultValues,
   });
 
   const { handleSubmit, control } = methods;
@@ -37,30 +37,45 @@ export default function AssignDiet() {
           includes: data?.includes || "",
           quantity: data?.quantity || "",
         },
-        ...(data?.diets || [])?.map((mealDiets: any) => ({
-          includes: mealDiets.includes || "",
-          quantity: mealDiets.quantity || "",
-        })),
+        ...(data?.diets || [])
+          ?.filter((mealDiets: any) => mealDiets.includes || mealDiets.quantity)
+          ?.map((mealDiets: any) => ({
+            includes: mealDiets.includes || "",
+            quantity: mealDiets.quantity || "",
+          })),
       ],
     };
 
     const dayOne = {
       meals: [
         mealOne,
-        ...(data?.meals || [])?.map((allMeals: any) => ({
-          mealName: allMeals?.mealName || "",
-          note: allMeals?.note || "",
-          diets: [
-            {
-              includes: allMeals?.includes || "",
-              quantity: allMeals?.quantity || "",
-            },
-            ...(allMeals?.diets || [])?.map((mealDiets: any) => ({
-              includes: mealDiets.includes || "",
-              quantity: mealDiets.quantity || "",
-            })),
-          ],
-        })),
+        ...(data?.meals || [])
+          ?.filter(
+            (allMeals: any) =>
+              allMeals.mealName ||
+              allMeals.note ||
+              allMeals.includes ||
+              allMeals.quantity ||
+              (allMeals.diets && allMeals.diets.length > 0)
+          )
+          ?.map((allMeals: any) => ({
+            mealName: allMeals?.mealName || "",
+            note: allMeals?.note || "",
+            diets: [
+              {
+                includes: allMeals?.includes || "",
+                quantity: allMeals?.quantity || "",
+              },
+              ...(allMeals?.diets || [])
+                ?.filter(
+                  (mealDiets: any) => mealDiets.includes || mealDiets.quantity
+                )
+                ?.map((mealDiets: any) => ({
+                  includes: mealDiets.includes || "",
+                  quantity: mealDiets.quantity || "",
+                })),
+            ],
+          })),
       ],
     };
 
