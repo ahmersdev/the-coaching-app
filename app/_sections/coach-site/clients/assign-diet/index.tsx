@@ -105,7 +105,7 @@ export default function AssignDiet() {
       ],
     };
 
-    // const daysArray = { days: [dayOne, dayMealOne] };
+    const daysArray = { days: [dayOne, dayMealOne] };
 
     console.log(data);
     enqueueSnackbar("Diet Added Successfully!", {

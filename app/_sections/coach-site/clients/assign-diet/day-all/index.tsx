@@ -11,6 +11,7 @@ import {
 import { useFieldArray } from "react-hook-form";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MealOne from "./meal-one";
+import MealAll from "./meal-all";
 
 export default function DayAll({ control }: any) {
   const { fields, append, remove } = useFieldArray({
@@ -81,6 +82,8 @@ export default function DayAll({ control }: any) {
             <AccordionDetails>
               <Divider sx={{ mb: 2 }} />
               <MealOne control={control} dayIndex={dayIndex} />
+
+              <MealAll control={control} dayIndex={dayIndex} />
             </AccordionDetails>
           </Accordion>
         </Box>
