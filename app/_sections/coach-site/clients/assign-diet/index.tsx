@@ -57,7 +57,7 @@ export default function AssignDiet() {
               allMeals.note ||
               allMeals.includes ||
               allMeals.quantity ||
-              (allMeals.meals.diets && allMeals.meals.diets.length > 0)
+              (allMeals.mealsDiets && allMeals.mealsDiets.length > 0)
           )
           ?.map((allMeals: any) => ({
             mealName: allMeals?.mealName || "",
@@ -67,7 +67,7 @@ export default function AssignDiet() {
                 includes: allMeals?.includes || "",
                 quantity: allMeals?.quantity || "",
               },
-              ...(allMeals?.meals.diets || [])
+              ...(allMeals?.mealsDiets || [])
                 ?.filter(
                   (mealDiet: any) => mealDiet.includes || mealDiet.quantity
                 )
@@ -80,7 +80,7 @@ export default function AssignDiet() {
       ],
     };
 
-    console.log(dayOne);
+    console.log(data);
     enqueueSnackbar("Diet Added Successfully!", {
       variant: "success",
     });

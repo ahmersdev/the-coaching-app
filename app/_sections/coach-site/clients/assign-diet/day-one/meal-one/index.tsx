@@ -20,7 +20,7 @@ export default function MealOne({ control }: any) {
   });
 
   const handleAddDiet = () => {
-    append({});
+    append({ includes: "", quantity: "" });
   };
 
   const handleRemoveDiet = (dietIndex: any) => {

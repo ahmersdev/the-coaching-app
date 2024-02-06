@@ -10,7 +10,6 @@ import {
 } from "@mui/material";
 import { MealIcon } from "@/app/_assets/icons";
 import { RHFTextField } from "@/app/_components/react-hook-form";
-import { useState } from "react";
 import { useFieldArray } from "react-hook-form";
 import Diets from "./diets";
 
@@ -23,8 +22,6 @@ export default function MealAll({ control }: any) {
     control,
     name: "meals",
   });
-
-  const [diets, setDiets] = useState<any>([]);
 
   const handleAddMeals = () => {
     append({});
