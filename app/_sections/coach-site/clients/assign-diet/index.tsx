@@ -86,7 +86,51 @@ export default function AssignDiet() {
         })),
     ];
 
-    console.log("Meals of Day 01", dayOneAllMeal);
+    const dayAllMealOne = [
+      ...(data?.days || [])?.map((mealOne: any) => ({
+        mealName: mealOne?.mealName || "",
+        note: mealOne?.note || "",
+        diets: [
+          {
+            includes: mealOne?.includes || "",
+            quantity: mealOne?.quantity || "",
+          },
+          ...(mealOne?.diets || [])
+            ?.filter((mealDiet: any) => mealDiet.includes || mealDiet.quantity)
+            ?.map((mealDiet: any) => ({
+              includes: mealDiet.includes || "",
+              quantity: mealDiet.quantity || "",
+            })),
+        ],
+      })),
+    ];
+
+    const dayAllMealAll = {
+      ...(data?.days || [])?.map((mealOne: any) =>
+        (mealOne?.meals || [])?.map((allMeals: any) => ({
+          mealName: allMeals?.mealName || "",
+          note: allMeals?.note || "",
+          diets: [
+            {
+              includes: allMeals?.includes || "",
+              quantity: allMeals?.quantity || "",
+            },
+            ...(allMeals?.diets || [])
+              ?.filter(
+                (mealDiet: any) => mealDiet.includes || mealDiet.quantity
+              )
+              ?.map((mealDiet: any) => ({
+                includes: mealDiet.includes || "",
+                quantity: mealDiet.quantity || "",
+              })),
+          ],
+        }))
+      ),
+    };
+
+    console.log("Meal All of Day 01", dayOneAllMeal);
+    console.log("Meal One of Day All", dayAllMealOne);
+    console.log("Meal All of Day All", dayAllMealAll);
     console.log(data);
     enqueueSnackbar("Diet Added Successfully!", {
       variant: "success",
