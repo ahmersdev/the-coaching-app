@@ -19,7 +19,12 @@ export default function DayAll({ control }: any) {
   });
 
   const handleAddDay = () => {
-    append({});
+    append({
+      mealName: "",
+      includes: "",
+      quantity: "",
+      note: "",
+    });
   };
 
   const handleRemoveDay = (dayIndex: any) => {

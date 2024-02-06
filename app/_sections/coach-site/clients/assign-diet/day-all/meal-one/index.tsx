@@ -16,11 +16,11 @@ import { useFieldArray } from "react-hook-form";
 export default function MealOne({ control, dayIndex }: any) {
   const { fields, append, remove } = useFieldArray({
     control,
-    name: "diets",
+    name: `days[${dayIndex}].diets`,
   });
 
   const handleAddDiet = () => {
-    append({});
+    append({ includes: "", quantity: "" });
   };
 
   const handleRemoveDiet = (dietIndex: any) => {

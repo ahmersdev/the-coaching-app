@@ -14,12 +14,12 @@ import DayOne from "./day-one";
 import DayAll from "./day-all";
 
 const dietValidationSchema: any = Yup.object().shape({
-  mealName: Yup.string().trim().required("Required"),
-  meals: Yup.array().of(
-    Yup.object().shape({
-      mealName: Yup.string().required("Required"),
-    })
-  ),
+  // mealName: Yup.string().trim().required("Required"),
+  // meals: Yup.array().of(
+  //   Yup.object().shape({
+  //     mealName: Yup.string().required("Required"),
+  //   })
+  // ),
 });
 
 const defaultValues = {
@@ -88,7 +88,9 @@ export default function AssignDiet() {
       ],
     };
 
-    console.log(dayOne);
+    const dayMealOne = {};
+
+    console.log(data);
     enqueueSnackbar("Diet Added Successfully!", {
       variant: "success",
     });
