@@ -55,6 +55,23 @@ export default function AssignDiet() {
       ],
     };
 
+    const dayMealOne = {
+      mealName: data?.days?.[0]?.mealName || "",
+      note: data?.days?.[0]?.note || "",
+      diets: [
+        {
+          includes: data?.days?.[0]?.includes || "",
+          quantity: data?.days?.[0]?.quantity || "",
+        },
+        ...(data?.days?.[0]?.diets || [])
+          ?.filter((mealDiet: any) => mealDiet.includes || mealDiet.quantity)
+          ?.map((mealDiet: any) => ({
+            includes: mealDiet.includes || "",
+            quantity: mealDiet.quantity || "",
+          })),
+      ],
+    };
+
     const dayOne = {
       meals: [
         mealOne,
@@ -88,9 +105,9 @@ export default function AssignDiet() {
       ],
     };
 
-    const dayMealOne = {};
+    const daysArray = { days: [dayOne, dayMealOne] };
 
-    console.log(data);
+    console.log(daysArray);
     enqueueSnackbar("Diet Added Successfully!", {
       variant: "success",
     });
