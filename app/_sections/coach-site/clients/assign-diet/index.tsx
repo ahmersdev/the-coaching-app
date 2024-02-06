@@ -38,7 +38,7 @@ export default function AssignDiet() {
   const { handleSubmit, control } = methods;
 
   const onSubmit = async (data: any) => {
-    const mealOne = {
+    const dayOneMealOne = {
       mealName: data?.mealName || "",
       note: data?.note || "",
       diets: [
@@ -55,58 +55,38 @@ export default function AssignDiet() {
       ],
     };
 
-    const dayMealOne = {
-      mealName: data?.days?.[0]?.mealName || "",
-      note: data?.days?.[0]?.note || "",
-      diets: [
-        {
-          includes: data?.days?.[0]?.includes || "",
-          quantity: data?.days?.[0]?.quantity || "",
-        },
-        ...(data?.days?.[0]?.diets || [])
-          ?.filter((mealDiet: any) => mealDiet.includes || mealDiet.quantity)
-          ?.map((mealDiet: any) => ({
-            includes: mealDiet.includes || "",
-            quantity: mealDiet.quantity || "",
-          })),
-      ],
-    };
+    const dayOneAllMeal = [
+      dayOneMealOne,
+      ...(data?.meals || [])
+        ?.filter(
+          (allMeals: any) =>
+            allMeals.mealName ||
+            allMeals.note ||
+            allMeals.includes ||
+            allMeals.quantity ||
+            (allMeals.diets && allMeals.diets.length > 0)
+        )
+        ?.map((allMeals: any) => ({
+          mealName: allMeals?.mealName || "",
+          note: allMeals?.note || "",
+          diets: [
+            {
+              includes: allMeals?.includes || "",
+              quantity: allMeals?.quantity || "",
+            },
+            ...(allMeals?.diets || [])
+              ?.filter(
+                (mealDiet: any) => mealDiet.includes || mealDiet.quantity
+              )
+              ?.map((mealDiet: any) => ({
+                includes: mealDiet.includes || "",
+                quantity: mealDiet.quantity || "",
+              })),
+          ],
+        })),
+    ];
 
-    const dayOne = {
-      meals: [
-        mealOne,
-        ...(data?.meals || [])
-          ?.filter(
-            (allMeals: any) =>
-              allMeals.mealName ||
-              allMeals.note ||
-              allMeals.includes ||
-              allMeals.quantity ||
-              (allMeals.diets && allMeals.diets.length > 0)
-          )
-          ?.map((allMeals: any) => ({
-            mealName: allMeals?.mealName || "",
-            note: allMeals?.note || "",
-            diets: [
-              {
-                includes: allMeals?.includes || "",
-                quantity: allMeals?.quantity || "",
-              },
-              ...(allMeals?.diets || [])
-                ?.filter(
-                  (mealDiet: any) => mealDiet.includes || mealDiet.quantity
-                )
-                ?.map((mealDiet: any) => ({
-                  includes: mealDiet.includes || "",
-                  quantity: mealDiet.quantity || "",
-                })),
-            ],
-          })),
-      ],
-    };
-
-    const daysArray = { days: [dayOne, dayMealOne] };
-
+    console.log("Meals of Day 01", dayOneAllMeal);
     console.log(data);
     enqueueSnackbar("Diet Added Successfully!", {
       variant: "success",
