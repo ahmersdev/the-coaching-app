@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { enqueueSnackbar } from "notistack";
 import { FormProvider } from "@/app/_components/react-hook-form";
-import { Box, Typography, Button } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import Link from "next/link";
 import { COACH_SITE } from "@/app/_constants/routes";
 import { ArrowBackIcon } from "@/app/_assets/icons";
@@ -105,9 +105,9 @@ export default function AssignDiet() {
       ],
     };
 
-    const daysArray = { days: [dayOne, dayMealOne] };
+    // const daysArray = { days: [dayOne, dayMealOne] };
 
-    console.log(daysArray);
+    console.log(data);
     enqueueSnackbar("Diet Added Successfully!", {
       variant: "success",
     });

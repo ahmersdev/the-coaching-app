@@ -3,15 +3,16 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  Avatar,
   Box,
   Button,
   Grid,
   Typography,
 } from "@mui/material";
-import { MealIcon } from "@/app/_assets/icons";
 import { RHFTextField } from "@/app/_components/react-hook-form";
 import { useFieldArray } from "react-hook-form";
 import Diets from "./diets";
+import { CoachesMealImg } from "@/app/_assets/images";
 
 export default function MealAll({ control }: any) {
   const {
@@ -62,7 +63,12 @@ export default function MealAll({ control }: any) {
                 gap={1}
               >
                 <Box display={"flex"} alignItems={"center"} gap={1}>
-                  <MealIcon />
+                  <Avatar
+                    src={CoachesMealImg?.src}
+                    alt={"Meal"}
+                    variant={"rounded"}
+                    sx={{ width: 52, height: 52 }}
+                  />
                   <Typography
                     variant={"h6"}
                     color={"grey.100"}

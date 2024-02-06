@@ -47,4 +47,3 @@ export { default as UploadFileIcon } from "./upload-file-icon";
 export { default as DescriptionIcon } from "./description-icon";
 export { default as NextIcon } from "./next-icon";
 export { default as DietDayIcon } from "./diet-day-icon";
-export { default as MealIcon } from "./meal-icon";

@@ -2,6 +2,7 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  Avatar,
   Box,
   Button,
   Grid,
@@ -9,9 +10,9 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import { MealIcon } from "@/app/_assets/icons";
 import { RHFTextField } from "@/app/_components/react-hook-form";
 import { useFieldArray } from "react-hook-form";
+import { CoachesMealImg } from "@/app/_assets/images";
 
 export default function MealOne({ control, dayIndex }: any) {
   const { fields, append, remove } = useFieldArray({
@@ -44,7 +45,12 @@ export default function MealOne({ control, dayIndex }: any) {
           expandIcon={<ExpandMoreIcon sx={{ color: "grey.100" }} />}
         >
           <Box display={"flex"} alignItems={"center"} gap={1}>
-            <MealIcon />
+            <Avatar
+              src={CoachesMealImg?.src}
+              alt={"Meal"}
+              variant={"rounded"}
+              sx={{ width: 52, height: 52 }}
+            />
             <Typography variant={"h6"} color={"grey.100"} fontWeight={700}>
               Meal 01
             </Typography>
