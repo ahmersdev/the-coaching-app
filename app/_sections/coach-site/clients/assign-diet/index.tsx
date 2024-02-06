@@ -88,7 +88,7 @@ export default function AssignDiet() {
       ],
     };
 
-    console.log(data);
+    console.log(dayOne);
     enqueueSnackbar("Diet Added Successfully!", {
       variant: "success",
     });

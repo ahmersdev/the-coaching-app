@@ -2,35 +2,25 @@ import { RHFTextField } from "@/app/_components/react-hook-form";
 import { Button, Grid, Typography } from "@mui/material";
 import { useFieldArray } from "react-hook-form";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import { useState } from "react";
 
 export default function Diets({ control, mealIndex }: any) {
-  const [diets, setDiets] = useState<any>([]);
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: `meals[${mealIndex}].diets`,
+  });
 
   const handleAddDiet = () => {
-    const updatedMeals: any = [...diets];
-    updatedMeals[mealIndex] = {
-      ...updatedMeals[mealIndex],
-      diets: [...(updatedMeals[mealIndex]?.diets || []), {}],
-    };
-    setDiets(updatedMeals);
+    append({ includes: "", quantity: "" });
   };
 
   const handleRemoveDiet = (dietIndex: any) => {
-    const updatedMeals: any = [...diets];
-    updatedMeals[dietIndex] = {
-      ...updatedMeals[dietIndex],
-      diets: updatedMeals[dietIndex]?.diets?.filter(
-        (_: any, index: any) => index !== dietIndex
-      ),
-    };
-    setDiets(updatedMeals);
+    remove(dietIndex);
   };
 
   return (
     <>
-      {diets?.map((diet: any, dietIndex: any) => (
-        <Grid item xs={12} md={3} key={dietIndex} position={"relative"}>
+      {fields?.map((diet: any, dietIndex: any) => (
+        <Grid item xs={12} md={3} key={diet.id} position={"relative"}>
           <Typography
             variant={"body1"}
             color={"grey.100"}
