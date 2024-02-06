@@ -24,7 +24,12 @@ export default function MealAll({ control }: any) {
   });
 
   const handleAddMeals = () => {
-    append({});
+    append({
+      mealName: "",
+      includes: "",
+      quantity: "",
+      note: "",
+    });
   };
 
   const handleRemoveMeals = (mealIndex: any) => {

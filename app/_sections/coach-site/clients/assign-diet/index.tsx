@@ -22,9 +22,17 @@ const dietValidationSchema: any = Yup.object().shape({
   ),
 });
 
+const defaultValues = {
+  mealName: "",
+  includes: "",
+  quantity: "",
+  note: "",
+};
+
 export default function AssignDiet() {
   const methods: any = useForm({
     resolver: yupResolver(dietValidationSchema),
+    defaultValues,
   });
 
   const { handleSubmit, control } = methods;
@@ -39,10 +47,10 @@ export default function AssignDiet() {
           quantity: data?.quantity || "",
         },
         ...(data?.diets || [])
-          ?.filter((mealDiets: any) => mealDiets.includes || mealDiets.quantity)
-          ?.map((mealDiets: any) => ({
-            includes: mealDiets.includes || "",
-            quantity: mealDiets.quantity || "",
+          ?.filter((mealDiet: any) => mealDiet.includes || mealDiet.quantity)
+          ?.map((mealDiet: any) => ({
+            includes: mealDiet.includes || "",
+            quantity: mealDiet.quantity || "",
           })),
       ],
     };
@@ -57,7 +65,7 @@ export default function AssignDiet() {
               allMeals.note ||
               allMeals.includes ||
               allMeals.quantity ||
-              (allMeals.mealsDiets && allMeals.mealsDiets.length > 0)
+              (allMeals.diets && allMeals.diets.length > 0)
           )
           ?.map((allMeals: any) => ({
             mealName: allMeals?.mealName || "",
@@ -67,7 +75,7 @@ export default function AssignDiet() {
                 includes: allMeals?.includes || "",
                 quantity: allMeals?.quantity || "",
               },
-              ...(allMeals?.mealsDiets || [])
+              ...(allMeals?.diets || [])
                 ?.filter(
                   (mealDiet: any) => mealDiet.includes || mealDiet.quantity
                 )
