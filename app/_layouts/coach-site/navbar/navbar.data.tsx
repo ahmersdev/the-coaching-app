@@ -11,7 +11,7 @@ export const mainRoutesArray = [
     label: "Dashboard",
     href: "/coach-dashboard",
   },
-  { id: 3, icon: ClientsIcon, label: "Clients", href: "/coach-clients" },
+  { id: 2, icon: ClientsIcon, label: "Clients", href: "/coach-clients" },
   {
     id: 3,
     icon: ClientAlertsIcon,
