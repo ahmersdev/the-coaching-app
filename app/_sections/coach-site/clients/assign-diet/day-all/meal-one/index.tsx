@@ -17,7 +17,7 @@ import { CoachesMealImg } from "@/app/_assets/images";
 export default function MealOne({ control, dayIndex }: any) {
   const { fields, append, remove } = useFieldArray({
     control,
-    name: `days[${dayIndex}].diets`,
+    name: `daysAll[${dayIndex}].daysAllMealOneDiets`,
   });
 
   const handleAddDiet = () => {
@@ -60,7 +60,7 @@ export default function MealOne({ control, dayIndex }: any) {
           <Grid container spacing={1}>
             <Grid item xs={12} md={6}>
               <RHFTextField
-                name={`days[${dayIndex}].mealName`}
+                name={`daysAll[${dayIndex}].mealName`}
                 label={"Meal Name"}
                 placeholder={"Enter Meal Name"}
               />
@@ -70,12 +70,12 @@ export default function MealOne({ control, dayIndex }: any) {
               <Grid container spacing={1} alignItems={"end"}>
                 <Grid item xs={12} md={3}>
                   <RHFTextField
-                    name={`days[${dayIndex}].includes`}
+                    name={`daysAll[${dayIndex}].includes`}
                     label={"Includes"}
                     placeholder={"-----"}
                   />
                   <RHFTextField
-                    name={`days[${dayIndex}].quantity`}
+                    name={`daysAll[${dayIndex}].quantity`}
                     placeholder={"Enter Quantity"}
                     type={"number"}
                   />
@@ -94,12 +94,12 @@ export default function MealOne({ control, dayIndex }: any) {
                       X
                     </Typography>
                     <RHFTextField
-                      name={`days[${dayIndex}].diets[${dietIndex}].includes`}
+                      name={`daysAll[${dayIndex}].daysAllMealOneDiets[${dietIndex}].includes`}
                       label={"Includes"}
                       placeholder={"-----"}
                     />
                     <RHFTextField
-                      name={`days[${dayIndex}].diets[${dietIndex}].quantity`}
+                      name={`daysAll[${dayIndex}].daysAllMealOneDiets[${dietIndex}].quantity`}
                       placeholder={"Enter Quantity"}
                       type={"number"}
                     />
@@ -134,7 +134,7 @@ export default function MealOne({ control, dayIndex }: any) {
 
             <Grid item xs={12} md={6}>
               <RHFTextField
-                name={`days[${dayIndex}].note`}
+                name={`daysAll[${dayIndex}].note`}
                 label={"Add Note"}
                 placeholder={"Add Some Details"}
                 multiline

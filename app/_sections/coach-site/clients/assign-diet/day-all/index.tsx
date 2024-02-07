@@ -16,7 +16,7 @@ import MealAll from "./meal-all";
 export default function DayAll({ control }: any) {
   const { fields, append, remove } = useFieldArray({
     control,
-    name: "days",
+    name: "daysAll",
   });
 
   const handleAddDay = () => {

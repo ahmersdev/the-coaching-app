@@ -22,7 +22,7 @@ export default function MealAll({ control, dayIndex }: any) {
     remove,
   } = useFieldArray({
     control,
-    name: `days[${dayIndex}].meals`,
+    name: `daysAll[${dayIndex}].daysAllMealsAll`,
   });
 
   const handleAddMeals = () => {
@@ -94,7 +94,7 @@ export default function MealAll({ control, dayIndex }: any) {
               <Grid container spacing={1}>
                 <Grid item xs={12} md={6}>
                   <RHFTextField
-                    name={`days[${dayIndex}].meals[${mealIndex}].mealName`}
+                    name={`daysAll[${dayIndex}].daysAllMealsAll[${mealIndex}].mealName`}
                     label={"Meal Name"}
                     placeholder={"Enter Meal Name"}
                   />
@@ -104,12 +104,12 @@ export default function MealAll({ control, dayIndex }: any) {
                   <Grid container spacing={1} alignItems={"end"}>
                     <Grid item xs={12} md={3}>
                       <RHFTextField
-                        name={`days[${dayIndex}].meals[${mealIndex}].includes`}
+                        name={`daysAll[${dayIndex}].daysAllMealsAll[${mealIndex}].includes`}
                         label={"Includes"}
                         placeholder={"-----"}
                       />
                       <RHFTextField
-                        name={`days[${dayIndex}].meals[${mealIndex}].quantity`}
+                        name={`daysAll[${dayIndex}].daysAllMealsAll[${mealIndex}].quantity`}
                         placeholder={"Enter Quantity"}
                         type={"number"}
                       />
@@ -125,7 +125,7 @@ export default function MealAll({ control, dayIndex }: any) {
 
                 <Grid item xs={12} md={6}>
                   <RHFTextField
-                    name={`days[${dayIndex}].meals[${mealIndex}].note`}
+                    name={`daysAll[${dayIndex}].daysAllMealsAll[${mealIndex}].note`}
                     label={"Add Note"}
                     placeholder={"Add Some Details"}
                     multiline

@@ -47,10 +47,10 @@ export default function AssignDiet() {
           quantity: data?.quantity || "",
         },
         ...(data?.dayOneMealOneDiets || [])
-          ?.filter((mealDiet: any) => mealDiet.includes || mealDiet.quantity)
+          ?.filter((mealDiet: any) => mealDiet?.includes || mealDiet?.quantity)
           ?.map((mealDiet: any) => ({
-            includes: mealDiet.includes || "",
-            quantity: mealDiet.quantity || "",
+            includes: mealDiet?.includes || "",
+            quantity: mealDiet?.quantity || "",
           })),
       ],
     };
@@ -60,12 +60,12 @@ export default function AssignDiet() {
       ...(data?.dayOneMealAll || [])
         ?.filter(
           (allMeals: any) =>
-            allMeals.mealName ||
-            allMeals.note ||
-            allMeals.includes ||
-            allMeals.quantity ||
-            (allMeals.dayOneMealAllDiets &&
-              allMeals.dayOneMealAllDiets.length > 0)
+            allMeals?.mealName ||
+            allMeals?.note ||
+            allMeals?.includes ||
+            allMeals?.quantity ||
+            (allMeals?.dayOneMealAllDiets &&
+              allMeals?.dayOneMealAllDiets?.length > 0)
         )
         ?.map((allMeals: any) => ({
           mealName: allMeals?.mealName || "",
@@ -77,62 +77,85 @@ export default function AssignDiet() {
             },
             ...(allMeals?.dayOneMealAllDiets || [])
               ?.filter(
-                (mealDiet: any) => mealDiet.includes || mealDiet.quantity
+                (mealDiet: any) => mealDiet?.includes || mealDiet?.quantity
               )
               ?.map((mealDiet: any) => ({
-                includes: mealDiet.includes || "",
-                quantity: mealDiet.quantity || "",
+                includes: mealDiet?.includes || "",
+                quantity: mealDiet?.quantity || "",
               })),
           ],
         })),
     ];
 
-    const dayAllMealOne = [
-      ...(data?.days || [])?.map((mealOne: any) => ({
-        mealName: mealOne?.mealName || "",
-        note: mealOne?.note || "",
-        diets: [
-          {
-            includes: mealOne?.includes || "",
-            quantity: mealOne?.quantity || "",
-          },
-          ...(mealOne?.diets || [])
-            ?.filter((mealDiet: any) => mealDiet.includes || mealDiet.quantity)
-            ?.map((mealDiet: any) => ({
-              includes: mealDiet.includes || "",
-              quantity: mealDiet.quantity || "",
-            })),
-        ],
-      })),
-    ];
+    const daysAll = data?.daysAll
+      ?.filter(
+        (mealsAll: any) =>
+          mealsAll?.mealName ||
+          mealsAll?.note ||
+          mealsAll?.includes ||
+          mealsAll?.quantity ||
+          (mealsAll?.daysAllMealOneDiets &&
+            mealsAll?.daysAllMealOneDiets?.length > 0)
+      )
+      ?.map((mealsAll: any) => {
+        const result: any = [];
 
-    const dayAllMealAll = {
-      ...(data?.days || [])?.map((mealOne: any) =>
-        (mealOne?.meals || [])?.map((allMeals: any) => ({
-          mealName: allMeals?.mealName || "",
-          note: allMeals?.note || "",
+        result[0] = {
+          mealName: mealsAll?.mealName || "",
+          note: mealsAll?.note || "",
           diets: [
             {
-              includes: allMeals?.includes || "",
-              quantity: allMeals?.quantity || "",
+              includes: mealsAll?.includes || "",
+              quantity: mealsAll?.quantity || "",
             },
-            ...(allMeals?.diets || [])
+            ...(mealsAll?.daysAllMealOneDiets || [])
               ?.filter(
-                (mealDiet: any) => mealDiet.includes || mealDiet.quantity
+                (mealDiet: any) => mealDiet?.includes || mealDiet?.quantity
               )
               ?.map((mealDiet: any) => ({
-                includes: mealDiet.includes || "",
-                quantity: mealDiet.quantity || "",
+                includes: mealDiet?.includes || "",
+                quantity: mealDiet?.quantity || "",
               })),
           ],
-        }))
-      ),
-    };
+        };
 
-    console.log("Meal All of Day 01", dayOneAllMeal);
-    console.log("Meal One of Day All", dayAllMealOne);
-    console.log("Meal All of Day All", dayAllMealAll);
-    console.log(data);
+        mealsAll?.daysAllMealsAll
+          ?.filter(
+            (meals: any) =>
+              meals?.mealName ||
+              meals?.note ||
+              meals?.includes ||
+              meals?.quantity ||
+              (meals?.daysAllMealsAllDiets &&
+                meals?.daysAllMealsAllDiets?.length > 0)
+          )
+          .forEach((meals: any, index: any) => {
+            result[index + 1] = {
+              mealName: meals?.mealName || "",
+              note: meals?.note || "",
+              diets: [
+                {
+                  includes: meals?.includes || "",
+                  quantity: meals?.quantity || "",
+                },
+                ...(meals?.daysAllMealsAllDiets || [])
+                  ?.filter(
+                    (mealDiet: any) => mealDiet?.includes || mealDiet?.quantity
+                  )
+                  ?.map((mealDiet: any) => ({
+                    includes: mealDiet?.includes || "",
+                    quantity: mealDiet?.quantity || "",
+                  })),
+              ],
+            };
+          });
+
+        return result;
+      });
+
+    daysAll?.unshift(dayOneAllMeal);
+
+    console.log("Meal One of Day All", daysAll);
     enqueueSnackbar("Diet Added Successfully!", {
       variant: "success",
     });
