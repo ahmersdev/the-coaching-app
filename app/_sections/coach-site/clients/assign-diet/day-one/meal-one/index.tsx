@@ -17,7 +17,7 @@ import { CoachesMealImg } from "@/app/_assets/images";
 export default function MealOne({ control }: any) {
   const { fields, append, remove } = useFieldArray({
     control,
-    name: "diets",
+    name: "dayOneMealOneDiets",
   });
 
   const handleAddDiet = () => {
@@ -94,12 +94,12 @@ export default function MealOne({ control }: any) {
                       X
                     </Typography>
                     <RHFTextField
-                      name={`diets[${dietIndex}].includes`}
+                      name={`dayOneMealOneDiets[${dietIndex}].includes`}
                       label={"Includes"}
                       placeholder={"-----"}
                     />
                     <RHFTextField
-                      name={`diets[${dietIndex}].quantity`}
+                      name={`dayOneMealOneDiets[${dietIndex}].quantity`}
                       placeholder={"Enter Quantity"}
                       type={"number"}
                     />

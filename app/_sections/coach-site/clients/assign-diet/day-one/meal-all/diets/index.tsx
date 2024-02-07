@@ -6,7 +6,7 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 export default function Diets({ control, mealIndex }: any) {
   const { fields, append, remove } = useFieldArray({
     control,
-    name: `meals[${mealIndex}].diets`,
+    name: `dayOneMealAll[${mealIndex}].dayOneMealAllDiets`,
   });
 
   const handleAddDiet = () => {
@@ -33,12 +33,12 @@ export default function Diets({ control, mealIndex }: any) {
             X
           </Typography>
           <RHFTextField
-            name={`meals[${mealIndex}].diets[${dietIndex}].includes`}
+            name={`dayOneMealAll[${mealIndex}].dayOneMealAllDiets[${dietIndex}].includes`}
             label={"Includes"}
             placeholder={"-----"}
           />
           <RHFTextField
-            name={`meals[${mealIndex}].diets[${dietIndex}].quantity`}
+            name={`dayOneMealAll[${mealIndex}].dayOneMealAllDiets[${dietIndex}].quantity`}
             placeholder={"Enter Quantity"}
             type={"number"}
           />

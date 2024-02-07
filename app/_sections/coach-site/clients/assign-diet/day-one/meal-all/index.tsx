@@ -21,7 +21,7 @@ export default function MealAll({ control }: any) {
     remove,
   } = useFieldArray({
     control,
-    name: "meals",
+    name: "dayOneMealAll",
   });
 
   const handleAddMeals = () => {
@@ -93,7 +93,7 @@ export default function MealAll({ control }: any) {
               <Grid container spacing={1}>
                 <Grid item xs={12} md={6}>
                   <RHFTextField
-                    name={`meals[${mealIndex}].mealName`}
+                    name={`dayOneMealAll[${mealIndex}].mealName`}
                     label={"Meal Name"}
                     placeholder={"Enter Meal Name"}
                   />
@@ -103,12 +103,12 @@ export default function MealAll({ control }: any) {
                   <Grid container spacing={1} alignItems={"end"}>
                     <Grid item xs={12} md={3}>
                       <RHFTextField
-                        name={`meals[${mealIndex}].includes`}
+                        name={`dayOneMealAll[${mealIndex}].includes`}
                         label={"Includes"}
                         placeholder={"-----"}
                       />
                       <RHFTextField
-                        name={`meals[${mealIndex}].quantity`}
+                        name={`dayOneMealAll[${mealIndex}].quantity`}
                         placeholder={"Enter Quantity"}
                         type={"number"}
                       />
@@ -120,7 +120,7 @@ export default function MealAll({ control }: any) {
 
                 <Grid item xs={12} md={6}>
                   <RHFTextField
-                    name={`meals[${mealIndex}].note`}
+                    name={`dayOneMealAll[${mealIndex}].note`}
                     label={"Add Note"}
                     placeholder={"Add Some Details"}
                     multiline
