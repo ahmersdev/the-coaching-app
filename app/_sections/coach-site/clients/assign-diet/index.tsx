@@ -14,12 +14,22 @@ import DayOne from "./day-one";
 import DayAll from "./day-all";
 
 const dietValidationSchema: any = Yup.object().shape({
-  // mealName: Yup.string().trim().required("Required"),
-  // meals: Yup.array().of(
-  //   Yup.object().shape({
-  //     mealName: Yup.string().required("Required"),
-  //   })
-  // ),
+  mealName: Yup.string().trim().required("Required"),
+  dayOneMealAll: Yup.array().of(
+    Yup.object().shape({
+      mealName: Yup.string().required("Required"),
+    })
+  ),
+  daysAll: Yup.array().of(
+    Yup.object().shape({
+      mealName: Yup.string().required("Required"),
+      daysAllMealsAll: Yup.array().of(
+        Yup.object().shape({
+          mealName: Yup.string().required("Required"),
+        })
+      ),
+    })
+  ),
 });
 
 const defaultValues = {
