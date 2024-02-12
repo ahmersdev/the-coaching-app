@@ -6,6 +6,8 @@ export default function RHFUploadFile({
   name,
   required,
   borderRadius = 2,
+  border = 1.5,
+  bgcolor = "secondary.900",
   ...other
 }: any) {
   const theme: any = useTheme();
@@ -20,7 +22,7 @@ export default function RHFUploadFile({
           <label htmlFor={name}>
             <Box
               borderRadius={borderRadius}
-              border={1.5}
+              border={border}
               borderColor={
                 error
                   ? theme?.palette?.error?.[700]
@@ -32,6 +34,7 @@ export default function RHFUploadFile({
               justifyContent={"space-between"}
               sx={{
                 cursor: "pointer",
+                bgcolor,
                 "&:hover": {
                   borderColor: theme?.palette?.primary?.[900],
                 },

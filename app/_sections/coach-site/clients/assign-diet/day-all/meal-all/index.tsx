@@ -14,6 +14,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { CoachesMealImg } from "@/app/_assets/images";
 import { RHFTextField } from "@/app/_components/react-hook-form";
 import Diets from "./diets";
+import { LoadingButton } from "@mui/lab";
 
 export default function MealAll({ control, dayIndex }: any) {
   const {
@@ -97,6 +98,7 @@ export default function MealAll({ control, dayIndex }: any) {
                     name={`daysAll[${dayIndex}].daysAllMealsAll[${mealIndex}].mealName`}
                     label={"Meal Name"}
                     placeholder={"Enter Meal Name"}
+                    bgcolor={"secondary.800"}
                   />
                 </Grid>
                 <Grid item xs={0} md={12} />
@@ -107,11 +109,13 @@ export default function MealAll({ control, dayIndex }: any) {
                         name={`daysAll[${dayIndex}].daysAllMealsAll[${mealIndex}].includes`}
                         label={"Includes"}
                         placeholder={"-----"}
+                        bgcolor={"secondary.800"}
                       />
                       <RHFTextField
                         name={`daysAll[${dayIndex}].daysAllMealsAll[${mealIndex}].quantity`}
                         placeholder={"Enter Quantity"}
                         type={"number"}
+                        bgcolor={"secondary.800"}
                       />
                     </Grid>
 
@@ -130,10 +134,11 @@ export default function MealAll({ control, dayIndex }: any) {
                     placeholder={"Add Some Details"}
                     multiline
                     rows={3}
+                    bgcolor={"secondary.800"}
                   />
                 </Grid>
                 <Grid item xs={12}>
-                  <Button
+                  <LoadingButton
                     variant={"contained"}
                     sx={{
                       color: "grey.100",
@@ -146,7 +151,7 @@ export default function MealAll({ control, dayIndex }: any) {
                     type={"submit"}
                   >
                     Add
-                  </Button>
+                  </LoadingButton>
                 </Grid>
               </Grid>
             </AccordionDetails>

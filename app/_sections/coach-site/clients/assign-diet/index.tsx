@@ -166,7 +166,7 @@ export default function AssignDiet() {
     daysAll?.unshift(dayOneAllMeal);
 
     console.log("Meal One of Day All", daysAll);
-    enqueueSnackbar("Diet Added Successfully!", {
+    enqueueSnackbar("Diet Assigned Successfully!", {
       variant: "success",
     });
   };
@@ -180,7 +180,7 @@ export default function AssignDiet() {
         gap={1}
       >
         <Box display={"flex"} alignItems={"center"} gap={1}>
-          <Link href={COACH_SITE?.CLIENTS_ALERTS}>
+          <Link href={COACH_SITE?.CLIENTS}>
             <ArrowBackIcon />
           </Link>
           <Typography variant={"h3"} fontWeight={600}>

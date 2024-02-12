@@ -4,6 +4,7 @@ import { FormLabel, TextField, Typography, useTheme } from "@mui/material";
 export default function RHFTextField({
   name,
   borderRadius = 2,
+  bgcolor = "secondary.900",
   ...other
 }: any) {
   const { control } = useFormContext();
@@ -31,6 +32,7 @@ export default function RHFTextField({
               ".MuiInputBase-root": {
                 borderRadius: borderRadius,
                 border: 1.5,
+                bgcolor,
                 borderColor: theme?.palette?.secondary?.[600],
                 "&:hover": {
                   borderColor: theme?.palette?.primary?.[900],

@@ -36,11 +36,13 @@ export default function Diets({ control, mealIndex }: any) {
             name={`dayOneMealAll[${mealIndex}].dayOneMealAllDiets[${dietIndex}].includes`}
             label={"Includes"}
             placeholder={"-----"}
+            bgcolor={"secondary.800"}
           />
           <RHFTextField
             name={`dayOneMealAll[${mealIndex}].dayOneMealAllDiets[${dietIndex}].quantity`}
             placeholder={"Enter Quantity"}
             type={"number"}
+            bgcolor={"secondary.800"}
           />
         </Grid>
       ))}

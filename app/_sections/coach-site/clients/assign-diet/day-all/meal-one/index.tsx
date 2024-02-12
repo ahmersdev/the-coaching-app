@@ -13,6 +13,7 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { RHFTextField } from "@/app/_components/react-hook-form";
 import { useFieldArray } from "react-hook-form";
 import { CoachesMealImg } from "@/app/_assets/images";
+import { LoadingButton } from "@mui/lab";
 
 export default function MealOne({ control, dayIndex }: any) {
   const { fields, append, remove } = useFieldArray({
@@ -63,6 +64,7 @@ export default function MealOne({ control, dayIndex }: any) {
                 name={`daysAll[${dayIndex}].mealName`}
                 label={"Meal Name"}
                 placeholder={"Enter Meal Name"}
+                bgcolor={"secondary.800"}
               />
             </Grid>
             <Grid item xs={0} md={12} />
@@ -73,11 +75,13 @@ export default function MealOne({ control, dayIndex }: any) {
                     name={`daysAll[${dayIndex}].includes`}
                     label={"Includes"}
                     placeholder={"-----"}
+                    bgcolor={"secondary.800"}
                   />
                   <RHFTextField
                     name={`daysAll[${dayIndex}].quantity`}
                     placeholder={"Enter Quantity"}
                     type={"number"}
+                    bgcolor={"secondary.800"}
                   />
                 </Grid>
                 {fields?.map((diet: any, dietIndex: number) => (
@@ -97,11 +101,13 @@ export default function MealOne({ control, dayIndex }: any) {
                       name={`daysAll[${dayIndex}].daysAllMealOneDiets[${dietIndex}].includes`}
                       label={"Includes"}
                       placeholder={"-----"}
+                      bgcolor={"secondary.800"}
                     />
                     <RHFTextField
                       name={`daysAll[${dayIndex}].daysAllMealOneDiets[${dietIndex}].quantity`}
                       placeholder={"Enter Quantity"}
                       type={"number"}
+                      bgcolor={"secondary.800"}
                     />
                   </Grid>
                 ))}
@@ -139,10 +145,11 @@ export default function MealOne({ control, dayIndex }: any) {
                 placeholder={"Add Some Details"}
                 multiline
                 rows={3}
+                bgcolor={"secondary.800"}
               />
             </Grid>
             <Grid item xs={12}>
-              <Button
+              <LoadingButton
                 variant={"contained"}
                 sx={{
                   color: "grey.100",
@@ -155,7 +162,7 @@ export default function MealOne({ control, dayIndex }: any) {
                 type={"submit"}
               >
                 Add
-              </Button>
+              </LoadingButton>
             </Grid>
           </Grid>
         </AccordionDetails>
