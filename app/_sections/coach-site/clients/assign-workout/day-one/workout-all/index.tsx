@@ -1,47 +1,41 @@
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  Avatar,
   Box,
   Button,
   Grid,
   Typography,
 } from "@mui/material";
-import { RHFTextField } from "@/app/_components/react-hook-form";
 import { useFieldArray } from "react-hook-form";
-import Diets from "./diets";
-import { CoachesMealImg } from "@/app/_assets/images";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { RHFTextField, RHFUploadFile } from "@/app/_components/react-hook-form";
 import { LoadingButton } from "@mui/lab";
+import Reps from "./reps";
 
-export default function MealAll({ control }: any) {
-  const {
-    fields: fieldsMeals,
-    append,
-    remove,
-  } = useFieldArray({
+export default function WorkoutAll({ control, watch }: any) {
+  const { fields, append, remove } = useFieldArray({
     control,
-    name: "dayOneMealAll",
+    name: "dayOneWorkoutAll",
   });
 
-  const handleAddMeals = () => {
+  const handleAddWorkout = () => {
     append({
-      mealName: "",
-      includes: "",
-      quantity: "",
+      exerciseName: "",
+      sets: "",
+      video: null,
       note: "",
     });
   };
 
-  const handleRemoveMeals = (mealIndex: any) => {
-    remove(mealIndex);
+  const handleRemoveWorkout = (workoutIndex: any) => {
+    remove(workoutIndex);
   };
 
   return (
     <>
-      {fieldsMeals?.map((meal: any, mealIndex: any) => (
-        <Box bgcolor={"secondary.900"} key={meal.id} borderRadius={3} mt={2}>
+      {fields?.map((workout: any, workoutIndex: any) => (
+        <Box bgcolor={"secondary.900"} key={workout.id} borderRadius={3} mt={2}>
           <Accordion
             elevation={0}
             defaultExpanded
@@ -64,25 +58,19 @@ export default function MealAll({ control }: any) {
                 gap={1}
               >
                 <Box display={"flex"} alignItems={"center"} gap={1}>
-                  <Avatar
-                    src={CoachesMealImg?.src}
-                    alt={"Meal"}
-                    variant={"rounded"}
-                    sx={{ width: 52, height: 52 }}
-                  />
                   <Typography
                     variant={"h6"}
                     color={"grey.100"}
                     fontWeight={700}
                   >
-                    Meal 0{mealIndex + 2}
+                    Exercise 0{workoutIndex + 2}
                   </Typography>
                 </Box>
                 <Typography
                   variant={"body1"}
                   color={"grey.100"}
                   fontWeight={900}
-                  onClick={() => handleRemoveMeals?.(mealIndex)}
+                  onClick={() => handleRemoveWorkout?.(workoutIndex)}
                   mr={2}
                   sx={{ cursor: "pointer" }}
                 >
@@ -90,42 +78,46 @@ export default function MealAll({ control }: any) {
                 </Typography>
               </Box>
             </AccordionSummary>
-            
+
             <AccordionDetails>
               <Grid container spacing={1}>
                 <Grid item xs={12} md={5}>
                   <RHFTextField
-                    name={`dayOneMealAll[${mealIndex}].mealName`}
-                    label={"Meal Name"}
-                    placeholder={"Enter Meal Name"}
+                    name={`dayOneWorkoutAll[${workoutIndex}].exerciseName`}
+                    label={"Exercise Name"}
+                    placeholder={"Enter Exercise Name"}
                     bgcolor={"secondary.800"}
                   />
                 </Grid>
-                <Grid item xs={0} md={7} />
-                <Grid item xs={12}>
-                  <Grid container spacing={1} alignItems={"end"}>
-                    <Grid item xs={12} md={2.5}>
-                      <RHFTextField
-                        name={`dayOneMealAll[${mealIndex}].includes`}
-                        label={"Includes"}
-                        placeholder={"-----"}
-                        bgcolor={"secondary.800"}
-                      />
-                      <RHFTextField
-                        name={`dayOneMealAll[${mealIndex}].quantity`}
-                        placeholder={"Enter Quantity"}
-                        type={"number"}
-                        bgcolor={"secondary.800"}
-                      />
-                    </Grid>
-
-                    <Diets control={control} mealIndex={mealIndex} />
-                  </Grid>
-                </Grid>
-
                 <Grid item xs={12} md={5}>
                   <RHFTextField
-                    name={`dayOneMealAll[${mealIndex}].note`}
+                    name={`dayOneWorkoutAll[${workoutIndex}].sets`}
+                    label={"Sets"}
+                    placeholder={"Enter Number of Sets"}
+                    type={"number"}
+                    bgcolor={"secondary.800"}
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <Reps
+                    control={control}
+                    watch={watch}
+                    workoutIndex={workoutIndex}
+                  />
+                </Grid>
+                <Grid item xs={12} md={5}>
+                  <RHFUploadFile
+                    name={`dayOneWorkoutAll[${workoutIndex}].video`}
+                    label={"Workout Video"}
+                    border={0}
+                    bgcolor={"secondary.main"}
+                  />
+                </Grid>
+                <Grid item xs={0} md={7} />
+                <Grid item xs={12} md={5}>
+                  <RHFTextField
+                    name={`dayOneWorkoutAll[${workoutIndex}].note`}
                     label={"Add Note"}
                     placeholder={"Add Some Details"}
                     multiline
@@ -172,9 +164,9 @@ export default function MealAll({ control }: any) {
           },
         }}
         disableElevation
-        onClick={handleAddMeals}
+        onClick={handleAddWorkout}
       >
-        Add Another Meal
+        Add Another Workout
       </Button>
     </>
   );

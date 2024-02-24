@@ -9,8 +9,41 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { RHFTextField, RHFUploadFile } from "@/app/_components/react-hook-form";
 import { LoadingButton } from "@mui/lab";
+import { useFieldArray } from "react-hook-form";
+import { useEffect } from "react";
 
-export default function WorkoutOne({ control }: any) {
+export default function WorkoutOne({ control, watch }: any) {
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "dayOneWorkoutOneReps",
+  });
+
+  const watchSets = watch("sets");
+
+  useEffect(() => {
+    // Calculate the difference between the current length of fields and watchSets
+    const diff = watchSets - fields.length;
+
+    const makeChanges = () => {
+      if (diff > 0) {
+        // If watchSets is greater than fields length, append the difference
+        for (let i = 0; i < diff; i++) {
+          append({ rep: "" });
+        }
+      } else if (diff < 0) {
+        // If watchSets is less than fields length, remove the excess items
+        for (let i = 0; i < -diff; i++) {
+          // Ensure that the last item is removed each time to avoid index issues
+          remove(fields.length - 1);
+        }
+      }
+    };
+
+    const timeoutId = setTimeout(makeChanges, 500);
+
+    return () => clearTimeout(timeoutId);
+  }, [watchSets, fields, append, remove]);
+
   return (
     <Box bgcolor={"secondary.900"} borderRadius={3} mt={2}>
       <Accordion
@@ -52,7 +85,19 @@ export default function WorkoutOne({ control }: any) {
               />
             </Grid>
             <Grid item xs={12}>
-              reps
+              <Grid container spacing={1}>
+                {fields?.map((rep: any, repIndex: number) => (
+                  <Grid item xs={12} md={2.5} key={rep.id}>
+                    <RHFTextField
+                      name={`dayOneWorkoutOneReps[${repIndex}].rep`}
+                      label={`Reps - Set ${repIndex + 1}`}
+                      placeholder={"00"}
+                      type={"number"}
+                      bgcolor={"secondary.800"}
+                    />
+                  </Grid>
+                ))}
+              </Grid>
             </Grid>
             <Grid item xs={12} md={5}>
               <RHFUploadFile

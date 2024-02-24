@@ -14,6 +14,11 @@ import DayOne from "./day-one";
 
 const workoutValidationSchema: any = Yup.object().shape({
   exerciseName: Yup.string().trim().required("Required"),
+  dayOneWorkoutAll: Yup.array().of(
+    Yup.object().shape({
+      exerciseName: Yup.string().required("Required"),
+    })
+  ),
 });
 
 const defaultValues = {
@@ -29,7 +34,7 @@ export default function AssignWorkout() {
     defaultValues,
   });
 
-  const { handleSubmit, control } = methods;
+  const { handleSubmit, control, watch } = methods;
 
   const onSubmit = (data: any) => {
     console.log(data);
@@ -47,7 +52,7 @@ export default function AssignWorkout() {
         gap={1}
       >
         <Box display={"flex"} alignItems={"center"} gap={1}>
-          <Link href={COACH_SITE?.CLIENTS_ALERTS}>
+          <Link href={COACH_SITE?.CLIENTS}>
             <ArrowBackIcon />
           </Link>
           <Typography variant={"h3"} fontWeight={600}>
@@ -71,7 +76,7 @@ export default function AssignWorkout() {
         </LoadingButton>
       </Box>
 
-      <DayOne control={control} />
+      <DayOne control={control} watch={watch} />
     </FormProvider>
   );
 }

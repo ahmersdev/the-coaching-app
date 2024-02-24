@@ -20,7 +20,7 @@ export default function Diets({ control, mealIndex }: any) {
   return (
     <>
       {fields?.map((diet: any, dietIndex: any) => (
-        <Grid item xs={12} md={3} key={diet.id} position={"relative"}>
+        <Grid item xs={12} md={2.5} key={diet.id} position={"relative"}>
           <Typography
             variant={"body1"}
             color={"grey.100"}

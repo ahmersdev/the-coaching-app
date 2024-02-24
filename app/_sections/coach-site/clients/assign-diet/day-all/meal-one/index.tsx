@@ -59,7 +59,7 @@ export default function MealOne({ control, dayIndex }: any) {
         </AccordionSummary>
         <AccordionDetails>
           <Grid container spacing={1}>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={5}>
               <RHFTextField
                 name={`daysAll[${dayIndex}].mealName`}
                 label={"Meal Name"}
@@ -67,10 +67,10 @@ export default function MealOne({ control, dayIndex }: any) {
                 bgcolor={"secondary.800"}
               />
             </Grid>
-            <Grid item xs={0} md={12} />
+            <Grid item xs={0} md={7} />
             <Grid item xs={12}>
               <Grid container spacing={1} alignItems={"end"}>
-                <Grid item xs={12} md={3}>
+                <Grid item xs={12} md={2.5}>
                   <RHFTextField
                     name={`daysAll[${dayIndex}].includes`}
                     label={"Includes"}
@@ -85,7 +85,7 @@ export default function MealOne({ control, dayIndex }: any) {
                   />
                 </Grid>
                 {fields?.map((diet: any, dietIndex: number) => (
-                  <Grid item xs={12} md={3} key={diet.id} position={"relative"}>
+                  <Grid item xs={12} md={2.5} key={diet.id} position={"relative"}>
                     <Typography
                       variant={"body1"}
                       color={"grey.100"}
@@ -138,7 +138,7 @@ export default function MealOne({ control, dayIndex }: any) {
               </Grid>
             </Grid>
 
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={5}>
               <RHFTextField
                 name={`daysAll[${dayIndex}].note`}
                 label={"Add Note"}

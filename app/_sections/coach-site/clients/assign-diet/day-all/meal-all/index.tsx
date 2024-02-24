@@ -93,7 +93,7 @@ export default function MealAll({ control, dayIndex }: any) {
             </AccordionSummary>
             <AccordionDetails>
               <Grid container spacing={1}>
-                <Grid item xs={12} md={6}>
+                <Grid item xs={12} md={5}>
                   <RHFTextField
                     name={`daysAll[${dayIndex}].daysAllMealsAll[${mealIndex}].mealName`}
                     label={"Meal Name"}
@@ -101,10 +101,10 @@ export default function MealAll({ control, dayIndex }: any) {
                     bgcolor={"secondary.800"}
                   />
                 </Grid>
-                <Grid item xs={0} md={12} />
+                <Grid item xs={0} md={7} />
                 <Grid item xs={12}>
                   <Grid container spacing={1} alignItems={"end"}>
-                    <Grid item xs={12} md={3}>
+                    <Grid item xs={12} md={2.5}>
                       <RHFTextField
                         name={`daysAll[${dayIndex}].daysAllMealsAll[${mealIndex}].includes`}
                         label={"Includes"}
@@ -127,7 +127,7 @@ export default function MealAll({ control, dayIndex }: any) {
                   </Grid>
                 </Grid>
 
-                <Grid item xs={12} md={6}>
+                <Grid item xs={12} md={5}>
                   <RHFTextField
                     name={`daysAll[${dayIndex}].daysAllMealsAll[${mealIndex}].note`}
                     label={"Add Note"}

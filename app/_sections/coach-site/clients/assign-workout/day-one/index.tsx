@@ -9,8 +9,9 @@ import {
 import { WorkoutDayIcon } from "@/app/_assets/icons";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import WorkoutOne from "./workout-one";
+import WorkoutAll from "./workout-all";
 
-export default function DayOne({ control }: any) {
+export default function DayOne({ control, watch }: any) {
   return (
     <Box bgcolor={"secondary.main"} borderRadius={3} mt={2}>
       <Accordion
@@ -37,7 +38,9 @@ export default function DayOne({ control }: any) {
 
         <AccordionDetails>
           <Divider sx={{ mb: 2 }} />
-          <WorkoutOne control={control} />
+          <WorkoutOne control={control} watch={watch} />
+
+          <WorkoutAll control={control} watch={watch} />
         </AccordionDetails>
       </Accordion>
     </Box>
