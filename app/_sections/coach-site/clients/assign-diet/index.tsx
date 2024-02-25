@@ -165,7 +165,7 @@ export default function AssignDiet() {
 
     daysAll?.unshift(dayOneAllMeal);
 
-    console.log("Meal One of Day All", daysAll);
+    console.log(daysAll);
     enqueueSnackbar("Diet Assigned Successfully!", {
       variant: "success",
     });

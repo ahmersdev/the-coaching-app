@@ -213,7 +213,7 @@ export const clientsColumns = [
           />
           <Link
             href={{
-              pathname: COACH_SITE?.CLIENTS_ASSIGN_MICRO_PLANS,
+              pathname: COACH_SITE?.CLIENTS_ASSIGN_MACRO_PLANS,
               query: { clientId: info?.row?.original?.id },
             }}
           >
@@ -232,7 +232,7 @@ export const clientsColumns = [
           />
           <Link
             href={{
-              pathname: COACH_SITE?.CLIENTS_ASSIGN_MICRO_PLANS,
+              pathname: COACH_SITE?.CLIENTS_ASSIGN_MACRO_PLANS,
               query: { clientId: info?.row?.original?.id },
             }}
           >

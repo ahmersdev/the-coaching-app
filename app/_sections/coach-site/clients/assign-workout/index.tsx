@@ -11,12 +11,23 @@ import { ArrowBackIcon } from "@/app/_assets/icons";
 import { LoadingButton } from "@mui/lab";
 import * as Yup from "yup";
 import DayOne from "./day-one";
+import DayAll from "./day-all";
 
 const workoutValidationSchema: any = Yup.object().shape({
   exerciseName: Yup.string().trim().required("Required"),
   dayOneWorkoutAll: Yup.array().of(
     Yup.object().shape({
       exerciseName: Yup.string().required("Required"),
+    })
+  ),
+  daysAll: Yup.array().of(
+    Yup.object().shape({
+      exerciseName: Yup.string().required("Required"),
+      daysAllWorkoutAll: Yup.array().of(
+        Yup.object().shape({
+          exerciseName: Yup.string().required("Required"),
+        })
+      ),
     })
   ),
 });
@@ -37,7 +48,107 @@ export default function AssignWorkout() {
   const { handleSubmit, control, watch } = methods;
 
   const onSubmit = (data: any) => {
-    console.log(data);
+    const dayOneWorkoutOne = {
+      exerciseName: data?.exerciseName || "",
+      sets: data?.sets || "",
+      video: data?.video || null,
+      note: data?.note || "",
+      reps: [
+        ...(data?.dayOneWorkoutOneReps || [])
+          ?.filter((workoutRep: any) => workoutRep?.rep)
+          ?.map((workoutRep: any) => ({
+            rep: workoutRep?.rep || "",
+          })),
+      ],
+    };
+
+    const dayOneAllWorkout = [
+      dayOneWorkoutOne,
+      ...(data?.dayOneWorkoutAll || [])
+        ?.filter(
+          (allWorkout: any) =>
+            allWorkout?.exerciseName ||
+            allWorkout?.sets ||
+            allWorkout?.video ||
+            allWorkout?.note ||
+            (allWorkout?.dayOneWorkoutAllReps &&
+              allWorkout?.dayOneWorkoutAllReps?.length > 0)
+        )
+        ?.map((allWorkout: any) => ({
+          exerciseName: allWorkout?.exerciseName || "",
+          sets: allWorkout?.sets || "",
+          video: allWorkout?.video || null,
+          note: allWorkout?.note || "",
+          reps: [
+            ...(allWorkout?.dayOneWorkoutAllReps || [])
+              ?.filter((workoutRep: any) => workoutRep?.rep)
+              ?.map((workoutRep: any) => ({
+                rep: workoutRep?.rep || "",
+              })),
+          ],
+        })),
+    ];
+
+    const daysAll = data?.daysAll
+      ?.filter(
+        (workoutAll: any) =>
+          workoutAll?.exerciseName ||
+          workoutAll?.sets ||
+          workoutAll?.video ||
+          workoutAll?.note ||
+          (workoutAll?.daysAllWorkoutOneReps &&
+            workoutAll?.daysAllWorkoutOneReps?.length > 0)
+      )
+      ?.map((workoutAll: any) => {
+        const result: any = [];
+
+        result[0] = {
+          exerciseName: workoutAll?.exerciseName || "",
+          sets: workoutAll?.sets || "",
+          video: workoutAll?.video || null,
+          note: workoutAll?.note || "",
+          reps: [
+            ...(workoutAll?.daysAllWorkoutOneReps || [])
+              ?.filter((workoutRep: any) => workoutRep?.rep)
+              ?.map((workoutRep: any) => ({
+                rep: workoutRep?.rep || "",
+              })),
+          ],
+        };
+
+        workoutAll?.daysAllWorkoutAll
+          ?.filter(
+            (workout: any) =>
+              workout?.exerciseName ||
+              workout?.sets ||
+              workout?.video ||
+              workout?.note ||
+              (workout?.daysAllWorkoutAllReps &&
+                workout?.daysAllWorkoutAllReps?.length > 0)
+          )
+          .forEach((workout: any, index: any) => {
+            result[index + 1] = {
+              exerciseName: workout?.exerciseName || "",
+              sets: workout?.sets || "",
+              video: workout?.video || null,
+              note: workout?.note || "",
+              reps: [
+                ...(workout?.daysAllWorkoutAllReps || [])
+                  ?.filter((workoutRep: any) => workoutRep?.rep)
+                  ?.map((workoutRep: any) => ({
+                    rep: workoutRep?.rep || "",
+                  })),
+              ],
+            };
+          });
+
+        return result;
+      });
+
+    daysAll?.unshift(dayOneAllWorkout);
+
+    console.log(daysAll);
+
     enqueueSnackbar("Workout Assigned Successfully!", {
       variant: "success",
     });
@@ -77,6 +188,8 @@ export default function AssignWorkout() {
       </Box>
 
       <DayOne control={control} watch={watch} />
+
+      <DayAll control={control} watch={watch} />
     </FormProvider>
   );
 }

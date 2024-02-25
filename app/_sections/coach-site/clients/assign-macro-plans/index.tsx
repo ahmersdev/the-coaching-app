@@ -1,5 +1,5 @@
 "use client";
 
-export default function AssignMicroPlans() {
+export default function AssignMacroPlans() {
   return <>Assign Micro Plans</>;
 }

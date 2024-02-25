@@ -77,7 +77,7 @@ export const headerTitle = (pathName: any) => {
       );
       break;
 
-    case COACH_SITE?.CLIENTS_ASSIGN_MICRO_PLANS:
+    case COACH_SITE?.CLIENTS_ASSIGN_MACRO_PLANS:
       title = (
         <>
           <Typography component={"span"} variant={"h3"} color={"grey.500"}>
