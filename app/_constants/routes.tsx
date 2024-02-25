@@ -32,5 +32,6 @@ export const COACH_SITE = {
   CLIENTS_ASSIGN_MACRO_PLANS: `/coach-clients/assign-macro-plans`,
   CLIENTS_ALERTS: `/coach-alerts`,
   CLIENTS_ALERTS_OVERVIEW: `/coach-alerts/overview`,
+  CLIENTS_IMAGES: `/coach-clients-images`,
   SETTINGS: `/coach-settings`,
 };

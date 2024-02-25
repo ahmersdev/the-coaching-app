@@ -3,6 +3,7 @@ import {
   ClientAlertsIcon,
   DashboardIcon,
   SettingsIcon,
+  ClientsImagesIcon,
 } from "@/app/_assets/icons";
 
 export const mainRoutesArray = [
@@ -19,16 +20,22 @@ export const mainRoutesArray = [
     label: "Client Alerts",
     href: "/coach-alerts",
   },
-  { id: 4, icon: SettingsIcon, label: "Settings", href: "/coach-settings" },
+  {
+    id: 4,
+    icon: ClientsImagesIcon,
+    label: "Clients Images",
+    href: "/coach-clients-images",
+  },
+  { id: 5, icon: SettingsIcon, label: "Settings", href: "/coach-settings" },
 ];
 
 export const mainStyles = (href: any, pathName: any, theme: any) => {
   return {
     background: `${
-      pathName?.includes(href) ? theme?.palette?.gradients?.primary : null
+      pathName === href ? theme?.palette?.gradients?.primary : null
     }`,
     color: `${
-      pathName?.includes(href)
+      pathName === href
         ? theme?.palette?.grey?.[100]
         : theme?.palette?.secondary?.[400]
     }`,
@@ -37,7 +44,7 @@ export const mainStyles = (href: any, pathName: any, theme: any) => {
     borderRadius: "6px 200px 200px 6px",
     "&:hover": {
       background: `${
-        pathName?.includes(href)
+        pathName === href
           ? theme?.palette?.gradients?.primary
           : theme?.palette?.gradients?.secondary
       }`,
