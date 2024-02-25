@@ -1,8 +1,24 @@
 import { MacroIcon } from "@/app/_assets/icons";
 import { Box, Button, Divider, Grid, Typography } from "@mui/material";
 import { planOneDataArray } from "./plans.data";
+import { useFieldArray } from "react-hook-form";
+import { RHFTextField } from "@/app/_components/react-hook-form";
+import RHFAutocomplete from "@/app/_components/react-hook-form/rhf-autocomplete";
 
 export default function Plans({ control }: any) {
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "macros",
+  });
+
+  const handleAddMacro = () => {
+    append({ proteins: "", carbs: "", fat: "", type: "", note: "" });
+  };
+
+  const handleRemoveMacro = (macroIndex: any) => {
+    remove(macroIndex);
+  };
+
   return (
     <Box my={2} bgcolor={"secondary.main"} borderRadius={3} p={2}>
       <Box display={"flex"} alignItems={"center"} gap={1}>
@@ -24,6 +40,67 @@ export default function Plans({ control }: any) {
           ))}
         </Grid>
       </Box>
+
+      {fields?.map((macro: any, macroIndex: any) => (
+        <Box
+          bgcolor={"secondary.900"}
+          borderRadius={3}
+          p={1}
+          my={2}
+          key={macro?.id}
+        >
+          <Typography variant={"h6"} color={"grey.100"} fontWeight={700} mb={2}>
+            Target Nutrition&rsquo;s
+          </Typography>
+
+          <Grid container spacing={2}>
+            <Grid item xs={12} md={3}>
+              <RHFTextField
+                name={`macros[${macroIndex}].proteins`}
+                label={"Proteins"}
+                placeholder={"Enter proteins in gram"}
+                bgcolor={"secondary.800"}
+              />
+            </Grid>
+            <Grid item xs={12} md={3}>
+              <RHFTextField
+                name={`macros[${macroIndex}].carbs`}
+                label={"Carbs"}
+                placeholder={"Enter carbs in gram"}
+                bgcolor={"secondary.800"}
+              />
+            </Grid>
+            <Grid item xs={12} md={3}>
+              <RHFTextField
+                name={`macros[${macroIndex}].fat`}
+                label={"Fat"}
+                placeholder={"Enter fat in gram"}
+                bgcolor={"secondary.800"}
+              />
+            </Grid>
+            <Grid item xs={12} md={3}>
+              <RHFAutocomplete
+                name={`macros[${macroIndex}].type`}
+                label={"Macro Type"}
+                placeholder={"Select type"}
+                bgcolor={"secondary.800"}
+                options={["High", "Medium", "Low"]}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <RHFTextField
+                name={`macros[${macroIndex}].note`}
+                label={"Add Note"}
+                placeholder={"Add Some Details"}
+                bgcolor={"secondary.800"}
+                multiline
+                rows={3}
+              />
+            </Grid>
+          </Grid>
+        </Box>
+      ))}
+
       <Button
         variant={"contained"}
         fullWidth
@@ -41,6 +118,7 @@ export default function Plans({ control }: any) {
           },
         }}
         disableElevation
+        onClick={handleAddMacro}
       >
         Add Other Macros
       </Button>

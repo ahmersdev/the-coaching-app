@@ -37,9 +37,35 @@ export default function AssignMacroPlans() {
   const { handleSubmit, control } = methods;
 
   const onSubmit = (data: any) => {
-    console.log(data);
+    const updatedData = [
+      {
+        proteins: data?.proteins || "",
+        carbs: data?.carbs || "",
+        fat: data?.fat || "",
+        type: data?.type || "",
+        note: data?.note || "",
+      },
+      ...(data?.macros || [])
+        ?.filter(
+          (macro: any) =>
+            macro?.proteins ||
+            macro?.carbs ||
+            macro?.fat ||
+            macro?.type ||
+            macro?.note
+        )
+        ?.map((macro: any) => ({
+          proteins: macro?.proteins || "",
+          carbs: macro?.carbs || "",
+          fat: macro?.fat || "",
+          type: macro?.type || "",
+          note: macro?.note || "",
+        })),
+    ];
 
-    enqueueSnackbar("Workout Assigned Successfully!", {
+    console.log(updatedData);
+
+    enqueueSnackbar("Macro Assigned Successfully!", {
       variant: "success",
     });
   };
