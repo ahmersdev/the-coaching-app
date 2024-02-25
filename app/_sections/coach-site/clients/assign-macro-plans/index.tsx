@@ -20,7 +20,13 @@ const macroValidationSchema: any = Yup.object().shape({
   note: Yup.string().trim(),
 });
 
-const defaultValues = {};
+const defaultValues = {
+  proteins: "",
+  carbs: "",
+  fat: "",
+  type: "",
+  note: "",
+};
 
 export default function AssignMacroPlans() {
   const methods: any = useForm({
