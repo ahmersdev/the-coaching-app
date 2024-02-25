@@ -1,7 +1,7 @@
 import { NextIcon, ProgressIcon } from "@/app/_assets/icons";
 import { HomeTrainersOneImg } from "@/app/_assets/images";
 import { COACH_SITE } from "@/app/_constants/routes";
-import { Box, Divider, Typography } from "@mui/material";
+import { Box, Divider, Grid, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -21,34 +21,36 @@ export default function Progress() {
 
       <Divider sx={{ my: 2 }} />
 
-      <Box display={"flex"} gap={2}>
-        <Box borderRadius={3} bgcolor={"secondary.900"}>
-          <Image
-            src={HomeTrainersOneImg}
-            width={198}
-            height={198}
-            alt={"img"}
-          />
-          <Box
-            p={1}
-            display={"flex"}
-            alignItems={"center"}
-            justifyContent={"space-between"}
-          >
-            <Typography variant={"h6"} fontWeight={700}>
-              Dec 27, 2023
-            </Typography>
-            <Link
-              href={{
-                pathname: COACH_SITE?.CLIENTS_ASSIGN_DIET,
-                query: { clientId },
-              }}
+      <Grid container spacing={2}>
+        <Grid item>
+          <Box borderRadius={3} bgcolor={"secondary.900"}>
+            <Image
+              src={HomeTrainersOneImg}
+              width={198}
+              height={198}
+              alt={"img"}
+            />
+            <Box
+              p={1}
+              display={"flex"}
+              alignItems={"center"}
+              justifyContent={"space-between"}
             >
-              <NextIcon />
-            </Link>
+              <Typography variant={"h6"} fontWeight={700}>
+                Dec 27, 2023
+              </Typography>
+              <Link
+                href={{
+                  pathname: COACH_SITE?.CLIENTS_ASSIGN_DIET,
+                  query: { clientId },
+                }}
+              >
+                <NextIcon />
+              </Link>
+            </Box>
           </Box>
-        </Box>
-      </Box>
+        </Grid>
+      </Grid>
     </Box>
   );
 }

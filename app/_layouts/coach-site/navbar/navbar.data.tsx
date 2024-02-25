@@ -23,17 +23,17 @@ export const mainRoutesArray = [
     id: 4,
     icon: ClientsImagesIcon,
     label: "Clients Images",
-    href: "/coach-clients-images",
+    href: "/coach-client-images",
   },
 ];
 
 export const mainStyles = (href: any, pathName: any, theme: any) => {
   return {
     background: `${
-      pathName === href ? theme?.palette?.gradients?.primary : null
+      pathName?.includes(href) ? theme?.palette?.gradients?.primary : null
     }`,
     color: `${
-      pathName === href
+      pathName?.includes(href)
         ? theme?.palette?.grey?.[100]
         : theme?.palette?.secondary?.[400]
     }`,
@@ -42,7 +42,7 @@ export const mainStyles = (href: any, pathName: any, theme: any) => {
     borderRadius: "6px 200px 200px 6px",
     "&:hover": {
       background: `${
-        pathName === href
+        pathName?.includes(href)
           ? theme?.palette?.gradients?.primary
           : theme?.palette?.gradients?.secondary
       }`,
