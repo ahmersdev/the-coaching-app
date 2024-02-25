@@ -14,6 +14,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { enqueueSnackbar } from "notistack";
 import { FormProvider, RHFTextField } from "@/app/_components/react-hook-form";
 import * as Yup from "yup";
+import { LoadingButton } from "@mui/lab";
 
 const validationSchema: any = Yup.object().shape({
   feedback: Yup.string().trim(),
@@ -110,22 +111,38 @@ export default function DetailsDialog({
         <DialogActions sx={{ marginX: 2.4, padding: 0 }}>
           <Button
             variant={"contained"}
-            type={"button"}
             sx={{
               color: "grey.100",
               borderRadius: 25,
               border: "1px dashed",
               borderColor: "grey.100",
               background: "transparent",
+              width: 111,
               ":hover": {
                 backgroundColor: "grey.100",
                 color: "grey.900",
               },
             }}
             disableElevation
+            type={"button"}
+            onClick={() => setShowDetails(false)}
           >
             Close
           </Button>
+          <LoadingButton
+            variant={"contained"}
+            sx={{
+              color: "grey.100",
+              width: 111,
+              borderRadius: 25,
+              border: "1px solid",
+              borderColor: "primary.main",
+            }}
+            disableElevation
+            type={"submit"}
+          >
+            Submit
+          </LoadingButton>
         </DialogActions>
       </FormProvider>
     </Dialog>
