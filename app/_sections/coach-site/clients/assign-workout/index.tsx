@@ -167,7 +167,7 @@ export default function AssignWorkout() {
             <ArrowBackIcon />
           </Link>
           <Typography variant={"h3"} fontWeight={600}>
-            Overview
+            Assign Workout
           </Typography>
         </Box>
 

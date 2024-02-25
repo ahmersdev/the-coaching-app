@@ -48,3 +48,4 @@ export { default as DescriptionIcon } from "./description-icon";
 export { default as NextIcon } from "./next-icon";
 export { default as DietDayIcon } from "./diet-day-icon";
 export { default as WorkoutDayIcon } from "./workout-day-icon";
+export { default as MacroIcon } from "./macro-icon";

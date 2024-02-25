@@ -184,7 +184,7 @@ export default function AssignDiet() {
             <ArrowBackIcon />
           </Link>
           <Typography variant={"h3"} fontWeight={600}>
-            Overview
+            Assign Diet
           </Typography>
         </Box>
         <LoadingButton
