@@ -12,6 +12,10 @@ export const headerTitle = (pathName: any) => {
       title = "About Us";
       break;
 
+    case SALE_SITE?.PRICING:
+      title = "Pricing";
+      break;
+
     case SALE_SITE?.CONTACT_US:
       title = "Contact Us";
       break;

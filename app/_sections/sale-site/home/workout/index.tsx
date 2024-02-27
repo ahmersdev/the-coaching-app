@@ -30,7 +30,7 @@ export default function Workout() {
       px={{ xs: 2, md: 12 }}
       py={12}
       spacing={2}
-      bgcolor={"secondary.900"}
+      bgcolor={"common.bg"}
       sx={{
         backgroundImage: `url(${HomeWorkoutBgImg.src})`,
         backgroundPosition: { xs: "100% 100%", md: "center bottom" },

@@ -108,6 +108,7 @@ const COMMON = {
     white: "#FFFFFF",
     stroke: "#EAECF0",
     footer: "#1C122C",
+    bg: "#0E0824",
   },
 
   primary: { ...PRIMARY, contrastText: "#fff" },

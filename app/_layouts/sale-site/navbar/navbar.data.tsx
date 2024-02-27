@@ -4,7 +4,8 @@ export const saleSiteHeaderArray = [
   { id: 1, label: "Home", href: "/" },
   { id: 2, label: "Services", href: "/services" },
   { id: 3, label: "About Us", href: "/about-us" },
-  { id: 4, label: "Contact Us", href: "/contact-us" },
+  { id: 4, label: "Pricing", href: "/pricing" },
+  { id: 5, label: "Contact Us", href: "/contact-us" },
 ];
 
 export const listButtonStyles = (href: any, pathName: any) => {

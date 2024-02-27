@@ -27,7 +27,7 @@ export default function NewsLetter() {
       container
       spacing={2}
       py={6}
-      bgcolor={"secondary.900"}
+      bgcolor={"common.bg"}
       position={"relative"}
     >
       <Box

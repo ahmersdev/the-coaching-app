@@ -20,6 +20,7 @@ export const AUTH = {
 export const SALE_SITE = {
   SERVICES: `/services`,
   ABOUT_US: `/about-us`,
+  PRICING: `/pricing`,
   CONTACT_US: `/contact-us`,
 };
 

@@ -16,7 +16,7 @@ export default function Testimonial({ bgImg }: any) {
     <Box
       px={{ xs: 2, md: 12 }}
       py={6}
-      bgcolor={"secondary.900"}
+      bgcolor={"common.bg"}
       sx={{
         backgroundImage: `url(${bgImg.src})`,
         backgroundPosition: { xs: "100% 100%", md: "center bottom" },

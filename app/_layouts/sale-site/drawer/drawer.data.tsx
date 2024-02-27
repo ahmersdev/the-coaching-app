@@ -2,9 +2,10 @@ export const saleSiteDrawerArray = [
   { id: 1, label: "Home", href: "/" },
   { id: 2, label: "Services", href: "/services" },
   { id: 3, label: "About Us", href: "/about-us" },
-  { id: 4, label: "Contact Us", href: "/contact-us" },
-  { id: 5, label: "Sign In", href: "/sign-in" },
-  { id: 6, label: "Sign Up", href: "/sign-up" },
+  { id: 4, label: "Pricing", href: "/pricing" },
+  { id: 5, label: "Contact Us", href: "/contact-us" },
+  { id: 6, label: "Sign In", href: "/sign-in" },
+  { id: 7, label: "Sign Up", href: "/sign-up" },
 ];
 
 export const mainStyles = (href: any, pathName: any, theme: any) => {

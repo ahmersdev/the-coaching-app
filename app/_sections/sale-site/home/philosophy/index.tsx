@@ -19,7 +19,13 @@ export default function Philosophy() {
   } = usePhilosophy();
 
   return (
-    <Grid container spacing={2} px={{ xs: 2, md: 12 }} py={6} bgcolor={"secondary.900"}>
+    <Grid
+      container
+      spacing={2}
+      px={{ xs: 2, md: 12 }}
+      py={6}
+      bgcolor={"common.bg"}
+    >
       <Grid item xs={12} md={6} margin={"auto 0"}>
         <animated.div style={slideInLeft} ref={refHead}>
           <Typography

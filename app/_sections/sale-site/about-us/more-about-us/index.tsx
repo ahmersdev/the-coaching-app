@@ -25,7 +25,7 @@ export default function MoreAboutUs() {
     <Box
       px={{ xs: 2, md: 12 }}
       py={6}
-      bgcolor={"secondary.900"}
+      bgcolor={"common.bg"}
       position={"relative"}
     >
       <Box

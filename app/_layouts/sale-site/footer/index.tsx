@@ -8,13 +8,13 @@ export default function Footer() {
       <Box
         px={{ xs: 2, md: 12 }}
         py={6}
-        bgcolor={"secondary.900"}
+        bgcolor={"common.bg"}
         position={"relative"}
       >
         <NewsLetter />
       </Box>
 
-      <Box px={{ xs: 2, md: 12 }} pb={6} pt={15} bgcolor={"common.footer"}>
+      <Box px={{ xs: 2, md: 12 }} pb={6} pt={15} bgcolor={"common.bg"}>
         <LowerFooter />
       </Box>
     </>
