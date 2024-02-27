@@ -100,6 +100,7 @@ const GRADIENTS = {
     "linear-gradient(0deg, #F0E9FB, #F0E9FB), linear-gradient(0deg, #E1D4F8, #E1D4F8)",
   button1Hover:
     "linear-gradient(0deg, #E1D4F8, #E1D4F8), linear-gradient(0deg, #D2BEF4, #D2BEF4)",
+  yellowGradient: "linear-gradient(180deg, #FFDE41 0%, #FFF5C3 100%)",
 };
 
 const COMMON = {
@@ -109,6 +110,7 @@ const COMMON = {
     stroke: "#EAECF0",
     footer: "#1C122C",
     bg: "#0E0824",
+    text: "#0D0D12",
   },
 
   primary: { ...PRIMARY, contrastText: "#fff" },
