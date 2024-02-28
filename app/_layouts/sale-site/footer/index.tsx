@@ -1,3 +1,5 @@
+"use client";
+
 import { Box } from "@mui/material";
 import LowerFooter from "./lower-footer";
 import NewsLetter from "./news-letter";

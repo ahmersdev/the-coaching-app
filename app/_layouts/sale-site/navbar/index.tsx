@@ -1,3 +1,5 @@
+"use client";
+
 import { Logo52Icon } from "@/app/_assets/icons";
 import {
   Box,
