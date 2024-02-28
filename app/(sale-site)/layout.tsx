@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 
 import { SnackbarProvider } from "notistack";
 import Navbar from "../_layouts/sale-site/navbar";
