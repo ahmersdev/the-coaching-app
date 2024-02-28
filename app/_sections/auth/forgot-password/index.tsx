@@ -47,7 +47,7 @@ const ForgotPassword = () => {
       <ShortLogoIcon />
       <Box display={"flex"} flexDirection={"column"} textAlign={"center"}>
         <Typography variant={"h1"} fontWeight={800}>
-          Forget Password!?
+          Forgot Password!?
         </Typography>
         <Box display={"flex"} justifyContent={{ xs: "center", md: "end" }}>
           <LineIcon />

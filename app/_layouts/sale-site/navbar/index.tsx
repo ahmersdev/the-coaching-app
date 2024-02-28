@@ -72,7 +72,7 @@ export default function Navbar() {
             Sign In
           </Button>
         </Link>
-        <Link href={AUTH?.SIGN_IN}>
+        <Link href={AUTH?.SIGN_UP}>
           <Button
             variant={"contained"}
             sx={{
