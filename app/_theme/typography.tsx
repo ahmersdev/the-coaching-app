@@ -1,9 +1,7 @@
 import { pxToRem, responsiveFontSizes } from "../_utils/getFontValue";
 
-const FONT_FAMILY = "__Mulish_2f1d39";
-
 const typography = {
-  fontFamily: FONT_FAMILY,
+  fontFamily: "inherit",
   fontWeightRegular: 400,
   fontWeightMedium: 600,
   fontWeightBold: 700,
