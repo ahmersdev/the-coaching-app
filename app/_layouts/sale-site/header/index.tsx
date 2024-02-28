@@ -1,5 +1,3 @@
-"use client";
-
 import { Box, Typography } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { usePathname } from "next/navigation";
