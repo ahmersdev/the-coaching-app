@@ -16,6 +16,7 @@ const Otp = () => {
 
   const searchParams = useSearchParams();
   const email = searchParams?.get("email");
+  const register = searchParams?.get("register");
   const router: any = useRouter();
 
   const theme: any = useTheme();
@@ -49,12 +50,17 @@ const Otp = () => {
 
       <Grid container maxWidth={500} mx={"auto"} width={"100%"}>
         <Grid item xs={12}>
-          <Typography variant={"body1"} textAlign={"center"} mt={2}>
+          {register && (
+            <Typography variant={"h3"} textAlign={"center"} mt={2}>
+              Verify Email
+            </Typography>
+          )}
+          <Typography variant={"body1"} textAlign={"center"} my={2}>
             Please enter the 4 digit code that we send to you at
             {email}
           </Typography>
         </Grid>
-        <Grid item xs={12} mt={2}>
+        <Grid item xs={12}>
           <OTPInput
             value={otp}
             onChange={(otp: any) => {
@@ -71,15 +77,14 @@ const Otp = () => {
               outline: "none",
               color: theme?.palette?.grey?.[100],
             }}
-            containerStyle={{ justifyContent: "space-evenly" }}
+            containerStyle={{ justifyContent: "center", gap: pxToRem(20) }}
             renderInput={(props) => <input {...props} />}
           />
         </Grid>
 
-        <Grid item xs={12}>
+        <Grid item xs={12} textAlign={"center"}>
           <LoadingButton
             variant={"contained"}
-            fullWidth
             sx={{
               color: "grey.100",
               borderRadius: 25,
@@ -87,6 +92,7 @@ const Otp = () => {
               borderColor: "primary.main",
               mt: 3,
               mb: 2,
+              width: { xs: "100%", md: "70%" },
             }}
             disableElevation
             type={"submit"}

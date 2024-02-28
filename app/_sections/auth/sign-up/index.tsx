@@ -47,7 +47,7 @@ const SignUp = () => {
       variant: "success",
     });
     reset(signUpFormDefaultValues);
-    router?.push(`${AUTH?.OTP}?email=${data?.email}`);
+    router?.push(`${AUTH?.OTP}?email=${data?.email}&register=true`);
   };
 
   return (

@@ -15,12 +15,16 @@ import {
 import { LineIcon, ShortLogoIcon } from "@/app/_assets/icons";
 import Link from "next/link";
 import { AUTH } from "@/app/_constants/routes";
+import { useSearchParams } from "next/navigation";
 
 const CreatePassword = () => {
   const [passwordVisibility, setPasswordVisibility] = useState({
     newPassword: false,
     confirmPassword: false,
   });
+
+  const searchParams = useSearchParams();
+  const email = searchParams?.get("email");
 
   const methods: any = useForm({
     resolver: yupResolver(createPasswordFormValidationSchema),
@@ -70,9 +74,16 @@ const CreatePassword = () => {
       <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
         <Grid container maxWidth={500} mx={"auto"} width={"100%"}>
           <Grid item xs={12}>
-            <Typography variant={"body1"} textAlign={"center"} mt={2}>
-              Your new password must be different from previously used password.
-            </Typography>
+            {email ? (
+              <Typography variant={"h3"} textAlign={"center"} mt={2}>
+                Set Password!
+              </Typography>
+            ) : (
+              <Typography variant={"body1"} textAlign={"center"} mt={2}>
+                Your new password must be different from previously used
+                password.
+              </Typography>
+            )}
           </Grid>
           {createPasswordDataArray?.map((item: any) => (
             <Grid item xs={12} key={item?.id} mt={2}>
