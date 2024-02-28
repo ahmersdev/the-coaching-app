@@ -28,7 +28,6 @@ export default function HeroBanner() {
   return (
     <Grid
       container
-      spacing={2}
       px={{ xs: 2, md: 12 }}
       pb={6}
       sx={{
@@ -178,7 +177,7 @@ export default function HeroBanner() {
                         border: "1px solid",
                         borderColor: "primary.main",
                         height: 44,
-                        width: 300,
+                        width: { xs: "70%", md: 300 },
                         fontSize: pxToRem(16),
                         fontWeight: "normal",
                       }}
