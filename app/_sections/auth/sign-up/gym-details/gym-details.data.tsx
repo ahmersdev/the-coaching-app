@@ -99,7 +99,7 @@ export const gymDetailsDataArray = [
 
 export const introDataArray = [
   {
-    id: 1,
+    id: 8,
     componentProps: {
       name: "bio",
       placeholder: "Short Bio",
@@ -108,7 +108,7 @@ export const introDataArray = [
     component: RHFTextField,
   },
   {
-    id: 2,
+    id: 9,
     componentProps: {
       name: "media",
       label: "Short Video",
