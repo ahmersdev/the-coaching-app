@@ -1,53 +1,48 @@
 "use client";
 
 import { LineIcon, ShortLogoIcon } from "@/app/_assets/icons";
-import { Box, Button, Grid, Typography } from "@mui/material";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { FormProvider, RHFTextField } from "@/app/_components/react-hook-form";
-import { LoadingButton } from "@mui/lab";
-import Link from "next/link";
 import { AUTH } from "@/app/_constants/routes";
-import { enqueueSnackbar } from "notistack";
-import { useRouter } from "next/navigation";
-import {
-  signUpDataArray,
-  signUpFormDefaultValues,
-  signUpFormValidationSchema,
-} from "./sign-up.data";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Box, Button, Grid, Typography } from "@mui/material";
+import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
-import { ForgotPasswordIcon } from "@/app/_assets/icons";
-import { InputAdornment } from "@mui/material";
+import { useForm } from "react-hook-form";
+import {
+  gymDetailsDataArray,
+  gymDetailsFormDefaultValues,
+  gymDetailsFormValidationSchema,
+  introDataArray,
+} from "./gym-details.data";
+import { FormProvider } from "@/app/_components/react-hook-form";
+import { enqueueSnackbar } from "notistack";
+import { LoadingButton } from "@mui/lab";
 
-const SignUp = () => {
+export default function GymDetails() {
   const [stepState, setStepState] = useState(false);
-  const [error, setError] = useState<any>(false);
 
   const router: any = useRouter();
+  const searchParams = useSearchParams();
+  const email = searchParams?.get("email");
 
   const methods: any = useForm({
-    resolver: yupResolver(signUpFormValidationSchema),
-    defaultValues: signUpFormDefaultValues,
+    resolver: yupResolver(gymDetailsFormValidationSchema),
+    defaultValues: gymDetailsFormDefaultValues,
   });
 
-  const { handleSubmit, reset, getValues } = methods;
+  const { handleSubmit, reset } = methods;
 
   const onNext = () => {
-    const { username } = getValues();
-    if (username?.trim() === "") {
-      setError("User name already taken, please try another");
-      return;
-    }
     setStepState(true);
   };
 
   const onSubmit = async (data: any) => {
     console.log(data);
-    enqueueSnackbar("Check your email!", {
+    enqueueSnackbar("Sign Up Successful!", {
       variant: "success",
     });
-    reset(signUpFormDefaultValues);
-    router?.push(`${AUTH?.OTP}?email=${data?.email}&register=true`);
+    reset();
+    router?.push(`/`);
   };
 
   return (
@@ -70,39 +65,20 @@ const SignUp = () => {
       </Box>
 
       <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-        <Grid container maxWidth={500} mx={"auto"} width={"100%"}>
+        <Grid container spacing={2} maxWidth={500} mx={"auto"} width={"100%"}>
           {!stepState ? (
             <>
               <Grid item xs={12}>
                 <Typography variant={"h3"} textAlign={"center"} mt={2}>
-                  Claim your User Name!
+                  Gym Details
                 </Typography>
               </Grid>
 
-              <Grid item xs={12} mt={2}>
-                <RHFTextField
-                  name={"username"}
-                  placeholder={"Enter User Name"}
-                  borderRadius={25}
-                  size={"small"}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <ForgotPasswordIcon />
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-                {error && (
-                  <Typography
-                    variant={"body2"}
-                    textAlign={"center"}
-                    color={"error.700"}
-                  >
-                    {error}
-                  </Typography>
-                )}
-              </Grid>
+              {gymDetailsDataArray?.map((item: any) => (
+                <Grid item xs={12} md={item?.md} key={item?.id}>
+                  <item.component {...item?.componentProps} size={"small"} />
+                </Grid>
+              ))}
 
               <Grid item xs={12}>
                 <Button
@@ -113,8 +89,6 @@ const SignUp = () => {
                     borderRadius: 25,
                     border: "1px solid",
                     borderColor: "primary.main",
-                    mt: 3,
-                    mb: 2,
                   }}
                   disableElevation
                   type={"button"}
@@ -126,8 +100,14 @@ const SignUp = () => {
             </>
           ) : (
             <>
-              {signUpDataArray?.map((item: any) => (
-                <Grid item xs={12} key={item?.id} mt={2}>
+              <Grid item xs={12}>
+                <Typography variant={"h3"} textAlign={"center"} mt={2}>
+                  Short Intro
+                </Typography>
+              </Grid>
+
+              {introDataArray?.map((item: any) => (
+                <Grid item xs={12} key={item?.id}>
                   <item.component {...item?.componentProps} size={"small"} />
                 </Grid>
               ))}
@@ -140,12 +120,11 @@ const SignUp = () => {
                     borderRadius: 25,
                     border: "1px solid",
                     borderColor: "primary.main",
-                    mt: 3,
                   }}
                   disableElevation
                   type={"submit"}
                 >
-                  Next
+                  Submit
                 </LoadingButton>
               </Grid>
             </>
@@ -153,20 +132,17 @@ const SignUp = () => {
         </Grid>
       </FormProvider>
 
-      <Typography variant={"body2"} my={2}>
-        Already have an account?{" "}
-        <Link href={AUTH?.SIGN_IN}>
-          <Typography
-            variant={"body1"}
-            component={"span"}
-            color={"primary.600"}
-            fontWeight={700}
-          >
-            Sign In
-          </Typography>
-        </Link>
-      </Typography>
-      <Typography variant={"body2"} fontWeight={700} textAlign={"center"}>
+      <Link href={AUTH?.SIGN_IN}>
+        <Typography variant={"h6"} color={"primary.600"} mt={2}>
+          Back to SignIn
+        </Typography>
+      </Link>
+      <Typography
+        variant={"body2"}
+        fontWeight={700}
+        textAlign={"center"}
+        mt={3}
+      >
         By continuing, you agree to our{" "}
         <Typography
           variant={"body2"}
@@ -188,6 +164,4 @@ const SignUp = () => {
       </Typography>
     </Box>
   );
-};
-
-export default SignUp;
+}

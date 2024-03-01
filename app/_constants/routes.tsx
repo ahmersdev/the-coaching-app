@@ -15,6 +15,7 @@ export const AUTH = {
   FORGOT_PASSWORD: `/forgot-password`,
   OTP: `/otp`,
   CREATE_PASSWORD: `/create-password`,
+  GYM_DETAILS: `/sign-up/gym-details`,
 };
 
 export const SALE_SITE = {

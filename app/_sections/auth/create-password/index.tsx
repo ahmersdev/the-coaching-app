@@ -15,7 +15,7 @@ import {
 import { LineIcon, ShortLogoIcon } from "@/app/_assets/icons";
 import Link from "next/link";
 import { AUTH } from "@/app/_constants/routes";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const CreatePassword = () => {
   const [passwordVisibility, setPasswordVisibility] = useState({
@@ -25,6 +25,9 @@ const CreatePassword = () => {
 
   const searchParams = useSearchParams();
   const email = searchParams?.get("email");
+  const register = searchParams?.get("register");
+
+  const router: any = useRouter();
 
   const methods: any = useForm({
     resolver: yupResolver(createPasswordFormValidationSchema),
@@ -50,7 +53,10 @@ const CreatePassword = () => {
     enqueueSnackbar("Password Created Successfully!", {
       variant: "success",
     });
-    reset(createPasswordFormDefaultValues);
+    reset();
+    !!register
+      ? router?.push(`${AUTH?.GYM_DETAILS}?email=${email}`)
+      : router?.push(`/`);
   };
   return (
     <Box
@@ -64,7 +70,7 @@ const CreatePassword = () => {
       <ShortLogoIcon />
       <Box display={"flex"} flexDirection={"column"} textAlign={"center"}>
         <Typography variant={"h1"} fontWeight={800}>
-          Sign Up to Supr.Club
+          {!!register ? `Sign Up to Supr.Club` : `Forgot Password!?`}
         </Typography>
         <Box display={"flex"} justifyContent={{ xs: "center", md: "end" }}>
           <LineIcon />

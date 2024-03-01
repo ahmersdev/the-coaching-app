@@ -26,7 +26,10 @@ const Otp = () => {
     enqueueSnackbar("Create Password!", {
       variant: "success",
     });
-    router?.push(`${AUTH?.CREATE_PASSWORD}?email=${email}`);
+
+    !!register
+      ? router?.push(`${AUTH?.CREATE_PASSWORD}?email=${email}&register=true`)
+      : router?.push(`${AUTH?.CREATE_PASSWORD}?email=${email}`);
   };
 
   return (
