@@ -6,17 +6,15 @@ import {
 } from "./sign-in.data";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { COACH_SITE, SYSTEM_ADMIN } from "@/constants/routes";
 import { useState } from "react";
 import { usePostSignInMutation } from "@/services/auth";
 import { errorSnackbar, successSnackbar } from "@/utils/api";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
-import CryptoJS from "crypto-js";
-import { ENCRYPTION_KEY } from "@/config";
 import { useAppDispatch } from "@/store/store";
-import { setDetails, setToken } from "@/store/auth";
+import { logIn } from "@/store/auth";
 import { USER_ROLES } from "@/constants/strings";
+import { COACH_SITE, SYSTEM_ADMIN } from "@/constants/routes";
 
 export default function useSignIn() {
   const theme: any = useTheme();
@@ -61,23 +59,9 @@ export default function useSignIn() {
     try {
       const res: any = await postSignInTrigger(updatedData).unwrap();
       if (res) {
-        const encryptedToken = CryptoJS.AES.encrypt(
-          res.session.authentication_token,
-          ENCRYPTION_KEY
-        ).toString();
+        const encryptedToken = res.session.authentication_token;
         Cookies.set("authentication_token", encryptedToken);
-
-        const userIdsDetails = {
-          user_role: res.coach.user_role,
-          coach_id: res.coach.coach_id,
-          gym_id: res.gym.gym_id,
-          gym_address: res.gym_address.address_id,
-        };
-
-        Cookies.set("authentication_details", JSON.stringify(userIdsDetails));
-        dispatch(setToken(encryptedToken));
-        dispatch(setDetails(userIdsDetails));
-
+        dispatch(logIn(encryptedToken));
         successSnackbar("Sign In Successful!");
 
         if (res.session.user_type === USER_ROLES.COACH) {

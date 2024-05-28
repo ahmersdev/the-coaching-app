@@ -12,7 +12,7 @@ import { USER_ROLES } from "@/constants/strings";
 import useNavbar from "./use-navbar";
 
 export default function Navbar() {
-  const { theme, pathName, details } = useNavbar();
+  const { theme, pathName, decryptedValues } = useNavbar();
 
   return (
     <Box
@@ -41,11 +41,11 @@ export default function Navbar() {
           ))}
         </List>
 
-        {details.user_role === USER_ROLES.COACH ||
-        details.user_role === USER_ROLES.ADMIN ? (
+        {decryptedValues.user_role === USER_ROLES.COACH ||
+        decryptedValues.user_role === USER_ROLES.ADMIN ? (
           <Link
             href={
-              details.user_role === USER_ROLES.COACH
+              decryptedValues.user_role === USER_ROLES.COACH
                 ? COACH_SITE.DASHBOARD
                 : SYSTEM_ADMIN.DASHBOARD
             }

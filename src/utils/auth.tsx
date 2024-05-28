@@ -1,19 +1,38 @@
 import Cookies from "js-cookie";
-import CryptoJS from "crypto-js";
+import { DecryptedValues } from "./utils.types";
 import { ENCRYPTION_KEY } from "@/config";
+import { decryptToken, validateBase64 } from "./crypto";
+import { errorSnackbar } from "./api";
 
 export const getTokenFromCookies = () => {
   const encryptedToken: any = Cookies.get("authentication_token");
   if (encryptedToken) {
-    const decryptedBytes = CryptoJS.AES.decrypt(encryptedToken, ENCRYPTION_KEY);
-    const decryptedToken = decryptedBytes.toString(CryptoJS.enc.Utf8);
-    return decryptedToken;
+    return encryptedToken;
   }
 };
 
-export const getDetailsFromCookies = () => {
-  const details: any = Cookies.get("authentication_details");
-  if (details) {
-    return details;
+export const decryptValuesFromToken = async (
+  encryptedToken: string
+): Promise<DecryptedValues | null> => {
+  let base64Key = ENCRYPTION_KEY;
+
+  if (base64Key.startsWith("base64:")) {
+    base64Key = base64Key.substring(7);
+  }
+
+  if (!validateBase64(encryptedToken) || !validateBase64(base64Key)) {
+    errorSnackbar("Invalid Base64 string");
+    return null;
+  }
+
+  try {
+    const decrypted = await decryptToken(encryptedToken, base64Key);
+    const [coach_id, gym_id, address_id, user_role] = decrypted.split("-");
+
+    return { coach_id, gym_id, address_id, user_role };
+  } catch (error: any) {
+    console.error(error.message);
+    errorSnackbar("Failed to decrypt token");
+    return null;
   }
 };
