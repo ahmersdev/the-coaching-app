@@ -31,7 +31,6 @@ export const decryptValuesFromToken = async (
 
     return { coach_id, gym_id, address_id, user_role };
   } catch (error: any) {
-    console.error(error.message);
     errorSnackbar("Failed to decrypt token");
     return null;
   }
