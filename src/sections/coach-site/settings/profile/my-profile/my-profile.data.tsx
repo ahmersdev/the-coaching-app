@@ -10,11 +10,11 @@ export const myProfileFormValidationSchema = Yup?.object()?.shape({
     ?.email("Enter Valid Email, this email doesn’t exist"),
 });
 
-export const myProfileFormDefaultValues = {
-  name: "",
-  username: "",
-  email: "",
-};
+export const myProfileFormDefaultValues = ({ initialValues }: any) => ({
+  name: initialValues?.coach?.full_name ?? "",
+  username: initialValues?.coach?.username ?? "",
+  email: initialValues?.coach?.email ?? "",
+});
 
 export const myProfileDataArray = [
   {

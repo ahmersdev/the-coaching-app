@@ -10,18 +10,31 @@ import {
 } from "./my-profile.data";
 import { MyProfileIcon } from "@/assets/icons";
 import { successSnackbar } from "@/utils/api";
+import { useEffect } from "react";
+import { SkeletonForm } from "@/components/skeletons";
 
-const MyProfile = () => {
+const MyProfile = ({
+  initialValues,
+  isLoading,
+  isFetching,
+  initialLoading,
+}: any) => {
+  const defaultValues = myProfileFormDefaultValues({ initialValues });
+
   const methods: any = useForm({
     resolver: yupResolver(myProfileFormValidationSchema),
-    defaultValues: myProfileFormDefaultValues,
+    defaultValues,
   });
 
   const { handleSubmit, reset } = methods;
 
+  useEffect(() => {
+    reset(defaultValues);
+  }, [reset, initialValues]);
+
   const onSubmit = async (data: any) => {
     successSnackbar("Profile Updated Successfully!");
-    reset(myProfileFormDefaultValues);
+    reset(defaultValues);
   };
 
   return (
@@ -35,31 +48,35 @@ const MyProfile = () => {
 
       <Divider sx={{ my: 2 }} />
 
-      <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-        <Grid container spacing={2}>
-          {myProfileDataArray?.map((item: any) => (
-            <Grid item xs={12} md={item?.md} key={item?.id}>
-              <item.component {...item?.componentProps} size={"small"} />
+      {isLoading || isFetching || initialLoading ? (
+        <SkeletonForm />
+      ) : (
+        <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
+          <Grid container spacing={2}>
+            {myProfileDataArray?.map((item: any) => (
+              <Grid item xs={12} md={item?.md} key={item?.id}>
+                <item.component {...item?.componentProps} size={"small"} />
+              </Grid>
+            ))}
+            <Grid item xs={12}>
+              <LoadingButton
+                variant={"contained"}
+                sx={{
+                  color: "grey.100",
+                  width: 132,
+                  borderRadius: 25,
+                  border: "1px solid",
+                  borderColor: "primary.main",
+                }}
+                disableElevation
+                type={"submit"}
+              >
+                Update
+              </LoadingButton>
             </Grid>
-          ))}
-          <Grid item xs={12}>
-            <LoadingButton
-              variant={"contained"}
-              sx={{
-                color: "grey.100",
-                width: 132,
-                borderRadius: 25,
-                border: "1px solid",
-                borderColor: "primary.main",
-              }}
-              disableElevation
-              type={"submit"}
-            >
-              Update
-            </LoadingButton>
           </Grid>
-        </Grid>
-      </FormProvider>
+        </FormProvider>
+      )}
     </Box>
   );
 };
