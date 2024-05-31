@@ -3,6 +3,7 @@ import { Mulish } from "next/font/google";
 import "./globals.css";
 import ThemeProvider from "@/theme";
 import Loader from "@/components/loader";
+import SnackbarProviderGlobal from "@/providers/snackbar";
 
 const mulish = Mulish({ subsets: ["latin"] });
 
@@ -23,8 +24,10 @@ export default function RootLayout({
         style={{ background: "#0B0B12", color: "#f9fafb" }}
       >
         <ThemeProvider>
-          <Loader />
-          {children}
+          <SnackbarProviderGlobal>
+            <Loader />
+            {children}
+          </SnackbarProviderGlobal>
         </ThemeProvider>
       </body>
     </html>
