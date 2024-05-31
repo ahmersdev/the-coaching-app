@@ -1,43 +1,17 @@
 "use client";
 
-import { useState } from "react";
 import OTPInput from "react-otp-input";
 import { LineIcon, ShortLogoIcon } from "@/assets/icons";
-import { Box, Grid, Typography, useTheme } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import Link from "next/link";
 import { AUTH } from "@/constants/routes";
-import { useRouter, useSearchParams } from "next/navigation";
 import { pxToRem } from "@/utils/get-font-value";
-import { errorSnackbar, successSnackbar } from "@/utils/api";
-import { usePostOtpVerificationMutation } from "@/services/auth";
+import useOtp from "./use-otp";
 
 const Otp = () => {
-  const [otp, setOtp] = useState<any>();
-
-  const searchParams = useSearchParams();
-  const email = searchParams.get("email");
-  const router: any = useRouter();
-
-  const theme: any = useTheme();
-
-  const [postOtpVerificationTrigger, postOtpVerificationStatus] =
-    usePostOtpVerificationMutation();
-
-  const onSubmit = async (data: any) => {
-    const updatedData = {
-      code: data,
-      email,
-    };
-
-    try {
-      await postOtpVerificationTrigger(updatedData).unwrap();
-      successSnackbar("Please, Enter Gym Address!");
-      router.push(`${AUTH.GYM_ADDRESS}?email=${email}`);
-    } catch (error: any) {
-      errorSnackbar(error?.data?.message);
-    }
-  };
+  const { email, otp, setOtp, theme, onSubmit, postOtpVerificationStatus } =
+    useOtp();
 
   return (
     <Box

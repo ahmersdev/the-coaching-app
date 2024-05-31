@@ -1,13 +1,12 @@
-import { useState } from "react";
-import { useFormContext, Controller } from "react-hook-form";
+import { Controller } from "react-hook-form";
 import {
   TextField,
   Autocomplete,
   Typography,
   Paper,
-  useTheme,
   FormLabel,
 } from "@mui/material";
+import useRhfAutocomplete from "./use-rhf-autocomplete";
 
 export default function RHFAutocomplete({
   name,
@@ -21,18 +20,9 @@ export default function RHFAutocomplete({
   bgcolor = "secondary.900",
   ...other
 }: any) {
-  const { control } = useFormContext();
-  const [open, setOpen] = useState(false);
-
-  const theme: any = useTheme();
-
-  const onChanged = (e: any, newValue: any, onChange: any) => {
-    if (multiple) {
-      onChange(newValue?.map((item: any) => item));
-    } else {
-      onChange(newValue);
-    }
-  };
+  const { control, setOpen, open, theme, onChanged } = useRhfAutocomplete({
+    multiple,
+  });
 
   return (
     <Controller

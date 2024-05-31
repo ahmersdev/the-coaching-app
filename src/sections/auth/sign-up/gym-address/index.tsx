@@ -3,47 +3,15 @@
 import { LineIcon, ShortLogoIcon } from "@/assets/icons";
 import { Box, Grid, Typography } from "@mui/material";
 import { FormProvider } from "@/components/react-hook-form";
-import { useForm } from "react-hook-form";
-import {
-  gymAddressDataArray,
-  gymAddressFormDefaultValues,
-  gymAddressFormValidationSchema,
-} from "./gym-address.data";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { errorSnackbar, successSnackbar } from "@/utils/api";
+import { gymAddressDataArray } from "./gym-address.data";
 import Link from "next/link";
 import { AUTH } from "@/constants/routes";
 import { LoadingButton } from "@mui/lab";
-import { usePostGymAddressMutation } from "@/services/auth";
-import { useRouter, useSearchParams } from "next/navigation";
+import useGymAddress from "./use-gym-address";
 
 export default function GymAddress() {
-  const methods: any = useForm({
-    resolver: yupResolver(gymAddressFormValidationSchema),
-    defaultValues: gymAddressFormDefaultValues,
-  });
-
-  const { handleSubmit } = methods;
-
-  const router: any = useRouter();
-
-  const searchParams = useSearchParams();
-  const email = searchParams.get("email");
-
-  const [postGymAddressTrigger, postGymAddressStatus] =
-    usePostGymAddressMutation();
-
-  const onSubmit = async (data: any) => {
-    try {
-      const res: any = await postGymAddressTrigger(data).unwrap();
-      successSnackbar("Please, Enter Gym Bio!");
-      router.push(
-        `${AUTH.GYM_DETAILS}?email=${email}&addressId=${res?.address_id}`
-      );
-    } catch (error: any) {
-      errorSnackbar(error?.data?.message);
-    }
-  };
+  const { methods, handleSubmit, onSubmit, postGymAddressStatus } =
+    useGymAddress();
 
   return (
     <Box
