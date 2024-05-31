@@ -41,8 +41,8 @@ export default function Navbar() {
           ))}
         </List>
 
-        {decryptedValues.user_role === USER_ROLES.COACH ||
-        decryptedValues.user_role === USER_ROLES.ADMIN ? (
+        {decryptedValues?.user_role === USER_ROLES.COACH ||
+        decryptedValues?.user_role === USER_ROLES.ADMIN ? (
           <Link
             href={
               decryptedValues.user_role === USER_ROLES.COACH
