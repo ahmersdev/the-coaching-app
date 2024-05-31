@@ -42,7 +42,7 @@ export default function Profile() {
       ) : (
         <>
           <MyProfile
-            initialValues={data}
+            initialValues={data?.coach}
             isLoading={isLoading}
             isFetching={isFetching}
             initialLoading={initialLoading}
@@ -52,9 +52,19 @@ export default function Profile() {
 
           <Password />
 
-          <GymDetails />
+          <GymDetails
+            initialValues={data?.gym}
+            isLoading={isLoading}
+            isFetching={isFetching}
+            initialLoading={initialLoading}
+          />
 
-          <GymAddress />
+          <GymAddress
+            initialValues={data?.gym_address}
+            isLoading={isLoading}
+            isFetching={isFetching}
+            initialLoading={initialLoading}
+          />
         </>
       )}
     </Stack>

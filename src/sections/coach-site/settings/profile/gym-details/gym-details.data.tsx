@@ -11,12 +11,12 @@ export const gymDetailsFormValidationSchema = Yup?.object()?.shape({
   phone: Yup?.string()?.trim()?.required("Required"),
 });
 
-export const gymDetailsFormDefaultValues = {
-  name: "",
-  slang: "",
-  email: "",
-  phone: "",
-};
+export const gymDetailsFormDefaultValues = ({ initialValues }: any) => ({
+  name: initialValues?.name ?? "",
+  slang: initialValues?.slang ?? "",
+  email: initialValues?.email ?? "",
+  phone: initialValues?.phone ?? "",
+});
 
 export const gymDetailsDataArray = [
   {

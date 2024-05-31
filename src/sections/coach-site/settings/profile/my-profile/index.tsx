@@ -10,7 +10,7 @@ import {
 } from "./my-profile.data";
 import { MyProfileIcon } from "@/assets/icons";
 import { successSnackbar } from "@/utils/api";
-import { useEffect } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { SkeletonForm } from "@/components/skeletons";
 
 const MyProfile = ({
@@ -19,7 +19,10 @@ const MyProfile = ({
   isFetching,
   initialLoading,
 }: any) => {
-  const defaultValues = myProfileFormDefaultValues({ initialValues });
+  const defaultValues = useMemo(
+    () => myProfileFormDefaultValues({ initialValues }),
+    [initialValues]
+  );
 
   const methods: any = useForm({
     resolver: yupResolver(myProfileFormValidationSchema),
@@ -28,9 +31,13 @@ const MyProfile = ({
 
   const { handleSubmit, reset } = methods;
 
-  useEffect(() => {
+  const resetForm = useCallback(() => {
     reset(defaultValues);
-  }, [reset, initialValues]);
+  }, [reset, defaultValues]);
+
+  useEffect(() => {
+    resetForm();
+  }, [resetForm]);
 
   const onSubmit = async (data: any) => {
     successSnackbar("Profile Updated Successfully!");

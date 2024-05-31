@@ -10,14 +10,14 @@ export const gymAddressFormValidationSchema = Yup?.object()?.shape({
   country: Yup?.string()?.trim()?.required("Required"),
 });
 
-export const gymAddressFormDefaultValues = {
-  street: "",
-  apartment: "",
-  city: "",
-  state: "",
-  postalCode: "",
-  country: "",
-};
+export const gymAddressFormDefaultValues = ({ initialValues }: any) => ({
+  street: initialValues?.address_line_1 ?? "",
+  apartment: initialValues?.address_line_2 ?? "",
+  city: initialValues?.city ?? "",
+  state: initialValues?.state ?? "",
+  postalCode: initialValues?.zip ?? "",
+  country: initialValues?.country ?? "",
+});
 
 export const gymAddressDataArray = [
   {

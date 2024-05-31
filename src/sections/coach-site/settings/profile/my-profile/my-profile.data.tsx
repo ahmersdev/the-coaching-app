@@ -11,9 +11,9 @@ export const myProfileFormValidationSchema = Yup?.object()?.shape({
 });
 
 export const myProfileFormDefaultValues = ({ initialValues }: any) => ({
-  name: initialValues?.coach?.full_name ?? "",
-  username: initialValues?.coach?.username ?? "",
-  email: initialValues?.coach?.email ?? "",
+  name: initialValues?.full_name ?? "",
+  username: initialValues?.username ?? "",
+  email: initialValues?.email ?? "",
 });
 
 export const myProfileDataArray = [
