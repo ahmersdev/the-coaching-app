@@ -65,7 +65,12 @@ export default function useSignIn() {
         successSnackbar("Sign In Successful!");
 
         if (res.session.user_type === USER_ROLES.COACH) {
-          router.push(COACH_SITE.DASHBOARD);
+          if (!res.coach.bio) {
+            successSnackbar("Please Enter Details!");
+            router.push(COACH_SITE.SETTINGS);
+          } else {
+            router.push(COACH_SITE.DASHBOARD);
+          }
         }
         if (res.session.user_type === USER_ROLES.ADMIN) {
           router.push(SYSTEM_ADMIN.DASHBOARD);

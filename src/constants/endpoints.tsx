@@ -6,3 +6,7 @@ export const AUTH = {
   GYM_INTRO: `addGym`,
   SIGN_IN: `coachSignIn`,
 };
+
+export const COACH_SITE = {
+  PROFILE: `fetchCoachDetails`,
+};
