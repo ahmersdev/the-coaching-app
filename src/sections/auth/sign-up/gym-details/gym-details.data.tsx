@@ -1,8 +1,9 @@
 import { RHFTextField } from "@/components/react-hook-form";
+import { PHONE_REGEX } from "@/constants";
 import * as Yup from "yup";
 
 export const gymDetailsFormValidationSchema: any = Yup.object().shape({
-  name: Yup.string().trim().required("Enter Gym Name"),
+  name: Yup.string().trim().required("Gym Name is Required"),
   slang: Yup.string().trim(),
   email: Yup.string()
     .trim()
@@ -11,7 +12,7 @@ export const gymDetailsFormValidationSchema: any = Yup.object().shape({
   phone: Yup.string()
     .trim()
     .required("Gym Phone is Required")
-    .matches(/^\+(?:[0-9]\s?){6,14}[0-9]$/, "Enter a Valid Phone"),
+    .matches(PHONE_REGEX, "Enter a Valid Phone"),
 });
 
 export const gymDetailsFormDefaultValues: any = {

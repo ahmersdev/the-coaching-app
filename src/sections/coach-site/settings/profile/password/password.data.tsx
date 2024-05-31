@@ -2,18 +2,18 @@ import { RHFTextField } from "@/components/react-hook-form";
 import * as Yup from "yup";
 import { IconButton, InputAdornment } from "@mui/material";
 import { EyeWithoutBgIcon, EyeSlashIcon } from "@/assets/icons";
+import { PASSWORD_MESSAGE, PASSWORD_REGEX } from "@/constants";
 
 export const passwordFormValidationSchema = Yup?.object()?.shape({
-  currentPassword: Yup?.string()?.trim()?.required("Required"),
-  newPassword: Yup?.string()
+  currentPassword: Yup?.string()
     ?.trim()
-    ?.required("Required")
-    ?.matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/,
-      "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character"
-    ),
+    ?.required("Current Password is Required"),
+  newPassword: Yup.string()
+    .trim()
+    .required("New Password is Required")
+    .matches(PASSWORD_REGEX, PASSWORD_MESSAGE),
   confirmPassword: Yup?.string()
-    ?.required("Required")
+    ?.required("Confirm Password is Required")
     ?.oneOf([Yup.ref("newPassword")], "Password must match"),
 });
 

@@ -48,7 +48,12 @@ export default function Profile() {
             initialLoading={initialLoading}
           />
 
-          <About />
+          <About
+            initialValues={data?.coach}
+            isLoading={isLoading}
+            isFetching={isFetching}
+            initialLoading={initialLoading}
+          />
 
           <Password />
 

@@ -4,6 +4,7 @@ import { Phone } from "@mui/icons-material";
 import * as Yup from "yup";
 import { IconButton, InputAdornment } from "@mui/material";
 import { EyeWithoutBgIcon, EyeSlashIcon } from "@/assets/icons";
+import { PASSWORD_MESSAGE, PASSWORD_REGEX, PHONE_REGEX } from "@/constants";
 
 export const signUpFormValidationSchema = Yup.object().shape({
   username: Yup.string().trim().required("Username is Required"),
@@ -15,14 +16,11 @@ export const signUpFormValidationSchema = Yup.object().shape({
   phone: Yup.string()
     .trim()
     .required("Phone is Required")
-    .matches(/^\+(?:[0-9]\s?){6,14}[0-9]$/, "Enter a Valid Phone"),
+    .matches(PHONE_REGEX, "Enter a Valid Phone"),
   password: Yup.string()
     .trim()
     .required("Password is Required")
-    .matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/,
-      "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character"
-    ),
+    .matches(PASSWORD_REGEX, PASSWORD_MESSAGE),
   confirmPassword: Yup.string()
     .required("Confirm Password is Required")
     .oneOf([Yup.ref("password")], "Password must match"),

@@ -1,13 +1,13 @@
 import { RHFTextField } from "@/components/react-hook-form";
 import * as Yup from "yup";
 
-export const gymAddressFormValidationSchema = Yup?.object()?.shape({
-  street: Yup?.string()?.trim()?.required("Required"),
-  apartment: Yup?.string()?.trim()?.required("Required"),
-  city: Yup?.string()?.trim()?.required("Required"),
-  state: Yup?.string()?.trim()?.required("Required"),
-  postalCode: Yup?.string()?.trim()?.required("Required"),
-  country: Yup?.string()?.trim()?.required("Required"),
+export const gymAddressFormValidationSchema: any = Yup?.object()?.shape({
+  street: Yup?.string()?.trim()?.required("Street Number & Name is Required"),
+  apartment: Yup?.string()?.trim(),
+  city: Yup?.string()?.trim()?.required("City is Required"),
+  state: Yup?.string()?.trim()?.required("State is Required"),
+  postalCode: Yup?.string()?.trim()?.required("Postal Code is Required"),
+  country: Yup?.string()?.trim()?.required("Country is Required"),
 });
 
 export const gymAddressFormDefaultValues = ({ initialValues }: any) => ({

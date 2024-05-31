@@ -4,8 +4,8 @@ import { IconButton, InputAdornment } from "@mui/material";
 import * as Yup from "yup";
 
 export const signInFormValidationSchema = Yup?.object()?.shape({
-  email: Yup?.string()?.trim()?.required("Required"),
-  password: Yup?.string()?.trim()?.required("Required"),
+  email: Yup?.string()?.trim()?.required("Email/Username is Required"),
+  password: Yup?.string()?.trim()?.required("Password is Required"),
 });
 
 export const signInFormDefaultValues = {

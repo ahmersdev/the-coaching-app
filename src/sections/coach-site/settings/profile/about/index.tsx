@@ -10,18 +10,38 @@ import {
 } from "./about.data";
 import { LoadingButton } from "@mui/lab";
 import { successSnackbar } from "@/utils/api";
+import { SkeletonForm } from "@/components/skeletons";
+import { useCallback, useEffect, useMemo } from "react";
 
-export default function About() {
+export default function About({
+  initialValues,
+  isLoading,
+  isFetching,
+  initialLoading,
+}: any) {
+  const defaultValues = useMemo(
+    () => aboutFormDefaultValues({ initialValues }),
+    [initialValues]
+  );
+
   const methods: any = useForm({
     resolver: yupResolver(aboutFormValidationSchema),
-    defaultValues: aboutFormDefaultValues,
+    defaultValues,
   });
 
   const { handleSubmit, reset } = methods;
 
+  const resetForm = useCallback(() => {
+    reset(defaultValues);
+  }, [reset, defaultValues]);
+
+  useEffect(() => {
+    resetForm();
+  }, [resetForm]);
+
   const onSubmit = async (data: any) => {
     successSnackbar("About Updated Successfully!");
-    reset(aboutFormDefaultValues);
+    reset(defaultValues);
   };
 
   return (
@@ -35,31 +55,35 @@ export default function About() {
 
       <Divider sx={{ my: 2 }} />
 
-      <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-        <Grid container spacing={2}>
-          {aboutDataArray?.map((item: any) => (
-            <Grid item xs={12} md={item?.md} key={item?.id}>
-              <item.component {...item?.componentProps} size={"small"} />
+      {isLoading || isFetching || initialLoading ? (
+        <SkeletonForm />
+      ) : (
+        <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
+          <Grid container spacing={2}>
+            {aboutDataArray?.map((item: any) => (
+              <Grid item xs={12} md={item?.md} key={item?.id}>
+                <item.component {...item?.componentProps} size={"small"} />
+              </Grid>
+            ))}
+            <Grid item xs={12}>
+              <LoadingButton
+                variant={"contained"}
+                sx={{
+                  color: "grey.100",
+                  width: 132,
+                  borderRadius: 25,
+                  border: "1px solid",
+                  borderColor: "primary.main",
+                }}
+                disableElevation
+                type={"submit"}
+              >
+                Update
+              </LoadingButton>
             </Grid>
-          ))}
-          <Grid item xs={12}>
-            <LoadingButton
-              variant={"contained"}
-              sx={{
-                color: "grey.100",
-                width: 132,
-                borderRadius: 25,
-                border: "1px solid",
-                borderColor: "primary.main",
-              }}
-              disableElevation
-              type={"submit"}
-            >
-              Update
-            </LoadingButton>
           </Grid>
-        </Grid>
-      </FormProvider>
+        </FormProvider>
+      )}
     </Box>
   );
 }

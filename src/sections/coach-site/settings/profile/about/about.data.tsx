@@ -2,14 +2,14 @@ import { RHFTextField, RHFUploadFile } from "@/components/react-hook-form";
 import * as Yup from "yup";
 
 export const aboutFormValidationSchema: any = Yup?.object()?.shape({
-  bio: Yup?.string()?.trim()?.required("Required"),
-  media: Yup?.mixed()?.nullable()?.required("Required"),
+  bio: Yup?.string()?.trim()?.required("Bio is Required"),
+  media: Yup?.mixed()?.nullable()?.required("Video is Required"),
 });
 
-export const aboutFormDefaultValues: any = {
-  bio: "",
-  media: null,
-};
+export const aboutFormDefaultValues: any = ({ initialValues }: any) => ({
+  bio: initialValues?.bio ?? "",
+  media: initialValues?.intro ?? null,
+});
 
 export const aboutDataArray = [
   {

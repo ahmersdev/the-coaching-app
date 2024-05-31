@@ -2,11 +2,11 @@ import { RHFTextField } from "@/components/react-hook-form";
 import * as Yup from "yup";
 
 export const myProfileFormValidationSchema = Yup?.object()?.shape({
-  name: Yup?.string()?.trim()?.required("Required"),
-  username: Yup?.string()?.trim()?.required("Required"),
+  name: Yup?.string()?.trim()?.required("Name is Required"),
+  username: Yup?.string()?.trim()?.required("Username is Required"),
   email: Yup?.string()
     ?.trim()
-    ?.required("Required")
+    ?.required("Email is Required")
     ?.email("Enter Valid Email, this email doesn’t exist"),
 });
 
