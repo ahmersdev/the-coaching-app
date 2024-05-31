@@ -13,6 +13,7 @@ import ErrorScreen from "@/components/error-screen";
 export default function Profile() {
   const [decryptedValues, setDecryptedValues] = useState<any>({});
   const [initialLoading, setInitialLoading] = useState(true);
+  
 
   const tokenSelector = useAppSelector((state) => state.auth.token);
 
