@@ -65,8 +65,8 @@ export default function useSignIn() {
         successSnackbar("Sign In Successful!");
 
         if (res.session.user_type === USER_ROLES.COACH) {
-          if (!res.coach.bio) {
-            successSnackbar("Please Enter Details!");
+          if (!res.coach.intro) {
+            successSnackbar("Please Add Intro Video!");
             router.push(COACH_SITE.SETTINGS);
           } else {
             router.push(COACH_SITE.DASHBOARD);

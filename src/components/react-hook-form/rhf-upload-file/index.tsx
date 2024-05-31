@@ -13,6 +13,9 @@ export default function RHFUploadFile({
   const theme: any = useTheme();
   const { control } = useFormContext();
 
+  const isFileInstance = (value: any) => value instanceof File;
+  const isStringUrl = (value: any) => typeof value === "string";
+
   return (
     <Controller
       name={name}
@@ -41,9 +44,19 @@ export default function RHFUploadFile({
               }}
             >
               <Box display={"flex"} alignItems={"center"} gap={1}>
-                {field?.value ? (
+                {isFileInstance(field.value) ? (
                   <video
                     src={URL.createObjectURL(field.value)}
+                    width={52}
+                    height={52}
+                    autoPlay
+                    muted
+                    playsInline
+                    loop
+                  />
+                ) : isStringUrl(field.value) ? (
+                  <video
+                    src={field.value}
                     width={52}
                     height={52}
                     autoPlay

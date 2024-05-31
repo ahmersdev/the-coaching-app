@@ -13,7 +13,16 @@ export const coachProfile = baseAPI.injectEndpoints({
       }),
       providesTags: [TAG],
     }),
+    updateCoachProfileAbout: builder.mutation({
+      query: (body: any) => ({
+        url: COACH_SITE.UPDATE_COACH,
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: [TAG],
+    }),
   }),
 });
 
-export const { useGetCoachDetailsQuery } = coachProfile;
+export const { useGetCoachDetailsQuery, useUpdateCoachProfileAboutMutation } =
+  coachProfile;

@@ -9,4 +9,5 @@ export const AUTH = {
 
 export const COACH_SITE = {
   PROFILE: `fetchCoachDetails`,
+  UPDATE_COACH: `updateCoach`,
 };

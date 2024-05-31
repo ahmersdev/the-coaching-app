@@ -9,9 +9,10 @@ import {
   aboutDataArray,
 } from "./about.data";
 import { LoadingButton } from "@mui/lab";
-import { successSnackbar } from "@/utils/api";
+import { errorSnackbar, successSnackbar } from "@/utils/api";
 import { SkeletonForm } from "@/components/skeletons";
 import { useCallback, useEffect, useMemo } from "react";
+import { useUpdateCoachProfileAboutMutation } from "@/services/coach-site/settings/profile";
 
 export default function About({
   initialValues,
@@ -39,9 +40,23 @@ export default function About({
     resetForm();
   }, [resetForm]);
 
+  const [updateCoachProfileAboutTrigger, updateCoachProfileAboutStatus] =
+    useUpdateCoachProfileAboutMutation();
+
   const onSubmit = async (data: any) => {
-    successSnackbar("About Updated Successfully!");
-    reset(defaultValues);
+    const formData = new FormData();
+
+    formData.append("coach_id", initialValues?.coach_id);
+    formData.append("bio", data?.bio);
+    formData.append("intro", data?.media);
+
+    try {
+      await updateCoachProfileAboutTrigger(formData).unwrap();
+      successSnackbar("About Updated Successfully!");
+      reset(defaultValues);
+    } catch (error: any) {
+      errorSnackbar(error?.data?.message);
+    }
   };
 
   return (
