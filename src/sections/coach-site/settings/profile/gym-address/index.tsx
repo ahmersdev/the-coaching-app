@@ -1,17 +1,10 @@
 import { FormProvider } from "@/components/react-hook-form";
 import { Box, Divider, Grid, Typography } from "@mui/material";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { LoadingButton } from "@mui/lab";
-import {
-  gymAddressFormValidationSchema,
-  gymAddressFormDefaultValues,
-  gymAddressDataArray,
-} from "./gym-address.data";
+import { gymAddressDataArray } from "./gym-address.data";
 import { GymAddressIcon } from "@/assets/icons";
-import { successSnackbar } from "@/utils/api";
-import { useCallback, useEffect, useMemo } from "react";
 import { SkeletonForm } from "@/components/skeletons";
+import useGymAddress from "./use-gym-address";
 
 const GymAddress = ({
   initialValues,
@@ -19,30 +12,8 @@ const GymAddress = ({
   isFetching,
   initialLoading,
 }: any) => {
-  const defaultValues = useMemo(
-    () => gymAddressFormDefaultValues({ initialValues }),
-    [initialValues]
-  );
-
-  const methods: any = useForm({
-    resolver: yupResolver(gymAddressFormValidationSchema),
-    defaultValues,
-  });
-
-  const { handleSubmit, reset } = methods;
-
-  const resetForm = useCallback(() => {
-    reset(defaultValues);
-  }, [reset, defaultValues]);
-
-  useEffect(() => {
-    resetForm();
-  }, [resetForm]);
-
-  const onSubmit = async (data: any) => {
-    successSnackbar("Gym Address Updated Successfully!");
-    reset(defaultValues);
-  };
+  const { methods, handleSubmit, onSubmit, updateGymAddressStatus } =
+    useGymAddress({ initialValues });
 
   return (
     <Box bgcolor={"secondary.main"} p={2.4} borderRadius={3}>
@@ -59,7 +30,7 @@ const GymAddress = ({
       ) : (
         <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
           <Grid container spacing={2}>
-            {gymAddressDataArray?.map((item: any) => (
+            {gymAddressDataArray.map((item: any) => (
               <Grid item xs={12} md={item?.md} key={item?.id}>
                 <item.component {...item?.componentProps} size={"small"} />
               </Grid>
@@ -73,9 +44,13 @@ const GymAddress = ({
                   borderRadius: 25,
                   border: "1px solid",
                   borderColor: "primary.main",
+                  "&.Mui-disabled": {
+                    bgcolor: "primary.main",
+                  },
                 }}
                 disableElevation
                 type={"submit"}
+                loading={updateGymAddressStatus?.isLoading}
               >
                 Update
               </LoadingButton>

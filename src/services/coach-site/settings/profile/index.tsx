@@ -37,6 +37,14 @@ export const coachProfile = baseAPI.injectEndpoints({
       }),
       invalidatesTags: [TAG],
     }),
+    updateGymAddress: builder.mutation({
+      query: (body: any) => ({
+        url: COACH_SITE.UPDATE_GYM_ADDRESS,
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: [TAG],
+    }),
   }),
 });
 
@@ -45,4 +53,5 @@ export const {
   useUpdateCoachProfileAboutMutation,
   useUpdateCoachPasswordMutation,
   useUpdateGymDetailsMutation,
+  useUpdateGymAddressMutation,
 } = coachProfile;

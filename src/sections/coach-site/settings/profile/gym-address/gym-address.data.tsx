@@ -2,20 +2,22 @@ import { RHFTextField } from "@/components/react-hook-form";
 import * as Yup from "yup";
 
 export const gymAddressFormValidationSchema: any = Yup?.object()?.shape({
-  street: Yup?.string()?.trim()?.required("Street Number & Name is Required"),
-  apartment: Yup?.string()?.trim(),
+  address_line_1: Yup?.string()
+    ?.trim()
+    ?.required("Street Number & Name is Required"),
+  address_line_2: Yup?.string()?.trim(),
   city: Yup?.string()?.trim()?.required("City is Required"),
   state: Yup?.string()?.trim()?.required("State is Required"),
-  postalCode: Yup?.string()?.trim()?.required("Postal Code is Required"),
+  zip: Yup?.string()?.trim()?.required("Postal Code is Required"),
   country: Yup?.string()?.trim()?.required("Country is Required"),
 });
 
 export const gymAddressFormDefaultValues = ({ initialValues }: any) => ({
-  street: initialValues?.address_line_1 ?? "",
-  apartment: initialValues?.address_line_2 ?? "",
+  address_line_1: initialValues?.address_line_1 ?? "",
+  address_line_2: initialValues?.address_line_2 ?? "",
   city: initialValues?.city ?? "",
   state: initialValues?.state ?? "",
-  postalCode: initialValues?.zip ?? "",
+  zip: initialValues?.zip ?? "",
   country: initialValues?.country ?? "",
 });
 
@@ -23,7 +25,7 @@ export const gymAddressDataArray = [
   {
     id: 1,
     componentProps: {
-      name: "street",
+      name: "address_line_1",
       label: "Street",
     },
     component: RHFTextField,
@@ -32,7 +34,7 @@ export const gymAddressDataArray = [
   {
     id: 2,
     componentProps: {
-      name: "apartment",
+      name: "address_line_2",
       label: "Apartment",
     },
     component: RHFTextField,
@@ -59,7 +61,7 @@ export const gymAddressDataArray = [
   {
     id: 5,
     componentProps: {
-      name: "postalCode",
+      name: "zip",
       label: "Postal Code",
     },
     component: RHFTextField,
