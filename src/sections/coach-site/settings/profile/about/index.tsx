@@ -1,18 +1,10 @@
 import { MyProfileIcon } from "@/assets/icons";
 import { Box, Divider, Grid, Typography } from "@mui/material";
 import { FormProvider } from "@/components/react-hook-form";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import {
-  aboutFormValidationSchema,
-  aboutFormDefaultValues,
-  aboutDataArray,
-} from "./about.data";
+import { aboutDataArray } from "./about.data";
 import { LoadingButton } from "@mui/lab";
-import { errorSnackbar, successSnackbar } from "@/utils/api";
 import { SkeletonForm } from "@/components/skeletons";
-import { useCallback, useEffect, useMemo } from "react";
-import { useUpdateCoachProfileAboutMutation } from "@/services/coach-site/settings/profile";
+import useAbout from "./use-about";
 
 export default function About({
   initialValues,
@@ -20,43 +12,8 @@ export default function About({
   isFetching,
   initialLoading,
 }: any) {
-  const defaultValues = useMemo(
-    () => aboutFormDefaultValues({ initialValues }),
-    [initialValues]
-  );
-
-  const methods: any = useForm({
-    resolver: yupResolver(aboutFormValidationSchema),
-    defaultValues,
-  });
-
-  const { handleSubmit, reset } = methods;
-
-  const resetForm = useCallback(() => {
-    reset(defaultValues);
-  }, [reset, defaultValues]);
-
-  useEffect(() => {
-    resetForm();
-  }, [resetForm]);
-
-  const [updateCoachProfileAboutTrigger, updateCoachProfileAboutStatus] =
-    useUpdateCoachProfileAboutMutation();
-
-  const onSubmit = async (data: any) => {
-    const formData = new FormData();
-    formData.append("coach_id", initialValues?.coach_id);
-    formData.append("bio", data?.bio);
-    formData.append("intro", data?.media);
-
-    try {
-      await updateCoachProfileAboutTrigger(formData).unwrap();
-      successSnackbar("About Updated Successfully!");
-      reset(defaultValues);
-    } catch (error: any) {
-      errorSnackbar(error?.data?.message);
-    }
-  };
+  const { methods, handleSubmit, onSubmit, updateCoachProfileAboutStatus } =
+    useAbout({ initialValues });
 
   return (
     <Box bgcolor={"secondary.main"} p={2.4} borderRadius={3}>
@@ -74,7 +31,7 @@ export default function About({
       ) : (
         <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
           <Grid container spacing={2}>
-            {aboutDataArray?.map((item: any) => (
+            {aboutDataArray.map((item: any) => (
               <Grid item xs={12} md={item?.md} key={item?.id}>
                 <item.component {...item?.componentProps} size={"small"} />
               </Grid>
@@ -88,9 +45,13 @@ export default function About({
                   borderRadius: 25,
                   border: "1px solid",
                   borderColor: "primary.main",
+                  "&.Mui-disabled": {
+                    bgcolor: "primary.main",
+                  },
                 }}
                 disableElevation
                 type={"submit"}
+                loading={updateCoachProfileAboutStatus?.isLoading}
               >
                 Update
               </LoadingButton>
