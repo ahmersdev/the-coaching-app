@@ -1,17 +1,10 @@
 import { FormProvider } from "@/components/react-hook-form";
 import { Box, Divider, Grid, Typography } from "@mui/material";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { LoadingButton } from "@mui/lab";
-import {
-  myProfileFormValidationSchema,
-  myProfileDataArray,
-  myProfileFormDefaultValues,
-} from "./my-profile.data";
+import { myProfileDataArray } from "./my-profile.data";
 import { MyProfileIcon } from "@/assets/icons";
-import { successSnackbar } from "@/utils/api";
-import { useCallback, useEffect, useMemo } from "react";
 import { SkeletonForm } from "@/components/skeletons";
+import useMyProfile from "./use-my-profile";
 
 const MyProfile = ({
   initialValues,
@@ -19,30 +12,8 @@ const MyProfile = ({
   isFetching,
   initialLoading,
 }: any) => {
-  const defaultValues = useMemo(
-    () => myProfileFormDefaultValues({ initialValues }),
-    [initialValues]
-  );
-
-  const methods: any = useForm({
-    resolver: yupResolver(myProfileFormValidationSchema),
-    defaultValues,
-  });
-
-  const { handleSubmit, reset } = methods;
-
-  const resetForm = useCallback(() => {
-    reset(defaultValues);
-  }, [reset, defaultValues]);
-
-  useEffect(() => {
-    resetForm();
-  }, [resetForm]);
-
-  const onSubmit = async (data: any) => {
-    successSnackbar("Profile Updated Successfully!");
-    reset(defaultValues);
-  };
+  const { methods, handleSubmit, onSubmit, updateCoachProfileAboutStatus } =
+    useMyProfile({ initialValues });
 
   return (
     <Box bgcolor={"secondary.main"} p={2.4} borderRadius={3}>
@@ -74,9 +45,13 @@ const MyProfile = ({
                   borderRadius: 25,
                   border: "1px solid",
                   borderColor: "primary.main",
+                  "&.Mui-disabled": {
+                    bgcolor: "primary.main",
+                  },
                 }}
                 disableElevation
                 type={"submit"}
+                loading={updateCoachProfileAboutStatus?.isLoading}
               >
                 Update
               </LoadingButton>

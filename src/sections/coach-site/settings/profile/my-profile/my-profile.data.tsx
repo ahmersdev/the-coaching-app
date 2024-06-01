@@ -48,6 +48,7 @@ export const myProfileDataArray = [
       name: "email",
       label: "Email",
       type: "email",
+      disabled: true,
     },
     component: RHFTextField,
     md: 5,

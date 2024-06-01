@@ -45,7 +45,6 @@ export default function About({
 
   const onSubmit = async (data: any) => {
     const formData = new FormData();
-
     formData.append("coach_id", initialValues?.coach_id);
     formData.append("bio", data?.bio);
     formData.append("intro", data?.media);
