@@ -21,8 +21,19 @@ export const coachProfile = baseAPI.injectEndpoints({
       }),
       invalidatesTags: [TAG],
     }),
+    updateCoachPassword: builder.mutation({
+      query: (body: any) => ({
+        url: COACH_SITE.UPDATE_PASSWORD,
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: [TAG],
+    }),
   }),
 });
 
-export const { useGetCoachDetailsQuery, useUpdateCoachProfileAboutMutation } =
-  coachProfile;
+export const {
+  useGetCoachDetailsQuery,
+  useUpdateCoachProfileAboutMutation,
+  useUpdateCoachPasswordMutation,
+} = coachProfile;

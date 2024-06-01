@@ -1,47 +1,17 @@
 import { FormProvider } from "@/components/react-hook-form";
 import { Box, Divider, Grid, Typography } from "@mui/material";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { LoadingButton } from "@mui/lab";
-import {
-  getPasswordDataArray,
-  passwordFormDefaultValues,
-  passwordFormValidationSchema,
-} from "./password.data";
-import { useState } from "react";
 import { PasswordIcon } from "@/assets/icons";
-import { successSnackbar } from "@/utils/api";
+import usePassword from "./use-password";
 
-const Password = () => {
-  const [passwordVisibility, setPasswordVisibility] = useState({
-    currentPassword: false,
-    newPassword: false,
-    confirmPassword: false,
-  });
-
-  const methods: any = useForm({
-    resolver: yupResolver(passwordFormValidationSchema),
-    defaultValues: passwordFormDefaultValues,
-  });
-
-  const togglePasswordVisibility = (field: any) => {
-    setPasswordVisibility((prev: any) => ({
-      ...prev,
-      [field]: !prev[field],
-    }));
-  };
-
-  const passwordDataArray = getPasswordDataArray(
-    togglePasswordVisibility,
-    passwordVisibility
-  );
-
-  const { handleSubmit, reset } = methods;
-
-  const onSubmit = async (data: any) => {
-    successSnackbar("Password Updated Successfully!");
-    reset(passwordFormDefaultValues);
-  };
+const Password = ({ initialValues }: any) => {
+  const {
+    methods,
+    handleSubmit,
+    onSubmit,
+    passwordDataArray,
+    updateCoachPasswordStatus,
+  } = usePassword({ initialValues });
 
   return (
     <Box bgcolor={"secondary.main"} p={2.4} borderRadius={3}>
@@ -70,9 +40,13 @@ const Password = () => {
                 borderRadius: 25,
                 border: "1px solid",
                 borderColor: "primary.main",
+                "&.Mui-disabled": {
+                  bgcolor: "primary.main",
+                },
               }}
               disableElevation
               type={"submit"}
+              loading={updateCoachPasswordStatus?.isLoading}
             >
               Update
             </LoadingButton>

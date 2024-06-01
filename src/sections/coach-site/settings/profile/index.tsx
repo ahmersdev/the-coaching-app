@@ -55,7 +55,7 @@ export default function Profile() {
             initialLoading={initialLoading}
           />
 
-          <Password />
+          <Password initialValues={data?.coach} />
 
           <GymDetails
             initialValues={data?.gym}
