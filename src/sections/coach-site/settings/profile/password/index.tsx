@@ -26,7 +26,7 @@ const Password = ({ initialValues }: any) => {
 
       <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
         <Grid container spacing={2}>
-          {passwordDataArray?.map((item: any) => (
+          {passwordDataArray.map((item: any) => (
             <Grid item xs={12} md={item?.md} key={item?.id}>
               <item.component {...item?.componentProps} size={"small"} />
             </Grid>
