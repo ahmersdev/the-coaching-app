@@ -13,6 +13,9 @@ export const myProfileFormValidationSchema = Yup?.object()?.shape({
     .trim()
     .required("Phone is Required")
     .matches(PHONE_REGEX, "Enter a Valid Phone"),
+  city: Yup.string().trim().required("City is Required"),
+  postalCode: Yup.string().trim().required("Postal Code is Required"),
+  country: Yup.string().trim().required("Country is Required"),
 });
 
 export const myProfileFormDefaultValues = ({ initialValues }: any) => ({
@@ -20,6 +23,9 @@ export const myProfileFormDefaultValues = ({ initialValues }: any) => ({
   username: initialValues?.username ?? "",
   email: initialValues?.email ?? "",
   phone: initialValues?.phone ?? "",
+  city: initialValues?.city ?? "",
+  postalCode: initialValues?.postal_code ?? "",
+  country: initialValues?.country ?? "",
 });
 
 export const myProfileDataArray = [
@@ -58,6 +64,33 @@ export const myProfileDataArray = [
     componentProps: {
       name: "phone",
       label: "Phone",
+    },
+    component: RHFTextField,
+    md: 5,
+  },
+  {
+    id: 5,
+    componentProps: {
+      name: "city",
+      label: "City",
+    },
+    component: RHFTextField,
+    md: 5,
+  },
+  {
+    id: 6,
+    componentProps: {
+      name: "postalCode",
+      label: "Postal Code",
+    },
+    component: RHFTextField,
+    md: 5,
+  },
+  {
+    id: 7,
+    componentProps: {
+      name: "country",
+      label: "Country",
     },
     component: RHFTextField,
     md: 5,
