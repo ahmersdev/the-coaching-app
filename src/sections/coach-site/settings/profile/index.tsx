@@ -2,8 +2,6 @@ import { Stack } from "@mui/material";
 import MyProfile from "./my-profile";
 import About from "./about";
 import Password from "./password";
-import GymAddress from "./gym-address";
-import GymDetails from "./gym-details";
 import { useGetCoachDetailsQuery } from "@/services/coach-site/settings/profile";
 import { useEffect, useState } from "react";
 import { useAppSelector } from "@/store/store";
@@ -56,20 +54,6 @@ export default function Profile() {
           />
 
           <Password initialValues={data?.coach} />
-
-          <GymDetails
-            initialValues={data?.gym}
-            isLoading={isLoading}
-            isFetching={isFetching}
-            initialLoading={initialLoading}
-          />
-
-          <GymAddress
-            initialValues={data?.gym_address}
-            isLoading={isLoading}
-            isFetching={isFetching}
-            initialLoading={initialLoading}
-          />
         </>
       )}
     </Stack>

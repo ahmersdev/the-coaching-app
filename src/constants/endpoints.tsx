@@ -12,6 +12,4 @@ export const COACH_SITE = {
   PROFILE: `fetchCoachDetails`,
   UPDATE_COACH: `updateCoach`,
   UPDATE_PASSWORD: `updateCoachPassword`,
-  UPDATE_GYM_DETAILS: `updateGymDetails`,
-  UPDATE_GYM_ADDRESS: `updateGymAddress`,
 };

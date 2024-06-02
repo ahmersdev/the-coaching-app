@@ -27,9 +27,9 @@ export const decryptValuesFromToken = async (
 
   try {
     const decrypted = await decryptToken(encryptedToken, base64Key);
-    const [coach_id, gym_id, address_id, user_role] = decrypted.split("-");
+    const [coach_id, user_role] = decrypted.split("-");
 
-    return { coach_id, gym_id, address_id, user_role };
+    return { coach_id, user_role };
   } catch (error: any) {
     errorSnackbar("Failed to decrypt token");
     return null;
