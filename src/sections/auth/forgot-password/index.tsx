@@ -14,7 +14,8 @@ import {
   forgotPasswordFormValidationSchema,
 } from "./forgot-password.data";
 import { useRouter } from "next/navigation";
-import { successSnackbar } from "@/utils/api";
+import { errorSnackbar, successSnackbar } from "@/utils/api";
+import { useLazyGetResendOtpQuery } from "@/services/auth";
 
 const ForgotPassword = () => {
   const router: any = useRouter();
@@ -24,11 +25,20 @@ const ForgotPassword = () => {
     defaultValues: forgotPasswordFormDefaultValues,
   });
 
-  const { handleSubmit, reset } = methods;
+  const { handleSubmit } = methods;
+
+  const [resendOtpTrigger, resendOtpStatus] = useLazyGetResendOtpQuery();
 
   const onSubmit = async (data: any) => {
-    successSnackbar("Check your email!");
-    reset(forgotPasswordFormDefaultValues);
+    try {
+      await resendOtpTrigger({
+        email: data?.email,
+      }).unwrap();
+      successSnackbar("Check your email!");
+      router.push(`${AUTH.OTP}?email=${data?.email}&forgot=true`);
+    } catch (error: any) {
+      errorSnackbar(error?.data?.message);
+    }
   };
 
   return (
@@ -79,6 +89,7 @@ const ForgotPassword = () => {
               }}
               disableElevation
               type={"submit"}
+              loading={resendOtpStatus?.isLoading}
             >
               Next
             </LoadingButton>

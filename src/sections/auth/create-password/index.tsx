@@ -25,7 +25,6 @@ const CreatePassword = () => {
 
   const searchParams = useSearchParams();
   const email = searchParams?.get("email");
-  const register = searchParams?.get("register");
 
   const router: any = useRouter();
 
@@ -64,7 +63,7 @@ const CreatePassword = () => {
       <ShortLogoIcon />
       <Box display={"flex"} flexDirection={"column"} textAlign={"center"}>
         <Typography variant={"h1"} fontWeight={800}>
-          {!!register ? `Sign Up to Supr.Club` : `Forgot Password!?`}
+          Forgot Password!?
         </Typography>
         <Box display={"flex"} justifyContent={{ xs: "center", md: "end" }}>
           <LineIcon />
@@ -74,16 +73,9 @@ const CreatePassword = () => {
       <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
         <Grid container maxWidth={500} mx={"auto"} width={"100%"}>
           <Grid item xs={12}>
-            {email ? (
-              <Typography variant={"h3"} textAlign={"center"} mt={2}>
-                Set Password!
-              </Typography>
-            ) : (
-              <Typography variant={"body1"} textAlign={"center"} mt={2}>
-                Your new password must be different from previously used
-                password.
-              </Typography>
-            )}
+            <Typography variant={"body1"} textAlign={"center"} mt={2}>
+              Your new password must be different from previously used password.
+            </Typography>
           </Grid>
           {createPasswordDataArray?.map((item: any) => (
             <Grid item xs={12} key={item?.id} mt={2}>

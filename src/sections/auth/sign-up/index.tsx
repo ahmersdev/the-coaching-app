@@ -52,7 +52,7 @@ const SignUp = () => {
       </Box>
 
       <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-        <Grid container maxWidth={550} mx={"auto"} width={"100%"} spacing={2}>
+        <Grid container maxWidth={500} mx={"auto"} width={"100%"} spacing={2}>
           {stepState === 1 && (
             <>
               <Grid item xs={12}>
