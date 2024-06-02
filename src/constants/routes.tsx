@@ -12,11 +12,9 @@ export const SYSTEM_ADMIN = {
 export const AUTH = {
   SIGN_IN: `/sign-in`,
   SIGN_UP: `/sign-up`,
-  OTP_SIGN_UP: `/sign-up/otp`,
   FORGOT_PASSWORD: `/forgot-password`,
   CREATE_PASSWORD: `/create-password`,
-  GYM_DETAILS: `/sign-up/gym-details`,
-  GYM_ADDRESS: `/sign-up/gym-address`,
+  OTP: `otp`,
 };
 
 export const SALE_SITE = {

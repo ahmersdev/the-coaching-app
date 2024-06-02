@@ -51,9 +51,6 @@ const CreatePassword = () => {
   const onSubmit = async (data: any) => {
     successSnackbar("Password Created Successfully!");
     reset();
-    !!register
-      ? router?.push(`${AUTH?.GYM_DETAILS}?email=${email}`)
-      : router?.push(`/`);
   };
   return (
     <Box

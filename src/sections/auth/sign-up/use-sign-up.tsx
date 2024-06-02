@@ -13,6 +13,8 @@ import {
   usePostRegisterCoachMutation,
 } from "@/services/auth";
 import { errorSnackbar, successSnackbar } from "@/utils/api";
+import { EMAIL_REGEX, PHONE_REGEX } from "@/constants";
+import { ErrorFields, ValidationRule } from "./sign-up.types";
 
 export default function useSignUp() {
   const [passwordVisibility, setPasswordVisibility] = useState({
@@ -22,12 +24,24 @@ export default function useSignUp() {
 
   const [stepState, setStepState] = useState(1);
 
-  const [errors, setErrors] = useState<any>({
+  const [errors, setErrors] = useState<ErrorFields>({
     username: false,
     fullName: false,
     email: false,
     phone: false,
+    city: false,
+    postalCode: false,
+    country: false,
   });
+
+  const errorMessages: Record<string, string | boolean> = {
+    fullName: errors?.fullName ?? false,
+    email: errors?.email ?? false,
+    phone: errors?.phone ?? false,
+    city: errors?.city ?? false,
+    postalCode: errors?.postalCode ?? false,
+    country: errors?.country ?? false,
+  };
 
   const router: any = useRouter();
 
@@ -37,6 +51,30 @@ export default function useSignUp() {
   });
 
   const { handleSubmit, getValues } = methods;
+
+  const setErrorFields = (fieldErrors: ErrorFields) => {
+    setErrors((prevErrors: ErrorFields) => ({
+      ...prevErrors,
+      ...fieldErrors,
+    }));
+  };
+
+  const validateFields = (
+    values: Record<string, string>,
+    rules: ValidationRule[]
+  ): ErrorFields | null => {
+    const errors: ErrorFields = {};
+    let hasErrors = false;
+
+    rules.forEach(({ field, message, validate }) => {
+      if (!validate(values[field])) {
+        errors[field] = message;
+        hasErrors = true;
+      }
+    });
+
+    return hasErrors ? errors : null;
+  };
 
   const togglePasswordVisibility = (field: any) => {
     setPasswordVisibility((prev: any) => ({
@@ -57,12 +95,7 @@ export default function useSignUp() {
     const { username } = getValues();
 
     if (username.trim() === "") {
-      setErrors({
-        username: "Username is Required",
-        fullName: false,
-        email: false,
-        phone: false,
-      });
+      setErrorFields({ username: "Username is Required" });
       return;
     }
 
@@ -72,76 +105,70 @@ export default function useSignUp() {
       }).unwrap();
 
       if (res?.alreadyExists === 1) {
-        setErrors({
+        setErrorFields({
           username: "User name already taken, please try another",
-          fullName: false,
-          email: false,
-          phone: false,
         });
         return;
       }
       setStepState((prevStep: any) => prevStep + 1);
+      setErrors({});
     } catch (error: any) {
       errorSnackbar(error?.data?.message);
     }
   };
 
   const handleNextSecond = async () => {
-    const { fullName, email, phone } = getValues();
+    const rules: ValidationRule[] = [
+      {
+        field: "fullName",
+        message: "Name is Required",
+        validate: (value) => value.trim() !== "",
+      },
+      {
+        field: "email",
+        message: "Email is Required",
+        validate: (value) => value.trim() !== "",
+      },
+      {
+        field: "email",
+        message: "Enter Valid Email",
+        validate: (value) => EMAIL_REGEX.test(value),
+      },
+      {
+        field: "phone",
+        message: "Phone is Required",
+        validate: (value) => value.trim() !== "",
+      },
+      {
+        field: "phone",
+        message: "Enter a Valid Phone",
+        validate: (value) => PHONE_REGEX.test(value),
+      },
+      {
+        field: "city",
+        message: "City is Required",
+        validate: (value) => value.trim() !== "",
+      },
+      {
+        field: "postalCode",
+        message: "Postal Code is Required",
+        validate: (value) => value.trim() !== "",
+      },
+      {
+        field: "country",
+        message: "Country is Required",
+        validate: (value) => value.trim() !== "",
+      },
+    ];
 
-    if (fullName?.trim() === "") {
-      setErrors({
-        username: false,
-        fullName: "Name is Required",
-        email: false,
-        phone: false,
-      });
+    const fieldErrors = validateFields(getValues(), rules);
+
+    if (fieldErrors) {
+      setErrors(fieldErrors);
       return;
     }
-
-    if (email?.trim() === "") {
-      setErrors({
-        username: false,
-        fullName: false,
-        email: "Email is Required",
-        phone: false,
-      });
-      return;
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex?.test(email)) {
-      setErrors({
-        username: false,
-        fullName: false,
-        email: "Enter Valid Email",
-        phone: false,
-      });
-      return;
-    }
-
-    if (phone?.trim() === "") {
-      setErrors({
-        username: false,
-        fullName: false,
-        email: false,
-        phone: "Phone is Required",
-      });
-      return;
-    }
-
-    const phoneRegex = /^\+(?:[0-9]\s?){6,14}[0-9]$/;
-    if (!phoneRegex?.test(phone)) {
-      setErrors({
-        username: false,
-        fullName: false,
-        email: false,
-        phone: "Enter a Valid Phone",
-      });
-      return;
-    }
-
     setStepState((prevStep: any) => prevStep + 1);
+    setErrors({});
   };
 
   const handlePrevStep = () => {
@@ -154,16 +181,19 @@ export default function useSignUp() {
   const onSubmit = async (data: any) => {
     const updatedData = {
       username: data.username,
-      full_name: data.full_name,
+      full_name: data.fullName,
       email: data.email,
       phone: data.phone,
+      city: data.city,
+      postal_code: data.postalCode,
+      country: data.country,
       password: data.password,
     };
 
     try {
       await postRegisterCoachTrigger(updatedData).unwrap();
       successSnackbar("Please, Check Email for Verification Code!");
-      router.push(`${AUTH.OTP_SIGN_UP}?email=${data?.email}`);
+      router.push(`${AUTH.OTP}?email=${data?.email}`);
     } catch (error: any) {
       errorSnackbar(error?.data?.message);
     }
@@ -175,6 +205,7 @@ export default function useSignUp() {
     onSubmit,
     stepState,
     errors,
+    errorMessages,
     handleNextFirst,
     getUsernameStatus,
     handlePrevStep,

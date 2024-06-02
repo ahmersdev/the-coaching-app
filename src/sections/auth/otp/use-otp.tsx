@@ -25,10 +25,11 @@ export default function useOtp() {
 
     try {
       await postOtpVerificationTrigger(updatedData).unwrap();
-      successSnackbar("Please, Enter Gym Address!");
-      router.push(`${AUTH.GYM_ADDRESS}?email=${email}`);
+      successSnackbar("Verification Successful! Sign In to Continue");
+      router.push(AUTH.SIGN_IN);
     } catch (error: any) {
       errorSnackbar(error?.data?.message);
+      setOtp(null);
     }
   };
 

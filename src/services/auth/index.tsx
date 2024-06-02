@@ -10,6 +10,7 @@ export const authAPI = baseAPI.injectEndpoints({
         params,
       }),
     }),
+
     postRegisterCoach: builder.mutation({
       query: (body: any) => ({
         url: AUTH.REGISTER_COACH,
@@ -17,6 +18,7 @@ export const authAPI = baseAPI.injectEndpoints({
         body,
       }),
     }),
+
     postOtpVerification: builder.mutation({
       query: (body: any) => ({
         url: AUTH.OTP_VERIFICATION,
@@ -24,18 +26,12 @@ export const authAPI = baseAPI.injectEndpoints({
         body,
       }),
     }),
-    postGymAddress: builder.mutation({
-      query: (body: any) => ({
-        url: AUTH.GYM_ADDRESS,
-        method: "POST",
-        body,
-      }),
-    }),
-    postGymIntro: builder.mutation({
-      query: (body: any) => ({
-        url: AUTH.GYM_INTRO,
-        method: "POST",
-        body,
+
+    getResendOtp: builder.query({
+      query: (params: any) => ({
+        url: AUTH.OTP_RESEND,
+        method: "GET",
+        params,
       }),
     }),
 
@@ -53,7 +49,6 @@ export const {
   useLazyGetCheckUsernameQuery,
   usePostRegisterCoachMutation,
   usePostOtpVerificationMutation,
-  usePostGymAddressMutation,
-  usePostGymIntroMutation,
+  useLazyGetResendOtpQuery,
   usePostSignInMutation,
 } = authAPI;

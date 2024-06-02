@@ -5,10 +5,13 @@ import * as Yup from "yup";
 import { IconButton, InputAdornment } from "@mui/material";
 import { EyeWithoutBgIcon, EyeSlashIcon } from "@/assets/icons";
 import { PASSWORD_MESSAGE, PASSWORD_REGEX, PHONE_REGEX } from "@/constants";
+import LocationCityIcon from "@mui/icons-material/LocationCity";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import FlagIcon from "@mui/icons-material/Flag";
 
 export const signUpFormValidationSchema = Yup.object().shape({
   username: Yup.string().trim().required("Username is Required"),
-  full_name: Yup.string().trim().required("Name is Required"),
+  fullName: Yup.string().trim().required("Name is Required"),
   email: Yup.string()
     .trim()
     .required("Email is Required")
@@ -17,6 +20,9 @@ export const signUpFormValidationSchema = Yup.object().shape({
     .trim()
     .required("Phone is Required")
     .matches(PHONE_REGEX, "Enter a Valid Phone"),
+  city: Yup.string().trim().required("City is Required"),
+  postalCode: Yup.string().trim().required("Postal Code is Required"),
+  country: Yup.string().trim().required("Country is Required"),
   password: Yup.string()
     .trim()
     .required("Password is Required")
@@ -28,9 +34,12 @@ export const signUpFormValidationSchema = Yup.object().shape({
 
 export const signUpFormDefaultValues = {
   username: "",
-  full_name: "",
+  fullName: "",
   email: "",
   phone: "",
+  city: "",
+  postalCode: "",
+  country: "",
   password: "",
   confirmPassword: "",
 };
@@ -39,7 +48,7 @@ export const signUpDataArray = [
   {
     id: 1,
     componentProps: {
-      name: "full_name",
+      name: "fullName",
       placeholder: "Enter Your Full Name",
       borderRadius: 25,
       InputProps: {
@@ -83,6 +92,58 @@ export const signUpDataArray = [
       },
     },
     component: RHFTextField,
+    md: 6,
+  },
+  {
+    id: 4,
+    componentProps: {
+      name: "city",
+      placeholder: "Enter City",
+      borderRadius: 25,
+      InputProps: {
+        endAdornment: (
+          <InputAdornment position="end">
+            <LocationCityIcon />
+          </InputAdornment>
+        ),
+      },
+    },
+    component: RHFTextField,
+    md: 6,
+  },
+  {
+    id: 5,
+    componentProps: {
+      name: "postalCode",
+      placeholder: "Enter Postal Code",
+      borderRadius: 25,
+      InputProps: {
+        endAdornment: (
+          <InputAdornment position="end">
+            <LocationOnIcon />
+          </InputAdornment>
+        ),
+      },
+    },
+    component: RHFTextField,
+    md: 6,
+  },
+  {
+    id: 6,
+    componentProps: {
+      name: "country",
+      placeholder: "Enter Country",
+      borderRadius: 25,
+      InputProps: {
+        endAdornment: (
+          <InputAdornment position="end">
+            <FlagIcon />
+          </InputAdornment>
+        ),
+      },
+    },
+    component: RHFTextField,
+    md: 6,
   },
 ];
 

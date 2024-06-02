@@ -2,8 +2,9 @@ export const AUTH = {
   CHECK_USERNAME: `checkCoachUsername`,
   REGISTER_COACH: `registerCoach`,
   OTP_VERIFICATION: `verifyVerificationCodeforEmail`,
-  GYM_ADDRESS: `addGymAddress`,
-  GYM_INTRO: `addGym`,
+  OTP_RESEND: `verifyCoachEmail`,
+  FORGOT_PASSWORD_VERIFY: `verifyVerificationCodeforForgetPassword`,
+  CREATE_PASSWORD: `createCoachPassword`,
   SIGN_IN: `coachSignIn`,
 };
 

@@ -7,14 +7,17 @@ import {
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
-import { usePostSignInMutation } from "@/services/auth";
+import {
+  useLazyGetResendOtpQuery,
+  usePostSignInMutation,
+} from "@/services/auth";
 import { errorSnackbar, successSnackbar } from "@/utils/api";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import { useAppDispatch } from "@/store/store";
 import { logIn } from "@/store/auth";
-import { USER_ROLES } from "@/constants/strings";
-import { COACH_SITE, SYSTEM_ADMIN } from "@/constants/routes";
+import { STATUS_403, USER_ROLES } from "@/constants/strings";
+import { AUTH, COACH_SITE, SYSTEM_ADMIN } from "@/constants/routes";
 
 export default function useSignIn() {
   const theme: any = useTheme();
@@ -48,6 +51,8 @@ export default function useSignIn() {
 
   const [postSignInTrigger, postSignInStatus] = usePostSignInMutation();
 
+  const [resendOtpTrigger] = useLazyGetResendOtpQuery();
+
   const onSubmit = async (data: any) => {
     const userAgent = navigator.userAgent;
     const updatedData = {
@@ -66,7 +71,7 @@ export default function useSignIn() {
 
         if (res.session.user_type === USER_ROLES.COACH) {
           if (!res.coach.intro) {
-            successSnackbar("Please Add Intro Video!");
+            successSnackbar("Please Complete Your Profile!");
             router.push(COACH_SITE.SETTINGS);
           } else {
             router.push(COACH_SITE.DASHBOARD);
@@ -77,6 +82,18 @@ export default function useSignIn() {
         }
       }
     } catch (error: any) {
+      if (error?.status === STATUS_403) {
+        errorSnackbar("Please Verify Your Email First");
+        try {
+          await resendOtpTrigger({
+            email: data?.email,
+          }).unwrap();
+          router.push(`${AUTH.OTP}?email=${data?.email}`);
+        } catch (e: any) {
+          errorSnackbar(e?.data?.message);
+        }
+        return;
+      }
       errorSnackbar(error?.data?.message);
     }
   };

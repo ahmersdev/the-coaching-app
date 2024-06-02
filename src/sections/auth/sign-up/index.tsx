@@ -18,6 +18,7 @@ const SignUp = () => {
     onSubmit,
     stepState,
     errors,
+    errorMessages,
     handleNextFirst,
     getUsernameStatus,
     handlePrevStep,
@@ -36,7 +37,12 @@ const SignUp = () => {
       p={2}
     >
       <ShortLogoIcon />
-      <Box display={"flex"} flexDirection={"column"} textAlign={"center"}>
+      <Box
+        display={"flex"}
+        flexDirection={"column"}
+        textAlign={"center"}
+        mb={2}
+      >
         <Typography variant={"h1"} fontWeight={800}>
           Sign Up to Coaching App
         </Typography>
@@ -46,16 +52,16 @@ const SignUp = () => {
       </Box>
 
       <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-        <Grid container maxWidth={500} mx={"auto"} width={"100%"}>
+        <Grid container maxWidth={550} mx={"auto"} width={"100%"} spacing={2}>
           {stepState === 1 && (
             <>
               <Grid item xs={12}>
-                <Typography variant={"h3"} textAlign={"center"} mt={2}>
+                <Typography variant={"h3"} textAlign={"center"}>
                   Claim your User Name!
                 </Typography>
               </Grid>
 
-              <Grid item xs={12} mt={2}>
+              <Grid item xs={12}>
                 <RHFTextField
                   name={"username"}
                   placeholder={"Enter User Name"}
@@ -89,8 +95,7 @@ const SignUp = () => {
                     borderRadius: 25,
                     border: "1px solid",
                     borderColor: "primary.main",
-                    mt: 3,
-                    mb: 2,
+                    mt: 1,
                     "&.Mui-disabled": {
                       backgroundColor: "primary.main",
                     },
@@ -112,35 +117,21 @@ const SignUp = () => {
           {stepState === 2 && (
             <>
               {signUpDataArray.map((item: any) => (
-                <Grid item xs={12} key={item.id} mt={2}>
+                <Grid item xs={12} md={item?.md} key={item.id}>
                   <item.component {...item.componentProps} size={"small"} />
-                  {item.componentProps.name === "fullName" &&
-                    errors?.fullName && (
-                      <Typography
-                        variant={"body2"}
-                        textAlign={"center"}
-                        color={"error.700"}
-                      >
-                        {errors.fullName}
-                      </Typography>
-                    )}
-                  {item.componentProps.name === "email" && errors?.email && (
-                    <Typography
-                      variant={"body2"}
-                      textAlign={"center"}
-                      color={"error.700"}
-                    >
-                      {errors.email}
-                    </Typography>
-                  )}
-                  {item.componentProps.name === "phone" && errors?.phone && (
-                    <Typography
-                      variant={"body2"}
-                      textAlign={"center"}
-                      color={"error.700"}
-                    >
-                      {errors.phone}
-                    </Typography>
+                  {Object.entries(errorMessages).map(
+                    ([field, errorMessage]) =>
+                      item.componentProps.name === field &&
+                      errorMessage && (
+                        <Typography
+                          key={field}
+                          variant={"body2"}
+                          textAlign={"center"}
+                          color={"error.700"}
+                        >
+                          {errorMessage}
+                        </Typography>
+                      )
                   )}
                 </Grid>
               ))}
@@ -193,13 +184,13 @@ const SignUp = () => {
           {stepState === 3 && (
             <>
               <Grid item xs={12}>
-                <Typography variant={"h3"} textAlign={"center"} mt={2}>
+                <Typography variant={"h3"} textAlign={"center"}>
                   Set Password!
                 </Typography>
               </Grid>
 
               {setPasswordDataArray.map((item: any) => (
-                <Grid item xs={12} key={item.id} mt={2}>
+                <Grid item xs={12} key={item.id}>
                   <item.component {...item.componentProps} size={"small"} />
                 </Grid>
               ))}
@@ -214,8 +205,7 @@ const SignUp = () => {
                     border: "1px dashed",
                     borderColor: "grey.100",
                     background: "transparent",
-                    mt: 3,
-                    mb: 2,
+                    mt: 1,
                     ":hover": {
                       backgroundColor: "grey.100",
                       color: "grey.900",
@@ -236,8 +226,7 @@ const SignUp = () => {
                     borderRadius: 25,
                     border: "1px solid",
                     borderColor: "primary.main",
-                    mt: 3,
-                    mb: 2,
+                    mt: 1,
                     "&.Mui-disabled": {
                       bgcolor: "primary.main",
                     },
