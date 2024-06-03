@@ -2,55 +2,21 @@
 
 import { FormProvider } from "@/components/react-hook-form";
 import { Box, Grid, Typography } from "@mui/material";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { LoadingButton } from "@mui/lab";
-import { useState } from "react";
-import {
-  createPasswordFormDefaultValues,
-  createPasswordFormValidationSchema,
-  getCreatePasswordDataArray,
-} from "./create-password.data";
 import { LineIcon, ShortLogoIcon } from "@/assets/icons";
 import Link from "next/link";
 import { AUTH } from "@/constants/routes";
-import { useRouter, useSearchParams } from "next/navigation";
-import { successSnackbar } from "@/utils/api";
+import useCreatePassword from "./use-create-password";
 
 const CreatePassword = () => {
-  const [passwordVisibility, setPasswordVisibility] = useState({
-    newPassword: false,
-    confirmPassword: false,
-  });
+  const {
+    methods,
+    handleSubmit,
+    onSubmit,
+    createPasswordDataArray,
+    postCreatePasswordStatus,
+  } = useCreatePassword();
 
-  const searchParams = useSearchParams();
-  const email = searchParams?.get("email");
-
-  const router: any = useRouter();
-
-  const methods: any = useForm({
-    resolver: yupResolver(createPasswordFormValidationSchema),
-    defaultValues: createPasswordFormDefaultValues,
-  });
-
-  const togglePasswordVisibility = (field: any) => {
-    setPasswordVisibility((prev: any) => ({
-      ...prev,
-      [field]: !prev[field],
-    }));
-  };
-
-  const createPasswordDataArray = getCreatePasswordDataArray(
-    togglePasswordVisibility,
-    passwordVisibility
-  );
-
-  const { handleSubmit, reset } = methods;
-
-  const onSubmit = async (data: any) => {
-    successSnackbar("Password Created Successfully!");
-    reset();
-  };
   return (
     <Box
       display="flex"
@@ -99,6 +65,7 @@ const CreatePassword = () => {
               }}
               disableElevation
               type={"submit"}
+              loading={postCreatePasswordStatus?.isLoading}
             >
               Continue
             </LoadingButton>

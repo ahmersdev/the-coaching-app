@@ -10,8 +10,15 @@ import { pxToRem } from "@/utils/get-font-value";
 import useOtp from "./use-otp";
 
 const Otp = () => {
-  const { email, otp, setOtp, theme, onSubmit, postOtpVerificationStatus } =
-    useOtp();
+  const {
+    email,
+    otp,
+    setOtp,
+    theme,
+    onSubmit,
+    postOtpVerificationStatus,
+    postForgotOtpVerificationStatus,
+  } = useOtp();
 
   return (
     <Box
@@ -25,7 +32,7 @@ const Otp = () => {
       <ShortLogoIcon />
       <Box display={"flex"} flexDirection={"column"} textAlign={"center"}>
         <Typography variant={"h1"} fontWeight={800}>
-          Forget Password!?
+          Verify Yourself!
         </Typography>
         <Box display={"flex"} justifyContent={{ xs: "center", md: "end" }}>
           <LineIcon />
@@ -81,9 +88,12 @@ const Otp = () => {
             disableElevation
             type={"submit"}
             onClick={() => onSubmit(otp)}
-            loading={postOtpVerificationStatus?.isLoading}
+            loading={
+              postOtpVerificationStatus?.isLoading ||
+              postForgotOtpVerificationStatus?.isLoading
+            }
           >
-            Next
+            Submit
           </LoadingButton>
         </Grid>
       </Grid>

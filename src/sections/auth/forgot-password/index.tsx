@@ -2,44 +2,16 @@
 
 import { LineIcon, ShortLogoIcon } from "@/assets/icons";
 import { Box, Grid, Typography } from "@mui/material";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { FormProvider } from "@/components/react-hook-form";
 import { LoadingButton } from "@mui/lab";
 import Link from "next/link";
 import { AUTH } from "@/constants/routes";
-import {
-  forgotPasswordDataArray,
-  forgotPasswordFormDefaultValues,
-  forgotPasswordFormValidationSchema,
-} from "./forgot-password.data";
-import { useRouter } from "next/navigation";
-import { errorSnackbar, successSnackbar } from "@/utils/api";
-import { useLazyGetResendOtpQuery } from "@/services/auth";
+import { forgotPasswordDataArray } from "./forgot-password.data";
+import useForgotPassword from "./use-forgot-password";
 
 const ForgotPassword = () => {
-  const router: any = useRouter();
-
-  const methods: any = useForm({
-    resolver: yupResolver(forgotPasswordFormValidationSchema),
-    defaultValues: forgotPasswordFormDefaultValues,
-  });
-
-  const { handleSubmit } = methods;
-
-  const [resendOtpTrigger, resendOtpStatus] = useLazyGetResendOtpQuery();
-
-  const onSubmit = async (data: any) => {
-    try {
-      await resendOtpTrigger({
-        email: data?.email,
-      }).unwrap();
-      successSnackbar("Check your email!");
-      router.push(`${AUTH.OTP}?email=${data?.email}&forgot=true`);
-    } catch (error: any) {
-      errorSnackbar(error?.data?.message);
-    }
-  };
+  const { methods, handleSubmit, onSubmit, forgotPasswordOtpStatus } =
+    useForgotPassword();
 
   return (
     <Box
@@ -89,7 +61,7 @@ const ForgotPassword = () => {
               }}
               disableElevation
               type={"submit"}
-              loading={resendOtpStatus?.isLoading}
+              loading={forgotPasswordOtpStatus?.isLoading}
             >
               Next
             </LoadingButton>

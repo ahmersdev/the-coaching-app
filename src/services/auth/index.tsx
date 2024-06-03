@@ -42,6 +42,30 @@ export const authAPI = baseAPI.injectEndpoints({
         body,
       }),
     }),
+
+    getForgotPasswordOtp: builder.query({
+      query: (params: any) => ({
+        url: AUTH.FORGOT_PASSWORD_OTP,
+        method: "GET",
+        params,
+      }),
+    }),
+
+    postForgotOtpVerification: builder.mutation({
+      query: (body: any) => ({
+        url: AUTH.FORGOT_PASSWORD_VERIFY,
+        method: "POST",
+        body,
+      }),
+    }),
+
+    postCreatePassword: builder.mutation({
+      query: (body: any) => ({
+        url: AUTH.CREATE_PASSWORD,
+        method: "POST",
+        body,
+      }),
+    }),
   }),
 });
 
@@ -51,4 +75,7 @@ export const {
   usePostOtpVerificationMutation,
   useLazyGetResendOtpQuery,
   usePostSignInMutation,
+  useLazyGetForgotPasswordOtpQuery,
+  usePostForgotOtpVerificationMutation,
+  usePostCreatePasswordMutation,
 } = authAPI;
