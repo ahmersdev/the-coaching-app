@@ -37,6 +37,9 @@ export default function useMyProfile({ initialValues }: any) {
     formData.append("coach_id", initialValues?.coach_id);
     formData.append("full_name", data?.name);
     formData.append("phone", data?.phone);
+    formData.append("city", data?.city);
+    formData.append("postal_code", data?.postalCode);
+    formData.append("country", data?.country);
 
     try {
       await updateCoachProfileAboutTrigger(formData).unwrap();

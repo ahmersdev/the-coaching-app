@@ -5,7 +5,7 @@ import { Box, Button, Grid, Typography } from "@mui/material";
 import { FormProvider, RHFTextField } from "@/components/react-hook-form";
 import { LoadingButton } from "@mui/lab";
 import Link from "next/link";
-import { AUTH } from "@/constants/routes";
+import { AUTH, SALE_SITE } from "@/constants/routes";
 import { signUpDataArray } from "./sign-up.data";
 import { ForgotPasswordIcon } from "@/assets/icons";
 import { InputAdornment } from "@mui/material";
@@ -253,6 +253,20 @@ const SignUp = () => {
             fontWeight={700}
           >
             Sign In
+          </Typography>
+        </Link>
+        <Typography variant={"body1"} component={"span"} fontWeight={700}>
+          {" "}
+          |{" "}
+        </Typography>
+        <Link href={SALE_SITE.HOME}>
+          <Typography
+            variant={"body1"}
+            component={"span"}
+            color={"primary.600"}
+            fontWeight={700}
+          >
+            Back to Home
           </Typography>
         </Link>
       </Typography>

@@ -5,7 +5,7 @@ import { Box, Grid, Typography } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { LineIcon, ShortLogoIcon } from "@/assets/icons";
 import Link from "next/link";
-import { AUTH } from "@/constants/routes";
+import { AUTH, SALE_SITE } from "@/constants/routes";
 import useCreatePassword from "./use-create-password";
 
 const CreatePassword = () => {
@@ -73,11 +73,32 @@ const CreatePassword = () => {
         </Grid>
       </FormProvider>
 
-      <Link href={AUTH?.SIGN_IN}>
-        <Typography variant={"h6"} color={"primary.600"}>
-          Back to SignIn
+      <Typography variant={"body2"} my={2}>
+        <Link href={AUTH.SIGN_IN}>
+          <Typography
+            variant={"body1"}
+            component={"span"}
+            color={"primary.600"}
+            fontWeight={700}
+          >
+            Back to Sign In
+          </Typography>
+        </Link>
+        <Typography variant={"body1"} component={"span"} fontWeight={700}>
+          {" "}
+          |{" "}
         </Typography>
-      </Link>
+        <Link href={SALE_SITE.HOME}>
+          <Typography
+            variant={"body1"}
+            component={"span"}
+            color={"primary.600"}
+            fontWeight={700}
+          >
+            Back to Home
+          </Typography>
+        </Link>
+      </Typography>
 
       <Typography
         variant={"body2"}
