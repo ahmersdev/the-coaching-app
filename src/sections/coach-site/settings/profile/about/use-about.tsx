@@ -39,6 +39,9 @@ export default function useAbout({ initialValues }: any) {
     if (data?.media !== initialValues?.intro) {
       formData.append("intro", data?.media);
     }
+    if (data?.profilePicture !== initialValues?.profile_picture) {
+      formData.append("profile_picture", data?.profilePicture);
+    }
 
     try {
       await updateCoachProfileAboutTrigger(formData).unwrap();

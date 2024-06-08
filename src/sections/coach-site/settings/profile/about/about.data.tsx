@@ -1,14 +1,20 @@
-import { RHFTextField, RHFUploadFile } from "@/components/react-hook-form";
+import {
+  RHFPicture,
+  RHFTextField,
+  RHFUploadFile,
+} from "@/components/react-hook-form";
 import * as Yup from "yup";
 
 export const aboutFormValidationSchema: any = Yup?.object()?.shape({
   bio: Yup?.string()?.trim()?.required("Bio is Required"),
   media: Yup?.mixed()?.nullable()?.required("Video is Required"),
+  profilePicture: Yup?.mixed()?.nullable()?.required("Video is Required"),
 });
 
 export const aboutFormDefaultValues: any = ({ initialValues }: any) => ({
   bio: initialValues?.bio ?? "",
   media: initialValues?.intro ?? null,
+  profilePicture: initialValues?.profile_picture ?? null,
 });
 
 export const aboutDataArray = [
@@ -29,6 +35,14 @@ export const aboutDataArray = [
       name: "media",
     },
     component: RHFUploadFile,
+    md: 5,
+  },
+  {
+    id: 3,
+    componentProps: {
+      name: "profilePicture",
+    },
+    component: RHFPicture,
     md: 5,
   },
 ];

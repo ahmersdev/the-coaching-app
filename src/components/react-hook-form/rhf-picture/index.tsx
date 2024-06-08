@@ -1,9 +1,8 @@
-import { Box, Chip, Typography, useTheme } from "@mui/material";
+import { Avatar, Box, Chip, Typography, useTheme } from "@mui/material";
 import { useFormContext, Controller } from "react-hook-form";
-import { UploadFileIcon } from "@/assets/icons";
-import { pxToRem } from "@/utils/get-font-value";
+import { UploadImageIcon } from "@/assets/icons";
 
-export default function RHFUploadFile({
+export default function RHFPicture({
   name,
   required,
   borderRadius = 2,
@@ -46,37 +45,29 @@ export default function RHFUploadFile({
             >
               <Box display={"flex"} alignItems={"center"} gap={1}>
                 {isFileInstance(field.value) ? (
-                  <video
+                  <Avatar
                     src={URL.createObjectURL(field.value)}
-                    width={52}
-                    height={52}
-                    autoPlay
-                    muted
-                    playsInline
-                    loop
-                    style={{ borderRadius: pxToRem(12), objectFit: "cover" }}
+                    alt={"Uploaded"}
+                    variant={"rounded"}
+                    sx={{ width: 52, height: 52 }}
                   />
                 ) : isStringUrl(field.value) ? (
-                  <video
+                  <Avatar
                     src={field.value}
-                    width={52}
-                    height={52}
-                    autoPlay
-                    muted
-                    playsInline
-                    loop
-                    style={{ borderRadius: pxToRem(12), objectFit: "cover" }}
+                    alt={"Uploaded"}
+                    variant={"rounded"}
+                    sx={{ width: 52, height: 52 }}
                   />
                 ) : (
-                  <UploadFileIcon />
+                  <UploadImageIcon />
                 )}
                 <Typography variant={"h6"} fontWeight={600} color={"grey.100"}>
-                  {other?.label ?? "Introductory Video"}
+                  {other?.label ?? "Add Your Image"}
                 </Typography>
               </Box>
 
               <Chip
-                label={"Upload Video"}
+                label={"Upload Image"}
                 sx={{
                   color: "grey.100",
                   border: "1px dashed",
@@ -89,7 +80,7 @@ export default function RHFUploadFile({
 
           <input
             type="file"
-            accept="video/*"
+            accept="image/*"
             disabled={other?.disabled}
             id={name}
             onChange={(event: any) => field.onChange(event?.target?.files?.[0])}
