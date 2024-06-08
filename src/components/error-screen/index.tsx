@@ -16,10 +16,10 @@ export default function ErrorScreen() {
       borderRadius={3}
       height={"80vh"}
     >
-      <Typography variant={"h1"} color={"error.main"}>
+      <Typography variant={"h1"} color={"grey.100"}>
         OOPS! 😖
       </Typography>
-      <Typography variant={"h2"} color={"error.main"}>
+      <Typography variant={"h2"} color={"grey.100"}>
         Something Went Wrong
       </Typography>
       <Button

@@ -1,15 +1,22 @@
 import { NotificationIcon } from "@/assets/icons";
-import { Avatar, Badge, Box, Stack, Typography } from "@mui/material";
-import { usePathname } from "next/navigation";
-import { useState } from "react";
+import {
+  Avatar,
+  Badge,
+  Box,
+  CircularProgress,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { StyledBadge, headerTitle } from "./header.data";
 import MenuIcon from "@mui/icons-material/Menu";
 import DrawerNavbar from "../drawer-navbar";
+import { getInitials } from "@/utils/avatar";
+import useHeader from "./use-header";
+import PersonIcon from "@mui/icons-material/Person";
 
 const Header = () => {
-  const pathName = usePathname();
-
-  const [open, setOpen] = useState(false);
+  const { open, setOpen, pathName, isLoading, isFetching, isError, data } =
+    useHeader();
 
   return (
     <>
@@ -58,11 +65,27 @@ const Header = () => {
               anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
               variant="dot"
             >
-              <Avatar
-                alt="Profile"
-                src="https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg"
-                sx={{ width: 38, height: 38 }}
-              />
+              {isLoading || isFetching ? (
+                <CircularProgress size={38} />
+              ) : (
+                <Avatar
+                  alt={"Profile"}
+                  sx={{
+                    width: 38,
+                    height: 38,
+                    bgcolor: "info.main",
+                  }}
+                  src={data?.coach?.profile_picture ?? ""}
+                >
+                  {isError ? (
+                    <PersonIcon sx={{ fontSize: 20 }} />
+                  ) : (
+                    <Typography variant="body2">
+                      {getInitials(data?.coach?.full_name)}
+                    </Typography>
+                  )}
+                </Avatar>
+              )}
             </StyledBadge>
           </Stack>
         </Box>
