@@ -52,3 +52,4 @@ export { default as WorkoutDayIcon } from "./workout-day-icon";
 export { default as MacroIcon } from "./macro-icon";
 export { default as ProgressIcon } from "./progress-icon";
 export { default as ClientsImagesIcon } from "./clients-images-icon";
+export { default as StripPremiumPlan } from "./stripe-premium-plan";

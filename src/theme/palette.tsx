@@ -111,6 +111,7 @@ const COMMON = {
     footer: "#1C122C",
     bg: "#0E0824",
     text: "#0D0D12",
+    stripe: "#6927DA26",
   },
 
   primary: { ...PRIMARY, contrastText: "#fff" },
