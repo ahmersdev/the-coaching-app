@@ -42,8 +42,8 @@ export default function useOtp() {
     } else {
       try {
         await postOtpVerificationTrigger(updatedData).unwrap();
-        successSnackbar("Verification Successful! Sign In to Continue");
-        router.push(AUTH.SIGN_IN);
+        successSnackbar("Verification Successful! Please Buy Plan");
+        router.push(AUTH.STRIPE);
       } catch (error: any) {
         errorSnackbar(error?.data?.message);
         setOtp(null);

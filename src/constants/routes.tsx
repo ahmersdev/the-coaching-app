@@ -14,7 +14,8 @@ export const AUTH = {
   SIGN_UP: `/sign-up`,
   FORGOT_PASSWORD: `/forgot-password`,
   CREATE_PASSWORD: `/create-password`,
-  OTP: `otp`,
+  OTP: `/otp`,
+  STRIPE: "/stripe",
 };
 
 export const SALE_SITE = {
