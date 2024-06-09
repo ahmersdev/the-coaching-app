@@ -19,7 +19,7 @@ export default function Stripe() {
   const router: any = useRouter();
 
   const stripeHandler = () => {
-    router.push("https://buy.stripe.com/dR63cG0LK20b0gw3cc");
+    router.push("https://buy.stripe.com/test_dR6eYvbsj4vJ8Cs9AA");
   };
 
   return (
