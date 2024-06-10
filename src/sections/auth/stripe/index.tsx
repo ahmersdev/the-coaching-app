@@ -19,6 +19,7 @@ import {
   useUpdateStripeIdMutation,
 } from "@/services/auth";
 import { errorSnackbar, successSnackbar } from "@/utils/api";
+import { STRIPE_URL } from "@/config";
 
 export default function Stripe() {
   const router: any = useRouter();
@@ -45,12 +46,16 @@ export default function Stripe() {
       ).unwrap();
       if (response) {
         const stripeData = { stripe_id: response?.id, user_email: email };
-        await updateStripeIdTrigger(stripeData).unwrap();
-        successSnackbar("Please Make Payment!");
-        router.push("https://buy.stripe.com/test_dR6eYvbsj4vJ8Cs9AA");
+        try {
+          await updateStripeIdTrigger(stripeData).unwrap();
+          successSnackbar("Please Make Payment!");
+          router.push(STRIPE_URL);
+        } catch (e: any) {
+          errorSnackbar(e?.data?.message);
+        }
       }
-    } catch (error) {
-      errorSnackbar(error);
+    } catch (error: any) {
+      errorSnackbar(error?.data?.message);
     }
   };
 

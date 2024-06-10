@@ -75,15 +75,11 @@ export const authAPI = baseAPI.injectEndpoints({
 
     postCreateStripeCustomer: builder.mutation({
       queryFn: async (body: any) => {
-        try {
-          const customer = await stripe.customers.create({
-            email: body.email,
-            name: body.name,
-          });
-          return { data: customer };
-        } catch (error: any) {
-          return { error: { status: 500, data: error.message } };
-        }
+        const customer = await stripe.customers.create({
+          email: body.email,
+          name: body.name,
+        });
+        return { data: customer };
       },
     }),
 
