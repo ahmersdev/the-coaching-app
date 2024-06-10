@@ -13,13 +13,45 @@ import { PricingList } from "./stripe.data";
 import { pxToRem } from "@/utils/get-font-value";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { LoadingButton } from "@mui/lab";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import {
+  usePostCreateStripeCustomerMutation,
+  useUpdateStripeIdMutation,
+} from "@/services/auth";
+import { errorSnackbar, successSnackbar } from "@/utils/api";
 
 export default function Stripe() {
   const router: any = useRouter();
 
-  const stripeHandler = () => {
-    router.push("https://buy.stripe.com/test_dR6eYvbsj4vJ8Cs9AA");
+  const searchParams = useSearchParams();
+
+  const email = searchParams.get("email");
+  const name = searchParams.get("name");
+
+  const [postCreateStripeCustomerTrigger, postCreateStripeCustomerStatus] =
+    usePostCreateStripeCustomerMutation();
+
+  const [updateStripeIdTrigger, updateStripeIdStatus] =
+    useUpdateStripeIdMutation();
+
+  const stripeHandler = async () => {
+    const updatedData = {
+      email,
+      name,
+    };
+    try {
+      const response = await postCreateStripeCustomerTrigger(
+        updatedData
+      ).unwrap();
+      if (response) {
+        const stripeData = { stripe_id: response?.id, user_email: email };
+        await updateStripeIdTrigger(stripeData).unwrap();
+        successSnackbar("Please Make Payment!");
+        router.push("https://buy.stripe.com/test_dR6eYvbsj4vJ8Cs9AA");
+      }
+    } catch (error) {
+      errorSnackbar(error);
+    }
   };
 
   return (
@@ -90,10 +122,17 @@ export default function Stripe() {
             borderRadius: 25,
             border: "1px solid",
             borderColor: "primary.main",
+            "&.Mui-disabled": {
+              bgcolor: "primary.main",
+            },
           }}
           disableElevation
           type={"button"}
           onClick={stripeHandler}
+          loading={
+            postCreateStripeCustomerStatus?.isLoading ||
+            updateStripeIdStatus?.isLoading
+          }
         >
           Buy Now
         </LoadingButton>

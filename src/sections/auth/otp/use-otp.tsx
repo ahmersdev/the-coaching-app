@@ -13,6 +13,7 @@ export default function useOtp() {
 
   const searchParams = useSearchParams();
   const email = searchParams.get("email");
+  const name = searchParams.get("name");
   const forgot = searchParams.get("forgot");
   const router: any = useRouter();
 
@@ -43,7 +44,7 @@ export default function useOtp() {
       try {
         await postOtpVerificationTrigger(updatedData).unwrap();
         successSnackbar("Verification Successful! Please Buy Plan");
-        router.push(AUTH.STRIPE);
+        router.push(`${AUTH.STRIPE}?email=${email}&name=${name}`);
       } catch (error: any) {
         errorSnackbar(error?.data?.message);
         setOtp(null);

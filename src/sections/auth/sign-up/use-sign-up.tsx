@@ -193,7 +193,7 @@ export default function useSignUp() {
     try {
       await postRegisterCoachTrigger(updatedData).unwrap();
       successSnackbar("Please, Check Email for Verification Code!");
-      router.push(`${AUTH.OTP}?email=${data?.email}`);
+      router.push(`${AUTH.OTP}?email=${data?.email}&name=${data.fullName}`);
     } catch (error: any) {
       errorSnackbar(error?.data?.message);
     }
