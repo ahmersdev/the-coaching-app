@@ -18,6 +18,8 @@ const Otp = () => {
     onSubmit,
     postOtpVerificationStatus,
     postForgotOtpVerificationStatus,
+    postCreateStripeCustomerStatus,
+    updateStripeIdStatus,
   } = useOtp();
 
   return (
@@ -90,7 +92,9 @@ const Otp = () => {
             onClick={() => onSubmit(otp)}
             loading={
               postOtpVerificationStatus?.isLoading ||
-              postForgotOtpVerificationStatus?.isLoading
+              postForgotOtpVerificationStatus?.isLoading ||
+              postCreateStripeCustomerStatus?.isLoading ||
+              updateStripeIdStatus?.isLoading
             }
           >
             Submit

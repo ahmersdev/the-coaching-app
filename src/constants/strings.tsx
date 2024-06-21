@@ -12,4 +12,7 @@ export const NOTISTACK_VARIANTS: {
 
 export const USER_ROLES = { COACH: "coach", ADMIN: "admin" };
 
-export const STATUS_403 = 403;
+export const STATUS_CODES = {
+  CODE_403: 403,
+  CODE_422: 422,
+};

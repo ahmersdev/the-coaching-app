@@ -90,6 +90,15 @@ export const authAPI = baseAPI.injectEndpoints({
         body,
       }),
     }),
+
+    getStripeCustomerSubscriptions: builder.mutation({
+      queryFn: async ({ body }: any) => {
+        const subscriptions = await stripe.subscriptions.list({
+          customer: body?.customerId,
+        });
+        return { data: subscriptions };
+      },
+    }),
   }),
 });
 
@@ -104,4 +113,5 @@ export const {
   usePostCreatePasswordMutation,
   usePostCreateStripeCustomerMutation,
   useUpdateStripeIdMutation,
+  useGetStripeCustomerSubscriptionsMutation,
 } = authAPI;

@@ -4,8 +4,10 @@ import { AUTH } from "@/constants/routes";
 import { useRouter, useSearchParams } from "next/navigation";
 import { errorSnackbar, successSnackbar } from "@/utils/api";
 import {
+  usePostCreateStripeCustomerMutation,
   usePostForgotOtpVerificationMutation,
   usePostOtpVerificationMutation,
+  useUpdateStripeIdMutation,
 } from "@/services/auth";
 
 export default function useOtp() {
@@ -25,6 +27,12 @@ export default function useOtp() {
   const [postForgotOtpVerificationTrigger, postForgotOtpVerificationStatus] =
     usePostForgotOtpVerificationMutation();
 
+  const [postCreateStripeCustomerTrigger, postCreateStripeCustomerStatus] =
+    usePostCreateStripeCustomerMutation();
+
+  const [updateStripeIdTrigger, updateStripeIdStatus] =
+    useUpdateStripeIdMutation();
+
   const onSubmit = async (data: any) => {
     const updatedData = {
       code: data,
@@ -42,9 +50,32 @@ export default function useOtp() {
       }
     } else {
       try {
-        await postOtpVerificationTrigger(updatedData).unwrap();
-        successSnackbar("Verification Successful! Please Buy Plan");
-        router.push(`${AUTH.STRIPE}?email=${email}&name=${name}`);
+        const resOtp: any = await postOtpVerificationTrigger(
+          updatedData
+        ).unwrap();
+        if (resOtp) {
+          const updatedDataCreateStripe = {
+            email,
+            name,
+          };
+          try {
+            const response = await postCreateStripeCustomerTrigger(
+              updatedDataCreateStripe
+            ).unwrap();
+            if (response) {
+              const stripeData = { stripe_id: response?.id, user_email: email };
+              try {
+                await updateStripeIdTrigger(stripeData).unwrap();
+              } catch (errorUpdate: any) {
+                errorSnackbar(errorUpdate?.data?.message);
+              }
+            }
+          } catch (errorCreate: any) {
+            errorSnackbar(errorCreate?.data?.message);
+          }
+          successSnackbar("Verification Successful! Please Buy Plan");
+          router.push(`${AUTH.STRIPE}?email=${email}&name=${name}`);
+        }
       } catch (error: any) {
         errorSnackbar(error?.data?.message);
         setOtp(null);
@@ -60,5 +91,7 @@ export default function useOtp() {
     onSubmit,
     postOtpVerificationStatus,
     postForgotOtpVerificationStatus,
+    postCreateStripeCustomerStatus,
+    updateStripeIdStatus,
   };
 }

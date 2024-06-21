@@ -13,51 +13,11 @@ import { PricingList } from "./stripe.data";
 import { pxToRem } from "@/utils/get-font-value";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { LoadingButton } from "@mui/lab";
-import { useRouter, useSearchParams } from "next/navigation";
-import {
-  usePostCreateStripeCustomerMutation,
-  useUpdateStripeIdMutation,
-} from "@/services/auth";
-import { errorSnackbar, successSnackbar } from "@/utils/api";
+import { useRouter } from "next/navigation";
 import { STRIPE_URL } from "@/config";
 
 export default function Stripe() {
   const router: any = useRouter();
-
-  const searchParams = useSearchParams();
-
-  const email = searchParams.get("email");
-  const name = searchParams.get("name");
-
-  const [postCreateStripeCustomerTrigger, postCreateStripeCustomerStatus] =
-    usePostCreateStripeCustomerMutation();
-
-  const [updateStripeIdTrigger, updateStripeIdStatus] =
-    useUpdateStripeIdMutation();
-
-  const stripeHandler = async () => {
-    const updatedData = {
-      email,
-      name,
-    };
-    try {
-      const response = await postCreateStripeCustomerTrigger(
-        updatedData
-      ).unwrap();
-      if (response) {
-        const stripeData = { stripe_id: response?.id, user_email: email };
-        try {
-          await updateStripeIdTrigger(stripeData).unwrap();
-          successSnackbar("Please Make Payment!");
-          router.push(STRIPE_URL);
-        } catch (e: any) {
-          errorSnackbar(e?.data?.message);
-        }
-      }
-    } catch (error: any) {
-      errorSnackbar(error?.data?.message);
-    }
-  };
 
   return (
     <Box
@@ -127,17 +87,10 @@ export default function Stripe() {
             borderRadius: 25,
             border: "1px solid",
             borderColor: "primary.main",
-            "&.Mui-disabled": {
-              bgcolor: "primary.main",
-            },
           }}
           disableElevation
           type={"button"}
-          onClick={stripeHandler}
-          loading={
-            postCreateStripeCustomerStatus?.isLoading ||
-            updateStripeIdStatus?.isLoading
-          }
+          onClick={() => router.push(STRIPE_URL)}
         >
           Buy Now
         </LoadingButton>
