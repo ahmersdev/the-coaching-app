@@ -99,6 +99,11 @@ export default function useSignUp() {
       return;
     }
 
+    if (/\s/.test(username)) {
+      setErrorFields({ username: "Username cannot contain spaces" });
+      return;
+    }
+
     try {
       const res = await getUsernameTrigger({
         username,
