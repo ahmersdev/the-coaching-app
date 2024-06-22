@@ -92,9 +92,9 @@ export const authAPI = baseAPI.injectEndpoints({
     }),
 
     getStripeCustomerSubscriptions: builder.mutation({
-      queryFn: async ({ body }: any) => {
+      queryFn: async ({ customerId }: any) => {
         const subscriptions = await stripe.subscriptions.list({
-          customer: body?.customerId,
+          customer: customerId,
         });
         return { data: subscriptions };
       },

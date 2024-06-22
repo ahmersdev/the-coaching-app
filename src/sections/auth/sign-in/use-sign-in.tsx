@@ -73,7 +73,7 @@ export default function useSignIn() {
       if (responseSignIn) {
         const subscriptionData: any =
           await getStripeCustomerSubscriptionsTrigger({
-            customerId: responseSignIn?.coach?.stripe_id,
+            customerId: responseSignIn.coach.stripe_id,
           });
 
         if (subscriptionData?.data?.data?.length > 0) {
