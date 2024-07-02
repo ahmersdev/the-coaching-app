@@ -1,11 +1,5 @@
 import { AUTH } from "@/constants/endpoints";
 import { baseAPI } from "../base-api";
-import Stripe from "stripe";
-import { STRIPE_PRIVATE_KEY } from "@/config";
-
-const stripe = new Stripe(STRIPE_PRIVATE_KEY, {
-  apiVersion: "2024-04-10",
-});
 
 export const authAPI = baseAPI.injectEndpoints({
   endpoints: (builder) => ({
@@ -72,33 +66,6 @@ export const authAPI = baseAPI.injectEndpoints({
         body,
       }),
     }),
-
-    postCreateStripeCustomer: builder.mutation({
-      queryFn: async (body: any) => {
-        const customer = await stripe.customers.create({
-          email: body.email,
-          name: body.name,
-        });
-        return { data: customer };
-      },
-    }),
-
-    updateStripeId: builder.mutation({
-      query: (body: any) => ({
-        url: AUTH.UPDATE_STRIPE,
-        method: "POST",
-        body,
-      }),
-    }),
-
-    getStripeCustomerSubscriptions: builder.mutation({
-      queryFn: async ({ customerId }: any) => {
-        const subscriptions = await stripe.subscriptions.list({
-          customer: customerId,
-        });
-        return { data: subscriptions };
-      },
-    }),
   }),
 });
 
@@ -111,7 +78,4 @@ export const {
   useLazyGetForgotPasswordOtpQuery,
   usePostForgotOtpVerificationMutation,
   usePostCreatePasswordMutation,
-  usePostCreateStripeCustomerMutation,
-  useUpdateStripeIdMutation,
-  useGetStripeCustomerSubscriptionsMutation,
 } = authAPI;

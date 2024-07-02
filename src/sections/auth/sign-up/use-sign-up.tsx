@@ -185,20 +185,20 @@ export default function useSignUp() {
 
   const onSubmit = async (data: any) => {
     const updatedData = {
-      username: data.username,
-      full_name: data.fullName,
-      email: data.email,
-      phone: data.phone,
-      city: data.city,
-      postal_code: data.postalCode,
-      country: data.country,
-      password: data.password,
+      username: data?.username,
+      full_name: data?.fullName,
+      email: data?.email,
+      phone: data?.phone,
+      city: data?.city,
+      postal_code: data?.postalCode,
+      country: data?.country,
+      password: data?.password,
     };
 
     try {
       await postRegisterCoachTrigger(updatedData).unwrap();
       successSnackbar("Please, Check Email for Verification Code!");
-      router.push(`${AUTH.OTP}?email=${data?.email}&name=${data.fullName}`);
+      router.push(`${AUTH.OTP}?email=${data?.email}`);
     } catch (error: any) {
       errorSnackbar(error?.data?.message);
     }

@@ -7,11 +7,14 @@ export const AUTH = {
   FORGOT_PASSWORD_VERIFY: `verifyVerificationCodeforForgetPassword`,
   CREATE_PASSWORD: `createCoachPassword`,
   SIGN_IN: `coachSignIn`,
-  UPDATE_STRIPE: `updateStripeID`,
 };
 
 export const COACH_SITE = {
   PROFILE: `fetchCoachDetails`,
   UPDATE_COACH: `updateCoach`,
   UPDATE_PASSWORD: `updateCoachPassword`,
+};
+
+export const STRIP = {
+  GET_SECRET: `getClientSecret`,
 };

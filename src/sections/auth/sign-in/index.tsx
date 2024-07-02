@@ -9,14 +9,8 @@ import { AUTH, SALE_SITE } from "@/constants/routes";
 import useSignIn from "./use-sign-in";
 
 const SignIn = () => {
-  const {
-    methods,
-    handleSubmit,
-    onSubmit,
-    signInDataArray,
-    postSignInStatus,
-    getStripeCustomerSubscriptionsStatus,
-  } = useSignIn();
+  const { methods, handleSubmit, onSubmit, signInDataArray, postSignInStatus } =
+    useSignIn();
 
   return (
     <Box
@@ -71,10 +65,7 @@ const SignIn = () => {
               }}
               disableElevation
               type={"submit"}
-              loading={
-                postSignInStatus?.isLoading ||
-                getStripeCustomerSubscriptionsStatus?.isLoading
-              }
+              loading={postSignInStatus?.isLoading}
             >
               Sign In
             </LoadingButton>

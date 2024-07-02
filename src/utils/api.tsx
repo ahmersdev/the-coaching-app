@@ -3,7 +3,7 @@ import { enqueueSnackbar } from "notistack";
 
 export const errorSnackbar = (message?: any) => {
   enqueueSnackbar(
-    Array?.isArray(message) ? message?.[0] : message ?? `Something went wrong`,
+    Array?.isArray(message) ? message?.[0] : message ?? `Something went wrong!`,
     {
       variant: NOTISTACK_VARIANTS?.ERROR,
     }

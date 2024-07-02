@@ -9,15 +9,18 @@ import {
   Typography,
 } from "@mui/material";
 import { ShortLogoIcon, StripPremiumPlan } from "@/assets/icons";
-import { PricingList } from "./stripe.data";
+import { PricingList } from "./plans.data";
 import { pxToRem } from "@/utils/get-font-value";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { LoadingButton } from "@mui/lab";
-import { useRouter } from "next/navigation";
-import { STRIPE_URL } from "@/config";
+import { useSearchParams } from "next/navigation";
+import { STRIPE } from "@/constants/routes";
+import Link from "next/link";
 
-export default function Stripe() {
-  const router: any = useRouter();
+export default function Plans() {
+  const searchParams = useSearchParams();
+
+  const email = searchParams.get("email");
 
   return (
     <Box
@@ -56,7 +59,7 @@ export default function Stripe() {
             Premium Plan
           </Typography>
           <Typography variant={"h4"} color={"text.100"} fontWeight={900}>
-            $12.99
+            $10.99
           </Typography>
         </Box>
 
@@ -79,21 +82,28 @@ export default function Stripe() {
           ))}
         </List>
 
-        <LoadingButton
-          variant={"contained"}
-          fullWidth
-          sx={{
-            color: "grey.100",
-            borderRadius: 25,
-            border: "1px solid",
-            borderColor: "primary.main",
+        <Link
+          href={{
+            pathname: STRIPE.PAYMENT,
+            query: { email },
           }}
-          disableElevation
-          type={"button"}
-          onClick={() => router.push(STRIPE_URL)}
+          style={{ width: "100%" }}
         >
-          Buy Now
-        </LoadingButton>
+          <LoadingButton
+            variant={"contained"}
+            fullWidth
+            sx={{
+              color: "grey.100",
+              borderRadius: 25,
+              border: "1px solid",
+              borderColor: "primary.main",
+            }}
+            disableElevation
+            type={"button"}
+          >
+            Buy Now
+          </LoadingButton>
+        </Link>
       </Box>
     </Box>
   );

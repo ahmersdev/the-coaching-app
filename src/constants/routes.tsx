@@ -15,7 +15,6 @@ export const AUTH = {
   FORGOT_PASSWORD: `/forgot-password`,
   CREATE_PASSWORD: `/create-password`,
   OTP: `/otp`,
-  STRIPE: "/stripe",
 };
 
 export const SALE_SITE = {
@@ -38,4 +37,9 @@ export const COACH_SITE = {
   CLIENTS_IMAGES: `/coach-client-images`,
   CLIENTS_IMAGES_OVERVIEW: `/coach-client-images/overview`,
   SETTINGS: `/coach-settings`,
+};
+
+export const STRIPE = {
+  PAYMENT: "/payment",
+  PLANS: "/plans",
 };

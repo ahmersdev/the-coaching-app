@@ -8,7 +8,6 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import {
-  useGetStripeCustomerSubscriptionsMutation,
   useLazyGetResendOtpQuery,
   usePostSignInMutation,
 } from "@/services/auth";
@@ -18,8 +17,7 @@ import Cookies from "js-cookie";
 import { useAppDispatch } from "@/store/store";
 import { logIn } from "@/store/auth";
 import { STATUS_CODES, USER_ROLES } from "@/constants/strings";
-import { AUTH, COACH_SITE, SYSTEM_ADMIN } from "@/constants/routes";
-import dayjs from "dayjs";
+import { AUTH, COACH_SITE, STRIPE, SYSTEM_ADMIN } from "@/constants/routes";
 
 export default function useSignIn() {
   const theme: any = useTheme();
@@ -55,11 +53,6 @@ export default function useSignIn() {
 
   const [resendOtpTrigger] = useLazyGetResendOtpQuery();
 
-  const [
-    getStripeCustomerSubscriptionsTrigger,
-    getStripeCustomerSubscriptionsStatus,
-  ] = useGetStripeCustomerSubscriptionsMutation();
-
   const onSubmit = async (data: any) => {
     const userAgent = navigator.userAgent;
     const updatedData = {
@@ -71,26 +64,6 @@ export default function useSignIn() {
     try {
       const responseSignIn: any = await postSignInTrigger(updatedData).unwrap();
       if (responseSignIn) {
-        const subscriptionData: any =
-          await getStripeCustomerSubscriptionsTrigger({
-            customerId: responseSignIn.coach.stripe_id,
-          });
-
-        if (subscriptionData?.data?.data?.length > 0) {
-          const currentPeriodEnd = dayjs.unix(
-            subscriptionData?.data?.data?.[0]?.current_period_end
-          );
-          const currentDate = dayjs();
-          if (currentDate?.isAfter(currentPeriodEnd)) {
-            errorSnackbar("Please Make Payment!");
-            router.push(`${AUTH.STRIPE}?email=${data?.email}`);
-            return;
-          }
-        } else {
-          errorSnackbar("Please Make Payment First");
-          router.push(`${AUTH.STRIPE}?email=${data?.email}`);
-          return;
-        }
         const encryptedToken = responseSignIn.session.authentication_token;
         Cookies.set("authentication_token", encryptedToken);
         dispatch(logIn(encryptedToken));
@@ -120,6 +93,11 @@ export default function useSignIn() {
         }
         return;
       }
+      if (error?.status === STATUS_CODES.CODE_422) {
+        errorSnackbar("Please Make Payment First");
+        router.push(`${STRIPE.PLANS}?email=${data?.email}`);
+        return;
+      }
       errorSnackbar(error?.data?.message);
     }
   };
@@ -130,6 +108,5 @@ export default function useSignIn() {
     onSubmit,
     signInDataArray,
     postSignInStatus,
-    getStripeCustomerSubscriptionsStatus,
   };
 }
