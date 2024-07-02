@@ -24,29 +24,29 @@ export default function CheckoutForm() {
       return;
     }
 
-    const { error, paymentIntent } = await stripe.confirmPayment({
-      elements,
-      confirmParams: {
-        return_url: `${window?.location?.origin}/${AUTH.SIGN_IN}`,
-      },
-      redirect: "if_required",
-    });
+    try {
+      const { error } = await stripe.confirmPayment({
+        elements,
+        confirmParams: {
+          return_url: `${window?.location?.origin}/${AUTH.SIGN_IN}`,
+        },
+      });
 
-    if (error) {
-      errorSnackbar(error?.message);
-    } else if (paymentIntent && paymentIntent?.status === "succeeded") {
+      if (error) {
+        errorSnackbar(error?.message);
+        return;
+      }
       successSnackbar("Payment Successful! Login to continue!");
-      router.push(AUTH.SIGN_IN);
-    } else {
-      errorSnackbar();
+    } catch (e: any) {
+      errorSnackbar(e?.message);
+    } finally {
+      setIsProcessing(false);
     }
-
-    setIsProcessing(false);
   };
 
   return (
-    <form id="payment-form" onSubmit={handleSubmit}>
-      <PaymentElement id="payment-element" />
+    <form onSubmit={handleSubmit}>
+      <PaymentElement />
 
       <LoadingButton
         variant={"contained"}
