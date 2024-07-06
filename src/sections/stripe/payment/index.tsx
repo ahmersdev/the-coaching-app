@@ -1,45 +1,17 @@
 "use client";
 
 import { STRIPE_PUBLIC_KEY } from "@/config";
-import { Box, useTheme } from "@mui/material";
+import { Box } from "@mui/material";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
-import { useGetClientSecretQuery } from "@/services/stripe";
-import { useSearchParams } from "next/navigation";
 import CheckoutForm from "./checkout-form";
 import { SkeletonForm } from "@/components/skeletons";
+import usePayment from "./use-payment";
 
 const stripePromise = loadStripe(STRIPE_PUBLIC_KEY);
 
 export default function Payment() {
-  const theme: any = useTheme();
-  const searchParams = useSearchParams();
-
-  const email = searchParams.get("email");
-
-  const params = { email };
-
-  const { data, isLoading, isFetching } = useGetClientSecretQuery(params);
-
-  const appearance: any = {
-    theme: "flat",
-    variables: {
-      colorPrimary: theme.palette.primary.main,
-      colorBackground: theme.palette.secondary[900],
-      colorText: theme.palette.grey[100],
-    },
-    rules: {
-      ".Input": {
-        border: 1.5,
-        borderColor: theme.palette.secondary[600],
-        backgroundColor: theme.palette.secondary[900],
-        color: theme.palette.grey[100],
-      },
-      ".Input:focus": {
-        borderColor: theme.palette.primary.main,
-      },
-    },
-  };
+  const { isLoading, isFetching, clientSecret, appearance } = usePayment();
 
   return (
     <Box
@@ -58,15 +30,12 @@ export default function Payment() {
         maxWidth={500}
         width={"100%"}
       >
-        {isLoading ||
-        isFetching ||
-        !!!stripePromise ||
-        !!!data?.client_secret ? (
+        {isLoading || isFetching || !!!stripePromise || !!!clientSecret ? (
           <SkeletonForm />
         ) : (
           <Elements
             stripe={stripePromise}
-            options={{ clientSecret: data?.client_secret, appearance }}
+            options={{ clientSecret, appearance }}
           >
             <CheckoutForm />
           </Elements>

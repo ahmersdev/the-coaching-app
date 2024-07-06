@@ -3,6 +3,11 @@ import { RHFTextField } from "@/components/react-hook-form";
 import { IconButton, InputAdornment } from "@mui/material";
 import * as Yup from "yup";
 
+export const INVOICE_STATUSES = {
+  OPEN: "open",
+  PAID: "paid",
+};
+
 export const signInFormValidationSchema = Yup?.object()?.shape({
   email: Yup?.string()?.trim()?.required("Email/Username is Required"),
   password: Yup?.string()?.trim()?.required("Password is Required"),

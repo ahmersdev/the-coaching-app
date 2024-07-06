@@ -1,46 +1,9 @@
-import { AUTH } from "@/constants/routes";
-import { errorSnackbar, successSnackbar } from "@/utils/api";
 import { LoadingButton } from "@mui/lab";
-import {
-  PaymentElement,
-  useElements,
-  useStripe,
-} from "@stripe/react-stripe-js";
-import { FormEvent, useState } from "react";
+import { PaymentElement } from "@stripe/react-stripe-js";
+import useCheckoutForm from "./use-checkout-form";
 
 export default function CheckoutForm() {
-  const [isProcessing, setIsProcessing] = useState(false);
-
-  const stripe = useStripe();
-  const elements = useElements();
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsProcessing(true);
-
-    if (!stripe || !elements) {
-      return;
-    }
-
-    try {
-      const { error } = await stripe.confirmPayment({
-        elements,
-        confirmParams: {
-          return_url: `${window?.location?.origin}/${AUTH.SIGN_IN}`,
-        },
-      });
-
-      if (error) {
-        errorSnackbar(error?.message);
-        return;
-      }
-      successSnackbar("Payment Successful! Login to continue!");
-    } catch (e: any) {
-      errorSnackbar(e?.message);
-    } finally {
-      setIsProcessing(false);
-    }
-  };
+  const { handleSubmit, isProcessing } = useCheckoutForm();
 
   return (
     <form onSubmit={handleSubmit}>

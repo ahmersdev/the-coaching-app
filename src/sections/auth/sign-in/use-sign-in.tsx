@@ -1,5 +1,6 @@
 import { useTheme } from "@mui/material";
 import {
+  INVOICE_STATUSES,
   getSignInDataArray,
   signInFormDefaultValues,
   signInFormValidationSchema,
@@ -64,20 +65,36 @@ export default function useSignIn() {
     try {
       const responseSignIn: any = await postSignInTrigger(updatedData).unwrap();
       if (responseSignIn) {
-        const encryptedToken = responseSignIn.session.authentication_token;
-        Cookies.set("authentication_token", encryptedToken);
-        dispatch(logIn(encryptedToken));
-        successSnackbar("Sign In Successful!");
-        if (responseSignIn?.session?.user_type === USER_ROLES.COACH) {
-          if (!responseSignIn.coach.intro) {
-            successSnackbar("Please Complete Your Profile!");
-            router.push(COACH_SITE.SETTINGS);
-          } else {
-            router.push(COACH_SITE.DASHBOARD);
+        if (responseSignIn?.latest_invoice?.status === INVOICE_STATUSES.PAID) {
+          const encryptedToken = responseSignIn.session.authentication_token;
+          Cookies.set("authentication_token", encryptedToken);
+          dispatch(logIn(encryptedToken));
+          successSnackbar("Sign In Successful!");
+          if (responseSignIn?.session?.user_type === USER_ROLES.COACH) {
+            if (!responseSignIn.coach.intro) {
+              successSnackbar("Please Complete Your Profile!");
+              router.push(COACH_SITE.SETTINGS);
+            } else {
+              router.push(COACH_SITE.DASHBOARD);
+            }
           }
-        }
-        if (responseSignIn.session.user_type === USER_ROLES.ADMIN) {
-          router.push(SYSTEM_ADMIN.DASHBOARD);
+          if (responseSignIn.session.user_type === USER_ROLES.ADMIN) {
+            router.push(SYSTEM_ADMIN.DASHBOARD);
+          }
+        } else if (
+          responseSignIn?.latest_invoice?.status === INVOICE_STATUSES.OPEN
+        ) {
+          Cookies.set(
+            "clientSecret",
+            responseSignIn?.latest_invoice?.client_secret
+          );
+          errorSnackbar("Please Make Payment First");
+          router.push(`${STRIPE.PLANS}?email=${data?.email}`);
+          return;
+        } else {
+          errorSnackbar("Please Make Payment First");
+          router.push(`${STRIPE.PLANS}?email=${data?.email}`);
+          return;
         }
       }
     } catch (error: any) {
