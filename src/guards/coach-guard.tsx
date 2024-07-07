@@ -17,7 +17,7 @@ export default function CoachGuard({ children }: CoachGuardProps) {
     const encryptedToken = getTokenFromCookies();
 
     if (!encryptedToken) {
-      errorSnackbar("Please Login to Continue.");
+      errorSnackbar("Session Expired! Login to Continue");
       router.push(AUTH.SIGN_IN);
       return false;
     }
