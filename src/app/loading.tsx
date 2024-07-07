@@ -1,5 +1,7 @@
-import { LoadingIcon } from "@/assets/icons";
+import { LoadingGif } from "@/assets/gifs";
+import { ShortLogoIcon } from "@/assets/icons";
 import { Box } from "@mui/material";
+import Image from "next/image";
 
 export default function Loading() {
   return (
@@ -49,7 +51,22 @@ export default function Loading() {
         borderRadius={"50%"}
         sx={{ opacity: 0.3, filter: "blur(140px)" }}
       />
-      <LoadingIcon />
+      <Box
+        display={"flex"}
+        justifyContent={"center"}
+        alignItems={"center"}
+        flexDirection={"column"}
+        gap={4}
+      >
+        <ShortLogoIcon />
+        <Image
+          src={LoadingGif}
+          alt={"The Coaching App"}
+          width={132}
+          height={24}
+          priority
+        />
+      </Box>
     </Box>
   );
 }
