@@ -6,6 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AUTH } from "@/constants/routes";
 import Loading from "@/app/loading";
+import { errorSnackbar } from "@/utils/api";
 
 export default function CoachGuard({ children }: CoachGuardProps) {
   const router = useRouter();
@@ -16,6 +17,7 @@ export default function CoachGuard({ children }: CoachGuardProps) {
     const encryptedToken = getTokenFromCookies();
 
     if (!encryptedToken) {
+      errorSnackbar("Please Login to Continue.");
       router.push(AUTH.SIGN_IN);
       return false;
     }
