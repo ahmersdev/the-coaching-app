@@ -13,25 +13,25 @@ export default function AuthGuard({ children }: AuthGuardProps) {
   const pathname = usePathname();
   const [isLoading, setIsLoading] = useState(true);
 
-  const checkAuth = () => {
-    const encryptedToken = getTokenFromCookies();
-
-    if (encryptedToken) {
-      errorSnackbar("Already Logged In!");
-      router.push(SALE_SITE.HOME);
-      return false;
-    }
-
-    return true;
-  };
+  const encryptedToken = getTokenFromCookies();
 
   useEffect(() => {
+    const checkAuth = () => {
+      if (encryptedToken) {
+        errorSnackbar("Already Logged In!");
+        router.push(SALE_SITE.HOME);
+        return false;
+      }
+
+      return true;
+    };
+
     setIsLoading(true);
     if (!checkAuth()) {
       return;
     }
     setIsLoading(false);
-  }, [pathname, checkAuth]);
+  }, [pathname, router, encryptedToken]);
 
   if (isLoading) return <Loading />;
 

@@ -13,25 +13,24 @@ export default function AdminGuard({ children }: AdminGuardProps) {
   const pathname = usePathname();
   const [isLoading, setIsLoading] = useState(true);
 
-  const checkAuth = () => {
-    const encryptedToken = getTokenFromCookies();
-
-    if (!encryptedToken) {
-      errorSnackbar("Session Expired! Login to Continue");
-      router.push(AUTH.SIGN_IN);
-      return false;
-    }
-
-    return true;
-  };
+  const encryptedToken = getTokenFromCookies();
 
   useEffect(() => {
+    const checkAuth = () => {
+      if (!encryptedToken) {
+        errorSnackbar("Session Expired! Login to Continue");
+        router.push(AUTH.SIGN_IN);
+        return false;
+      }
+
+      return true;
+    };
     setIsLoading(true);
     if (!checkAuth()) {
       return;
     }
     setIsLoading(false);
-  }, [pathname, checkAuth]);
+  }, [pathname, router, encryptedToken]);
 
   if (isLoading) return <Loading />;
 

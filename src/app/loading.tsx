@@ -1,4 +1,3 @@
-import { LoadingGif } from "@/assets/gifs";
 import { ShortLogoIcon } from "@/assets/icons";
 import { Box } from "@mui/material";
 import Image from "next/image";
@@ -60,11 +59,11 @@ export default function Loading() {
       >
         <ShortLogoIcon />
         <Image
-          src={LoadingGif}
+          src={"/loading-gif.gif"}
           alt={"The Coaching App"}
           width={132}
           height={24}
-          priority
+          unoptimized
         />
       </Box>
     </Box>

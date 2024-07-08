@@ -15,6 +15,10 @@ export const COACH_SITE = {
   UPDATE_PASSWORD: `updateCoachPassword`,
 };
 
-export const STRIP = {
+export const STRIPE = {
   GET_SECRET: `getClientSecret`,
+};
+
+export const GUARDS = {
+  SUBSCRIPTION_STATUS: `CheckSubscriptionStatus`,
 };
