@@ -9,6 +9,7 @@ export default function Loading() {
       justifyContent={"center"}
       alignItems={"center"}
       height={"100vh"}
+      bgcolor={"#0B0B12"}
     >
       <Box
         position={"absolute"}
