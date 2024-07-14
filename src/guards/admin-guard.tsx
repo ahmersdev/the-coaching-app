@@ -1,14 +1,14 @@
 "use client";
 
-import { AdminGuardProps } from "./guards.type";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AUTH } from "@/constants/routes";
 import Loading from "@/app/loading";
 import { errorSnackbar } from "@/utils/api";
 import { useAppSelector } from "@/store/store";
+import { IAdminGuardProps } from "./guards.interface";
 
-export default function AdminGuard({ children }: AdminGuardProps) {
+export default function AdminGuard({ children }: IAdminGuardProps) {
   const router = useRouter();
   const pathname = usePathname();
   const [isLoading, setIsLoading] = useState(true);

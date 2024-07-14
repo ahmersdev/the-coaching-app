@@ -1,6 +1,5 @@
 "use client";
 
-import { CoachGuardProps } from "./guards.type";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AUTH, STRIPE } from "@/constants/routes";
@@ -8,8 +7,9 @@ import Loading from "@/app/loading";
 import { errorSnackbar } from "@/utils/api";
 import { useLazyGetSubscriptionStatusQuery } from "@/services/guards";
 import { useAppSelector } from "@/store/store";
+import { ICoachGuardProps } from "./guards.interface";
 
-export default function CoachGuard({ children }: CoachGuardProps) {
+export default function CoachGuard({ children }: ICoachGuardProps) {
   const router = useRouter();
   const pathname = usePathname();
   const [isLoading, setIsLoading] = useState(true);
