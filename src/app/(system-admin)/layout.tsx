@@ -1,12 +1,13 @@
 "use client";
 
 import AdminGuard from "@/guards/admin-guard";
+import { IChildrenInterface } from "@/interfaces";
 import { Header, Navbar } from "@/layouts/admin-site";
 import store from "@/store/store";
 import { Box, Grid } from "@mui/material";
 import { Provider } from "react-redux";
 
-const AdminLayout = ({ children }: { children: React.ReactNode }) => {
+const AdminLayout = ({ children }: IChildrenInterface) => {
   return (
     <main style={{ background: "#23232a", color: "#f9fafb" }}>
       <Provider store={store}>

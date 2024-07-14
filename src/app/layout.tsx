@@ -4,6 +4,7 @@ import "./globals.css";
 import ThemeProvider from "@/theme";
 import Loader from "@/components/loader";
 import SnackbarProviderGlobal from "@/providers/snackbar";
+import { IChildrenInterface } from "@/interfaces";
 
 const mulish = Mulish({ subsets: ["latin"] });
 
@@ -12,11 +13,7 @@ export const metadata: Metadata = {
   description: "The Coaching App",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: IChildrenInterface) {
   return (
     <html lang="en">
       <body
