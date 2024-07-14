@@ -1,7 +1,9 @@
+import { IAssetsProps } from "@/interfaces";
+
 export const TwoPersonIcon = ({
   fill = "#F9FAFB",
   stroke = "#6927DA",
-}: any) => {
+}: IAssetsProps) => {
   return (
     <svg
       width="42"

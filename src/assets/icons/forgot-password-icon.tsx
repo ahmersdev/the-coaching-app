@@ -1,4 +1,6 @@
-export const ForgotPasswordIcon = ({ fill = "#6B7280" }: any) => {
+import { IAssetsProps } from "@/interfaces";
+
+export const ForgotPasswordIcon = ({ fill = "#6B7280" }: IAssetsProps) => {
   return (
     <svg
       width="24"

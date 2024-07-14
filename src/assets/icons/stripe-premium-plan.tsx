@@ -1,4 +1,9 @@
-const StripPremiumPlan = ({ fill = "#6927DA", stroke = "#F9FAFB" }: any) => {
+import { IAssetsProps } from "@/interfaces";
+
+const StripPremiumPlan = ({
+  fill = "#6927DA",
+  stroke = "#F9FAFB",
+}: IAssetsProps) => {
   return (
     <svg
       width="52"

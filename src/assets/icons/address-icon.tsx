@@ -1,4 +1,9 @@
-const AddressIcon = ({ fill = "#F9FAFB", stroke = "#6927DA" }: any) => {
+import { IAssetsProps } from "@/interfaces";
+
+const AddressIcon = ({
+  fill = "#F9FAFB",
+  stroke = "#6927DA",
+}: IAssetsProps) => {
   return (
     <svg
       width="42"

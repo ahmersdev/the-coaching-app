@@ -1,8 +1,10 @@
+import { ICustomProps } from "../assets.interface";
+
 const AlertDialogDeleteIcon = ({
   fill = "#FEF2F2",
   stroke1 = "#FFEBEE",
   stroke2 = "#F64C4C",
-}: any) => {
+}: ICustomProps) => {
   return (
     <svg
       width="46"

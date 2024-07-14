@@ -1,4 +1,6 @@
-const TableUpArrowIcon = ({ fill = "#F9FAFB" }: any) => {
+import { IAssetsProps } from "@/interfaces";
+
+const TableUpArrowIcon = ({ fill = "#F9FAFB" }: IAssetsProps) => {
   return (
     <svg
       width="12"

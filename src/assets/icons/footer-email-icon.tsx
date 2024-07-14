@@ -1,4 +1,6 @@
-const FooterEmailIcon = ({ fill = "#F7F2E7" }: any) => {
+import { IAssetsProps } from "@/interfaces";
+
+const FooterEmailIcon = ({ fill = "#F7F2E7" }: IAssetsProps) => {
   return (
     <svg
       width="22"

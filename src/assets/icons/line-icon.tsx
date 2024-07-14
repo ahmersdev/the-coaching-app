@@ -1,4 +1,6 @@
-const LineIcon = ({ fill = "#F64C4C" }: any) => {
+import { IAssetsProps } from "@/interfaces";
+
+const LineIcon = ({ fill = "#F64C4C" }: IAssetsProps) => {
   return (
     <svg
       width="186"

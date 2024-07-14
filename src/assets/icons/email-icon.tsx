@@ -1,4 +1,6 @@
-const EmailIcon = ({ fill = "#9CA3AF" }: any) => {
+import { IAssetsProps } from "@/interfaces";
+
+const EmailIcon = ({ fill = "#9CA3AF" }: IAssetsProps) => {
   return (
     <svg
       width="24"

@@ -1,4 +1,6 @@
-const ArrowBackIcon = ({ fill = "#F9FAFB" }: any) => {
+import { IAssetsProps } from "@/interfaces";
+
+const ArrowBackIcon = ({ fill = "#F9FAFB" }: IAssetsProps) => {
   return (
     <svg
       width="14"

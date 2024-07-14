@@ -1,4 +1,6 @@
-const DeleteIcon = ({ fill = "#EB6F70" }: any) => {
+import { IAssetsProps } from "@/interfaces";
+
+const DeleteIcon = ({ fill = "#EB6F70" }: IAssetsProps) => {
   return (
     <svg
       width="24"

@@ -1,4 +1,9 @@
-const DietDayIcon = ({ fill = "#F9FAFB", stroke = "#6927DA" }: any) => {
+import { IAssetsProps } from "@/interfaces";
+
+const DietDayIcon = ({
+  fill = "#F9FAFB",
+  stroke = "#6927DA",
+}: IAssetsProps) => {
   return (
     <svg
       width="42"

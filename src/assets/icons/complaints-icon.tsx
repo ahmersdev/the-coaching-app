@@ -1,4 +1,9 @@
-const ComplaintsIcon = ({ fill = "#9D9DA0", stroke = "#F9FAFB" }: any) => {
+import { IAssetsProps } from "@/interfaces";
+
+const ComplaintsIcon = ({
+  fill = "#9D9DA0",
+  stroke = "#F9FAFB",
+}: IAssetsProps) => {
   return (
     <svg
       width="22"

@@ -1,4 +1,6 @@
-const NextIcon = ({ fill = "#0B0B12" }: any) => {
+import { IAssetsProps } from "@/interfaces";
+
+const NextIcon = ({ fill = "#0B0B12" }: IAssetsProps) => {
   return (
     <svg
       width="16"

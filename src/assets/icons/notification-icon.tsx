@@ -1,4 +1,6 @@
-const NotificationIcon = ({ fill = "#23232A" }: any) => {
+import { IAssetsProps } from "@/interfaces";
+
+const NotificationIcon = ({ fill = "#23232A" }: IAssetsProps) => {
   return (
     <svg
       width="38"

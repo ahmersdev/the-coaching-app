@@ -1,4 +1,9 @@
-export const EyeIcon = ({ fill = "#0B0B12", stroke = "#F9FAFB" }: any) => {
+import { IAssetsProps } from "@/interfaces";
+
+export const EyeIcon = ({
+  fill = "#0B0B12",
+  stroke = "#F9FAFB",
+}: IAssetsProps) => {
   return (
     <svg
       width="32"

@@ -1,4 +1,6 @@
-const RotateLeftIcon = ({ fill = "#F9FAFB" }: any) => {
+import { IAssetsProps } from "@/interfaces";
+
+const RotateLeftIcon = ({ fill = "#F9FAFB" }: IAssetsProps) => {
   return (
     <svg
       width="22"

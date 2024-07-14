@@ -1,4 +1,6 @@
-const EyeWithoutBgIcon = ({ fill = "#6D6D71" }: any) => {
+import { IAssetsProps } from "@/interfaces";
+
+const EyeWithoutBgIcon = ({ fill = "#6D6D71" }: IAssetsProps) => {
   return (
     <svg
       width="20"

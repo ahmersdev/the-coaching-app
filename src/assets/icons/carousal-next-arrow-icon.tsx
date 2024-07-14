@@ -1,7 +1,9 @@
+import { IAssetsProps } from "@/interfaces";
+
 const CarousalNextArrowIcon = ({
   fill = "#8752E1",
   stroke = "#F9FAFB",
-}: any) => {
+}: IAssetsProps) => {
   return (
     <svg
       width="32"

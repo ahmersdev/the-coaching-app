@@ -1,4 +1,6 @@
-const ClientsIcon = ({ fill = "#9D9DA0" }: any) => {
+import { IAssetsProps } from "@/interfaces";
+
+const ClientsIcon = ({ fill = "#9D9DA0" }: IAssetsProps) => {
   return (
     <svg
       width="22"

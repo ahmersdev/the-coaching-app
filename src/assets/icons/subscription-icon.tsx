@@ -1,4 +1,6 @@
-const SubscriptionIcon = ({ fill = "#9CA3AF" }: any) => {
+import { IAssetsProps } from "@/interfaces";
+
+const SubscriptionIcon = ({ fill = "#9CA3AF" }: IAssetsProps) => {
   return (
     <svg
       width="20"

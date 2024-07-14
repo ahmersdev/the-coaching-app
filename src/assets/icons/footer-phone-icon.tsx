@@ -1,4 +1,6 @@
-const FooterPhoneIcon = ({ fill = "#F7F2E7" }: any) => {
+import { IAssetsProps } from "@/interfaces";
+
+const FooterPhoneIcon = ({ fill = "#F7F2E7" }: IAssetsProps) => {
   return (
     <svg
       width="22"

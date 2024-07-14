@@ -1,4 +1,6 @@
-const UploadImageIcon = ({ fill = "#6927DA" }: any) => {
+import { IAssetsProps } from "@/interfaces";
+
+const UploadImageIcon = ({ fill = "#6927DA" }: IAssetsProps) => {
   return (
     <svg
       width="52"
