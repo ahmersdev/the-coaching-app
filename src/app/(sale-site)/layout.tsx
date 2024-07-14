@@ -7,9 +7,9 @@ import "swiper/css/navigation";
 import { Provider } from "react-redux";
 import store from "@/store/store";
 import { Footer, Header, Navbar } from "@/layouts/sale-site";
-import { IChildrenInterface } from "@/interfaces";
+import { IChildrenProps } from "@/interfaces";
 
-const SaleSiteLayout = ({ children }: IChildrenInterface) => {
+const SaleSiteLayout = ({ children }: IChildrenProps) => {
   return (
     <main style={{ background: "#0B0B12", color: "#f9fafb" }}>
       <Provider store={store}>

@@ -9,9 +9,9 @@ import { Provider } from "react-redux";
 import store from "@/store/store";
 import { Header, Navbar } from "@/layouts/coach-site";
 import CoachGuard from "@/guards/coach-guard";
-import { IChildrenInterface } from "@/interfaces";
+import { IChildrenProps } from "@/interfaces";
 
-const CoachLayout = ({ children }: IChildrenInterface) => {
+const CoachLayout = ({ children }: IChildrenProps) => {
   return (
     <main style={{ background: "#23232a", color: "#f9fafb" }}>
       <Provider store={store}>

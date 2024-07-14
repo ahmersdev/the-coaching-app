@@ -4,7 +4,7 @@ import "./globals.css";
 import ThemeProvider from "@/theme";
 import Loader from "@/components/loader";
 import SnackbarProviderGlobal from "@/providers/snackbar";
-import { IChildrenInterface } from "@/interfaces";
+import { IChildrenProps } from "@/interfaces";
 
 const mulish = Mulish({ subsets: ["latin"] });
 
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   description: "The Coaching App",
 };
 
-export default function RootLayout({ children }: IChildrenInterface) {
+export default function RootLayout({ children }: IChildrenProps) {
   return (
     <html lang="en">
       <body
