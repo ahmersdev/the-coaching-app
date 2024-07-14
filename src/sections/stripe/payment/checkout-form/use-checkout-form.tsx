@@ -1,4 +1,4 @@
-import { AUTH } from "@/constants/routes";
+import { COACH_SITE } from "@/constants/routes";
 import { errorSnackbar, successSnackbar } from "@/utils/api";
 import { useElements, useStripe } from "@stripe/react-stripe-js";
 import { useRouter } from "next/navigation";
@@ -32,9 +32,9 @@ export default function useCheckoutForm() {
         return;
       }
       if (paymentIntent?.status === "succeeded") {
-        successSnackbar("Payment Successful! Login to continue!");
+        successSnackbar("Payment Successful!");
         Cookies.remove("clientSecret");
-        router.push(AUTH.SIGN_IN);
+        router.push(COACH_SITE.DASHBOARD);
       } else {
         errorSnackbar("Payment failed. Please try again.");
       }

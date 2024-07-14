@@ -1,6 +1,5 @@
 "use client";
 
-import { getTokenFromCookies } from "@/utils/auth";
 import { CoachGuardProps } from "./guards.type";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -8,27 +7,28 @@ import { AUTH, STRIPE } from "@/constants/routes";
 import Loading from "@/app/loading";
 import { errorSnackbar } from "@/utils/api";
 import { useLazyGetSubscriptionStatusQuery } from "@/services/guards";
+import { useAppSelector } from "@/store/store";
 
 export default function CoachGuard({ children }: CoachGuardProps) {
   const router = useRouter();
   const pathname = usePathname();
   const [isLoading, setIsLoading] = useState(true);
 
-  const encryptedToken = getTokenFromCookies();
+  const tokenSelector = useAppSelector((state) => state.auth.token);
 
   const [getSubscriptionStatusTrigger, getSubscriptionStatusStatus] =
     useLazyGetSubscriptionStatusQuery();
 
   useEffect(() => {
     const checkAuth = async () => {
-      if (!encryptedToken) {
+      if (!tokenSelector) {
         errorSnackbar("Session Expired! Login to Continue");
         router.push(AUTH.SIGN_IN);
         return;
       }
 
       const params = {
-        authentication_token: encryptedToken,
+        authentication_token: tokenSelector,
       };
       const res: any = await getSubscriptionStatusTrigger(params);
 
@@ -43,7 +43,7 @@ export default function CoachGuard({ children }: CoachGuardProps) {
 
     setIsLoading(true);
     checkAuth();
-  }, [pathname, encryptedToken, getSubscriptionStatusTrigger, router]);
+  }, [pathname, tokenSelector, getSubscriptionStatusTrigger, router]);
 
   if (
     isLoading ||

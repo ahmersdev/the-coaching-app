@@ -7,9 +7,14 @@ import {
   usePostForgotOtpVerificationMutation,
   usePostOtpVerificationMutation,
 } from "@/services/auth";
+import Cookies from "js-cookie";
+import { useAppDispatch } from "@/store/store";
+import { logIn } from "@/store/auth";
 
 export default function useOtp() {
   const [otp, setOtp] = useState<any>();
+
+  const dispatch: any = useAppDispatch();
 
   const searchParams = useSearchParams();
   const email = searchParams.get("email");
@@ -46,6 +51,9 @@ export default function useOtp() {
           updatedData
         ).unwrap();
         if (resOtp) {
+          const encryptedToken = resOtp.session.authentication_token;
+          Cookies.set("authentication_token", encryptedToken);
+          dispatch(logIn(encryptedToken));
           successSnackbar("Verification Successful! Please Buy Plan");
           router.push(`${STRIPE?.PLANS}?email=${email}`);
         }

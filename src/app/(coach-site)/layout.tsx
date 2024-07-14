@@ -14,7 +14,7 @@ const CoachLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <main style={{ background: "#23232a", color: "#f9fafb" }}>
       <Provider store={store}>
-        <CoachGuard>
+        {/* <CoachGuard> */}
           <Grid container>
             <Grid item xs={0} md={2} height={"100vh"} overflow={"hidden"}>
               <Navbar />
@@ -24,7 +24,7 @@ const CoachLayout = ({ children }: { children: React.ReactNode }) => {
               <Box py={2}>{children}</Box>
             </Grid>
           </Grid>
-        </CoachGuard>
+        {/* </CoachGuard> */}
       </Provider>
     </main>
   );

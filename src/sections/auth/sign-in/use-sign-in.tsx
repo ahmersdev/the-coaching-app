@@ -65,8 +65,8 @@ export default function useSignIn() {
     try {
       const responseSignIn: any = await postSignInTrigger(updatedData).unwrap();
       if (responseSignIn) {
+        const encryptedToken = responseSignIn.session.authentication_token;
         if (responseSignIn?.latest_invoice?.status === INVOICE_STATUSES.PAID) {
-          const encryptedToken = responseSignIn.session.authentication_token;
           Cookies.set("authentication_token", encryptedToken);
           dispatch(logIn(encryptedToken));
           successSnackbar("Sign In Successful!");
@@ -88,10 +88,14 @@ export default function useSignIn() {
             "clientSecret",
             responseSignIn?.latest_invoice?.client_secret
           );
+          Cookies.set("authentication_token", encryptedToken);
+          dispatch(logIn(encryptedToken));
           errorSnackbar("Please Make Payment First");
           router.push(`${STRIPE.PLANS}?email=${data?.email}`);
           return;
         } else {
+          Cookies.set("authentication_token", encryptedToken);
+          dispatch(logIn(encryptedToken));
           errorSnackbar("Please Make Payment First");
           router.push(`${STRIPE.PLANS}?email=${data?.email}`);
           return;

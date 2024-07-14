@@ -9,9 +9,9 @@ const Auth = ({ children }: { children: React.ReactNode }) => {
   return (
     <main style={{ background: "#0B0B12", color: "#f9fafb" }}>
       <Provider store={store}>
-        <AuthGuard>
+        {/* <AuthGuard> */}
           <AuthLayout>{children}</AuthLayout>
-        </AuthGuard>
+        {/* </AuthGuard> */}
       </Provider>
     </main>
   );

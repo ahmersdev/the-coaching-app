@@ -1,23 +1,23 @@
 "use client";
 
-import { getTokenFromCookies } from "@/utils/auth";
 import { AdminGuardProps } from "./guards.type";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AUTH } from "@/constants/routes";
 import Loading from "@/app/loading";
 import { errorSnackbar } from "@/utils/api";
+import { useAppSelector } from "@/store/store";
 
 export default function AdminGuard({ children }: AdminGuardProps) {
   const router = useRouter();
   const pathname = usePathname();
   const [isLoading, setIsLoading] = useState(true);
 
-  const encryptedToken = getTokenFromCookies();
+  const tokenSelector = useAppSelector((state) => state.auth.token);
 
   useEffect(() => {
     const checkAuth = () => {
-      if (!encryptedToken) {
+      if (!tokenSelector) {
         errorSnackbar("Session Expired! Login to Continue");
         router.push(AUTH.SIGN_IN);
         return false;
@@ -30,7 +30,7 @@ export default function AdminGuard({ children }: AdminGuardProps) {
       return;
     }
     setIsLoading(false);
-  }, [pathname, router, encryptedToken]);
+  }, [pathname, router, tokenSelector]);
 
   if (isLoading) return <Loading />;
 
