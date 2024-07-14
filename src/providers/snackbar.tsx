@@ -1,13 +1,9 @@
 "use client";
 
+import { IChildrenProps } from "@/interfaces";
 import { SnackbarProvider } from "notistack";
-import { ReactNode } from "react";
 
-export default function SnackbarProviderGlobal({
-  children,
-}: {
-  children: ReactNode;
-}) {
+export default function SnackbarProviderGlobal({ children }: IChildrenProps) {
   return (
     <SnackbarProvider
       preventDuplicate

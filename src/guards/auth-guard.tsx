@@ -7,9 +7,9 @@ import Loading from "@/app/loading";
 import { errorSnackbar } from "@/utils/api";
 import { useAppSelector } from "@/store/store";
 import { excludedAuthPaths } from "./guards.data";
-import { IAuthGuardProps } from "./guards.interface";
+import { IChildrenProps } from "@/interfaces";
 
-export default function AuthGuard({ children }: IAuthGuardProps) {
+export default function AuthGuard({ children }: IChildrenProps) {
   const router = useRouter();
   const pathname = usePathname();
   const [isLoading, setIsLoading] = useState(true);

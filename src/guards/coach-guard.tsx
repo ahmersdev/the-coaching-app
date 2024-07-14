@@ -7,9 +7,10 @@ import Loading from "@/app/loading";
 import { errorSnackbar } from "@/utils/api";
 import { useLazyGetSubscriptionStatusQuery } from "@/services/guards";
 import { useAppSelector } from "@/store/store";
-import { ICoachGuardProps } from "./guards.interface";
+import { ICoachResponseTypes } from "./guards.interface";
+import { IChildrenProps } from "@/interfaces";
 
-export default function CoachGuard({ children }: ICoachGuardProps) {
+export default function CoachGuard({ children }: IChildrenProps) {
   const router = useRouter();
   const pathname = usePathname();
   const [isLoading, setIsLoading] = useState(true);
@@ -30,7 +31,9 @@ export default function CoachGuard({ children }: ICoachGuardProps) {
       const params = {
         authentication_token: tokenSelector,
       };
-      const res: any = await getSubscriptionStatusTrigger(params);
+      const res: ICoachResponseTypes = await getSubscriptionStatusTrigger(
+        params
+      );
 
       if (res?.data?.subscription_status !== "active") {
         errorSnackbar("Subscription Expired! Buy Plan Again");

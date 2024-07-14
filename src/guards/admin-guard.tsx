@@ -6,9 +6,9 @@ import { AUTH } from "@/constants/routes";
 import Loading from "@/app/loading";
 import { errorSnackbar } from "@/utils/api";
 import { useAppSelector } from "@/store/store";
-import { IAdminGuardProps } from "./guards.interface";
+import { IChildrenProps } from "@/interfaces";
 
-export default function AdminGuard({ children }: IAdminGuardProps) {
+export default function AdminGuard({ children }: IChildrenProps) {
   const router = useRouter();
   const pathname = usePathname();
   const [isLoading, setIsLoading] = useState(true);
