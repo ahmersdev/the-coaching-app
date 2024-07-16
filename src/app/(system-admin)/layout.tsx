@@ -1,6 +1,5 @@
 "use client";
 
-import AdminGuard from "@/guards/admin-guard";
 import { IChildrenProps } from "@/interfaces";
 import { Header, Navbar } from "@/layouts/admin-site";
 import store from "@/store/store";
@@ -11,7 +10,6 @@ const AdminLayout = ({ children }: IChildrenProps) => {
   return (
     <main style={{ background: "#23232a", color: "#f9fafb" }}>
       <Provider store={store}>
-        {/* <AdminGuard> */}
         <Grid container>
           <Grid item xs={0} md={2} height={"100vh"} overflow={"hidden"}>
             <Navbar />
@@ -21,7 +19,6 @@ const AdminLayout = ({ children }: IChildrenProps) => {
             <Box py={2}>{children}</Box>
           </Grid>
         </Grid>
-        {/* </AdminGuard> */}
       </Provider>
     </main>
   );
