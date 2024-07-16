@@ -15,6 +15,7 @@ export default function AuthGuard({ children }: IChildrenProps) {
   const [isLoading, setIsLoading] = useState(true);
 
   const tokenSelector = useAppSelector((state) => state.auth.token);
+  const guardSelector = useAppSelector((state) => state.auth.guardCheck);
 
   useEffect(() => {
     const checkAuth = () => {
@@ -22,7 +23,7 @@ export default function AuthGuard({ children }: IChildrenProps) {
         return true;
       }
 
-      if (tokenSelector) {
+      if (tokenSelector && guardSelector) {
         errorSnackbar("Already Logged In!");
         router.push(SALE_SITE.HOME);
         return false;
