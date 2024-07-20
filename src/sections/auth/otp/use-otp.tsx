@@ -55,6 +55,7 @@ export default function useOtp() {
           Cookies.set("authentication_token", encryptedToken);
           dispatch(logIn(encryptedToken));
           successSnackbar("Verification Successful! Please Buy Plan");
+          Cookies.set("guardCheck", "false");
           router.push(`${STRIPE?.PLANS}?email=${email}`);
         }
       } catch (error: any) {

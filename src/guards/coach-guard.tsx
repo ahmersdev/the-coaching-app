@@ -9,6 +9,7 @@ import { useLazyGetSubscriptionStatusQuery } from "@/services/guards";
 import { useAppSelector } from "@/store/store";
 import { ICoachResponseTypes } from "./guards.interface";
 import { IChildrenProps } from "@/interfaces";
+import useSyncCookiesWithState from "@/hooks/use-sync-cookies";
 
 export default function CoachGuard({ children }: IChildrenProps) {
   const router = useRouter();
@@ -16,37 +17,57 @@ export default function CoachGuard({ children }: IChildrenProps) {
   const [isLoading, setIsLoading] = useState(true);
 
   const tokenSelector = useAppSelector((state) => state.auth.token);
+  const guardSelector = useAppSelector((state) => state.auth.guardCheck);
 
   const [getSubscriptionStatusTrigger, getSubscriptionStatusStatus] =
     useLazyGetSubscriptionStatusQuery();
 
+  useSyncCookiesWithState();
+
   useEffect(() => {
     const checkAuth = async () => {
-      if (!tokenSelector) {
+      if ((!tokenSelector && guardSelector === "true") || !guardSelector) {
         errorSnackbar("Session Expired! Login to Continue");
         router.push(AUTH.SIGN_IN);
         return;
       }
 
-      const params = {
-        authentication_token: tokenSelector,
-      };
-      const res: ICoachResponseTypes = await getSubscriptionStatusTrigger(
-        params
-      );
+      try {
+        const params = {
+          authentication_token: tokenSelector,
+        };
+        const res: ICoachResponseTypes = await getSubscriptionStatusTrigger(
+          params
+        );
 
-      if (res?.data?.subscription_status !== "active") {
-        errorSnackbar("Subscription Expired! Buy Plan Again");
-        router.push(STRIPE.PLANS);
-        return;
+        if (res?.data?.subscription_status !== "active") {
+          errorSnackbar("Subscription Expired! Buy Plan Again");
+          router.push(STRIPE.PLANS);
+          return;
+        }
+
+        setIsLoading(false);
+      } catch (error) {
+        errorSnackbar(
+          "Failed to verify subscription status. Please try again."
+        );
+        router.push(AUTH.SIGN_IN);
       }
-
-      setIsLoading(false);
     };
 
-    setIsLoading(true);
-    checkAuth();
-  }, [pathname, tokenSelector, getSubscriptionStatusTrigger, router]);
+    if (tokenSelector) {
+      setIsLoading(true);
+      checkAuth();
+    } else {
+      setIsLoading(false);
+    }
+  }, [
+    pathname,
+    tokenSelector,
+    getSubscriptionStatusTrigger,
+    router,
+    guardSelector,
+  ]);
 
   if (
     isLoading ||

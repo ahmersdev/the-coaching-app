@@ -10,9 +10,9 @@ const Auth = ({ children }: IChildrenProps) => {
   return (
     <main style={{ background: "#0B0B12", color: "#f9fafb" }}>
       <Provider store={store}>
-        {/* <AuthGuard> */}
-        <AuthLayout>{children}</AuthLayout>
-        {/* </AuthGuard> */}
+        <AuthGuard>
+          <AuthLayout>{children}</AuthLayout>
+        </AuthGuard>
       </Provider>
     </main>
   );

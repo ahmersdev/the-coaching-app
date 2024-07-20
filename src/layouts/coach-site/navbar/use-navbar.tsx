@@ -12,7 +12,9 @@ export default function useNavbar() {
 
   const handleLogout = () => {
     dispatch(logOut());
-    router.push(SALE_SITE.HOME);
+    setTimeout(() => {
+      router.push(SALE_SITE.HOME);
+    }, 100);
   };
 
   return { pathName, theme, handleLogout };

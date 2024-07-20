@@ -5,7 +5,7 @@ import { AuthState } from "./auth.interface";
 
 const initialState: AuthState = {
   token: getTokenFromCookies(),
-  guardCheck: true,
+  guardCheck: Cookies.get("guardCheck") === "false" ? "false" : "true",
 };
 
 const authSlice = createSlice({
@@ -18,9 +18,12 @@ const authSlice = createSlice({
     logOut: (state) => {
       state.token = "";
       Cookies.remove("authentication_token");
+      state.guardCheck = "true";
+      Cookies.remove("guardCheck");
     },
     setGuardCheck: (state, action) => {
       state.guardCheck = action.payload;
+      Cookies.set("guardCheck", action.payload ? "true" : "false");
     },
   },
 });

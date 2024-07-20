@@ -1,4 +1,4 @@
 export interface AuthState {
   token: string | null;
-  guardCheck: boolean;
+  guardCheck: "false" | "true" | string;
 }

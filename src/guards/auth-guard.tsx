@@ -8,6 +8,7 @@ import { errorSnackbar } from "@/utils/api";
 import { useAppSelector } from "@/store/store";
 import { excludedAuthPaths } from "./guards.data";
 import { IChildrenProps } from "@/interfaces";
+import useSyncCookiesWithState from "@/hooks/use-sync-cookies";
 
 export default function AuthGuard({ children }: IChildrenProps) {
   const router = useRouter();
@@ -17,13 +18,15 @@ export default function AuthGuard({ children }: IChildrenProps) {
   const tokenSelector = useAppSelector((state) => state.auth.token);
   const guardSelector = useAppSelector((state) => state.auth.guardCheck);
 
+  useSyncCookiesWithState();
+
   useEffect(() => {
     const checkAuth = () => {
       if (excludedAuthPaths.includes(pathname)) {
         return true;
       }
 
-      if (tokenSelector && guardSelector) {
+      if (tokenSelector && guardSelector === "false") {
         errorSnackbar("Already Logged In!");
         router.push(SALE_SITE.HOME);
         return false;
@@ -37,7 +40,7 @@ export default function AuthGuard({ children }: IChildrenProps) {
       return;
     }
     setIsLoading(false);
-  }, [pathname, router, tokenSelector]);
+  }, [pathname, router, tokenSelector, guardSelector]);
 
   if (isLoading) return <Loading />;
 
