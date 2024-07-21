@@ -36,7 +36,7 @@ export default function useCheckoutForm() {
         Cookies.remove("clientSecret");
         setTimeout(() => {
           router.push(COACH_SITE.DASHBOARD);
-        }, 100);
+        }, 500);
       } else {
         errorSnackbar("Payment failed. Please try again.");
       }
