@@ -7,7 +7,6 @@ import Loading from "@/app/loading";
 import { errorSnackbar } from "@/utils/api";
 import { useLazyGetSubscriptionStatusQuery } from "@/services/guards";
 import { useAppSelector } from "@/store/store";
-import { ICoachResponseTypes } from "./guards.interface";
 import { IChildrenProps } from "@/interfaces";
 import useSyncCookiesWithState from "@/hooks/use-sync-cookies";
 
@@ -36,13 +35,13 @@ export default function CoachGuard({ children }: IChildrenProps) {
         const params = {
           authentication_token: tokenSelector,
         };
-        const res: ICoachResponseTypes = await getSubscriptionStatusTrigger(
-          params
-        );
+        const res: any = await getSubscriptionStatusTrigger(params);
 
         if (res?.data?.subscription_status !== "active") {
           errorSnackbar("Subscription Expired! Buy Plan Again");
-          router.push(STRIPE.PLANS);
+          router.push(
+            `${STRIPE.PLANS}?email=${res?.error?.data?.coach?.email}`
+          );
           return;
         }
 
