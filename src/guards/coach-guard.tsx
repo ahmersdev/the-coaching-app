@@ -42,7 +42,13 @@ export default function CoachGuard({ children }: IChildrenProps) {
           const capitalizedStatus = capitalizeFirstLetter(
             res?.subscription_status
           );
-          errorSnackbar(`Subscription ${capitalizedStatus}! Buy Plan Again.`);
+          if (res?.subscription_status === "incomplete") {
+            errorSnackbar(
+              `Subscription ${capitalizedStatus}! Please Purchase a Subscription First.`
+            );
+          } else {
+            errorSnackbar(`Subscription ${capitalizedStatus}! Buy Plan Again.`);
+          }
           router.push(`${STRIPE.PLANS}?email=${res?.coach?.email}`);
           return;
         }
