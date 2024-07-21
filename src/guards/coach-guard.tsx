@@ -9,6 +9,7 @@ import { useLazyGetSubscriptionStatusQuery } from "@/services/guards";
 import { useAppSelector } from "@/store/store";
 import { IChildrenProps } from "@/interfaces";
 import useSyncCookiesWithState from "@/hooks/use-sync-cookies";
+import { capitalizeFirstLetter } from "@/utils";
 
 export default function CoachGuard({ children }: IChildrenProps) {
   const router = useRouter();
@@ -35,22 +36,21 @@ export default function CoachGuard({ children }: IChildrenProps) {
         const params = {
           authentication_token: tokenSelector,
         };
-        const res: any = await getSubscriptionStatusTrigger(params);
+        const res: any = await getSubscriptionStatusTrigger(params).unwrap();
 
-        if (res?.data?.subscription_status !== "active") {
-          errorSnackbar("Subscription Expired! Buy Plan Again");
-          router.push(
-            `${STRIPE.PLANS}?email=${res?.error?.data?.coach?.email}`
+        if (res?.subscription_status !== "active") {
+          const capitalizedStatus = capitalizeFirstLetter(
+            res?.subscription_status
           );
+          errorSnackbar(`Subscription ${capitalizedStatus}! Buy Plan Again.`);
+          router.push(`${STRIPE.PLANS}?email=${res?.coach?.email}`);
           return;
         }
 
         setIsLoading(false);
-      } catch (error) {
-        errorSnackbar(
-          "Failed to verify subscription status. Please try again."
-        );
-        router.push(AUTH.SIGN_IN);
+      } catch (error: any) {
+        errorSnackbar("Purchase a Subscription to Continue!");
+        router.push(`${STRIPE.PLANS}?email=${error?.data?.coach?.email}`);
       }
     };
 
