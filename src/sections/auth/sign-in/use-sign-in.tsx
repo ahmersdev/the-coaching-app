@@ -7,7 +7,7 @@ import {
 } from "./sign-in.data";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   useLazyGetResendOtpQuery,
   usePostSignInMutation,
@@ -19,6 +19,7 @@ import { useAppDispatch } from "@/store/store";
 import { logIn } from "@/store/auth";
 import { STATUS_CODES, USER_ROLES } from "@/constants/strings";
 import { AUTH, COACH_SITE, STRIPE, SYSTEM_ADMIN } from "@/constants/routes";
+import { CLICK_EVENTS } from "@/constants";
 
 export default function useSignIn() {
   const theme: any = useTheme();
@@ -54,77 +55,99 @@ export default function useSignIn() {
 
   const [resendOtpTrigger] = useLazyGetResendOtpQuery();
 
-  const onSubmit = async (data: any) => {
-    const userAgent = navigator.userAgent;
-    const updatedData = {
-      email_username: data?.email,
-      password: data?.password,
-      device_info: userAgent,
+  const onSubmit = useCallback(
+    async (data: any) => {
+      const userAgent = navigator.userAgent;
+      const updatedData = {
+        email_username: data?.email,
+        password: data?.password,
+        device_info: userAgent,
+      };
+
+      try {
+        const responseSignIn: any = await postSignInTrigger(
+          updatedData
+        ).unwrap();
+        if (responseSignIn) {
+          const encryptedToken = responseSignIn.session.authentication_token;
+          if (
+            responseSignIn?.latest_invoice?.status === INVOICE_STATUSES.PAID
+          ) {
+            Cookies.set("authentication_token", encryptedToken);
+            dispatch(logIn(encryptedToken));
+            successSnackbar("Sign In Successful!");
+            Cookies.set("guardCheck", "false");
+            if (responseSignIn?.session?.user_type === USER_ROLES.COACH) {
+              if (!responseSignIn.coach.intro) {
+                successSnackbar("Please Complete Your Profile!");
+                router.push(COACH_SITE.SETTINGS);
+              } else {
+                router.push(COACH_SITE.DASHBOARD);
+              }
+            }
+            if (responseSignIn.session.user_type === USER_ROLES.ADMIN) {
+              router.push(SYSTEM_ADMIN.DASHBOARD);
+            }
+          } else if (
+            responseSignIn?.latest_invoice?.status === INVOICE_STATUSES.OPEN
+          ) {
+            Cookies.set(
+              "clientSecret",
+              responseSignIn?.latest_invoice?.client_secret
+            );
+            Cookies.set("authentication_token", encryptedToken);
+            dispatch(logIn(encryptedToken));
+            errorSnackbar("Please Make Payment First");
+            Cookies.set("guardCheck", "false");
+            router.push(`${STRIPE.PLANS}?email=${data?.email}`);
+            return;
+          } else {
+            Cookies.set("authentication_token", encryptedToken);
+            dispatch(logIn(encryptedToken));
+            errorSnackbar("Please Make Payment First");
+            Cookies.set("guardCheck", "false");
+            router.push(`${STRIPE.PLANS}?email=${data?.email}`);
+            return;
+          }
+        }
+      } catch (error: any) {
+        if (error?.status === STATUS_CODES.CODE_403) {
+          errorSnackbar("Please Verify Your Email First");
+          try {
+            await resendOtpTrigger({
+              email: data?.email,
+            }).unwrap();
+            router.push(`${AUTH.OTP}?email=${data?.email}`);
+          } catch (e: any) {
+            errorSnackbar(e?.data?.message);
+          }
+          return;
+        }
+        if (error?.status === STATUS_CODES.CODE_422) {
+          errorSnackbar("Please Make Payment First");
+          router.push(`${STRIPE.PLANS}?email=${data?.email}`);
+          return;
+        }
+        errorSnackbar(error?.data?.message);
+      }
+    },
+    [postSignInTrigger, dispatch, router, resendOtpTrigger]
+  );
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === CLICK_EVENTS.ENTER) {
+        event.preventDefault();
+        handleSubmit(onSubmit)?.();
+      }
     };
 
-    try {
-      const responseSignIn: any = await postSignInTrigger(updatedData).unwrap();
-      if (responseSignIn) {
-        const encryptedToken = responseSignIn.session.authentication_token;
-        if (responseSignIn?.latest_invoice?.status === INVOICE_STATUSES.PAID) {
-          Cookies.set("authentication_token", encryptedToken);
-          dispatch(logIn(encryptedToken));
-          successSnackbar("Sign In Successful!");
-          Cookies.set("guardCheck", "false");
-          if (responseSignIn?.session?.user_type === USER_ROLES.COACH) {
-            if (!responseSignIn.coach.intro) {
-              successSnackbar("Please Complete Your Profile!");
-              router.push(COACH_SITE.SETTINGS);
-            } else {
-              router.push(COACH_SITE.DASHBOARD);
-            }
-          }
-          if (responseSignIn.session.user_type === USER_ROLES.ADMIN) {
-            router.push(SYSTEM_ADMIN.DASHBOARD);
-          }
-        } else if (
-          responseSignIn?.latest_invoice?.status === INVOICE_STATUSES.OPEN
-        ) {
-          Cookies.set(
-            "clientSecret",
-            responseSignIn?.latest_invoice?.client_secret
-          );
-          Cookies.set("authentication_token", encryptedToken);
-          dispatch(logIn(encryptedToken));
-          errorSnackbar("Please Make Payment First");
-          Cookies.set("guardCheck", "false");
-          router.push(`${STRIPE.PLANS}?email=${data?.email}`);
-          return;
-        } else {
-          Cookies.set("authentication_token", encryptedToken);
-          dispatch(logIn(encryptedToken));
-          errorSnackbar("Please Make Payment First");
-          Cookies.set("guardCheck", "false");
-          router.push(`${STRIPE.PLANS}?email=${data?.email}`);
-          return;
-        }
-      }
-    } catch (error: any) {
-      if (error?.status === STATUS_CODES.CODE_403) {
-        errorSnackbar("Please Verify Your Email First");
-        try {
-          await resendOtpTrigger({
-            email: data?.email,
-          }).unwrap();
-          router.push(`${AUTH.OTP}?email=${data?.email}`);
-        } catch (e: any) {
-          errorSnackbar(e?.data?.message);
-        }
-        return;
-      }
-      if (error?.status === STATUS_CODES.CODE_422) {
-        errorSnackbar("Please Make Payment First");
-        router.push(`${STRIPE.PLANS}?email=${data?.email}`);
-        return;
-      }
-      errorSnackbar(error?.data?.message);
-    }
-  };
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [handleSubmit, onSubmit]);
 
   return {
     methods,

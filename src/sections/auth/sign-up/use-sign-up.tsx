@@ -7,13 +7,13 @@ import {
   signUpFormDefaultValues,
   signUpFormValidationSchema,
 } from "./sign-up.data";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   useLazyGetCheckUsernameQuery,
   usePostRegisterCoachMutation,
 } from "@/services/auth";
 import { errorSnackbar, successSnackbar } from "@/utils/api";
-import { EMAIL_REGEX, PHONE_REGEX } from "@/constants";
+import { CLICK_EVENTS, EMAIL_REGEX, PHONE_REGEX } from "@/constants";
 import { ErrorFields, ValidationRule } from "./sign-up.types";
 
 export default function useSignUp() {
@@ -91,7 +91,7 @@ export default function useSignUp() {
   const [getUsernameTrigger, getUsernameStatus] =
     useLazyGetCheckUsernameQuery();
 
-  const handleNextFirst = async () => {
+  const handleNextFirst = useCallback(async () => {
     const { username } = getValues();
 
     if (username.trim() === "") {
@@ -120,9 +120,9 @@ export default function useSignUp() {
     } catch (error: any) {
       errorSnackbar(error?.data?.message);
     }
-  };
+  }, [getUsernameTrigger, getValues]);
 
-  const handleNextSecond = async () => {
+  const handleNextSecond = useCallback(async () => {
     const rules: ValidationRule[] = [
       {
         field: "fullName",
@@ -174,7 +174,7 @@ export default function useSignUp() {
     }
     setStepState((prevStep: any) => prevStep + 1);
     setErrors({});
-  };
+  }, [getValues]);
 
   const handlePrevStep = () => {
     setStepState((prevStep: any) => prevStep - 1);
@@ -183,26 +183,50 @@ export default function useSignUp() {
   const [postRegisterCoachTrigger, postRegisterCoachStatus] =
     usePostRegisterCoachMutation();
 
-  const onSubmit = async (data: any) => {
-    const updatedData = {
-      username: data?.username,
-      full_name: data?.fullName,
-      email: data?.email,
-      phone: data?.phone,
-      city: data?.city,
-      postal_code: data?.postalCode,
-      country: data?.country,
-      password: data?.password,
+  const onSubmit = useCallback(
+    async (data: any) => {
+      const updatedData = {
+        username: data?.username,
+        full_name: data?.fullName,
+        email: data?.email,
+        phone: data?.phone,
+        city: data?.city,
+        postal_code: data?.postalCode,
+        country: data?.country,
+        password: data?.password,
+      };
+
+      try {
+        await postRegisterCoachTrigger(updatedData).unwrap();
+        successSnackbar("Please, Check Email for Verification Code!");
+        router.push(`${AUTH.OTP}?email=${data?.email}`);
+      } catch (error: any) {
+        errorSnackbar(error?.data?.message);
+      }
+    },
+    [postRegisterCoachTrigger, router]
+  );
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === CLICK_EVENTS.ENTER) {
+        event.preventDefault();
+        if (stepState === 1) {
+          handleNextFirst();
+        } else if (stepState === 2) {
+          handleNextSecond();
+        } else if (stepState === 3) {
+          handleSubmit(onSubmit)?.();
+        }
+      }
     };
 
-    try {
-      await postRegisterCoachTrigger(updatedData).unwrap();
-      successSnackbar("Please, Check Email for Verification Code!");
-      router.push(`${AUTH.OTP}?email=${data?.email}`);
-    } catch (error: any) {
-      errorSnackbar(error?.data?.message);
-    }
-  };
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [stepState, handleSubmit, onSubmit, handleNextFirst, handleNextSecond]);
 
   return {
     methods,

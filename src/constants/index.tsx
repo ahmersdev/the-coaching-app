@@ -4,3 +4,7 @@ export const PASSWORD_REGEX =
 export const PASSWORD_MESSAGE =
   "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character";
 export const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+export const CLICK_EVENTS = {
+  ENTER: "Enter",
+};

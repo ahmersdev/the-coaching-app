@@ -67,7 +67,7 @@ const CreatePassword = () => {
               type={"submit"}
               loading={postCreatePasswordStatus?.isLoading}
             >
-              Continue
+              Save
             </LoadingButton>
           </Grid>
         </Grid>
