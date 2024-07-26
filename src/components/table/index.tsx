@@ -12,6 +12,7 @@ import { flexRender } from "@tanstack/react-table";
 import CustomPagination from "../custom-pagination";
 import { TableDownArrowIcon, TableUpArrowIcon } from "@/assets/icons";
 import { SkeletonTable } from "../skeletons";
+import NoData from "../no-data";
 
 const TanstackTable = (props: any) => {
   const {
@@ -105,7 +106,7 @@ const TanstackTable = (props: any) => {
         {isError ? (
           <>Error</>
         ) : (
-          !!!table?.getRowModel()?.rows?.length && isSuccess && <>No Data</>
+          !!!table?.getRowModel()?.rows?.length && isSuccess && <NoData />
         )}
       </TableContainer>
 

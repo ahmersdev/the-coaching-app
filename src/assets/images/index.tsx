@@ -38,3 +38,4 @@ export { default as AboutUsFitnessImg } from "./about-us-fitness-img.png";
 export { default as ContactUsHeroBannerBgImg } from "./contact-us-hero-banner-bg-img.png";
 export { default as CoachesMealImg } from "./coaches-meal-img.png";
 export { default as PricingHeroBannerBgImg } from "./pricing-hero-banner-bg-img.png";
+export { default as NoDataFoundImg } from "./no-data-found-img.png";

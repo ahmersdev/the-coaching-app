@@ -65,6 +65,7 @@ export default function Loading() {
           width={132}
           height={24}
           unoptimized
+          priority
         />
       </Box>
     </Box>
