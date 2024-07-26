@@ -39,3 +39,4 @@ export { default as ContactUsHeroBannerBgImg } from "./contact-us-hero-banner-bg
 export { default as CoachesMealImg } from "./coaches-meal-img.png";
 export { default as PricingHeroBannerBgImg } from "./pricing-hero-banner-bg-img.png";
 export { default as NoDataFoundImg } from "./no-data-found-img.png";
+export { default as CardWorldMapImg } from "./card-world-map-img.png";

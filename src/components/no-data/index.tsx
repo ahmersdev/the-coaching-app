@@ -16,10 +16,10 @@ export default function NoData({
       alignItems={"center"}
       height={height}
     >
-      <Grid item textAlign={"center"}>
-        <Image src={image} alt={"No Data Found"} width={360} height={360} />
+      <Grid item xs={12} textAlign={"center"}>
+        <Image src={image} alt={"No Data Found"} width={224} height={224} />
         {messagePrimary && (
-          <Typography variant={"h2"} mb={1} color={"grey.100"}>
+          <Typography variant={"h2"} mb={1} mt={4} color={"grey.100"}>
             {messagePrimary}
           </Typography>
         )}

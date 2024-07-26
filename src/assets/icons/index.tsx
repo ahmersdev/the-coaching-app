@@ -54,3 +54,4 @@ export { default as ClientsImagesIcon } from "./clients-images-icon";
 export { default as StripPremiumPlan } from "./stripe-premium-plan";
 export { default as PaymentMethodIcon } from "./payment-method-icon";
 export { default as PaymentMethodDetailsIcon } from "./payment-method-details-icon";
+export { default as CardChipIcon } from "./card-chip-icon";
