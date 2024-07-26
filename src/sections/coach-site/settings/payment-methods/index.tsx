@@ -1,36 +1,23 @@
-import { CardChipIcon, PaymentMethodDetailsIcon } from "@/assets/icons";
+import {
+  CardChipIcon,
+  CardMasterIcon,
+  CardVisaIcon,
+  PaymentMethodDetailsIcon,
+} from "@/assets/icons";
 import { CardWorldMapImg } from "@/assets/images";
 import NoData from "@/components/no-data";
-import { useGetPaymentMethodsQuery } from "@/services/coach-site/settings/payment-methods";
-import { useAppSelector } from "@/store/store";
-import { decryptValuesFromToken } from "@/utils/auth";
 import { Box, Divider, Skeleton, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import usePaymentMethods from "./use-payment-methods";
 
 export default function PaymentMethods() {
-  const [decryptedValues, setDecryptedValues] = useState<any>({});
-  const [initialLoading, setInitialLoading] = useState(true);
-
-  const tokenSelector = useAppSelector((state) => state.auth.token);
-
-  useEffect(() => {
-    const decryptToken = async () => {
-      if (tokenSelector) {
-        const values = await decryptValuesFromToken(tokenSelector);
-        setDecryptedValues(values);
-      }
-    };
-
-    decryptToken();
-    setInitialLoading(false);
-  }, [tokenSelector]);
-
-  const { data, isLoading, isFetching, isError } = useGetPaymentMethodsQuery(
-    {
-      coach_id: decryptedValues?.coach_id,
-    },
-    { skip: !decryptedValues?.coach_id }
-  );
+  const {
+    isLoading,
+    isFetching,
+    initialLoading,
+    isError,
+    data,
+    transformedMonth,
+  } = usePaymentMethods();
 
   return (
     <Box bgcolor={"secondary.main"} p={2.4} borderRadius={3}>
@@ -59,8 +46,8 @@ export default function PaymentMethods() {
               />
             ) : (
               <Box
-                width={500}
-                height={250}
+                maxWidth={398}
+                height={212}
                 bgcolor={"primary.main"}
                 p={3}
                 borderRadius={4}
@@ -108,7 +95,23 @@ export default function PaymentMethods() {
                   alignItems={"center"}
                   color={"common.white"}
                 >
-                  Expiry
+                  <Box display={"flex"} gap={2}>
+                    <Box>
+                      <Typography variant={"body2"}>Expiry Date</Typography>
+                      <Typography variant={"body1"} fontWeight={600}>
+                        {transformedMonth}/{data?.payment_method?.exp_year}
+                      </Typography>
+                    </Box>
+                    <Box>
+                      <Typography variant={"body2"}>CVV</Typography>
+                      <Typography variant={"body1"} fontWeight={600}>
+                        ***
+                      </Typography>
+                    </Box>
+                  </Box>
+                  <Box width={55} height={20}>
+                    <CardVisaIcon />
+                  </Box>
                 </Box>
               </Box>
             )}
