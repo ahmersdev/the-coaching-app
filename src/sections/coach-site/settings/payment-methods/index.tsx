@@ -1,9 +1,4 @@
-import {
-  CardChipIcon,
-  CardMasterIcon,
-  CardVisaIcon,
-  PaymentMethodDetailsIcon,
-} from "@/assets/icons";
+import { CardChipIcon, PaymentMethodDetailsIcon } from "@/assets/icons";
 import { CardWorldMapImg } from "@/assets/images";
 import NoData from "@/components/no-data";
 import { Box, Divider, Skeleton, Typography } from "@mui/material";
@@ -17,6 +12,7 @@ export default function PaymentMethods() {
     isError,
     data,
     transformedMonth,
+    cardBrandIcon,
   } = usePaymentMethods();
 
   return (
@@ -110,7 +106,7 @@ export default function PaymentMethods() {
                     </Box>
                   </Box>
                   <Box width={55} height={20}>
-                    <CardVisaIcon />
+                    {cardBrandIcon(data?.payment_method?.card_brand)}
                   </Box>
                 </Box>
               </Box>

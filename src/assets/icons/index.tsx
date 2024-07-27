@@ -57,3 +57,9 @@ export { default as PaymentMethodDetailsIcon } from "./payment-method-details-ic
 export { default as CardChipIcon } from "./card-chip-icon";
 export { default as CardVisaIcon } from "./card-visa-icon";
 export { default as CardMasterIcon } from "./card-master-icon";
+export { default as CardAmericanIcon } from "./card-american-icon";
+export { default as CardDiscoverIcon } from "./card-discover-icon";
+export { default as CardDinersIcon } from "./card-diners-icon";
+export { default as CardJcbIcon } from "./card-jcb-icon";
+export { default as CardUnionPayIcon } from "./card-union-pay-icon";
+export { default as CardUnknownIcon } from "./card-unknown-icon";
