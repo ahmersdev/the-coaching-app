@@ -1,56 +1,20 @@
 import TanstackTable from "@/components/table";
-import { Box, Button, Grid, Typography, useTheme } from "@mui/material";
-import {
-  subscriptionColumns,
-  subscriptionDataArray,
-} from "./subscription.data";
+import { Grid, Typography } from "@mui/material";
+import { subscriptionColumns } from "./subscription.data";
+import { useGetCoachSubscriptionsQuery } from "@/services/coach-site/settings";
 
-export default function Subscription() {
-  const theme: any = useTheme();
+export default function Subscription({ coach_id }: any) {
+  const { data, isLoading, isFetching, isError, isSuccess } =
+    useGetCoachSubscriptionsQuery(
+      {
+        coach_id,
+      },
+      { refetchOnMountOrArgChange: true, skip: !coach_id }
+    );
 
   return (
     <>
       <Grid container spacing={2}>
-        <Grid item xs={12} md={4}>
-          <Box
-            borderRadius={6}
-            border={"0px 0px 0px 6px"}
-            padding={"24px 16px"}
-            borderLeft={`6px solid ${theme?.palette?.primary?.main}`}
-            bgcolor={"secondary.main"}
-            height={"97px"}
-            display={"flex"}
-            justifyContent={"space-between"}
-            alignItems={"center"}
-            sx={{
-              ":hover": {
-                boxShadow: theme?.CustomShadows?.()?.primary,
-              },
-            }}
-          >
-            <Typography variant={"body1"} color={"grey.100"}>
-              Renew Subscription in
-              <br />
-              Just One Click
-            </Typography>
-
-            <Button
-              variant={"contained"}
-              sx={{
-                color: "grey.100",
-                borderRadius: 25,
-                border: "1px solid",
-                borderColor: "primary.main",
-                height: 36,
-                fontWeight: "normal",
-              }}
-              disableElevation
-            >
-              Renew Subscription
-            </Button>
-          </Box>
-        </Grid>
-
         <Grid item xs={12}>
           <Typography variant={"h6"} fontWeight={700} color={"grey.100"}>
             Recent Subscription
@@ -59,9 +23,12 @@ export default function Subscription() {
 
         <Grid item xs={12}>
           <TanstackTable
-            data={subscriptionDataArray}
+            data={data?.data}
             columns={subscriptionColumns}
-            isPagination
+            isLoading={isLoading}
+            isFetching={isFetching}
+            isError={isError}
+            isSuccess={isSuccess}
           />
         </Grid>
       </Grid>

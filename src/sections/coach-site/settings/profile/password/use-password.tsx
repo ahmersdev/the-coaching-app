@@ -7,7 +7,7 @@ import {
 } from "./password.data";
 import { useState } from "react";
 import { errorSnackbar, successSnackbar } from "@/utils/api";
-import { useUpdateCoachPasswordMutation } from "@/services/coach-site/settings/profile";
+import { useUpdateCoachPasswordMutation } from "@/services/coach-site/settings";
 
 export default function usePassword({ initialValues }: any) {
   const [passwordVisibility, setPasswordVisibility] = useState({

@@ -6,7 +6,7 @@ import {
 } from "./about.data";
 import { errorSnackbar, successSnackbar } from "@/utils/api";
 import { useCallback, useEffect, useMemo } from "react";
-import { useUpdateCoachProfileAboutMutation } from "@/services/coach-site/settings/profile";
+import { useUpdateCoachProfileAboutMutation } from "@/services/coach-site/settings";
 
 export default function useAbout({ initialValues }: any) {
   const defaultValues = useMemo(

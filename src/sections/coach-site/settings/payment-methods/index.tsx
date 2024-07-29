@@ -4,16 +4,14 @@ import NoData from "@/components/no-data";
 import { Box, Divider, Skeleton, Typography } from "@mui/material";
 import usePaymentMethods from "./use-payment-methods";
 
-export default function PaymentMethods() {
-  const {
-    isLoading,
-    isFetching,
-    initialLoading,
-    isError,
-    data,
-    transformedMonth,
-    cardBrandIcon,
-  } = usePaymentMethods();
+export default function PaymentMethods({
+  isLoading,
+  isFetching,
+  initialLoading,
+  isError,
+  data,
+}: any) {
+  const { transformedMonth, cardBrandIcon } = usePaymentMethods({ data });
 
   return (
     <Box bgcolor={"secondary.main"} p={2.4} borderRadius={3}>

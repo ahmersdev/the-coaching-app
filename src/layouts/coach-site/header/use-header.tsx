@@ -1,7 +1,7 @@
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useAppSelector } from "@/store/store";
-import { useGetCoachDetailsQuery } from "@/services/coach-site/settings/profile";
+import { useGetCoachDetailsQuery } from "@/services/coach-site/settings";
 import { decryptValuesFromToken } from "@/utils/auth";
 
 export default function useHeader() {

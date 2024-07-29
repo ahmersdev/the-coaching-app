@@ -1,9 +1,9 @@
 import { COACH_SITE } from "@/constants/endpoints";
 import { baseAPI } from "@/services/base-api";
 
-const TAG = "COACH_PROFILE";
+const TAG = "COACH_SETTINGS";
 
-export const coachProfile = baseAPI.injectEndpoints({
+export const coachSettings = baseAPI.injectEndpoints({
   endpoints: (builder) => ({
     getCoachDetails: builder.query({
       query: (params: any) => ({
@@ -29,6 +29,15 @@ export const coachProfile = baseAPI.injectEndpoints({
       }),
       invalidatesTags: [TAG],
     }),
+    // Coach Subscriptions
+    getCoachSubscriptions: builder.query({
+      query: (params: any) => ({
+        url: COACH_SITE.SUBSCRIPTIONS,
+        method: "GET",
+        params,
+      }),
+      providesTags: [TAG],
+    }),
   }),
 });
 
@@ -36,4 +45,5 @@ export const {
   useGetCoachDetailsQuery,
   useUpdateCoachProfileAboutMutation,
   useUpdateCoachPasswordMutation,
-} = coachProfile;
+  useGetCoachSubscriptionsQuery,
+} = coachSettings;

@@ -13,6 +13,7 @@ export const COACH_SITE = {
   PROFILE: `fetchCoachDetails`,
   UPDATE_COACH: `updateCoach`,
   UPDATE_PASSWORD: `updateCoachPassword`,
+  SUBSCRIPTIONS: `getCoachSubscriptions`,
 };
 
 export const STRIPE = {

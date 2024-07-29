@@ -1,9 +1,9 @@
-import { useGetCoachDetailsQuery } from "@/services/coach-site/settings/profile";
 import { useEffect, useState } from "react";
 import { useAppSelector } from "@/store/store";
 import { decryptValuesFromToken } from "@/utils/auth";
+import { useGetCoachDetailsQuery } from "@/services/coach-site/settings";
 
-export default function useProfile() {
+export default function useSettings() {
   const [decryptedValues, setDecryptedValues] = useState<any>({});
   const [initialLoading, setInitialLoading] = useState(true);
 
@@ -21,12 +21,21 @@ export default function useProfile() {
     setInitialLoading(false);
   }, [tokenSelector]);
 
+  const coach_id = decryptedValues?.coach_id;
+
   const { data, isLoading, isFetching, isError } = useGetCoachDetailsQuery(
     {
-      coach_id: decryptedValues?.coach_id,
+      coach_id,
     },
-    { refetchOnMountOrArgChange: true, skip: !decryptedValues?.coach_id }
+    { refetchOnMountOrArgChange: true, skip: !coach_id }
   );
 
-  return { data, isError, isLoading, isFetching, initialLoading };
+  return {
+    data,
+    isError,
+    isLoading,
+    isFetching,
+    initialLoading,
+    coach_id,
+  };
 }
