@@ -63,3 +63,4 @@ export { default as CardDinersIcon } from "./card-diners-icon";
 export { default as CardJcbIcon } from "./card-jcb-icon";
 export { default as CardUnionPayIcon } from "./card-union-pay-icon";
 export { default as CardUnknownIcon } from "./card-unknown-icon";
+export { default as ApiErrorStateIcon } from "./api-error-state-icon";

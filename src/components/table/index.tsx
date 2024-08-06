@@ -13,6 +13,7 @@ import CustomPagination from "../custom-pagination";
 import { TableDownArrowIcon, TableUpArrowIcon } from "@/assets/icons";
 import { SkeletonTable } from "../skeletons";
 import NoData from "../no-data";
+import ApiErrorState from "../api-error-state";
 
 const TanstackTable = (props: any) => {
   const {
@@ -31,9 +32,11 @@ const TanstackTable = (props: any) => {
     onPageChange,
     setPage,
     setPageLimit,
+    errorChildren,
   } = props;
 
   const table = useTanstackTable(data, columns);
+
   if (isLoading || isFetching) return <SkeletonTable />;
 
   return (
@@ -104,7 +107,7 @@ const TanstackTable = (props: any) => {
           </TableBody>
         </Table>
         {isError ? (
-          <>Error</>
+          <ApiErrorState>{errorChildren}</ApiErrorState>
         ) : (
           !!!table?.getRowModel()?.rows?.length && isSuccess && <NoData />
         )}
