@@ -26,11 +26,18 @@ export default function CoachGuard({ children }: IChildrenProps) {
 
   useEffect(() => {
     const checkAuth = async () => {
-      if ((!tokenSelector && guardSelector === "true") || !guardSelector) {
-        errorSnackbar("Session Expired! Login to Continue");
-        router.push(AUTH.SIGN_IN);
-        return;
-      }
+      // if (!tokenSelector) {
+      //   errorSnackbar("Session Expired! Login to Continue");
+      //   router.push(AUTH.SIGN_IN);
+      // }
+      // if (!guardSelector) {
+      //   errorSnackbar("Session Expired! Login to Continue");
+      //   router.push(AUTH.SIGN_IN);
+      // }
+      // if (guardSelector === "true") {
+      //   errorSnackbar("Session Expired! Login to Continue");
+      //   router.push(AUTH.SIGN_IN);
+      // }
 
       try {
         const params = {
