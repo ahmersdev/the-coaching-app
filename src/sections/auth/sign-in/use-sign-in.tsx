@@ -76,7 +76,6 @@ export default function useSignIn() {
             Cookies.set("authentication_token", encryptedToken);
             dispatch(logIn(encryptedToken));
             successSnackbar("Sign In Successful!");
-            Cookies.set("guardCheck", "false");
             if (responseSignIn?.session?.user_type === USER_ROLES.COACH) {
               if (!responseSignIn.coach.intro) {
                 successSnackbar("Please Complete Your Profile!");
@@ -98,14 +97,12 @@ export default function useSignIn() {
             Cookies.set("authentication_token", encryptedToken);
             dispatch(logIn(encryptedToken));
             errorSnackbar("Please Make Payment First");
-            Cookies.set("guardCheck", "false");
             router.push(`${STRIPE.PLANS}?email=${data?.email}`);
             return;
           } else {
             Cookies.set("authentication_token", encryptedToken);
             dispatch(logIn(encryptedToken));
             errorSnackbar("Please Make Payment First");
-            Cookies.set("guardCheck", "false");
             router.push(`${STRIPE.PLANS}?email=${data?.email}`);
             return;
           }

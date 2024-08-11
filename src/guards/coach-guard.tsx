@@ -17,7 +17,6 @@ export default function CoachGuard({ children }: IChildrenProps) {
   const [isLoading, setIsLoading] = useState(true);
 
   const tokenSelector = useAppSelector((state) => state.auth.token);
-  const guardSelector = useAppSelector((state) => state.auth.guardCheck);
 
   const [getSubscriptionStatusTrigger, getSubscriptionStatusStatus] =
     useLazyGetSubscriptionStatusQuery();
@@ -73,13 +72,7 @@ export default function CoachGuard({ children }: IChildrenProps) {
     } else {
       setIsLoading(false);
     }
-  }, [
-    pathname,
-    tokenSelector,
-    getSubscriptionStatusTrigger,
-    router,
-    guardSelector,
-  ]);
+  }, [pathname, tokenSelector, getSubscriptionStatusTrigger, router]);
 
   if (
     isLoading ||

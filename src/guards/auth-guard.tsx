@@ -16,7 +16,6 @@ export default function AuthGuard({ children }: IChildrenProps) {
   const [isLoading, setIsLoading] = useState(true);
 
   const tokenSelector = useAppSelector((state) => state.auth.token);
-  const guardSelector = useAppSelector((state) => state.auth.guardCheck);
 
   useSyncCookiesWithState();
 
@@ -26,7 +25,7 @@ export default function AuthGuard({ children }: IChildrenProps) {
         return true;
       }
 
-      if (tokenSelector && guardSelector === "false") {
+      if (tokenSelector) {
         errorSnackbar("Already Logged In!");
         router.push(SALE_SITE.HOME);
         return false;
@@ -40,7 +39,7 @@ export default function AuthGuard({ children }: IChildrenProps) {
       return;
     }
     setIsLoading(false);
-  }, [pathname, router, tokenSelector, guardSelector]);
+  }, [pathname, router, tokenSelector]);
 
   if (isLoading) return <Loading />;
 
