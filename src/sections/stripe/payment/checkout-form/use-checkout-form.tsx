@@ -35,9 +35,7 @@ export default function useCheckoutForm() {
         if (paymentIntent?.status === "succeeded") {
           successSnackbar("Payment Successful!");
           Cookies.remove("clientSecret");
-          setTimeout(() => {
-            router.push(COACH_SITE.DASHBOARD);
-          }, 500);
+          router.push(COACH_SITE.DASHBOARD);
         } else {
           errorSnackbar("Payment failed. Please try again.");
         }
