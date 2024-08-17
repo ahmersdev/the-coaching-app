@@ -14,6 +14,8 @@ export const COACH_SITE = {
   UPDATE_COACH: `updateCoach`,
   UPDATE_PASSWORD: `updateCoachPassword`,
   SUBSCRIPTIONS: `getCoachSubscriptions`,
+  GET_CLIENTS: `getClients`,
+  GET_PROGRESS_PICTURES: `getProgressPictures`,
 };
 
 export const STRIPE = {

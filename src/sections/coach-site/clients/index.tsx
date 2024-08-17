@@ -7,8 +7,11 @@ import { clientsData, clientsColumns } from "./clients.data";
 import Link from "next/link";
 import { COACH_SITE } from "@/constants/routes";
 import TanstackTable from "@/components/table";
+import { useGetClientDetailsQuery } from "@/services/coach-site/clients";
 
 export default function Clients() {
+  const { data, isLoading, isFetching, isError } = useGetClientDetailsQuery({});
+
   return (
     <>
       <Typography variant={"h2"} color={"grey.100"} mb={2}>
