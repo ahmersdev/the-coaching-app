@@ -16,6 +16,7 @@ export const COACH_SITE = {
   SUBSCRIPTIONS: `getCoachSubscriptions`,
   GET_CLIENTS: `getClients`,
   GET_PROGRESS_PICTURES: `getProgressPictures`,
+  ASSIGN_WORKOUT: `assignWorkout`,
 };
 
 export const STRIPE = {
