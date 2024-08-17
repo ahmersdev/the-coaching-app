@@ -21,9 +21,9 @@ export default function DayAll({ control, watch }: any) {
 
   const handleAddDay = () => {
     append({
-      exerciseName: "",
+      exercise_name: "",
       sets: "",
-      video: null,
+      workout_video: null,
       note: "",
     });
   };

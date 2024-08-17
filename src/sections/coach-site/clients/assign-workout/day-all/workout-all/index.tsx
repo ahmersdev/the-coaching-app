@@ -21,9 +21,9 @@ export default function WorkoutAll({ control, watch, dayIndex }: any) {
 
   const handleAddWorkout = () => {
     append({
-      exerciseName: "",
+      exercise_name: "",
       sets: "",
-      video: null,
+      workout_video: null,
       note: "",
     });
   };
@@ -83,7 +83,7 @@ export default function WorkoutAll({ control, watch, dayIndex }: any) {
               <Grid container spacing={1}>
                 <Grid item xs={12} md={5}>
                   <RHFTextField
-                    name={`daysAll[${dayIndex}].daysAllWorkoutAll[${workoutIndex}].exerciseName`}
+                    name={`daysAll[${dayIndex}].daysAllWorkoutAll[${workoutIndex}].exercise_name`}
                     label={"Exercise Name"}
                     placeholder={"Enter Exercise Name"}
                     bgcolor={"secondary.800"}
@@ -109,7 +109,7 @@ export default function WorkoutAll({ control, watch, dayIndex }: any) {
                 </Grid>
                 <Grid item xs={12} md={5}>
                   <RHFUploadFile
-                    name={`daysAll[${dayIndex}].daysAllWorkoutAll[${workoutIndex}].video`}
+                    name={`daysAll[${dayIndex}].daysAllWorkoutAll[${workoutIndex}].workout_video`}
                     label={"Workout Video"}
                     border={0}
                     bgcolor={"secondary.main"}

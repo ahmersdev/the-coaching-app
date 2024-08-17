@@ -64,7 +64,7 @@ export default function WorkoutOne({ control, watch, dayIndex }: any) {
           <Grid container spacing={1}>
             <Grid item xs={12} md={5}>
               <RHFTextField
-                name={`daysAll[${dayIndex}].exerciseName`}
+                name={`daysAll[${dayIndex}].exercise_name`}
                 label={"Exercise Name"}
                 placeholder={"Enter Exercise Name"}
                 bgcolor={"secondary.800"}
@@ -96,7 +96,7 @@ export default function WorkoutOne({ control, watch, dayIndex }: any) {
             </Grid>
             <Grid item xs={12} md={5}>
               <RHFUploadFile
-                name={`daysAll[${dayIndex}].video`}
+                name={`daysAll[${dayIndex}].workout_video`}
                 label={"Workout Video"}
                 border={0}
                 bgcolor={"secondary.main"}

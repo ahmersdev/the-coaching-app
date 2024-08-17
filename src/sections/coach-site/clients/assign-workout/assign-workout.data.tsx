@@ -1,18 +1,18 @@
 import * as Yup from "yup";
 
 export const workoutValidationSchema: any = Yup.object().shape({
-  exerciseName: Yup.string().trim().required("Required"),
+  exercise_name: Yup.string().trim().required("Required"),
   dayOneWorkoutAll: Yup.array().of(
     Yup.object().shape({
-      exerciseName: Yup.string().required("Required"),
+      exercise_name: Yup.string().required("Required"),
     })
   ),
   daysAll: Yup.array().of(
     Yup.object().shape({
-      exerciseName: Yup.string().required("Required"),
+      exercise_name: Yup.string().required("Required"),
       daysAllWorkoutAll: Yup.array().of(
         Yup.object().shape({
-          exerciseName: Yup.string().required("Required"),
+          exercise_name: Yup.string().required("Required"),
         })
       ),
     })
@@ -20,8 +20,8 @@ export const workoutValidationSchema: any = Yup.object().shape({
 });
 
 export const defaultValues = {
-  exerciseName: "",
+  exercise_name: "",
   sets: "",
-  video: null,
+  workout_video: null,
   note: "",
 };

@@ -4,9 +4,32 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useSearchParams } from "next/navigation";
 
+interface RepSet {
+  set: number;
+  reps: number;
+}
+
+interface Exercise {
+  exercise_name: string;
+  sets: number;
+  workout_video: File | null;
+  note: string;
+  reps_sets: RepSet[];
+}
+
+interface DayWorkout {
+  day: number;
+  exercises: Exercise[];
+}
+
+interface UpdatedData {
+  details: DayWorkout[];
+  client_id: string | any;
+}
+
 export default function useAssignWorkout() {
   const searchParams = useSearchParams();
-  const clientId = searchParams?.get("clientId");
+  const clientId = searchParams.get("clientId");
 
   const methods: any = useForm({
     resolver: yupResolver(workoutValidationSchema),
@@ -16,106 +39,79 @@ export default function useAssignWorkout() {
   const { handleSubmit, control, watch } = methods;
 
   const onSubmit = (data: any) => {
-    const dayOneWorkoutOne = {
-      exerciseName: data?.exerciseName || "",
-      sets: data?.sets || "",
-      video: data?.video || null,
-      note: data?.note || "",
-      reps: [
-        ...(data?.dayOneWorkoutOneReps || [])
-          ?.filter((workoutRep: any) => workoutRep?.rep)
-          ?.map((workoutRep: any) => ({
-            rep: workoutRep?.rep || "",
-          })),
-      ],
+    const mapRepsSets = (repsData: any[], dayIndex: number): RepSet[] => {
+      return (
+        repsData
+          ?.filter((repSet) => repSet?.rep)
+          ?.map((repSet, setIndex) => ({
+            set: setIndex + 1,
+            reps: Number(repSet?.rep || 0),
+          })) || []
+      );
     };
 
-    const dayOneAllWorkout = [
-      dayOneWorkoutOne,
-      ...(data?.dayOneWorkoutAll || [])
-        ?.filter(
-          (allWorkout: any) =>
-            allWorkout?.exerciseName ||
-            allWorkout?.sets ||
-            allWorkout?.video ||
-            allWorkout?.note ||
-            (allWorkout?.dayOneWorkoutAllReps &&
-              allWorkout?.dayOneWorkoutAllReps?.length > 0)
-        )
-        ?.map((allWorkout: any) => ({
-          exerciseName: allWorkout?.exerciseName || "",
-          sets: allWorkout?.sets || "",
-          video: allWorkout?.video || null,
-          note: allWorkout?.note || "",
-          reps: [
-            ...(allWorkout?.dayOneWorkoutAllReps || [])
-              ?.filter((workoutRep: any) => workoutRep?.rep)
-              ?.map((workoutRep: any) => ({
-                rep: workoutRep?.rep || "",
-              })),
-          ],
-        })),
-    ];
-
-    const daysAll = data?.daysAll
-      ?.filter(
-        (workoutAll: any) =>
-          workoutAll?.exerciseName ||
-          workoutAll?.sets ||
-          workoutAll?.video ||
-          workoutAll?.note ||
-          (workoutAll?.daysAllWorkoutOneReps &&
-            workoutAll?.daysAllWorkoutOneReps?.length > 0)
-      )
-      ?.map((workoutAll: any) => {
-        const result: any = [];
-
-        result[0] = {
-          exerciseName: workoutAll?.exerciseName || "",
-          sets: workoutAll?.sets || "",
-          video: workoutAll?.video || null,
-          note: workoutAll?.note || "",
-          reps: [
-            ...(workoutAll?.daysAllWorkoutOneReps || [])
-              ?.filter((workoutRep: any) => workoutRep?.rep)
-              ?.map((workoutRep: any) => ({
-                rep: workoutRep?.rep || "",
-              })),
-          ],
-        };
-
-        workoutAll?.daysAllWorkoutAll
+    const mapExercises = (workouts: any[], dayIndex: number): Exercise[] => {
+      return (
+        workouts
           ?.filter(
-            (workout: any) =>
-              workout?.exerciseName ||
+            (workout) =>
+              workout?.exercise_name ||
               workout?.sets ||
-              workout?.video ||
+              workout?.workout_video ||
               workout?.note ||
-              (workout?.daysAllWorkoutAllReps &&
-                workout?.daysAllWorkoutAllReps?.length > 0)
+              (workout?.reps && workout.reps.length > 0)
           )
-          .forEach((workout: any, index: any) => {
-            result[index + 1] = {
-              exerciseName: workout?.exerciseName || "",
-              sets: workout?.sets || "",
-              video: workout?.video || null,
-              note: workout?.note || "",
-              reps: [
-                ...(workout?.daysAllWorkoutAllReps || [])
-                  ?.filter((workoutRep: any) => workoutRep?.rep)
-                  ?.map((workoutRep: any) => ({
-                    rep: workoutRep?.rep || "",
-                  })),
-              ],
-            };
-          });
+          ?.map((workout) => ({
+            exercise_name: workout?.exercise_name || "",
+            sets: Number(workout?.sets || 0),
+            workout_video: workout?.workout_video || null,
+            note: workout?.note || "", // Ensure the note is kept as an HTML string
+            reps_sets: mapRepsSets(workout?.reps, dayIndex),
+          })) || []
+      );
+    };
 
-        return result;
-      });
+    const dayOneWorkoutOne = {
+      exercise_name: data?.exercise_name || "",
+      sets: Number(data?.sets || 0),
+      workout_video: data?.workout_video || null,
+      note: data?.note || "", // Ensure the note is kept as an HTML string
+      reps_sets: mapRepsSets(data?.dayOneWorkoutOneReps, 1),
+    };
 
-    daysAll?.unshift(dayOneAllWorkout);
+    const dayOneAllWorkout = mapExercises(
+      [dayOneWorkoutOne, ...(data?.dayOneWorkoutAll || [])],
+      1
+    );
 
-    const updatedData = {
+    const daysAll: DayWorkout[] =
+      data?.daysAll?.map((workoutDay: any, dayIndex: number) => {
+        const exercises = [
+          {
+            exercise_name: workoutDay?.exercise_name || "",
+            sets: Number(workoutDay?.sets || 0),
+            workout_video: workoutDay?.workout_video || null,
+            note: workoutDay?.note || "",
+            reps_sets: mapRepsSets(
+              workoutDay?.daysAllWorkoutOneReps,
+              dayIndex + 2
+            ),
+          },
+          ...mapExercises(workoutDay?.daysAllWorkoutAll || [], dayIndex + 2),
+        ];
+
+        return {
+          day: dayIndex + 2,
+          exercises,
+        };
+      }) || [];
+
+    daysAll.unshift({
+      day: 1,
+      exercises: dayOneAllWorkout,
+    });
+
+    const updatedData: UpdatedData = {
       details: daysAll,
       client_id: clientId,
     };
