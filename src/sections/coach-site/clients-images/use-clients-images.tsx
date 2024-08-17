@@ -6,14 +6,12 @@ export default function useClientsImages() {
   const theme: any = useTheme();
   const { data, isLoading, isFetching, isError } = useGetClientImagesQuery({});
 
-  const checkInDetails = data?.check_in_details;
-
-  const sortedData = [...(checkInDetails || [])]
+  const sortedData = [...(data?.check_in_details || [])]
     ?.sort(
       (a: IDataSorting, b: IDataSorting) =>
-        new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
+        new Date(b?.updatedAt)?.getTime() - new Date(a?.updatedAt)?.getTime()
     )
-    .slice(0, 4);
+    ?.slice(0, 4);
 
-  return { theme, isLoading, isFetching, isError, sortedData, checkInDetails };
+  return { theme, isLoading, isFetching, isError, sortedData, data };
 }

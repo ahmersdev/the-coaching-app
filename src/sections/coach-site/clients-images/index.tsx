@@ -11,7 +11,7 @@ import { SkeletonTable } from "@/components/skeletons";
 import useClientsImages from "./use-clients-images";
 
 export default function ClientsImages() {
-  const { theme, isLoading, isFetching, isError, sortedData, checkInDetails } =
+  const { theme, isLoading, isFetching, isError, sortedData, data } =
     useClientsImages();
 
   return (
@@ -84,7 +84,7 @@ export default function ClientsImages() {
           </Typography>
 
           <Grid container spacing={2}>
-            {checkInDetails?.map((item: any) => (
+            {data?.check_in_details?.map((item: any) => (
               <Grid item key={item?.id}>
                 <Box
                   borderRadius={3}

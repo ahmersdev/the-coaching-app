@@ -3,14 +3,14 @@
 import { Avatar, Box, Button, Typography } from "@mui/material";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow } from "swiper/modules";
-import { clientsData, clientsColumns } from "./clients.data";
+import { clientsColumns } from "./clients.data";
 import Link from "next/link";
 import { COACH_SITE } from "@/constants/routes";
 import TanstackTable from "@/components/table";
-import { useGetClientDetailsQuery } from "@/services/coach-site/clients";
+import useClients from "./use-clients";
 
 export default function Clients() {
-  const { data, isLoading, isFetching, isError } = useGetClientDetailsQuery({});
+  const { data, isLoading, isFetching, isError, sortedData } = useClients();
 
   return (
     <>
@@ -36,11 +36,11 @@ export default function Clients() {
         style={{ width: "100%" }}
         breakpoints={{
           900: {
-            slidesPerView: 5,
+            slidesPerView: data?.clients.length < 6 ? data?.clients.length : 5,
           },
         }}
       >
-        {clientsData?.map((item: any, index: number) => (
+        {sortedData?.map((item: any, index: number) => (
           <SwiperSlide key={index}>
             <Box
               bgcolor={"secondary.main"}
@@ -53,10 +53,13 @@ export default function Clients() {
               gap={2}
               height={"100%"}
             >
-              <Avatar src={item?.src} sx={{ width: 44, height: 44 }} />
+              <Avatar
+                src={item?.profile_picture}
+                sx={{ width: 44, height: 44 }}
+              />
               <Box textAlign={"center"}>
                 <Typography variant={"h6"} fontWeight={600}>
-                  {item?.name}
+                  {item?.full_name}
                 </Typography>
                 <Typography
                   variant={"body1"}
@@ -69,7 +72,7 @@ export default function Clients() {
               <Link
                 href={{
                   pathname: COACH_SITE?.CLIENTS_OVERVIEW,
-                  query: { clientId: item?.id },
+                  query: { clientId: item?.client_id },
                 }}
               >
                 <Button
@@ -97,8 +100,11 @@ export default function Clients() {
 
       <Box mt={2}>
         <TanstackTable
-          data={clientsData}
+          data={data?.clients}
           columns={clientsColumns}
+          isLoading={isLoading}
+          isFetching={isFetching}
+          isError={isError}
           isPagination
         />
       </Box>
