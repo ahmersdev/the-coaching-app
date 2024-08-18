@@ -7,15 +7,29 @@ import ApiErrorState from "@/components/api-error-state";
 import { SkeletonTable } from "@/components/skeletons";
 import useClientsImages from "./use-clients-images";
 import NoData from "@/components/no-data";
+import DetailsDialog from "./details-dialog";
 
 export default function ClientsImages() {
-  const { theme, isLoading, isFetching, isError, sortedData, data } =
-    useClientsImages();
+  const {
+    theme,
+    isLoading,
+    isFetching,
+    isError,
+    sortedData,
+    data,
+    showDetails,
+    setShowDetails,
+  } = useClientsImages();
 
   return (
     <>
       {isLoading || isFetching ? (
-        <SkeletonTable />
+        <>
+          <Typography variant={"h3"} mb={2}>
+            Recently Uploaded Progress By Clients
+          </Typography>
+          <SkeletonTable />
+        </>
       ) : isError ? (
         <ApiErrorState />
       ) : !!!data?.check_in_details?.length ? (
@@ -65,6 +79,9 @@ export default function ClientsImages() {
                       },
                     }}
                     disableElevation
+                    onClick={() =>
+                      setShowDetails({ open: true, details: item })
+                    }
                   >
                     Progress Images
                   </Button>
@@ -84,6 +101,8 @@ export default function ClientsImages() {
                   bgcolor={"secondary.900"}
                   boxShadow={theme?.CustomShadows?.()?.secondary}
                   overflow={"hidden"}
+                  sx={{ cursor: "pointer" }}
+                  onClick={() => setShowDetails({ open: true, details: item })}
                 >
                   <Image
                     src={item?.check_in_pictures?.[0]?.picture}
@@ -121,6 +140,13 @@ export default function ClientsImages() {
             ))}
           </Grid>
         </>
+      )}
+
+      {showDetails?.open && (
+        <DetailsDialog
+          showDetails={showDetails}
+          setShowDetails={setShowDetails}
+        />
       )}
     </>
   );

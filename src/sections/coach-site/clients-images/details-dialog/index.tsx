@@ -6,7 +6,12 @@ import {
   DialogContent,
   DialogTitle,
   Grid,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
   Typography,
+  useTheme,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { useForm } from "react-hook-form";
@@ -15,6 +20,9 @@ import { FormProvider, RHFTextField } from "@/components/react-hook-form";
 import * as Yup from "yup";
 import { LoadingButton } from "@mui/lab";
 import { successSnackbar } from "@/utils/api";
+import { detailsDataArray, questionsList } from "./details-dialog.data";
+import { pxToRem } from "@/utils/get-font-value";
+import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 
 const validationSchema: any = Yup.object().shape({
   feedback: Yup.string().trim(),
@@ -24,11 +32,8 @@ const defaultValues = {
   feedback: "",
 };
 
-export default function DetailsDialog({
-  details,
-  showDetails,
-  setShowDetails,
-}: any) {
+export default function DetailsDialog({ showDetails, setShowDetails }: any) {
+  const theme: any = useTheme();
   const methods: any = useForm({
     resolver: yupResolver(validationSchema),
     defaultValues,
@@ -39,20 +44,22 @@ export default function DetailsDialog({
   const onSubmit = async (data: any) => {
     successSnackbar("Feedback Added Successfully!");
     reset();
-    setShowDetails(false);
+    setShowDetails({ open: false, details: null });
   };
+
+  const detailsData = detailsDataArray(showDetails.details);
 
   return (
     <Dialog
-      open={showDetails}
-      onClose={() => setShowDetails(false)}
+      open={showDetails?.open}
+      onClose={() => setShowDetails({ open: false, details: null })}
       fullWidth
-      maxWidth={"sm"}
       sx={{
         "& .MuiDialog-paper": {
           bgcolor: "secondary.900",
           paddingBottom: 2,
           borderRadius: 5,
+          maxWidth: theme.breakpoints.values.md - 100,
         },
       }}
     >
@@ -64,11 +71,11 @@ export default function DetailsDialog({
           flexWrap={"wrap"}
         >
           <Typography variant={"h3"} color={"grey.100"}>
-            Details
+            Progress Details
           </Typography>
           <CloseIcon
             sx={{ cursor: "pointer", color: "grey.100" }}
-            onClick={() => setShowDetails(false)}
+            onClick={() => setShowDetails({ open: false, details: null })}
           />
         </Box>
       </DialogTitle>
@@ -76,22 +83,59 @@ export default function DetailsDialog({
       <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
         <DialogContent>
           <Grid container spacing={2}>
-            {details?.details?.map((item: any, index: any) => (
-              <Grid item xs={12} md={6} key={index}>
-                <Box borderRight={1} borderColor={"grey.800"}>
+            {Object?.entries(detailsData)?.map(([key, value], index, array) => (
+              <Grid item xs={12} sm={6} key={key}>
+                <Box
+                  borderRight={index !== array.length - 1 ? 1 : 0}
+                  borderColor={"grey.800"}
+                  mr={5}
+                >
                   <Typography
                     variant={"body1"}
                     fontWeight={500}
                     color={"grey.400"}
                   >
-                    {Object?.keys?.(item)?.[0]}:
+                    {key}:
                   </Typography>
                   <Typography variant={"h6"} color={"grey.100"} mt={0.5}>
-                    {item[Object?.keys?.(item)?.[0]]}
+                    {value} inches
                   </Typography>
                 </Box>
               </Grid>
             ))}
+
+            <Grid item xs={12}>
+              Images
+            </Grid>
+
+            <Grid item xs={12}>
+              <Box display={"flex"} flexDirection={"column"}>
+                <Typography variant={"h6"} color={"grey.100"}>
+                  Client Question:
+                </Typography>
+
+                <List sx={{ pt: 0 }}>
+                  {questionsList?.map((item: any, index: any) => (
+                    <ListItem sx={{ pl: 0 }} key={index}>
+                      <ListItemIcon sx={{ minWidth: pxToRem(20) }}>
+                        <FiberManualRecordIcon
+                          sx={{ color: "grey.400", fontSize: pxToRem(10) }}
+                        />
+                      </ListItemIcon>
+                      <ListItemText
+                        primary={item}
+                        sx={{
+                          color: "grey.400",
+                          ".MuiTypography-root": {
+                            fontSize: pxToRem(14),
+                          },
+                        }}
+                      />
+                    </ListItem>
+                  ))}
+                </List>
+              </Box>
+            </Grid>
 
             <Grid item xs={12}>
               <RHFTextField
@@ -122,7 +166,7 @@ export default function DetailsDialog({
             }}
             disableElevation
             type={"button"}
-            onClick={() => setShowDetails(false)}
+            onClick={() => setShowDetails({ open: false, details: null })}
           >
             Close
           </Button>
