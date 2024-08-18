@@ -12,13 +12,18 @@ import { usePostClientImageFeedbackMutation } from "@/services/coach-site/client
 
 export default function useDetailsDialog({ showDetails, setShowDetails }: any) {
   const theme: any = useTheme();
+  const [loadingImages, setLoadingImages] = useState<boolean[]>([]);
+  const [singleImageView, setSingleImageView] = useState({
+    openSingle: false,
+    singleImg: null,
+  });
+
   const methods: any = useForm({
     resolver: yupResolver(validationSchema),
     defaultValues,
   });
 
   const { handleSubmit, reset } = methods;
-  const [loadingImages, setLoadingImages] = useState<boolean[]>([]);
 
   const [updateClientFeedbackTrigger, updateClientFeedbackStatus] =
     usePostClientImageFeedbackMutation();
@@ -49,5 +54,7 @@ export default function useDetailsDialog({ showDetails, setShowDetails }: any) {
     loadingImages,
     setLoadingImages,
     updateClientFeedbackStatus,
+    singleImageView,
+    setSingleImageView,
   };
 }
