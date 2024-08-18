@@ -10,7 +10,15 @@ export const coachClientsImages = baseAPI.injectEndpoints({
         params,
       }),
     }),
+    postClientImageFeedback: builder.mutation({
+      query: (params: any) => ({
+        url: COACH_SITE.CLIENT_PROGRESS_FEEDBACK,
+        method: "POST",
+        params,
+      }),
+    }),
   }),
 });
 
-export const { useGetClientImagesQuery } = coachClientsImages;
+export const { useGetClientImagesQuery, usePostClientImageFeedbackMutation } =
+  coachClientsImages;

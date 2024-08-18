@@ -1,13 +1,14 @@
 import { useTheme } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { successSnackbar } from "@/utils/api";
+import { errorSnackbar, successSnackbar } from "@/utils/api";
 import {
   detailsDataArray,
   validationSchema,
   defaultValues,
 } from "./details-dialog.data";
 import { useState } from "react";
+import { usePostClientImageFeedbackMutation } from "@/services/coach-site/clients-images";
 
 export default function useDetailsDialog({ showDetails, setShowDetails }: any) {
   const theme: any = useTheme();
@@ -19,10 +20,22 @@ export default function useDetailsDialog({ showDetails, setShowDetails }: any) {
   const { handleSubmit, reset } = methods;
   const [loadingImages, setLoadingImages] = useState<boolean[]>([]);
 
+  const [updateClientFeedbackTrigger, updateClientFeedbackStatus] =
+    usePostClientImageFeedbackMutation();
+
   const onSubmit = async (data: any) => {
-    successSnackbar("Feedback Added Successfully!");
-    reset();
-    setShowDetails({ open: false, details: null });
+    const updatedData = {
+      details_id: showDetails?.details?.details_id,
+      feedback: data?.feedback,
+    };
+    try {
+      await updateClientFeedbackTrigger(updatedData).unwrap();
+      successSnackbar("Feedback Added Successfully!");
+      reset();
+      setShowDetails({ open: false, details: null });
+    } catch (error: any) {
+      errorSnackbar(error?.data?.message);
+    }
   };
 
   const detailsData = detailsDataArray(showDetails.details);
@@ -35,5 +48,6 @@ export default function useDetailsDialog({ showDetails, setShowDetails }: any) {
     detailsData,
     loadingImages,
     setLoadingImages,
+    updateClientFeedbackStatus,
   };
 }

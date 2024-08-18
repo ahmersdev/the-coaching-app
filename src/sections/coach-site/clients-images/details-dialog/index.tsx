@@ -34,6 +34,7 @@ export default function DetailsDialog({ showDetails, setShowDetails }: any) {
     detailsData,
     loadingImages,
     setLoadingImages,
+    updateClientFeedbackStatus,
   } = useDetailsDialog({ showDetails, setShowDetails });
 
   return (
@@ -279,6 +280,7 @@ export default function DetailsDialog({ showDetails, setShowDetails }: any) {
             }}
             disableElevation
             type={"submit"}
+            loading={updateClientFeedbackStatus?.isLoading}
           >
             Submit
           </LoadingButton>

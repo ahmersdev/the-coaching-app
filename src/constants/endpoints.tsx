@@ -16,6 +16,7 @@ export const COACH_SITE = {
   SUBSCRIPTIONS: `getCoachSubscriptions`,
   GET_CLIENTS: `getClients`,
   GET_PROGRESS_PICTURES: `getCheckinDetails`,
+  CLIENT_PROGRESS_FEEDBACK: `addFeedback`,
   ASSIGN_WORKOUT: `assignWorkout`,
 };
 
