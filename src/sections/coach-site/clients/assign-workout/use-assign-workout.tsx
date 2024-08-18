@@ -39,7 +39,7 @@ export default function useAssignWorkout() {
   const { handleSubmit, control, watch } = methods;
 
   const onSubmit = (data: any) => {
-    const mapRepsSets = (repsData: any[], dayIndex: number): RepSet[] => {
+    const mapRepsSets = (repsData: any[]): RepSet[] => {
       return (
         repsData
           ?.filter((repSet) => repSet?.rep)
@@ -50,7 +50,7 @@ export default function useAssignWorkout() {
       );
     };
 
-    const mapExercises = (workouts: any[], dayIndex: number): Exercise[] => {
+    const mapExercises = (workouts: any[]): Exercise[] => {
       return (
         workouts
           ?.filter(
@@ -59,30 +59,40 @@ export default function useAssignWorkout() {
               workout?.sets ||
               workout?.workout_video ||
               workout?.note ||
-              (workout?.reps && workout.reps.length > 0)
+              ((workout?.reps ||
+                workout?.daysAllWorkoutAllReps ||
+                workout?.dayOneWorkoutAllReps) &&
+                (workout.reps?.length > 0 ||
+                  workout.daysAllWorkoutAllReps?.length > 0 ||
+                  workout.dayOneWorkoutAllReps?.length > 0))
           )
           ?.map((workout) => ({
             exercise_name: workout?.exercise_name || "",
             sets: Number(workout?.sets || 0),
             workout_video: workout?.workout_video || null,
-            note: workout?.note || "", // Ensure the note is kept as an HTML string
-            reps_sets: mapRepsSets(workout?.reps, dayIndex),
+            note: workout?.note || "",
+            reps_sets: mapRepsSets(
+              workout?.reps ||
+                workout?.daysAllWorkoutAllReps ||
+                workout?.dayOneWorkoutAllReps ||
+                []
+            ),
           })) || []
       );
     };
 
-    const dayOneWorkoutOne = {
+    const dayOneWorkoutOne: Exercise = {
       exercise_name: data?.exercise_name || "",
       sets: Number(data?.sets || 0),
       workout_video: data?.workout_video || null,
-      note: data?.note || "", // Ensure the note is kept as an HTML string
-      reps_sets: mapRepsSets(data?.dayOneWorkoutOneReps, 1),
+      note: data?.note || "",
+      reps_sets: mapRepsSets(data?.dayOneWorkoutOneReps || []),
     };
 
-    const dayOneAllWorkout = mapExercises(
-      [dayOneWorkoutOne, ...(data?.dayOneWorkoutAll || [])],
-      1
-    );
+    const dayOneAllWorkout: Exercise[] = [
+      dayOneWorkoutOne,
+      ...mapExercises(data?.dayOneWorkoutAll || []),
+    ];
 
     const daysAll: DayWorkout[] =
       data?.daysAll?.map((workoutDay: any, dayIndex: number) => {
@@ -92,12 +102,9 @@ export default function useAssignWorkout() {
             sets: Number(workoutDay?.sets || 0),
             workout_video: workoutDay?.workout_video || null,
             note: workoutDay?.note || "",
-            reps_sets: mapRepsSets(
-              workoutDay?.daysAllWorkoutOneReps,
-              dayIndex + 2
-            ),
+            reps_sets: mapRepsSets(workoutDay?.daysAllWorkoutOneReps || []),
           },
-          ...mapExercises(workoutDay?.daysAllWorkoutAll || [], dayIndex + 2),
+          ...mapExercises(workoutDay?.daysAllWorkoutAll || []),
         ];
 
         return {
