@@ -11,43 +11,30 @@ import {
   ListItemIcon,
   ListItemText,
   Typography,
-  useTheme,
+  Skeleton,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { FormProvider, RHFTextField } from "@/components/react-hook-form";
-import * as Yup from "yup";
 import { LoadingButton } from "@mui/lab";
-import { successSnackbar } from "@/utils/api";
-import { detailsDataArray, questionsList } from "./details-dialog.data";
+import { questionsList } from "./details-dialog.data";
 import { pxToRem } from "@/utils/get-font-value";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
-
-const validationSchema: any = Yup.object().shape({
-  feedback: Yup.string().trim(),
-});
-
-const defaultValues = {
-  feedback: "",
-};
+import { Swiper, SwiperSlide } from "swiper/react";
+import { EffectCoverflow, Navigation, Pagination } from "swiper/modules";
+import Image from "next/image";
+import { CarousalBackArrowIcon, CarousalNextArrowIcon } from "@/assets/icons";
+import useDetailsDialog from "./use-details-dialog";
 
 export default function DetailsDialog({ showDetails, setShowDetails }: any) {
-  const theme: any = useTheme();
-  const methods: any = useForm({
-    resolver: yupResolver(validationSchema),
-    defaultValues,
-  });
-
-  const { handleSubmit, reset } = methods;
-
-  const onSubmit = async (data: any) => {
-    successSnackbar("Feedback Added Successfully!");
-    reset();
-    setShowDetails({ open: false, details: null });
-  };
-
-  const detailsData = detailsDataArray(showDetails.details);
+  const {
+    theme,
+    methods,
+    handleSubmit,
+    onSubmit,
+    detailsData,
+    loadingImages,
+    setLoadingImages,
+  } = useDetailsDialog({ showDetails, setShowDetails });
 
   return (
     <Dialog
@@ -60,6 +47,7 @@ export default function DetailsDialog({ showDetails, setShowDetails }: any) {
           paddingBottom: 2,
           borderRadius: 5,
           maxWidth: theme.breakpoints.values.md - 100,
+          maxHeight: "80vh",
         },
       }}
     >
@@ -104,8 +92,118 @@ export default function DetailsDialog({ showDetails, setShowDetails }: any) {
               </Grid>
             ))}
 
-            <Grid item xs={12}>
-              Images
+            <Grid item xs={12} my={2}>
+              <Swiper
+                effect={"coverflow"}
+                grabCursor={true}
+                centeredSlides={true}
+                loop={true}
+                slidesPerView={1}
+                spaceBetween={12}
+                speed={500}
+                coverflowEffect={{
+                  rotate: 0,
+                  stretch: 0,
+                  depth: 0,
+                  modifier: 0,
+                }}
+                navigation={{
+                  nextEl: ".progress-images-next",
+                  prevEl: ".progress-images-prev",
+                }}
+                modules={[EffectCoverflow, Navigation, Pagination]}
+                className="mySwiper"
+                style={{ width: "100%" }}
+                breakpoints={{
+                  900: {
+                    slidesPerView: 3,
+                  },
+                }}
+              >
+                {showDetails.details?.check_in_pictures?.map(
+                  (item: any, index: number) => (
+                    <SwiperSlide
+                      key={index}
+                      style={{
+                        backgroundColor: "transparent",
+                        borderRadius: 6,
+                        height: "100%",
+                      }}
+                    >
+                      <Box
+                        position="relative"
+                        display="flex"
+                        justifyContent="center"
+                        alignItems="center"
+                      >
+                        {loadingImages[index] && (
+                          <Skeleton
+                            variant="rectangular"
+                            width={200}
+                            height={200}
+                            sx={{ borderRadius: 12 }}
+                          />
+                        )}
+                        <Image
+                          src={item?.picture}
+                          alt={"Progress Pictures"}
+                          width={200}
+                          height={200}
+                          style={{
+                            width: "100%",
+                            objectFit: "cover",
+                            objectPosition: "center center",
+                            borderRadius: 12,
+                            opacity: loadingImages[index] ? 0 : 1,
+                            transition: "opacity 0.3s ease-in-out",
+                          }}
+                          onLoadingComplete={() =>
+                            setLoadingImages((prev) =>
+                              prev.map((_, i) =>
+                                i === index ? false : prev[i]
+                              )
+                            )
+                          }
+                          onLoadStart={() =>
+                            setLoadingImages((prev) => {
+                              const newState = [...prev];
+                              newState[index] = true;
+                              return newState;
+                            })
+                          }
+                        />
+                      </Box>
+                    </SwiperSlide>
+                  )
+                )}
+              </Swiper>
+
+              <Box
+                display={"flex"}
+                justifyContent={"center"}
+                alignItems={"center"}
+                gap={1.2}
+                mt={2}
+              >
+                <Box
+                  className="progress-images-prev"
+                  sx={{ cursor: "pointer" }}
+                >
+                  <CarousalBackArrowIcon
+                    fill={theme?.palette?.common?.white}
+                    stroke={theme?.palette?.secondary?.main}
+                  />
+                </Box>
+                <Box
+                  className="progress-images-next"
+                  sx={{ cursor: "pointer" }}
+                >
+                  <CarousalNextArrowIcon
+                    fill={theme?.palette?.common?.white}
+                    stroke={theme?.palette?.secondary?.main}
+                  />
+                </Box>
+              </Box>
             </Grid>
 
             <Grid item xs={12}>

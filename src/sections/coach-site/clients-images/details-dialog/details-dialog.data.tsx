@@ -1,3 +1,13 @@
+import * as Yup from "yup";
+
+export const validationSchema: any = Yup.object().shape({
+  feedback: Yup.string().trim(),
+});
+
+export const defaultValues = {
+  feedback: "",
+};
+
 export const detailsDataArray = (data: any) => {
   return {
     "Chest Size": data?.chest ?? "-",
