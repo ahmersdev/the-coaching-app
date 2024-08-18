@@ -1,14 +1,12 @@
 "use client";
 
 import { Avatar, Box, Button, Divider, Grid, Typography } from "@mui/material";
-import Link from "next/link";
-import { COACH_SITE } from "@/constants/routes";
 import Image from "next/image";
-import { NextIcon } from "@/assets/icons";
 import dayjs from "dayjs";
 import ApiErrorState from "@/components/api-error-state";
 import { SkeletonTable } from "@/components/skeletons";
 import useClientsImages from "./use-clients-images";
+import NoData from "@/components/no-data";
 
 export default function ClientsImages() {
   const { theme, isLoading, isFetching, isError, sortedData, data } =
@@ -20,6 +18,8 @@ export default function ClientsImages() {
         <SkeletonTable />
       ) : isError ? (
         <ApiErrorState />
+      ) : !!!data?.check_in_details?.length ? (
+        <NoData />
       ) : (
         <>
           <Typography variant={"h3"} mb={2}>
@@ -51,30 +51,23 @@ export default function ClientsImages() {
 
                   <Divider sx={{ my: 2 }} />
 
-                  <Link
-                    href={{
-                      pathname: COACH_SITE?.CLIENTS_IMAGES_OVERVIEW,
-                      query: { clientId: item?.client_id },
+                  <Button
+                    variant={"contained"}
+                    sx={{
+                      color: "grey.100",
+                      borderRadius: 25,
+                      border: "1px dashed",
+                      borderColor: "grey.100",
+                      background: "transparent",
+                      ":hover": {
+                        backgroundColor: "grey.100",
+                        color: "grey.900",
+                      },
                     }}
+                    disableElevation
                   >
-                    <Button
-                      variant={"contained"}
-                      sx={{
-                        color: "grey.100",
-                        borderRadius: 25,
-                        border: "1px dashed",
-                        borderColor: "grey.100",
-                        background: "transparent",
-                        ":hover": {
-                          backgroundColor: "grey.100",
-                          color: "grey.900",
-                        },
-                      }}
-                      disableElevation
-                    >
-                      Progress Images
-                    </Button>
-                  </Link>
+                    Progress Images
+                  </Button>
                 </Box>
               </Grid>
             ))}
@@ -100,24 +93,10 @@ export default function ClientsImages() {
                     style={{ width: "100%", height: "100%" }}
                   />
                   <Box p={1}>
-                    <Box
-                      display={"flex"}
-                      alignItems={"center"}
-                      justifyContent={"space-between"}
-                      mb={1}
-                    >
-                      <Typography variant={"h6"} fontWeight={700}>
-                        {dayjs(item?.updated_at)?.format("MMM DD, YYYY")}
-                      </Typography>
-                      <Link
-                        href={{
-                          pathname: COACH_SITE?.CLIENTS_IMAGES_OVERVIEW,
-                          query: { clientId: item?.client_id },
-                        }}
-                      >
-                        <NextIcon />
-                      </Link>
-                    </Box>
+                    <Typography variant={"h6"} fontWeight={700} mb={1}>
+                      {dayjs(item?.updated_at)?.format("MMM DD, YYYY")}
+                    </Typography>
+
                     <Box display={"flex"} alignItems={"center"} gap={1}>
                       <Avatar
                         src={item?.client?.profile_picture}

@@ -107,10 +107,6 @@ export const headerTitle = (pathName: any) => {
       title = "Clients Progress";
       break;
 
-    case COACH_SITE?.CLIENTS_IMAGES_OVERVIEW:
-      title = "Clients Progress";
-      break;
-
     case COACH_SITE?.SETTINGS:
       title = "Settings";
       break;

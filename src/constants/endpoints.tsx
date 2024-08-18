@@ -15,7 +15,7 @@ export const COACH_SITE = {
   UPDATE_PASSWORD: `updateCoachPassword`,
   SUBSCRIPTIONS: `getCoachSubscriptions`,
   GET_CLIENTS: `getClients`,
-  GET_PROGRESS_PICTURES: `getProgressPictures`,
+  GET_PROGRESS_PICTURES: `getCheckinDetails`,
   ASSIGN_WORKOUT: `assignWorkout`,
 };
 

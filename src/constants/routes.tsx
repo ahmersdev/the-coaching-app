@@ -35,7 +35,6 @@ export const COACH_SITE = {
   CLIENTS_ALERTS: `/coach-alerts`,
   CLIENTS_ALERTS_OVERVIEW: `/coach-alerts/overview`,
   CLIENTS_IMAGES: `/coach-client-images`,
-  CLIENTS_IMAGES_OVERVIEW: `/coach-client-images/overview`,
   SETTINGS: `/coach-settings`,
 };
 

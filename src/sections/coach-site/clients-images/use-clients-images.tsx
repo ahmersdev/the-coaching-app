@@ -4,7 +4,10 @@ import { IDataSorting } from "./clients-images.interface";
 
 export default function useClientsImages() {
   const theme: any = useTheme();
-  const { data, isLoading, isFetching, isError } = useGetClientImagesQuery({});
+  const { data, isLoading, isFetching, isError } = useGetClientImagesQuery(
+    {},
+    { refetchOnMountOrArgChange: true }
+  );
 
   const sortedData = [...(data?.check_in_details || [])]
     ?.sort(
