@@ -9,7 +9,6 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { RHFTextField, RHFUploadFile } from "@/components/react-hook-form";
 import { useFieldArray } from "react-hook-form";
-import { LoadingButton } from "@mui/lab";
 import { useEffect } from "react";
 
 export default function WorkoutOne({ control, watch, dayIndex }: any) {
@@ -112,23 +111,6 @@ export default function WorkoutOne({ control, watch, dayIndex }: any) {
                 rows={3}
                 bgcolor={"secondary.800"}
               />
-            </Grid>
-
-            <Grid item xs={12}>
-              <LoadingButton
-                variant={"contained"}
-                sx={{
-                  color: "grey.100",
-                  width: 132,
-                  borderRadius: 25,
-                  border: "1px solid",
-                  borderColor: "primary.main",
-                }}
-                disableElevation
-                type={"submit"}
-              >
-                Add
-              </LoadingButton>
             </Grid>
           </Grid>
         </AccordionDetails>

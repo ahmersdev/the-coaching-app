@@ -18,6 +18,7 @@ export const COACH_SITE = {
   GET_PROGRESS_PICTURES: `getCheckinDetails`,
   CLIENT_PROGRESS_FEEDBACK: `addFeedback`,
   ASSIGN_WORKOUT: `assignWorkout`,
+  GET_WORKOUT: `getWorkout`,
 };
 
 export const STRIPE = {

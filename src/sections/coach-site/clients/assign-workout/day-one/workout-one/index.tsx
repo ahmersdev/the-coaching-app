@@ -118,22 +118,6 @@ export default function WorkoutOne({ control, watch }: any) {
                 bgcolor={"secondary.800"}
               />
             </Grid>
-            <Grid item xs={12}>
-              <LoadingButton
-                variant={"contained"}
-                sx={{
-                  color: "grey.100",
-                  width: 132,
-                  borderRadius: 25,
-                  border: "1px solid",
-                  borderColor: "primary.main",
-                }}
-                disableElevation
-                type={"submit"}
-              >
-                Add
-              </LoadingButton>
-            </Grid>
           </Grid>
         </AccordionDetails>
       </Accordion>

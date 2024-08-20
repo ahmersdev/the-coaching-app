@@ -16,13 +16,24 @@ export const coachClients = baseAPI.injectEndpoints({
     postAssignWorkout: builder.mutation({
       query: (params: any) => ({
         url: COACH_SITE.ASSIGN_WORKOUT,
-        method: "POST",
+        method: "PUT",
         params,
       }),
       invalidatesTags: [TAG],
     }),
+    getAssignWorkout: builder.query({
+      query: (params: any) => ({
+        url: COACH_SITE.GET_WORKOUT,
+        method: "GET",
+        params,
+      }),
+      providesTags: [TAG],
+    }),
   }),
 });
 
-export const { useGetClientDetailsQuery, usePostAssignWorkoutMutation } =
-  coachClients;
+export const {
+  useGetClientDetailsQuery,
+  usePostAssignWorkoutMutation,
+  useGetAssignWorkoutQuery,
+} = coachClients;

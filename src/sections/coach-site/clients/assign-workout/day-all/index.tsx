@@ -96,12 +96,19 @@ export default function DayAll({ control, watch }: any) {
           color: "grey.100",
           borderRadius: 25,
           height: 54,
+          border: "1px dashed",
+          borderColor: "grey.100",
+          background: "transparent",
           mt: 2,
+          ":hover": {
+            backgroundColor: "grey.100",
+            color: "grey.900",
+          },
         }}
         disableElevation
         onClick={handleAddDay}
       >
-        Add exercises for another day
+        Add Workout For Another Day
       </Button>
     </>
   );

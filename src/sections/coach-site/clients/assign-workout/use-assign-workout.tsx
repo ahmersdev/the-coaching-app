@@ -1,45 +1,42 @@
-import { successSnackbar } from "@/utils/api";
+import { errorSnackbar, successSnackbar } from "@/utils/api";
 import { workoutValidationSchema, defaultValues } from "./assign-workout.data";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useSearchParams } from "next/navigation";
-
-interface RepSet {
-  set: number;
-  reps: number;
-}
-
-interface Exercise {
-  exercise_name: string;
-  sets: number;
-  workout_video: File | null;
-  note: string;
-  reps_sets: RepSet[];
-}
-
-interface DayWorkout {
-  day: number;
-  exercises: Exercise[];
-}
-
-interface UpdatedData {
-  details: DayWorkout[];
-  client_id: string | any;
-}
+import {
+  useGetAssignWorkoutQuery,
+  usePostAssignWorkoutMutation,
+} from "@/services/coach-site/clients";
+import {
+  IDayWorkout,
+  IExercise,
+  IRepSet,
+  IUpdatedData,
+} from "./assign-workout.interface";
 
 export default function useAssignWorkout() {
   const searchParams = useSearchParams();
   const clientId = searchParams.get("clientId");
+
+  const [postWorkoutTrigger, postWorkoutStatus] =
+    usePostAssignWorkoutMutation();
+
+  const { data, isLoading, isFetching, isError } = useGetAssignWorkoutQuery(
+    { client_id: clientId },
+    { refetchOnMountOrArgChange: true, skip: !clientId }
+  );
+
+  console.log(data);
 
   const methods: any = useForm({
     resolver: yupResolver(workoutValidationSchema),
     defaultValues,
   });
 
-  const { handleSubmit, control, watch } = methods;
+  const { handleSubmit, control, watch, reset } = methods;
 
-  const onSubmit = (data: any) => {
-    const mapRepsSets = (repsData: any[]): RepSet[] => {
+  const onSubmit = async (data: any) => {
+    const mapRepsSets = (repsData: any[]): IRepSet[] => {
       return (
         repsData
           ?.filter((repSet) => repSet?.rep)
@@ -50,7 +47,7 @@ export default function useAssignWorkout() {
       );
     };
 
-    const mapExercises = (workouts: any[]): Exercise[] => {
+    const mapExercises = (workouts: any[]): IExercise[] => {
       return (
         workouts
           ?.filter(
@@ -81,7 +78,7 @@ export default function useAssignWorkout() {
       );
     };
 
-    const dayOneWorkoutOne: Exercise = {
+    const dayOneWorkoutOne: IExercise = {
       exercise_name: data?.exercise_name || "",
       sets: Number(data?.sets || 0),
       workout_video: data?.workout_video || null,
@@ -89,12 +86,12 @@ export default function useAssignWorkout() {
       reps_sets: mapRepsSets(data?.dayOneWorkoutOneReps || []),
     };
 
-    const dayOneAllWorkout: Exercise[] = [
+    const dayOneAllWorkout: IExercise[] = [
       dayOneWorkoutOne,
       ...mapExercises(data?.dayOneWorkoutAll || []),
     ];
 
-    const daysAll: DayWorkout[] =
+    const daysAll: IDayWorkout[] =
       data?.daysAll?.map((workoutDay: any, dayIndex: number) => {
         const exercises = [
           {
@@ -118,15 +115,28 @@ export default function useAssignWorkout() {
       exercises: dayOneAllWorkout,
     });
 
-    const updatedData: UpdatedData = {
-      details: daysAll,
+    const updatedData: IUpdatedData = {
+      details: JSON.stringify(daysAll),
       client_id: clientId,
     };
 
-    console.log(updatedData);
-
-    successSnackbar("Workout Assigned Successfully!");
+    try {
+      await postWorkoutTrigger(updatedData).unwrap();
+      successSnackbar("Workout Assigned Successfully!");
+    } catch (error: any) {
+      errorSnackbar(error?.data?.error);
+    }
   };
 
-  return { methods, handleSubmit, onSubmit, control, watch };
+  return {
+    methods,
+    handleSubmit,
+    onSubmit,
+    control,
+    watch,
+    postWorkoutStatus,
+    isLoading,
+    isFetching,
+    isError,
+  };
 }

@@ -10,7 +10,6 @@ import {
 import { useFieldArray } from "react-hook-form";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { RHFTextField, RHFUploadFile } from "@/components/react-hook-form";
-import { LoadingButton } from "@mui/lab";
 import Reps from "./reps";
 
 export default function WorkoutAll({ control, watch }: any) {
@@ -125,22 +124,6 @@ export default function WorkoutAll({ control, watch }: any) {
                     bgcolor={"secondary.800"}
                   />
                 </Grid>
-                <Grid item xs={12}>
-                  <LoadingButton
-                    variant={"contained"}
-                    sx={{
-                      color: "grey.100",
-                      width: 132,
-                      borderRadius: 25,
-                      border: "1px solid",
-                      borderColor: "primary.main",
-                    }}
-                    disableElevation
-                    type={"submit"}
-                  >
-                    Add
-                  </LoadingButton>
-                </Grid>
               </Grid>
             </AccordionDetails>
           </Accordion>
@@ -166,7 +149,7 @@ export default function WorkoutAll({ control, watch }: any) {
         disableElevation
         onClick={handleAddWorkout}
       >
-        Add Another Workout
+        Add Another Exercise
       </Button>
     </>
   );
