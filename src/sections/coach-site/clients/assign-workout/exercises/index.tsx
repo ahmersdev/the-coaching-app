@@ -1,3 +1,4 @@
+import { RHFTextField, RHFUploadFile } from "@/components/react-hook-form";
 import {
   Accordion,
   AccordionDetails,
@@ -7,34 +8,23 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import { useFieldArray } from "react-hook-form";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { RHFTextField, RHFUploadFile } from "@/components/react-hook-form";
 import Reps from "./reps";
+import useExercises from "./use-exercises";
 
-export default function WorkoutAll({ control, watch }: any) {
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: "dayOneWorkoutAll",
-  });
-
-  const handleAddWorkout = () => {
-    append({
-      exercise_name: "",
-      sets: "",
-      workout_video: null,
-      note: "",
-    });
-  };
-
-  const handleRemoveWorkout = (workoutIndex: any) => {
-    remove(workoutIndex);
-  };
+export default function Exercises({ control, watch, dayIndex }: any) {
+  const { exercisesField, handleRemoveExercise, handleAddExercise } =
+    useExercises({ control, dayIndex });
 
   return (
     <>
-      {fields?.map((workout: any, workoutIndex: any) => (
-        <Box bgcolor={"secondary.900"} key={workout.id} borderRadius={3} mt={2}>
+      {exercisesField.map((exercise, exerciseIndex) => (
+        <Box
+          bgcolor={"secondary.900"}
+          key={exercise.id}
+          borderRadius={3}
+          mt={2}
+        >
           <Accordion
             elevation={0}
             defaultExpanded
@@ -62,19 +52,21 @@ export default function WorkoutAll({ control, watch }: any) {
                     color={"grey.100"}
                     fontWeight={700}
                   >
-                    Exercise 0{workoutIndex + 2}
+                    Exercise 0{exerciseIndex + 1}
                   </Typography>
                 </Box>
-                <Typography
-                  variant={"body1"}
-                  color={"grey.100"}
-                  fontWeight={900}
-                  onClick={() => handleRemoveWorkout?.(workoutIndex)}
-                  mr={2}
-                  sx={{ cursor: "pointer" }}
-                >
-                  X
-                </Typography>
+                {exerciseIndex !== 0 && (
+                  <Typography
+                    variant={"body1"}
+                    color={"grey.100"}
+                    fontWeight={900}
+                    onClick={() => handleRemoveExercise?.(exerciseIndex)}
+                    mr={2}
+                    sx={{ cursor: "pointer" }}
+                  >
+                    X
+                  </Typography>
+                )}
               </Box>
             </AccordionSummary>
 
@@ -82,7 +74,7 @@ export default function WorkoutAll({ control, watch }: any) {
               <Grid container spacing={1}>
                 <Grid item xs={12} md={5}>
                   <RHFTextField
-                    name={`dayOneWorkoutAll[${workoutIndex}].exercise_name`}
+                    name={`days[${dayIndex}].exercises[${exerciseIndex}].exercise_name`}
                     label={"Exercise Name"}
                     placeholder={"Enter Exercise Name"}
                     bgcolor={"secondary.800"}
@@ -90,24 +82,24 @@ export default function WorkoutAll({ control, watch }: any) {
                 </Grid>
                 <Grid item xs={12} md={5}>
                   <RHFTextField
-                    name={`dayOneWorkoutAll[${workoutIndex}].sets`}
+                    name={`days[${dayIndex}].exercises[${exerciseIndex}].sets`}
                     label={"Sets"}
                     placeholder={"Enter Number of Sets"}
                     type={"number"}
                     bgcolor={"secondary.800"}
                   />
                 </Grid>
-
                 <Grid item xs={12}>
                   <Reps
                     control={control}
                     watch={watch}
-                    workoutIndex={workoutIndex}
+                    dayIndex={dayIndex}
+                    exerciseIndex={exerciseIndex}
                   />
                 </Grid>
                 <Grid item xs={12} md={5}>
                   <RHFUploadFile
-                    name={`dayOneWorkoutAll[${workoutIndex}].workout_video`}
+                    name={`days[${dayIndex}].exercises[${exerciseIndex}].workout_video`}
                     label={"Workout Video"}
                     border={0}
                     bgcolor={"secondary.main"}
@@ -116,7 +108,7 @@ export default function WorkoutAll({ control, watch }: any) {
                 <Grid item xs={0} md={7} />
                 <Grid item xs={12} md={5}>
                   <RHFTextField
-                    name={`dayOneWorkoutAll[${workoutIndex}].note`}
+                    name={`days[${dayIndex}].exercises[${exerciseIndex}].note`}
                     label={"Add Note"}
                     placeholder={"Add Some Details"}
                     multiline
@@ -124,33 +116,35 @@ export default function WorkoutAll({ control, watch }: any) {
                     bgcolor={"secondary.800"}
                   />
                 </Grid>
+
+                <Grid item xs={12}>
+                  <Button
+                    variant={"contained"}
+                    fullWidth
+                    sx={{
+                      color: "grey.100",
+                      borderRadius: 25,
+                      height: 54,
+                      border: "1px dashed",
+                      borderColor: "grey.100",
+                      background: "transparent",
+                      mt: 2,
+                      ":hover": {
+                        backgroundColor: "grey.100",
+                        color: "grey.900",
+                      },
+                    }}
+                    disableElevation
+                    onClick={handleAddExercise}
+                  >
+                    Add Another Exercise
+                  </Button>
+                </Grid>
               </Grid>
             </AccordionDetails>
           </Accordion>
         </Box>
       ))}
-
-      <Button
-        variant={"contained"}
-        fullWidth
-        sx={{
-          color: "grey.100",
-          borderRadius: 25,
-          height: 54,
-          border: "1px dashed",
-          borderColor: "grey.100",
-          background: "transparent",
-          mt: 2,
-          ":hover": {
-            backgroundColor: "grey.100",
-            color: "grey.900",
-          },
-        }}
-        disableElevation
-        onClick={handleAddWorkout}
-      >
-        Add Another Exercise
-      </Button>
     </>
   );
 }

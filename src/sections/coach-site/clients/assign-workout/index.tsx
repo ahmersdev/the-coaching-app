@@ -1,23 +1,37 @@
 "use client";
 
 import { FormProvider } from "@/components/react-hook-form";
-import { Box, Grid, Skeleton, Typography } from "@mui/material";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Box,
+  Button,
+  Divider,
+  Grid,
+  Skeleton,
+  Typography,
+} from "@mui/material";
 import Link from "next/link";
 import { COACH_SITE } from "@/constants/routes";
 import { ArrowBackIcon } from "@/assets/icons";
 import { LoadingButton } from "@mui/lab";
-import DayOne from "./day-one";
-import DayAll from "./day-all";
+import { WorkoutDayIcon } from "@/assets/icons";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import Exercises from "./exercises";
 import useAssignWorkout from "./use-assign-workout";
 import ApiErrorState from "@/components/api-error-state";
 
 export default function AssignWorkout() {
   const {
     methods,
-    handleSubmit,
-    onSubmit,
     control,
     watch,
+    handleSubmit,
+    onSubmit,
+    daysField,
+    handleRemoveDay,
+    handleAddDay,
     postWorkoutStatus,
     isLoading,
     isFetching,
@@ -34,6 +48,7 @@ export default function AssignWorkout() {
           Assign Workout
         </Typography>
       </Box>
+
       {isLoading || isFetching ? (
         <Box bgcolor={"secondary.main"} borderRadius={3} mt={2} p={2}>
           <Grid container spacing={2}>
@@ -68,9 +83,93 @@ export default function AssignWorkout() {
         </Box>
       ) : (
         <>
-          <DayOne control={control} watch={watch} />
+          {daysField?.map((day, dayIndex) => (
+            <Box
+              bgcolor={"secondary.main"}
+              borderRadius={3}
+              mt={2}
+              key={day.id}
+            >
+              <Accordion
+                elevation={0}
+                defaultExpanded
+                sx={{
+                  bgcolor: "transparent",
+                  p: 1,
+                  "&.Mui-expanded": {
+                    margin: 0,
+                  },
+                }}
+              >
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon sx={{ color: "grey.100" }} />}
+                >
+                  <Box
+                    width={"100%"}
+                    display={"flex"}
+                    alignItems={"center"}
+                    justifyContent={"space-between"}
+                    gap={1}
+                  >
+                    <Box display={"flex"} alignItems={"center"} gap={1}>
+                      <WorkoutDayIcon />
+                      <Typography
+                        variant={"h6"}
+                        color={"grey.100"}
+                        fontWeight={700}
+                      >
+                        Day 0{dayIndex + 1}
+                      </Typography>
+                    </Box>
+                    {dayIndex !== 0 && (
+                      <Typography
+                        variant={"body1"}
+                        color={"grey.100"}
+                        fontWeight={900}
+                        onClick={() => handleRemoveDay?.(dayIndex)}
+                        mr={2}
+                        sx={{ cursor: "pointer" }}
+                      >
+                        X
+                      </Typography>
+                    )}
+                  </Box>
+                </AccordionSummary>
 
-          <DayAll control={control} watch={watch} />
+                <AccordionDetails>
+                  <Divider sx={{ mb: 2 }} />
+
+                  <Exercises
+                    control={control}
+                    watch={watch}
+                    dayIndex={dayIndex}
+                  />
+                </AccordionDetails>
+              </Accordion>
+            </Box>
+          ))}
+
+          <Button
+            variant={"contained"}
+            fullWidth
+            sx={{
+              color: "grey.100",
+              borderRadius: 25,
+              height: 54,
+              border: "1px dashed",
+              borderColor: "grey.100",
+              background: "transparent",
+              mt: 2,
+              ":hover": {
+                backgroundColor: "grey.100",
+                color: "grey.900",
+              },
+            }}
+            disableElevation
+            onClick={handleAddDay}
+          >
+            Add Workout For Another Day
+          </Button>
 
           <LoadingButton
             variant={"contained"}

@@ -1,27 +1,39 @@
 import * as Yup from "yup";
 
-export const workoutValidationSchema: any = Yup.object().shape({
-  exercise_name: Yup.string().trim().required("Required"),
-  dayOneWorkoutAll: Yup.array().of(
+export const assignWorkoutValidationSchema = Yup.object().shape({
+  days: Yup.array().of(
     Yup.object().shape({
-      exercise_name: Yup.string().required("Required"),
-    })
-  ),
-  daysAll: Yup.array().of(
-    Yup.object().shape({
-      exercise_name: Yup.string().required("Required"),
-      daysAllWorkoutAll: Yup.array().of(
+      exercises: Yup.array().of(
         Yup.object().shape({
-          exercise_name: Yup.string().required("Required"),
+          exercise_name: Yup.string().trim().required("Exercise Name Required"),
+          sets: Yup.string().required("Number of Sets is Required"),
+          reps_sets: Yup.array().of(
+            Yup.object().shape({
+              rep: Yup.string().required("Required"),
+            })
+          ),
+          note: Yup.string().trim(),
+          workout_video: Yup.mixed().nullable(),
         })
       ),
     })
   ),
 });
 
-export const defaultValues = {
-  exercise_name: "",
-  sets: "",
-  workout_video: null,
-  note: "",
+export const repsDefaultValues = { rep: "" };
+
+export const exerciseDefaultValues = {
+  exercises: [
+    {
+      exercise_name: "",
+      sets: "",
+      reps_sets: [repsDefaultValues],
+      workout_video: null,
+      note: "",
+    },
+  ],
+};
+
+export const assignWorkoutDefaultValues = {
+  days: [exerciseDefaultValues],
 };
