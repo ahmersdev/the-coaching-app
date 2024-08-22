@@ -93,7 +93,7 @@ export default function useAssignWorkout() {
 
       reset({ days: originalFormData });
     }
-  }, [data]);
+  }, [data, reset]);
 
   return {
     methods,

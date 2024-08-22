@@ -49,7 +49,7 @@ export default function useDetailsDialog({ showDetails, setShowDetails }: any) {
     if (showDetails.details) {
       reset({ feedback: showDetails.details?.coach_feedback ?? "" });
     }
-  }, [showDetails.details]);
+  }, [showDetails.details, reset]);
 
   const mappedAnswers = getQuestionsList(showDetails.details);
 
