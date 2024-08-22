@@ -19,14 +19,19 @@ export const detailsDataArray = (data: any) => {
   };
 };
 
-export const questionsList = [
-  "How was your week?",
-  "Any stress depression?",
-  "How was macros?",
-  "How many missed meals?",
-  "How many cheat meals?",
-  "How was sleep?",
-  "How is appetite and digestion?",
-  "How is recovery?",
-  "Training strength?",
-];
+export const getQuestionsList = (data: any) => {
+  return {
+    "How was your week?": data.how_was_your_week ?? "No answer provided",
+    "Any stress depression?":
+      data.any_stress_depression ?? "No answer provided",
+    "How was macros?": data.how_was_macros ?? "No answer provided",
+    "How many missed meals?":
+      data.how_many_missed_meals ?? "No answer provided",
+    "How many cheat meals?": data.how_many_cheat_meals ?? "No answer provided",
+    "How was sleep?": data.how_was_sleep ?? "No answer provided",
+    "How is appetite and digestion?":
+      data.how_is_appetite_and_digestion ?? "No answer provided",
+    "How is recovery?": data.how_is_recovery ?? "No answer provided",
+    "Training strength?": data.training_strength ?? "No answer provided",
+  };
+};

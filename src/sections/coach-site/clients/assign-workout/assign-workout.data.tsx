@@ -27,7 +27,7 @@ export const exerciseDefaultValues = {
     {
       exercise_name: "",
       sets: "",
-      reps_sets: [repsDefaultValues],
+      reps_sets: [],
       workout_video: null,
       note: "",
     },

@@ -10,6 +10,7 @@ import {
   usePostAssignWorkoutMutation,
 } from "@/services/coach-site/clients";
 import { errorSnackbar, successSnackbar } from "@/utils/api";
+import { useEffect } from "react";
 
 export default function useAssignWorkout() {
   const searchParams = useSearchParams();
@@ -20,7 +21,7 @@ export default function useAssignWorkout() {
     defaultValues: assignWorkoutDefaultValues,
   });
 
-  const { handleSubmit, control, watch } = methods;
+  const { handleSubmit, control, watch, reset } = methods;
 
   const {
     fields: daysField,
@@ -38,11 +39,6 @@ export default function useAssignWorkout() {
   const handleRemoveDay = (dayIndex: any) => {
     daysRemove(dayIndex);
   };
-
-  const { data, isLoading, isFetching, isError } = useGetAssignWorkoutQuery(
-    { client_id: clientId },
-    { refetchOnMountOrArgChange: true, skip: !clientId }
-  );
 
   const [postWorkoutTrigger, postWorkoutStatus] =
     usePostAssignWorkoutMutation();
@@ -74,6 +70,30 @@ export default function useAssignWorkout() {
       errorSnackbar(error?.data?.error);
     }
   };
+
+  const { data, isLoading, isFetching, isError } = useGetAssignWorkoutQuery(
+    { client_id: clientId },
+    { refetchOnMountOrArgChange: true, skip: !clientId }
+  );
+
+  useEffect(() => {
+    if (data?.details) {
+      const originalFormData = data.details.map((day: any) => ({
+        day: day.day,
+        exercises: day.exercises.map((exercise: any) => ({
+          exercise_name: exercise.exercise_name,
+          sets: exercise.sets,
+          workout_video: exercise.workout_video,
+          note: exercise.note,
+          reps_sets: exercise.reps_sets.map((repSet: any) => ({
+            rep: repSet.reps,
+          })),
+        })),
+      }));
+
+      reset({ days: originalFormData });
+    }
+  }, [data]);
 
   return {
     methods,

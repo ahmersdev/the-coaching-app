@@ -6,8 +6,9 @@ import {
   detailsDataArray,
   validationSchema,
   defaultValues,
+  getQuestionsList,
 } from "./details-dialog.data";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { usePostClientImageFeedbackMutation } from "@/services/coach-site/clients-images";
 
 export default function useDetailsDialog({ showDetails, setShowDetails }: any) {
@@ -36,7 +37,6 @@ export default function useDetailsDialog({ showDetails, setShowDetails }: any) {
     try {
       await updateClientFeedbackTrigger(updatedData).unwrap();
       successSnackbar("Feedback Added Successfully!");
-      reset();
       setShowDetails({ open: false, details: null });
     } catch (error: any) {
       errorSnackbar(error?.data?.message);
@@ -44,6 +44,14 @@ export default function useDetailsDialog({ showDetails, setShowDetails }: any) {
   };
 
   const detailsData = detailsDataArray(showDetails.details);
+
+  useEffect(() => {
+    if (showDetails.details) {
+      reset({ feedback: showDetails.details?.coach_feedback ?? "" });
+    }
+  }, [showDetails.details]);
+
+  const mappedAnswers = getQuestionsList(showDetails.details);
 
   return {
     theme,
@@ -56,5 +64,6 @@ export default function useDetailsDialog({ showDetails, setShowDetails }: any) {
     updateClientFeedbackStatus,
     singleImageView,
     setSingleImageView,
+    mappedAnswers,
   };
 }

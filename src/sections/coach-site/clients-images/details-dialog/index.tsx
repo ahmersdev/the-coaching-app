@@ -6,17 +6,12 @@ import {
   DialogContent,
   DialogTitle,
   Grid,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
   Typography,
   Skeleton,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { FormProvider, RHFTextField } from "@/components/react-hook-form";
 import { LoadingButton } from "@mui/lab";
-import { questionsList } from "./details-dialog.data";
 import { pxToRem } from "@/utils/get-font-value";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -38,6 +33,7 @@ export default function DetailsDialog({ showDetails, setShowDetails }: any) {
     updateClientFeedbackStatus,
     singleImageView,
     setSingleImageView,
+    mappedAnswers,
   } = useDetailsDialog({ showDetails, setShowDetails });
 
   return (
@@ -229,26 +225,26 @@ export default function DetailsDialog({ showDetails, setShowDetails }: any) {
                     Client Question:
                   </Typography>
 
-                  <List sx={{ pt: 0 }}>
-                    {questionsList?.map((item: any, index: any) => (
-                      <ListItem sx={{ pl: 0 }} key={index}>
-                        <ListItemIcon sx={{ minWidth: pxToRem(20) }}>
-                          <FiberManualRecordIcon
-                            sx={{ color: "grey.400", fontSize: pxToRem(10) }}
-                          />
-                        </ListItemIcon>
-                        <ListItemText
-                          primary={item}
-                          sx={{
-                            color: "grey.400",
-                            ".MuiTypography-root": {
-                              fontSize: pxToRem(14),
-                            },
-                          }}
-                        />
-                      </ListItem>
-                    ))}
-                  </List>
+                  <Grid container spacing={2}>
+                    {Object?.entries(mappedAnswers)?.map(
+                      ([key, value]: any) => (
+                        <Grid item xs={12} key={key} color={"grey.400"}>
+                          <Box display={"flex"} alignItems={"center"} gap={1}>
+                            <FiberManualRecordIcon
+                              sx={{ fontSize: pxToRem(10) }}
+                            />
+                            <Typography variant={"body1"}>{key}</Typography>
+                          </Box>
+                          <Box display={"flex"} gap={1}>
+                            <Typography variant={"body1"} fontWeight={800}>
+                              A
+                            </Typography>
+                            <Typography variant={"body1"}>{value}</Typography>
+                          </Box>
+                        </Grid>
+                      )
+                    )}
+                  </Grid>
                 </Box>
               </Grid>
 
