@@ -12,9 +12,16 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Reps from "./reps";
 import useExercises from "./use-exercises";
 
-export default function Exercises({ control, watch, dayIndex }: any) {
+export default function Exercises({
+  control,
+  watch,
+  dayIndex,
+  clientId,
+  workoutPlanId,
+  workoutDayId,
+}: any) {
   const { exercisesField, handleRemoveExercise, handleAddExercise } =
-    useExercises({ control, dayIndex });
+    useExercises({ control, dayIndex, clientId, workoutPlanId, workoutDayId });
 
   return (
     <>

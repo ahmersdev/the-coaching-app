@@ -6,15 +6,18 @@ import {
 } from "./assign-workout.data";
 import { useSearchParams } from "next/navigation";
 import {
+  useDeleteWorkoutDayMutation,
   useGetAssignWorkoutQuery,
   usePostAssignWorkoutMutation,
 } from "@/services/coach-site/clients";
 import { errorSnackbar, successSnackbar } from "@/utils/api";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function useAssignWorkout() {
   const searchParams = useSearchParams();
   const clientId = searchParams.get("clientId");
+
+  const [workoutPlanId, setWorkoutPlanId] = useState();
 
   const methods = useForm({
     resolver: yupResolver(assignWorkoutValidationSchema),
@@ -36,8 +39,30 @@ export default function useAssignWorkout() {
     daysAppend(assignWorkoutDefaultValues.days);
   };
 
-  const handleRemoveDay = (dayIndex: any) => {
-    daysRemove(dayIndex);
+  const [deleteWorkoutDayTrigger] = useDeleteWorkoutDayMutation();
+
+  const handleRemoveDay = async (dayIndex: number) => {
+    const dayToRemove: any = daysField[dayIndex];
+
+    const workoutPlanId = data?.details[0].workout_plan_id;
+    const workoutDayId = dayToRemove?.workout_day_id;
+
+    if (workoutDayId && workoutPlanId) {
+      const params = {
+        client_id: clientId,
+        workout_plan_id: workoutPlanId,
+        workout_day_id: workoutDayId,
+      };
+      try {
+        await deleteWorkoutDayTrigger(params).unwrap();
+        successSnackbar("Day removed successfully!");
+      } catch (error: any) {
+        errorSnackbar(error?.data?.error);
+        return;
+      }
+    } else {
+      daysRemove(dayIndex);
+    }
   };
 
   const [postWorkoutTrigger, postWorkoutStatus] =
@@ -77,10 +102,16 @@ export default function useAssignWorkout() {
   );
 
   useEffect(() => {
+    setWorkoutPlanId(data?.details[0]?.workout_plan_id);
+  }, [data]);
+
+  useEffect(() => {
     if (data?.details) {
-      const originalFormData = data.details.map((day: any) => ({
+      const originalFormData = data.details[0].workout_days.map((day: any) => ({
+        workout_day_id: day.workout_day_id,
         day: day.day,
         exercises: day.exercises.map((exercise: any) => ({
+          exercise_id: exercise.exercise_id,
           exercise_name: exercise.exercise_name,
           sets: exercise.sets,
           workout_video: exercise.workout_video,
@@ -108,5 +139,7 @@ export default function useAssignWorkout() {
     isLoading,
     isFetching,
     isError,
+    clientId,
+    workoutPlanId,
   };
 }

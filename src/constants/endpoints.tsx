@@ -19,6 +19,8 @@ export const COACH_SITE = {
   CLIENT_PROGRESS_FEEDBACK: `addFeedback`,
   ASSIGN_WORKOUT: `assignWorkout`,
   GET_WORKOUT: `getWorkout`,
+  DELETE_WORKOUT_DAY: `deleteDay`,
+  DELETE_WORKOUT_EXERCISE: `deleteExercise`,
 };
 
 export const STRIPE = {

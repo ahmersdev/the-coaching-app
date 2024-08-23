@@ -29,6 +29,22 @@ export const coachClients = baseAPI.injectEndpoints({
       }),
       providesTags: [TAG],
     }),
+    deleteWorkoutDay: builder.mutation({
+      query: (params: any) => ({
+        url: COACH_SITE.DELETE_WORKOUT_DAY,
+        method: "DELETE",
+        params,
+      }),
+      invalidatesTags: [TAG],
+    }),
+    deleteWorkoutExercise: builder.mutation({
+      query: (params: any) => ({
+        url: COACH_SITE.DELETE_WORKOUT_EXERCISE,
+        method: "DELETE",
+        params,
+      }),
+      invalidatesTags: [TAG],
+    }),
   }),
 });
 
@@ -36,4 +52,6 @@ export const {
   useGetClientDetailsQuery,
   usePostAssignWorkoutMutation,
   useGetAssignWorkoutQuery,
+  useDeleteWorkoutDayMutation,
+  useDeleteWorkoutExerciseMutation,
 } = coachClients;

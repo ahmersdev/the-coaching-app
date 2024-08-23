@@ -36,6 +36,8 @@ export default function AssignWorkout() {
     isLoading,
     isFetching,
     isError,
+    clientId,
+    workoutPlanId,
   } = useAssignWorkout();
 
   return (
@@ -83,7 +85,7 @@ export default function AssignWorkout() {
         </Box>
       ) : (
         <>
-          {daysField?.map((day, dayIndex) => (
+          {daysField?.map((day: any, dayIndex) => (
             <Box
               bgcolor={"secondary.main"}
               borderRadius={3}
@@ -143,6 +145,9 @@ export default function AssignWorkout() {
                     control={control}
                     watch={watch}
                     dayIndex={dayIndex}
+                    clientId={clientId}
+                    workoutPlanId={workoutPlanId}
+                    workoutDayId={day?.workout_day_id}
                   />
                 </AccordionDetails>
               </Accordion>

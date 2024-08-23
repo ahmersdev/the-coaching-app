@@ -1,7 +1,15 @@
 import { useFieldArray } from "react-hook-form";
 import { exerciseDefaultValues } from "../assign-workout.data";
+import { useDeleteWorkoutExerciseMutation } from "@/services/coach-site/clients";
+import { errorSnackbar, successSnackbar } from "@/utils/api";
 
-export default function useExercises({ control, dayIndex }: any) {
+export default function useExercises({
+  control,
+  dayIndex,
+  clientId,
+  workoutPlanId,
+  workoutDayId,
+}: any) {
   const {
     fields: exercisesField,
     append: exercisesAppend,
@@ -15,8 +23,30 @@ export default function useExercises({ control, dayIndex }: any) {
     exercisesAppend(exerciseDefaultValues.exercises);
   };
 
-  const handleRemoveExercise = (exerciseIndex: any) => {
-    exercisesRemove(exerciseIndex);
+  const [deleteWorkoutExerciseTrigger] = useDeleteWorkoutExerciseMutation();
+
+  const handleRemoveExercise = async (exerciseIndex: any) => {
+    const exerciseToRemove: any = exercisesField[exerciseIndex];
+
+    const workoutExerciseId = exerciseToRemove?.exercise_id;
+
+    if (workoutDayId && workoutPlanId && workoutExerciseId) {
+      const params = {
+        client_id: clientId,
+        workout_plan_id: workoutPlanId,
+        workout_day_id: workoutDayId,
+        exercise_id: workoutExerciseId,
+      };
+      try {
+        await deleteWorkoutExerciseTrigger(params).unwrap();
+        successSnackbar("Exercise removed successfully!");
+      } catch (error: any) {
+        errorSnackbar(error?.data?.error);
+        return;
+      }
+    } else {
+      exercisesRemove(dayIndex);
+    }
   };
 
   return { exercisesField, handleRemoveExercise, handleAddExercise };
