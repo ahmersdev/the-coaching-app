@@ -9,12 +9,37 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 import CloseIcon from "@mui/icons-material/Close";
-import { mainStyles, saleSiteDrawerArray } from "./drawer.data";
+import { getSaleSiteDrawerArray, mainStyles } from "./drawer.data";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import useSyncCookiesWithState from "@/hooks/use-sync-cookies";
+import { useAppSelector } from "@/store/store";
+import { decryptValuesFromToken } from "@/utils/auth";
 
 export default function DrawerSaleSite({ open, setOpen }: any) {
   const theme: any = useTheme();
   const pathName: any = usePathname();
+
+  const [decryptedValues, setDecryptedValues] = useState<any>(null);
+
+  useSyncCookiesWithState();
+
+  const tokenSelector = useAppSelector((state) => state.auth.token);
+
+  useEffect(() => {
+    const decryptToken = async () => {
+      if (tokenSelector) {
+        const values = await decryptValuesFromToken(tokenSelector);
+        setDecryptedValues(values);
+      } else {
+        setDecryptedValues(null);
+      }
+    };
+
+    decryptToken();
+  }, [tokenSelector]);
+
+  const saleSiteDrawerArray = getSaleSiteDrawerArray(decryptedValues);
 
   return (
     <Drawer
