@@ -2,7 +2,6 @@ import Cookies from "js-cookie";
 import { DecryptedValues } from "./utils.types";
 import { ENCRYPTION_KEY } from "@/config";
 import { decryptToken, validateBase64 } from "./crypto";
-import { errorSnackbar } from "./api";
 
 export const getTokenFromCookies = () => {
   const encryptedToken: any = Cookies.get("authentication_token");
@@ -21,7 +20,7 @@ export const decryptValuesFromToken = async (
   }
 
   if (!validateBase64(encryptedToken) || !validateBase64(base64Key)) {
-    errorSnackbar("Invalid Base64 string");
+    console.warn("Invalid Base64 string");
     return null;
   }
 
@@ -31,7 +30,7 @@ export const decryptValuesFromToken = async (
 
     return { coach_id, user_role };
   } catch (error: any) {
-    errorSnackbar("Failed to decrypt token");
+    console.warn("Failed to decrypt token");
     return null;
   }
 };

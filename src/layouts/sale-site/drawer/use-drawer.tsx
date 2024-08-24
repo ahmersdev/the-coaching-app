@@ -3,8 +3,8 @@ import { getSaleSiteDrawerArray } from "./drawer.data";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import useSyncCookiesWithState from "@/hooks/use-sync-cookies";
-import { useAppSelector } from "@/store/store";
 import { decryptValuesFromToken } from "@/utils/auth";
+import Cookies from "js-cookie";
 
 export default function useDrawerSaleSite() {
   const theme: any = useTheme();
@@ -14,7 +14,7 @@ export default function useDrawerSaleSite() {
 
   useSyncCookiesWithState();
 
-  const tokenSelector = useAppSelector((state) => state.auth.token);
+  const tokenSelector = Cookies.get("authentication_token");
 
   useEffect(() => {
     const decryptToken = async () => {

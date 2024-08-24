@@ -1,9 +1,9 @@
 import { usePathname } from "next/navigation";
-import { useAppSelector } from "@/store/store";
 import { useTheme } from "@mui/material";
 import { decryptValuesFromToken } from "@/utils/auth";
 import { useEffect, useState } from "react";
 import useSyncCookiesWithState from "@/hooks/use-sync-cookies";
+import Cookies from "js-cookie";
 
 export default function useNavbar() {
   const pathName = usePathname();
@@ -14,7 +14,7 @@ export default function useNavbar() {
 
   useSyncCookiesWithState();
 
-  const tokenSelector = useAppSelector((state) => state.auth.token);
+  const tokenSelector = Cookies.get("authentication_token");
 
   useEffect(() => {
     const decryptToken = async () => {
