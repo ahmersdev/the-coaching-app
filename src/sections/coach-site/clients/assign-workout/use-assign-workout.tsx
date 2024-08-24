@@ -4,7 +4,7 @@ import {
   assignWorkoutValidationSchema,
   assignWorkoutDefaultValues,
 } from "./assign-workout.data";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import {
   useDeleteWorkoutDayMutation,
   useGetAssignWorkoutQuery,
@@ -12,9 +12,11 @@ import {
 } from "@/services/coach-site/clients";
 import { errorSnackbar, successSnackbar } from "@/utils/api";
 import { useEffect, useState } from "react";
+import { COACH_SITE } from "@/constants/routes";
 
 export default function useAssignWorkout() {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const clientId = searchParams.get("clientId");
 
   const [workoutPlanId, setWorkoutPlanId] = useState();
@@ -91,6 +93,8 @@ export default function useAssignWorkout() {
     try {
       await postWorkoutTrigger(updatedData).unwrap();
       successSnackbar("Workout Assigned Successfully!");
+      router.push(COACH_SITE.CLIENTS);
+      reset();
     } catch (error: any) {
       errorSnackbar(error?.data?.error);
     }
