@@ -45,6 +45,14 @@ export const coachClients = baseAPI.injectEndpoints({
       }),
       invalidatesTags: [TAG],
     }),
+    postAssignMacro: builder.mutation({
+      query: (params: any) => ({
+        url: COACH_SITE.ASSIGN_MACRO,
+        method: "PUT",
+        params,
+      }),
+      invalidatesTags: [TAG],
+    }),
   }),
 });
 
@@ -54,4 +62,5 @@ export const {
   useGetAssignWorkoutQuery,
   useDeleteWorkoutDayMutation,
   useDeleteWorkoutExerciseMutation,
+  usePostAssignMacroMutation,
 } = coachClients;

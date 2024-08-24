@@ -1,51 +1,25 @@
 "use client";
 
-import { useFieldArray, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { FormProvider } from "@/components/react-hook-form";
 import { Box, Button, Divider, Grid, Typography } from "@mui/material";
 import Link from "next/link";
 import { ArrowBackIcon } from "@/assets/icons";
 import { COACH_SITE } from "@/constants/routes";
 import { LoadingButton } from "@mui/lab";
-import { successSnackbar } from "@/utils/api";
-import {
-  getMacroPlanOneDataArray,
-  macroDefaultValues,
-  macroValidationSchema,
-} from "./assign-macro-plans.data";
+import { getMacroPlanOneDataArray } from "./assign-macro-plans.data";
 import { MacroIcon } from "@/assets/icons";
+import useAssignMacroPlans from "./use-assign-macro-plans";
 
 export default function AssignMacroPlans() {
-  const methods: any = useForm({
-    resolver: yupResolver(macroValidationSchema),
-    defaultValues: macroDefaultValues,
-  });
-
-  const { handleSubmit, control } = methods;
-
   const {
-    fields: fieldsMacro,
-    append: appendMacro,
-    remove: removeMacro,
-  } = useFieldArray({
-    control,
-    name: "macros",
-  });
-
-  const handleAddMacro = () => {
-    appendMacro(macroDefaultValues.macros);
-  };
-
-  const handleRemoveMacro = (macroIndex: any) => {
-    removeMacro(macroIndex);
-  };
-
-  const onSubmit = (data: any) => {
-    console.log(data?.macros);
-
-    successSnackbar("Macro Assigned Successfully!");
-  };
+    methods,
+    handleSubmit,
+    onSubmit,
+    fieldsMacro,
+    handleAddMacro,
+    handleRemoveMacro,
+    postMacroStatus,
+  } = useAssignMacroPlans();
 
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
@@ -149,6 +123,7 @@ export default function AssignMacroPlans() {
         }}
         disableElevation
         type={"submit"}
+        loading={postMacroStatus?.isLoading}
       >
         Assign Macro
       </LoadingButton>

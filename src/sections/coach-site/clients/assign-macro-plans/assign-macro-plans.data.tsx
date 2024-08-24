@@ -2,19 +2,24 @@ import { RHFAutocomplete, RHFTextField } from "@/components/react-hook-form";
 import * as Yup from "yup";
 
 export const macroValidationSchema: any = Yup.object().shape({
-  proteins: Yup.string().trim(),
-  carbs: Yup.string().trim(),
-  fat: Yup.string().trim(),
-  type: Yup.string(),
-  note: Yup.string().trim(),
+  macros: Yup.array().of(
+    Yup.object().shape({
+      title: Yup.string().trim().required("Title is Required"),
+      protein: Yup.string().trim(),
+      carbs: Yup.string().trim(),
+      fat: Yup.string().trim(),
+      type: Yup.string().nullable(),
+      note: Yup.string().trim(),
+    })
+  ),
 });
 
 export const macroFieldsDefaultValues = {
   title: "",
-  proteins: "",
+  protein: "",
   carbs: "",
   fats: "",
-  type: "",
+  type: null,
   note: "",
 };
 
@@ -36,7 +41,7 @@ export const getMacroPlanOneDataArray = (macroIndex: number) => [
   {
     id: 2,
     componentProps: {
-      name: `macros[${macroIndex}].proteins`,
+      name: `macros[${macroIndex}].protein`,
       label: "Proteins",
       placeholder: "Enter proteins in gram",
       bgcolor: "secondary.800",

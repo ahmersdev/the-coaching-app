@@ -21,6 +21,7 @@ export const COACH_SITE = {
   GET_WORKOUT: `getWorkout`,
   DELETE_WORKOUT_DAY: `deleteDay`,
   DELETE_WORKOUT_EXERCISE: `deleteExercise`,
+  ASSIGN_MACRO: `assignMacro`,
 };
 
 export const STRIPE = {
