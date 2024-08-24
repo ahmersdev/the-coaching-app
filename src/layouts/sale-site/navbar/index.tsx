@@ -1,5 +1,12 @@
 import { Logo52Icon } from "@/assets/icons";
-import { Box, Button, List, ListItem, ListItemButton } from "@mui/material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  List,
+  ListItem,
+  ListItemButton,
+} from "@mui/material";
 import Link from "next/link";
 import {
   activeLinkStyle,
@@ -12,7 +19,7 @@ import { USER_ROLES } from "@/constants/strings";
 import useNavbar from "./use-navbar";
 
 export default function Navbar() {
-  const { theme, pathName, decryptedValues } = useNavbar();
+  const { theme, pathName, decryptedValues, initialLoad } = useNavbar();
 
   return (
     <Box
@@ -41,8 +48,9 @@ export default function Navbar() {
           ))}
         </List>
 
-        {decryptedValues?.user_role === USER_ROLES.COACH ||
-        decryptedValues?.user_role === USER_ROLES.ADMIN ? (
+        {initialLoad ? (
+          <CircularProgress size={20} />
+        ) : decryptedValues ? (
           <Link
             href={
               decryptedValues.user_role === USER_ROLES.COACH

@@ -1,6 +1,6 @@
 import { getTokenFromCookies } from "@/utils/auth";
 import Cookies from "js-cookie";
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AuthState } from "./auth.interface";
 
 const initialState: AuthState = {
@@ -11,11 +11,11 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    logIn: (state, action) => {
+    logIn: (state, action: PayloadAction<string>) => {
       state.token = action.payload;
     },
     logOut: (state) => {
-      state.token = "";
+      state.token = null;
       Cookies.remove("authentication_token");
     },
   },

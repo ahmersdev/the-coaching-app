@@ -1,26 +1,28 @@
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import Cookies from "js-cookie";
 import { useDispatch } from "react-redux";
-import { logOut } from "@/store/auth";
+import { logOut, logIn } from "@/store/auth";
 
 const useSyncCookiesWithState = () => {
   const dispatch = useDispatch();
 
+  const syncCookiesWithState = useCallback(() => {
+    const token = Cookies.get("authentication_token");
+
+    if (!token) {
+      dispatch(logOut());
+    } else {
+      dispatch(logIn(token)); // Update the Redux state with the token
+    }
+  }, [dispatch]);
+
   useEffect(() => {
-    const syncCookiesWithState = () => {
-      const token = Cookies.get("authentication_token");
+    syncCookiesWithState(); // Initial check
 
-      if (!token) {
-        dispatch(logOut());
-      } else {
-        return;
-      }
-    };
-
-    const intervalId = setInterval(syncCookiesWithState, 1000);
+    const intervalId = setInterval(syncCookiesWithState, 5000); // Reduced frequency
 
     return () => clearInterval(intervalId);
-  }, [dispatch]);
+  }, [syncCookiesWithState]);
 };
 
 export default useSyncCookiesWithState;
