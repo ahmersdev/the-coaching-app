@@ -5,9 +5,14 @@ import {
   macroDefaultValues,
   macroValidationSchema,
 } from "./assign-macro-plans.data";
-import { usePostAssignMacroMutation } from "@/services/coach-site/clients";
+import {
+  useDeleteMacroMutation,
+  useGetAssignMacroQuery,
+  usePostAssignMacroMutation,
+} from "@/services/coach-site/clients";
 import { useRouter, useSearchParams } from "next/navigation";
 import { COACH_SITE } from "@/constants/routes";
+import { useEffect } from "react";
 
 export default function useAssignMacroPlans() {
   const searchParams = useSearchParams();
@@ -34,8 +39,28 @@ export default function useAssignMacroPlans() {
     appendMacro(macroDefaultValues.macros);
   };
 
-  const handleRemoveMacro = (macroIndex: any) => {
-    removeMacro(macroIndex);
+  const [deleteMacroTrigger] = useDeleteMacroMutation();
+
+  const handleRemoveMacro = async (macroIndex: any) => {
+    const macroToRemove: any = fieldsMacro[macroIndex];
+
+    const macroPlanId = macroToRemove?.macro_plan_id;
+
+    if (macroPlanId) {
+      const params = {
+        client_id: clientId,
+        macro_plan_id: macroPlanId,
+      };
+      try {
+        await deleteMacroTrigger(params).unwrap();
+        successSnackbar("Macro removed successfully!");
+      } catch (error: any) {
+        errorSnackbar(error?.data?.error);
+        return;
+      }
+    } else {
+      removeMacro(macroIndex);
+    }
   };
 
   const [postMacroTrigger, postMacroStatus] = usePostAssignMacroMutation();
@@ -65,6 +90,27 @@ export default function useAssignMacroPlans() {
     }
   };
 
+  const { data, isLoading, isFetching, isError } = useGetAssignMacroQuery(
+    { client_id: clientId },
+    { refetchOnMountOrArgChange: true, skip: !clientId }
+  );
+
+  useEffect(() => {
+    if (data?.details) {
+      const originalFormData = data.details[0].macros.map((macro: any) => ({
+        macro_plan_id: macro.macro_plan_id,
+        title: macro.title,
+        protein: macro.protein,
+        carbs: macro.carbs,
+        fats: macro.fats,
+        type: macro.type,
+        note: macro.note,
+      }));
+
+      reset({ macros: originalFormData });
+    }
+  }, [data, reset]);
+
   return {
     methods,
     handleSubmit,
@@ -73,5 +119,8 @@ export default function useAssignMacroPlans() {
     handleAddMacro,
     handleRemoveMacro,
     postMacroStatus,
+    isLoading,
+    isFetching,
+    isError,
   };
 }

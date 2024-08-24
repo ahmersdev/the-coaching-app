@@ -53,6 +53,22 @@ export const coachClients = baseAPI.injectEndpoints({
       }),
       invalidatesTags: [TAG],
     }),
+    getAssignMacro: builder.query({
+      query: (params: any) => ({
+        url: COACH_SITE.GET_MACRO,
+        method: "GET",
+        params,
+      }),
+      providesTags: [TAG],
+    }),
+    deleteMacro: builder.mutation({
+      query: (params: any) => ({
+        url: COACH_SITE.DELETE_MACRO,
+        method: "DELETE",
+        params,
+      }),
+      invalidatesTags: [TAG],
+    }),
   }),
 });
 
@@ -63,4 +79,6 @@ export const {
   useDeleteWorkoutDayMutation,
   useDeleteWorkoutExerciseMutation,
   usePostAssignMacroMutation,
+  useGetAssignMacroQuery,
+  useDeleteMacroMutation,
 } = coachClients;
