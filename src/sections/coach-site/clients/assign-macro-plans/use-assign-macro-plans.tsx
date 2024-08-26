@@ -96,8 +96,8 @@ export default function useAssignMacroPlans() {
   );
 
   useEffect(() => {
-    if (data?.details) {
-      const originalFormData = data.details[0].macros.map((macro: any) => ({
+    if (data) {
+      const originalFormData = data.map((macro: any) => ({
         macro_plan_id: macro.macro_plan_id,
         title: macro.title,
         protein: macro.protein,
