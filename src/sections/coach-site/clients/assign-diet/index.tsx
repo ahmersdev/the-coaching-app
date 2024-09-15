@@ -1,7 +1,5 @@
 "use client";
 
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { FormProvider } from "@/components/react-hook-form";
 import {
   Accordion,
@@ -35,34 +33,13 @@ export default function AssignDiet() {
 
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-      <Box
-        display={"flex"}
-        alignItems={"center"}
-        justifyContent={"space-between"}
-        gap={1}
-      >
-        <Box display={"flex"} alignItems={"center"} gap={1}>
-          <Link href={COACH_SITE?.CLIENTS}>
-            <ArrowBackIcon />
-          </Link>
-          <Typography variant={"h3"} fontWeight={600}>
-            Assign Diet
-          </Typography>
-        </Box>
-        <LoadingButton
-          variant={"contained"}
-          sx={{
-            color: "grey.100",
-            width: 132,
-            borderRadius: 25,
-            border: "1px solid",
-            borderColor: "primary.main",
-          }}
-          disableElevation
-          type={"submit"}
-        >
-          Assign
-        </LoadingButton>
+      <Box display={"flex"} alignItems={"center"} gap={1}>
+        <Link href={COACH_SITE?.CLIENTS}>
+          <ArrowBackIcon />
+        </Link>
+        <Typography variant={"h3"} fontWeight={600}>
+          Assign Diet
+        </Typography>
       </Box>
 
       {daysField?.map((day: any, dayIndex) => (
