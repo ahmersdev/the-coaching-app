@@ -45,7 +45,7 @@ export default function useExercises({
         return;
       }
     } else {
-      exercisesRemove(dayIndex);
+      exercisesRemove(exerciseIndex);
     }
   };
 
