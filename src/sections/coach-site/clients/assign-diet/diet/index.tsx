@@ -58,7 +58,7 @@ export default function Diet({
                     color={"grey.100"}
                     fontWeight={700}
                   >
-                    Exercise 0{dietIndex + 1}
+                    Meal 0{dietIndex + 1}
                   </Typography>
                 </Box>
                 {dietIndex !== 0 && (
@@ -81,8 +81,8 @@ export default function Diet({
                 <Grid item xs={12} md={5}>
                   <RHFTextField
                     name={`days[${dayIndex}].meals[${dietIndex}].meal_name`}
-                    label={"Exercise Name"}
-                    placeholder={"Enter Exercise Name"}
+                    label={"Meal Name"}
+                    placeholder={"Enter Meal Name"}
                     bgcolor={"secondary.800"}
                   />
                 </Grid>
