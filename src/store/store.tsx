@@ -3,10 +3,12 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import authReducer from "./auth";
 import stripeReducer from "./stripe";
 import { baseAPI } from "@/services/base-api";
+import { fatSecretApi } from "@/services/coach-site/clients/fat-secret";
 
 const store = configureStore({
   reducer: {
     [baseAPI.reducerPath]: baseAPI.reducer,
+    [fatSecretApi.reducerPath]: fatSecretApi.reducer,
     auth: authReducer,
     stripe: stripeReducer,
   },
@@ -14,7 +16,9 @@ const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
-    }).concat(baseAPI.middleware),
+    })
+      .concat(baseAPI.middleware)
+      .concat(fatSecretApi.middleware),
 });
 
 export type AppDispatch = typeof store.dispatch;

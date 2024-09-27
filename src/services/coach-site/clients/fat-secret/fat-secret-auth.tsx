@@ -1,42 +1,40 @@
-export interface ITokenResponse {
-  access_token: string;
-  token_type: string;
-  expires_in: number;
-  scope: string;
-}
+import OAuth from "oauth-1.0a";
+import CryptoJS from "crypto-js";
+import { IOAuthParams } from "./fat-secret.interface";
 
-export const getFatSecretAccessToken = async (): Promise<string | null> => {
-  const clientId = process.env.NEXT_PUBLIC_FAT_SECRET_CLIENT_ID;
-  const clientSecret = process.env.NEXT_PUBLIC_FAT_SECRET_CLIENT_SECRET;
-
-  const tokenUrl = "https://oauth.fatsecret.com/connect/token";
-
-  const headers = new Headers();
-  headers.append("Content-Type", "application/x-www-form-urlencoded");
-
-  const body = new URLSearchParams({
-    grant_type: "client_credentials",
-    client_id: clientId,
-    client_secret: clientSecret,
-    scope: "basic",
+export const getOAuthParams = (
+  url: string,
+  method: string,
+  params: Record<string, string>,
+  consumerKey: string,
+  consumerSecret: string
+): IOAuthParams => {
+  const oauth = new OAuth({
+    consumer: { key: consumerKey, secret: consumerSecret },
+    signature_method: "HMAC-SHA1",
+    hash_function(base_string, key) {
+      return CryptoJS.HmacSHA1(base_string, key).toString(CryptoJS.enc.Base64);
+    },
   });
 
-  try {
-    const response = await fetch(tokenUrl, {
-      method: "POST",
-      headers: headers,
-      body: body,
-    });
+  const oauthParams: IOAuthParams = {
+    oauth_consumer_key: consumerKey,
+    oauth_nonce: Math.random().toString(36).substring(2),
+    oauth_timestamp: Math.floor(Date.now() / 1000).toString(),
+    oauth_signature_method: "HMAC-SHA1",
+  };
 
-    const data: ITokenResponse = await response.json();
+  const request_data = {
+    url,
+    method,
+    data: { ...oauthParams, ...params },
+  };
 
-    if (data.access_token) {
-      return data.access_token;
-    } else {
-      throw new Error("Failed to retrieve access token");
-    }
-  } catch (error) {
-    console.error("Error fetching FatSecret access token:", error);
-    return null;
-  }
+  oauthParams.oauth_signature = oauth.authorize(request_data).oauth_signature;
+
+  return oauthParams;
+};
+
+export const getFatSecretAccessToken = async (): Promise<string | null> => {
+  return null;
 };

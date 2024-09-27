@@ -1,11 +1,13 @@
 import * as Yup from "yup";
 
-export const assignDietValidationSchema = Yup.object().shape({
+export const assignDietValidationSchema: any = Yup.object().shape({
   days: Yup.array().of(
     Yup.object().shape({
       meals: Yup.array().of(
         Yup.object().shape({
-          meal_name: Yup.string().trim().required("Exercise Name is Required"),
+          meal_name: Yup.mixed()
+            .nullable()
+            .required("Exercise Name is Required"),
           serving_size: Yup.string()
             .trim()
             .required("Serving Size is Required"),
@@ -27,7 +29,7 @@ export const assignDietValidationSchema = Yup.object().shape({
 export const mealDefaultValues = {
   meals: [
     {
-      meal_name: "",
+      meal_name: null,
       serving_size: "",
       serving_unit: "g",
       fat: "",

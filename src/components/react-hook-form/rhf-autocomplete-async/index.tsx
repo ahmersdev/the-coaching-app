@@ -1,10 +1,11 @@
-import { useState, Fragment, useEffect } from "react";
-import { useFormContext, Controller } from "react-hook-form";
+import { Fragment } from "react";
+import { Controller } from "react-hook-form";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import CircularProgress from "@mui/material/CircularProgress";
-import { FormLabel, Paper, Typography, useTheme } from "@mui/material";
+import { FormLabel, Paper, Typography } from "@mui/material";
 import { Search } from "@mui/icons-material";
+import useRhfAutocompleteAsync from "./use-rhf-autocomplete-async";
 
 export default function RHFAutocompleteAsync({
   name,
@@ -20,34 +21,27 @@ export default function RHFAutocompleteAsync({
     option?._id === newValue?._id,
   renderOption,
   required,
+  borderRadius = 2,
+  bgcolor = "secondary.900",
   ...other
 }: any): JSX.Element {
-  const { control } = useFormContext();
-  const [open, setOpen] = useState(false);
-  const [trigger, { data, isLoading, isFetching }]: any = apiQuery;
-  const [debounceTimeout, setDebounceTimeout] = useState<NodeJS.Timeout | null>(
-    null
-  );
-
-  const triggerWithDebounce = (newInputValue: string) => {
-    if (debounceTimeout) clearTimeout(debounceTimeout);
-    const timeout = setTimeout(() => {
-      trigger({ params: { [queryKey]: newInputValue, ...externalParams } });
-    }, debounceTime);
-    setDebounceTimeout(timeout);
-  };
-
-  const onChanged = (e: any, newValue: any, onChange: any) => {
-    onChange(newValue);
-  };
-
-  const theme = useTheme();
-
-  useEffect(() => {
-    return () => {
-      if (debounceTimeout) clearTimeout(debounceTimeout);
-    };
-  }, [debounceTimeout]);
+  const {
+    theme,
+    control,
+    data,
+    isLoading,
+    isFetching,
+    setOpen,
+    open,
+    trigger,
+    onChanged,
+    triggerWithDebounce,
+  } = useRhfAutocompleteAsync({
+    apiQuery,
+    queryKey,
+    externalParams,
+    debounceTime,
+  });
 
   return (
     <Controller
@@ -82,11 +76,8 @@ export default function RHFAutocompleteAsync({
               <Paper
                 {...props}
                 sx={{
-                  backgroundColor: theme?.palette?.common?.white,
-                  border: `1px solid ${theme?.palette?.custom?.off_white_three}`,
-                  borderRadius: 1,
-                  boxShadow: 1,
-                  color: "grey.600",
+                  backgroundColor: "common.white",
+                  borderRadius,
                 }}
               >
                 {props?.children}
@@ -113,6 +104,27 @@ export default function RHFAutocompleteAsync({
                   {...params}
                   label={""}
                   placeholder={placeholder}
+                  sx={{
+                    mt: 0.5,
+                    ".MuiInputBase-root": {
+                      borderRadius,
+                      border: 1.5,
+                      bgcolor,
+                      borderColor: theme?.palette?.secondary?.[600],
+                      "&:hover": {
+                        borderColor: theme?.palette?.primary?.[900],
+                      },
+                    },
+                    ".MuiOutlinedInput-notchedOutline": {
+                      border: "none",
+                    },
+                    ".MuiAutocomplete-input": {
+                      color: theme?.palette?.grey?.[100],
+                    },
+                    ".MuiAutocomplete-endAdornment .MuiSvgIcon-root": {
+                      color: theme?.palette?.grey?.[600],
+                    },
+                  }}
                   error={Boolean(form?.fieldState?.error)}
                   helperText={
                     <Typography
@@ -128,9 +140,12 @@ export default function RHFAutocompleteAsync({
                     endAdornment: (
                       <Fragment>
                         {isLoading || isFetching ? (
-                          <CircularProgress color="inherit" size={20} />
+                          <CircularProgress
+                            sx={{ color: "grey.600" }}
+                            size={20}
+                          />
                         ) : (
-                          <Search sx={{ color: "inherit" }} />
+                          <Search sx={{ color: "grey.600" }} />
                         )}
                         {params?.InputProps?.endAdornment}
                       </Fragment>

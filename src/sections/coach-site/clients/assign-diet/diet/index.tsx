@@ -1,4 +1,8 @@
-import { RHFTextField, RHFUploadFile } from "@/components/react-hook-form";
+import {
+  RHFAutocompleteAsync,
+  RHFTextField,
+  RHFUploadFile,
+} from "@/components/react-hook-form";
 import {
   Accordion,
   AccordionDetails,
@@ -10,6 +14,7 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import useDiet from "./use-diet";
+import { useLazyGetFoodAutocompleteQuery } from "@/services/coach-site/clients/fat-secret";
 
 export default function Diet({
   control,
@@ -26,6 +31,8 @@ export default function Diet({
     workoutPlanId,
     workoutDayId,
   });
+
+  const test = useLazyGetFoodAutocompleteQuery();
 
   return (
     <>
@@ -79,11 +86,15 @@ export default function Diet({
             <AccordionDetails>
               <Grid container spacing={1}>
                 <Grid item xs={12} md={5}>
-                  <RHFTextField
+                  <RHFAutocompleteAsync
                     name={`days[${dayIndex}].meals[${dietIndex}].meal_name`}
                     label={"Meal Name"}
                     placeholder={"Enter Meal Name"}
                     bgcolor={"secondary.800"}
+                    apiQuery={test}
+                    queryKey={"search_expression"}
+                    getOptionLabel={(option: any) => option?.food_name}
+                    noOptionsCase={"Start Searching Meals"}
                   />
                 </Grid>
                 <Grid item xs={12} md={5}>

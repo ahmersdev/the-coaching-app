@@ -66,6 +66,7 @@ export default function useAssignDiet() {
   //   usePostAssignWorkoutMutation();
 
   const onSubmit = async (data: any) => {
+    console.log(data);
     // const transformedData = data.days.map((day: any, dayIndex: number) => ({
     //   day: dayIndex + 1,
     //   exercises: day.exercises.map((exercise: any) => ({
