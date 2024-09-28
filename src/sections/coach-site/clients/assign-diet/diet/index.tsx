@@ -32,7 +32,7 @@ export default function Diet({
     workoutDayId,
   });
 
-  const test = useLazyGetFoodAutocompleteQuery();
+  const mealNameQuery = useLazyGetFoodAutocompleteQuery();
 
   return (
     <>
@@ -91,7 +91,7 @@ export default function Diet({
                     label={"Meal Name"}
                     placeholder={"Enter Meal Name"}
                     bgcolor={"secondary.800"}
-                    apiQuery={test}
+                    apiQuery={mealNameQuery}
                     queryKey={"search_expression"}
                     getOptionLabel={(option: any) => option?.food_name}
                     noOptionsCase={"Start Searching Meals"}
