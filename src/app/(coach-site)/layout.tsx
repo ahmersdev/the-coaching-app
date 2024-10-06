@@ -8,14 +8,14 @@ import "swiper/css/navigation";
 import { Provider } from "react-redux";
 import store from "@/store/store";
 import { Header, Navbar } from "@/layouts/coach-site";
-import CoachGuard from "@/guards/coach-guard";
 import { IChildrenProps } from "@/interfaces";
+import AuthGuard from "@/guards/auth-guard";
 
 const CoachLayout = ({ children }: IChildrenProps) => {
   return (
     <main style={{ background: "#23232a", color: "#f9fafb" }}>
       <Provider store={store}>
-        <CoachGuard>
+        <AuthGuard>
           <Grid container>
             <Grid item xs={0} md={2} height={"100vh"} overflow={"hidden"}>
               <Navbar />
@@ -25,7 +25,7 @@ const CoachLayout = ({ children }: IChildrenProps) => {
               <Box py={2}>{children}</Box>
             </Grid>
           </Grid>
-        </CoachGuard>
+        </AuthGuard>
       </Provider>
     </main>
   );

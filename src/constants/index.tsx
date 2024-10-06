@@ -8,3 +8,8 @@ export const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export const CLICK_EVENTS = {
   ENTER: "Enter",
 };
+
+export const GUARD_ROLES = {
+  ADMIN: "admin" as const,
+  COACH: "coach" as const,
+};

@@ -4,3 +4,8 @@ export interface ISubscriptionStatusResponse {
     email: string;
   };
 }
+
+export interface IDecryptedValues {
+  user_role?: string;
+  [key: string]: any;
+}
