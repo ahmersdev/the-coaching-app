@@ -4,12 +4,8 @@ import dayjs from "dayjs";
 import Link from "next/link";
 import { NextIcon } from "@/assets/icons";
 import { COACH_SITE } from "@/constants/routes";
-import { useSearchParams } from "next/navigation";
 
-export default function Client({ clientDetailsData }: any) {
-  const searchParams = useSearchParams();
-  const clientId = searchParams.get("clientId");
-
+export default function Client({ clientDetailsData, clientId }: any) {
   return (
     <Box bgcolor={"secondary.main"} p={2.4} borderRadius={3}>
       <Box display={"flex"} alignItems={"center"} gap={1} mb={2}>

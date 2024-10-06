@@ -28,6 +28,7 @@ export const COACH_SITE = {
   GET_DIET: `getDietPlan`,
   DELETE_DIET_DAY: `deleteDietDay`,
   DELETE_DIET_MEAL: `deleteMeal`,
+  GET_CLIENT_DETAILS_BY_ID: `getClientDetailsById`,
 };
 
 export const STRIPE = {

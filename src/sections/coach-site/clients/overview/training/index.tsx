@@ -5,10 +5,7 @@ import { Box, Button, Divider, Typography } from "@mui/material";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
-export default function Training() {
-  const searchParams = useSearchParams();
-  const clientId = searchParams.get("clientId");
-
+export default function Training({ clientId }: any) {
   return (
     <Box bgcolor={"secondary.main"} p={2.4} borderRadius={3}>
       <Box

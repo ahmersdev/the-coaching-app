@@ -3,12 +3,8 @@ import { COACH_SITE } from "@/constants/routes";
 import { AddCircle } from "@mui/icons-material";
 import { Box, Button, Divider, Typography } from "@mui/material";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 
-export default function Diet() {
-  const searchParams = useSearchParams();
-  const clientId = searchParams.get("clientId");
-
+export default function Diet({ clientId }: any) {
   return (
     <Box bgcolor={"secondary.main"} p={2.4} borderRadius={3}>
       <Box

@@ -4,12 +4,8 @@ import { COACH_SITE } from "@/constants/routes";
 import { Box, Divider, Grid, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 
-export default function Progress() {
-  const searchParams = useSearchParams();
-  const clientId = searchParams.get("clientId");
-
+export default function Progress({ clientId }: any) {
   return (
     <Box bgcolor={"secondary.main"} p={2.4} borderRadius={3}>
       <Box display={"flex"} alignItems={"center"} gap={1} mb={2}>

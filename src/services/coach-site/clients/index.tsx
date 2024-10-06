@@ -113,6 +113,16 @@ export const coachClients = baseAPI.injectEndpoints({
       }),
       invalidatesTags: [TAG],
     }),
+
+    // Overview
+    getCoachClientsById: builder.query({
+      query: (params: any) => ({
+        url: COACH_SITE.GET_CLIENT_DETAILS_BY_ID,
+        method: "GET",
+        params,
+      }),
+      providesTags: [TAG],
+    }),
   }),
 });
 
@@ -129,4 +139,5 @@ export const {
   useGetAssignDietQuery,
   useDeleteDietDayMutation,
   useDeleteDietMealMutation,
+  useGetCoachClientsByIdQuery,
 } = coachClients;

@@ -2,7 +2,10 @@ import { useGetClientDetailsQuery } from "@/services/coach-site/clients";
 import { IDataSorting } from "./clients.interface";
 
 export default function useClients() {
-  const { data, isLoading, isFetching, isError } = useGetClientDetailsQuery({});
+  const { data, isLoading, isFetching, isError } = useGetClientDetailsQuery(
+    null,
+    { refetchOnMountOrArgChange: true }
+  );
 
   const sortedData = [...(data?.clients || [])]
     ?.sort(
