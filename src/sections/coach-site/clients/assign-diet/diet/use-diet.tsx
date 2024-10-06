@@ -30,8 +30,6 @@ export default function useDiet({
 
     const dietMealId = mealToRemove?.meal_id;
 
-    console.log(dietDayId, dietPlanId, dietField);
-
     if (dietDayId && dietPlanId && dietMealId) {
       const params = {
         client_id: clientId,

@@ -1,9 +1,4 @@
 import {
-  RHFAutocompleteAsync,
-  RHFTextField,
-  RHFUploadFile,
-} from "@/components/react-hook-form";
-import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
@@ -14,11 +9,10 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import useDiet from "./use-diet";
-import { useLazyGetFoodAutocompleteQuery } from "@/services/coach-site/clients/fat-secret";
+import { getAssignDietDataArray } from "./diet.data";
 
 export default function Diet({
   control,
-  watch,
   dayIndex,
   clientId,
   dietPlanId,
@@ -83,96 +77,16 @@ export default function Diet({
 
             <AccordionDetails>
               <Grid container spacing={1}>
-                <Grid item xs={12} md={5}>
-                  <RHFTextField
-                    name={`days[${dayIndex}].meals[${dietIndex}].meal_title`}
-                    label={"Meal Name"}
-                    placeholder={"Enter Meal Name"}
-                    bgcolor={"secondary.800"}
-                  />
-                </Grid>
-                <Grid item xs={12} md={5}>
-                  <RHFTextField
-                    name={`days[${dayIndex}].meals[${dietIndex}].serving_size`}
-                    label={"Serving Size"}
-                    placeholder={"Enter Serving Size"}
-                    bgcolor={"secondary.800"}
-                  />
-                </Grid>
-                <Grid item xs={12} md={5}>
-                  <RHFTextField
-                    name={`days[${dayIndex}].meals[${dietIndex}].serving_unit`}
-                    label={"Serving Unit"}
-                    placeholder={"Enter Serving Unit"}
-                    bgcolor={"secondary.800"}
-                  />
-                </Grid>
-                <Grid item xs={12} md={5}>
-                  <RHFTextField
-                    name={`days[${dayIndex}].meals[${dietIndex}].fat`}
-                    label={"Fat"}
-                    placeholder={"Enter Fat"}
-                    bgcolor={"secondary.800"}
-                  />
-                </Grid>
-                <Grid item xs={12} md={5}>
-                  <RHFTextField
-                    name={`days[${dayIndex}].meals[${dietIndex}].carbohydrates`}
-                    label={"Carbohydrates"}
-                    placeholder={"Enter Carbohydrates"}
-                    bgcolor={"secondary.800"}
-                  />
-                </Grid>
-                <Grid item xs={12} md={5}>
-                  <RHFTextField
-                    name={`days[${dayIndex}].meals[${dietIndex}].protein`}
-                    label={"Protein"}
-                    placeholder={"Enter Protein"}
-                    bgcolor={"secondary.800"}
-                  />
-                </Grid>
-                <Grid item xs={12} md={5}>
-                  <RHFTextField
-                    name={`days[${dayIndex}].meals[${dietIndex}].fibre`}
-                    label={"Fibre"}
-                    placeholder={"Enter Fibre"}
-                    bgcolor={"secondary.800"}
-                  />
-                </Grid>
-                <Grid item xs={12} md={5}>
-                  <RHFTextField
-                    name={`days[${dayIndex}].meals[${dietIndex}].calories`}
-                    label={"Calories"}
-                    placeholder={"Enter Calories"}
-                    bgcolor={"secondary.800"}
-                  />
-                </Grid>
-                <Grid item xs={12} md={5}>
-                  <RHFTextField
-                    name={`days[${dayIndex}].meals[${dietIndex}].sugar`}
-                    label={"Sugar"}
-                    placeholder={"Enter Sugar"}
-                    bgcolor={"secondary.800"}
-                  />
-                </Grid>
-                <Grid item xs={12} md={5}>
-                  <RHFTextField
-                    name={`days[${dayIndex}].meals[${dietIndex}].sodium`}
-                    label={"Sodium"}
-                    placeholder={"Enter Sodium"}
-                    bgcolor={"secondary.800"}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <RHFTextField
-                    name={`days[${dayIndex}].meals[${dietIndex}].note`}
-                    label={"Add Note"}
-                    placeholder={"Add Some Details"}
-                    multiline
-                    rows={3}
-                    bgcolor={"secondary.800"}
-                  />
-                </Grid>
+                {getAssignDietDataArray(dayIndex, dietIndex).map(
+                  (item: any) => (
+                    <Grid item xs={12} md={item?.md} key={item.id}>
+                      <item.component
+                        {...item.componentProps}
+                        bgcolor={"secondary.800"}
+                      />
+                    </Grid>
+                  )
+                )}
 
                 <Grid item xs={12}>
                   <Button

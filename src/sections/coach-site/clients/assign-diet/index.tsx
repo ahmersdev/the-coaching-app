@@ -25,7 +25,6 @@ export default function AssignDiet() {
   const {
     methods,
     control,
-    watch,
     handleSubmit,
     onSubmit,
     daysField,
@@ -141,7 +140,6 @@ export default function AssignDiet() {
                   <Divider sx={{ mb: 2 }} />
                   <Diet
                     control={control}
-                    watch={watch}
                     dayIndex={dayIndex}
                     clientId={clientId}
                     dietPlanId={dietPlanId}

@@ -26,7 +26,7 @@ export default function useAssignDiet() {
     defaultValues: assignDietDefaultValues,
   });
 
-  const { handleSubmit, control, watch, reset } = methods;
+  const { handleSubmit, control, reset } = methods;
 
   const {
     fields: daysField,
@@ -139,7 +139,6 @@ export default function useAssignDiet() {
   return {
     methods,
     control,
-    watch,
     handleSubmit,
     onSubmit,
     daysField,
