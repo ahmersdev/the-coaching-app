@@ -149,59 +149,53 @@ export default function AssignDiet() {
               </Accordion>
             </Box>
           ))}
+
+          <Button
+            variant={"contained"}
+            fullWidth
+            sx={{
+              color: "grey.100",
+              borderRadius: 25,
+              height: 54,
+              border: "1px dashed",
+              borderColor: "grey.100",
+              background: "transparent",
+              mt: 2,
+              "&.Mui-disabled": {
+                background: "transparent",
+              },
+              ":hover": {
+                backgroundColor: "grey.100",
+                color: "grey.900",
+              },
+            }}
+            disableElevation
+            onClick={handleAddDay}
+            disabled={postDietStatus?.isLoading}
+          >
+            Add Diet For Another Day
+          </Button>
+
+          <LoadingButton
+            variant={"contained"}
+            fullWidth
+            sx={{
+              color: "grey.100",
+              borderRadius: 25,
+              height: 54,
+              mt: 2,
+              "&.Mui-disabled": {
+                bgcolor: "primary.main",
+              },
+            }}
+            disableElevation
+            type={"submit"}
+            loading={postDietStatus?.isLoading}
+          >
+            Assign Diet
+          </LoadingButton>
         </>
       )}
-
-      {isLoading ||
-        isFetching ||
-        (!isError && (
-          <>
-            <Button
-              variant={"contained"}
-              fullWidth
-              sx={{
-                color: "grey.100",
-                borderRadius: 25,
-                height: 54,
-                border: "1px dashed",
-                borderColor: "grey.100",
-                background: "transparent",
-                mt: 2,
-                "&.Mui-disabled": {
-                  background: "transparent",
-                },
-                ":hover": {
-                  backgroundColor: "grey.100",
-                  color: "grey.900",
-                },
-              }}
-              disableElevation
-              onClick={handleAddDay}
-              disabled={postDietStatus?.isLoading}
-            >
-              Add Diet For Another Day
-            </Button>
-
-            <LoadingButton
-              variant={"contained"}
-              fullWidth
-              sx={{
-                color: "grey.100",
-                borderRadius: 25,
-                height: 54,
-                mt: 2,
-                "&.Mui-disabled": {
-                  bgcolor: "primary.main",
-                },
-              }}
-              disableElevation
-              type={"submit"}
-              loading={postDietStatus?.isLoading}
-            >
-              Assign Diet
-            </LoadingButton>
-          </>
-        ))}
     </FormProvider>
   );
 }

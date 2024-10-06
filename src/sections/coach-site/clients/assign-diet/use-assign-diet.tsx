@@ -112,7 +112,7 @@ export default function useAssignDiet() {
   }, [data]);
 
   useEffect(() => {
-    if (data?.details) {
+    if (data?.details && data.details.length > 0) {
       const originalFormData = data.details?.[0].diet_days.map((day: any) => ({
         diet_day_id: day.diet_day_id,
         day: day.day,
