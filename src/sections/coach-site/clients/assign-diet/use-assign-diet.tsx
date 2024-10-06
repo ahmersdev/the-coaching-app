@@ -8,13 +8,18 @@ import {
   assignDietDefaultValues,
   assignDietValidationSchema,
 } from "./assign-diet.data";
+import {
+  useDeleteDietDayMutation,
+  useGetAssignDietQuery,
+  usePostAssignDietMutation,
+} from "@/services/coach-site/clients";
 
 export default function useAssignDiet() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const clientId = searchParams.get("clientId");
 
-  // const [dietPlanId, setDietPlanId] = useState();
+  const [dietPlanId, setDietPlanId] = useState();
 
   const methods = useForm({
     resolver: yupResolver(assignDietValidationSchema),
@@ -36,96 +41,100 @@ export default function useAssignDiet() {
     daysAppend(assignDietDefaultValues.days);
   };
 
-  // const [deleteWorkoutDayTrigger] = useDeleteWorkoutDayMutation();
+  const [deleteDietDayTrigger] = useDeleteDietDayMutation();
 
   const handleRemoveDay = async (dayIndex: number) => {
-    // const dayToRemove: any = daysField[dayIndex];
+    const dayToRemove: any = daysField[dayIndex];
 
-    // const workoutPlanId = data?.details[0].workout_plan_id;
-    // const workoutDayId = dayToRemove?.workout_day_id;
+    const dietPlanId = data?.details[0].diet_plan_id;
+    const dietDayId = dayToRemove?.diet_day_id;
 
-    // if (workoutDayId && workoutPlanId) {
-    //   const params = {
-    //     client_id: clientId,
-    //     workout_plan_id: workoutPlanId,
-    //     workout_day_id: workoutDayId,
-    //   };
-    //   try {
-    //     // await deleteWorkoutDayTrigger(params).unwrap();
-    //     successSnackbar("Day removed successfully!");
-    //   } catch (error: any) {
-    //     errorSnackbar(error?.data?.error);
-    //     return;
-    //   }
-    // } else {
-    daysRemove(dayIndex);
-    // }
+    if (dietDayId && dietPlanId) {
+      const params = {
+        client_id: clientId,
+        diet_plan_id: dietPlanId,
+        diet_day_id: dietDayId,
+      };
+      try {
+        await deleteDietDayTrigger(params).unwrap();
+        successSnackbar("Day removed successfully!");
+      } catch (error: any) {
+        errorSnackbar(error?.data?.error);
+        return;
+      }
+    } else {
+      daysRemove(dayIndex);
+    }
   };
 
-  // const [postWorkoutTrigger, postWorkoutStatus] =
-  //   usePostAssignWorkoutMutation();
+  const [postDietTrigger, postDietStatus] = usePostAssignDietMutation();
 
   const onSubmit = async (data: any) => {
-    console.log(data);
-    // const transformedData = data.days.map((day: any, dayIndex: number) => ({
-    //   day: dayIndex + 1,
-    //   exercises: day.exercises.map((exercise: any) => ({
-    //     exercise_name: exercise.exercise_name,
-    //     sets: Number(exercise.sets),
-    //     workout_video: exercise.workout_video,
-    //     note: exercise.note,
-    //     reps_sets: exercise.reps_sets.map((repSet: any, repIndex: number) => ({
-    //       set: repIndex + 1,
-    //       reps: Number(repSet.rep),
-    //     })),
-    //   })),
-    // }));
+    const transformedData = data.days.map((day: any, dayIndex: number) => ({
+      day: dayIndex + 1,
+      meals: day.meals.map((meal: any) => ({
+        meal_title: meal.meal_title,
+        serving_size: Number(meal.serving_size),
+        serving_unit: meal.serving_unit,
+        fat: meal.fat,
+        carbohydrates: meal.carbohydrates,
+        protein: meal.protein,
+        fibre: meal.fibre,
+        calories: meal.calories,
+        sugar: meal.sugar,
+        sodium: meal.sodium,
+        note: meal.note,
+      })),
+    }));
 
-    // const updatedData = {
-    //   details: JSON.stringify(transformedData),
-    //   client_id: clientId,
-    // };
+    const updatedData = {
+      details: JSON.stringify(transformedData),
+      client_id: clientId,
+    };
 
     try {
-      // await postWorkoutTrigger(updatedData).unwrap();
-      successSnackbar("Workout Assigned Successfully!");
-      console.log(data);
-      // router.push(COACH_SITE.CLIENTS);
+      await postDietTrigger(updatedData).unwrap();
+      successSnackbar("Diet Plan Assigned Successfully!");
+      router.push(COACH_SITE.CLIENTS);
       reset();
     } catch (error: any) {
       errorSnackbar(error?.data?.error);
     }
   };
 
-  // const { data, isLoading, isFetching, isError } = useGetAssignWorkoutQuery(
-  //   { client_id: clientId },
-  //   { refetchOnMountOrArgChange: true, skip: !clientId }
-  // );
+  const { data, isLoading, isFetching, isError } = useGetAssignDietQuery(
+    { client_id: clientId },
+    { refetchOnMountOrArgChange: true, skip: !clientId }
+  );
 
-  // useEffect(() => {
-  //   setDietPlanId(data?.details[0]?.workout_plan_id);
-  // }, [data]);
+  useEffect(() => {
+    if (data?.details) setDietPlanId(data?.details[0]?.diet_plan_id);
+  }, [data]);
 
-  // useEffect(() => {
-  //   if (data?.details) {
-  //     const originalFormData = data.details[0].workout_days.map((day: any) => ({
-  //       workout_day_id: day.workout_day_id,
-  //       day: day.day,
-  //       exercises: day.exercises.map((exercise: any) => ({
-  //         exercise_id: exercise.exercise_id,
-  //         exercise_name: exercise.exercise_name,
-  //         sets: exercise.sets,
-  //         workout_video: exercise.workout_video,
-  //         note: exercise.note,
-  //         reps_sets: exercise.reps_sets.map((repSet: any) => ({
-  //           rep: repSet.reps,
-  //         })),
-  //       })),
-  //     }));
+  useEffect(() => {
+    if (data?.details) {
+      const originalFormData = data.details?.[0].diet_days.map((day: any) => ({
+        diet_day_id: day.diet_day_id,
+        day: day.day,
+        meals: day.meals.map((meal: any) => ({
+          meal_id: meal.meal_id,
+          meal_title: meal.meal_title,
+          serving_size: Number(meal.serving_size),
+          serving_unit: meal.serving_unit,
+          fat: meal.fat,
+          carbohydrates: meal.carbohydrates,
+          protein: meal.protein,
+          fibre: meal.fibre,
+          calories: meal.calories,
+          sugar: meal.sugar,
+          sodium: meal.sodium,
+          note: meal.note,
+        })),
+      }));
 
-  //     reset({ days: originalFormData });
-  //   }
-  // }, [data, reset]);
+      reset({ days: originalFormData });
+    }
+  }, [data, reset]);
 
   return {
     methods,
@@ -136,11 +145,11 @@ export default function useAssignDiet() {
     daysField,
     handleRemoveDay,
     handleAddDay,
-    // postWorkoutStatus,
-    // isLoading,
-    // isFetching,
-    // isError,
+    postDietStatus,
+    isLoading,
+    isFetching,
+    isError,
     clientId,
-    // dietPlanId,
+    dietPlanId,
   };
 }

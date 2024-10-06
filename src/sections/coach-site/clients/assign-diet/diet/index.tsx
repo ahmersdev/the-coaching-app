@@ -21,18 +21,16 @@ export default function Diet({
   watch,
   dayIndex,
   clientId,
-  workoutPlanId,
-  workoutDayId,
+  dietPlanId,
+  dietDayId,
 }: any) {
-  const { dietField, handleRemoveExercise, handleAddExercise } = useDiet({
+  const { dietField, handleAddMeal, handleRemoveMeal } = useDiet({
     control,
     dayIndex,
     clientId,
-    workoutPlanId,
-    workoutDayId,
+    dietPlanId,
+    dietDayId,
   });
-
-  const mealNameQuery = useLazyGetFoodAutocompleteQuery();
 
   return (
     <>
@@ -73,7 +71,7 @@ export default function Diet({
                     variant={"body1"}
                     color={"grey.100"}
                     fontWeight={900}
-                    onClick={() => handleRemoveExercise?.(dietIndex)}
+                    onClick={() => handleRemoveMeal?.(dietIndex)}
                     mr={2}
                     sx={{ cursor: "pointer" }}
                   >
@@ -86,18 +84,86 @@ export default function Diet({
             <AccordionDetails>
               <Grid container spacing={1}>
                 <Grid item xs={12} md={5}>
-                  <RHFAutocompleteAsync
-                    name={`days[${dayIndex}].meals[${dietIndex}].meal_name`}
+                  <RHFTextField
+                    name={`days[${dayIndex}].meals[${dietIndex}].meal_title`}
                     label={"Meal Name"}
                     placeholder={"Enter Meal Name"}
                     bgcolor={"secondary.800"}
-                    apiQuery={mealNameQuery}
-                    queryKey={"search_expression"}
-                    getOptionLabel={(option: any) => option?.food_name}
-                    noOptionsCase={"Start Searching Meals"}
                   />
                 </Grid>
                 <Grid item xs={12} md={5}>
+                  <RHFTextField
+                    name={`days[${dayIndex}].meals[${dietIndex}].serving_size`}
+                    label={"Serving Size"}
+                    placeholder={"Enter Serving Size"}
+                    bgcolor={"secondary.800"}
+                  />
+                </Grid>
+                <Grid item xs={12} md={5}>
+                  <RHFTextField
+                    name={`days[${dayIndex}].meals[${dietIndex}].serving_unit`}
+                    label={"Serving Unit"}
+                    placeholder={"Enter Serving Unit"}
+                    bgcolor={"secondary.800"}
+                  />
+                </Grid>
+                <Grid item xs={12} md={5}>
+                  <RHFTextField
+                    name={`days[${dayIndex}].meals[${dietIndex}].fat`}
+                    label={"Fat"}
+                    placeholder={"Enter Fat"}
+                    bgcolor={"secondary.800"}
+                  />
+                </Grid>
+                <Grid item xs={12} md={5}>
+                  <RHFTextField
+                    name={`days[${dayIndex}].meals[${dietIndex}].carbohydrates`}
+                    label={"Carbohydrates"}
+                    placeholder={"Enter Carbohydrates"}
+                    bgcolor={"secondary.800"}
+                  />
+                </Grid>
+                <Grid item xs={12} md={5}>
+                  <RHFTextField
+                    name={`days[${dayIndex}].meals[${dietIndex}].protein`}
+                    label={"Protein"}
+                    placeholder={"Enter Protein"}
+                    bgcolor={"secondary.800"}
+                  />
+                </Grid>
+                <Grid item xs={12} md={5}>
+                  <RHFTextField
+                    name={`days[${dayIndex}].meals[${dietIndex}].fibre`}
+                    label={"Fibre"}
+                    placeholder={"Enter Fibre"}
+                    bgcolor={"secondary.800"}
+                  />
+                </Grid>
+                <Grid item xs={12} md={5}>
+                  <RHFTextField
+                    name={`days[${dayIndex}].meals[${dietIndex}].calories`}
+                    label={"Calories"}
+                    placeholder={"Enter Calories"}
+                    bgcolor={"secondary.800"}
+                  />
+                </Grid>
+                <Grid item xs={12} md={5}>
+                  <RHFTextField
+                    name={`days[${dayIndex}].meals[${dietIndex}].sugar`}
+                    label={"Sugar"}
+                    placeholder={"Enter Sugar"}
+                    bgcolor={"secondary.800"}
+                  />
+                </Grid>
+                <Grid item xs={12} md={5}>
+                  <RHFTextField
+                    name={`days[${dayIndex}].meals[${dietIndex}].sodium`}
+                    label={"Sodium"}
+                    placeholder={"Enter Sodium"}
+                    bgcolor={"secondary.800"}
+                  />
+                </Grid>
+                <Grid item xs={12}>
                   <RHFTextField
                     name={`days[${dayIndex}].meals[${dietIndex}].note`}
                     label={"Add Note"}
@@ -126,7 +192,7 @@ export default function Diet({
                       },
                     }}
                     disableElevation
-                    onClick={handleAddExercise}
+                    onClick={handleAddMeal}
                   >
                     Add Another Exercise
                   </Button>

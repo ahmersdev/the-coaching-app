@@ -106,7 +106,7 @@ export default function useAssignWorkout() {
   );
 
   useEffect(() => {
-    setWorkoutPlanId(data?.details[0]?.workout_plan_id);
+    if (data?.details) setWorkoutPlanId(data?.details[0]?.workout_plan_id);
   }, [data]);
 
   useEffect(() => {

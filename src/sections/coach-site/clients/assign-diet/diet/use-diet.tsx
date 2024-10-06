@@ -1,14 +1,14 @@
 import { useFieldArray } from "react-hook-form";
-import { useDeleteWorkoutExerciseMutation } from "@/services/coach-site/clients";
 import { errorSnackbar, successSnackbar } from "@/utils/api";
 import { mealDefaultValues } from "../assign-diet.data";
+import { useDeleteDietMealMutation } from "@/services/coach-site/clients";
 
 export default function useDiet({
   control,
   dayIndex,
   clientId,
-  workoutPlanId,
-  workoutDayId,
+  dietPlanId,
+  dietDayId,
 }: any) {
   const {
     fields: dietField,
@@ -19,35 +19,37 @@ export default function useDiet({
     name: `days[${dayIndex}].meals`,
   });
 
-  const handleAddExercise = () => {
+  const handleAddMeal = () => {
     dietAppend(mealDefaultValues.meals);
   };
 
-  //   const [deleteWorkoutExerciseTrigger] = useDeleteWorkoutExerciseMutation();
+  const [deleteDietMealTrigger] = useDeleteDietMealMutation();
 
-  const handleRemoveExercise = async (mealIndex: any) => {
+  const handleRemoveMeal = async (mealIndex: any) => {
     const mealToRemove: any = dietField[mealIndex];
 
-    // const workoutExerciseId = mealToRemove?.exercise_id;
+    const dietMealId = mealToRemove?.meal_id;
 
-    // if (workoutDayId && workoutPlanId && workoutExerciseId) {
-    //   const params = {
-    //     client_id: clientId,
-    //     workout_plan_id: workoutPlanId,
-    //     workout_day_id: workoutDayId,
-    //     exercise_id: workoutExerciseId,
-    //   };
-    //   try {
-    //     await deleteWorkoutExerciseTrigger(params).unwrap();
-    //     successSnackbar("Exercise removed successfully!");
-    //   } catch (error: any) {
-    //     errorSnackbar(error?.data?.error);
-    //     return;
-    //   }
-    // } else {
-    dietRemove(mealIndex);
-    // }
+    console.log(dietDayId, dietPlanId, dietField);
+
+    if (dietDayId && dietPlanId && dietMealId) {
+      const params = {
+        client_id: clientId,
+        diet_plan_id: dietPlanId,
+        diet_day_id: dietDayId,
+        meal_id: dietMealId,
+      };
+      try {
+        await deleteDietMealTrigger(params).unwrap();
+        successSnackbar("Meal removed successfully!");
+      } catch (error: any) {
+        errorSnackbar(error?.data?.error);
+        return;
+      }
+    } else {
+      dietRemove(mealIndex);
+    }
   };
 
-  return { dietField, handleRemoveExercise, handleAddExercise };
+  return { dietField, handleAddMeal, handleRemoveMeal };
 }

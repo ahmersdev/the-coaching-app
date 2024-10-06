@@ -5,6 +5,7 @@ const TAG = "COACH_CLIENTS";
 
 export const coachClients = baseAPI.injectEndpoints({
   endpoints: (builder) => ({
+    // List Page
     getClientDetails: builder.query({
       query: (params: any) => ({
         url: COACH_SITE.GET_CLIENTS,
@@ -13,6 +14,7 @@ export const coachClients = baseAPI.injectEndpoints({
       }),
       providesTags: [TAG],
     }),
+    // Assign Workout
     postAssignWorkout: builder.mutation({
       query: (params: any) => ({
         url: COACH_SITE.ASSIGN_WORKOUT,
@@ -21,6 +23,7 @@ export const coachClients = baseAPI.injectEndpoints({
       }),
       invalidatesTags: [TAG],
     }),
+
     getAssignWorkout: builder.query({
       query: (params: any) => ({
         url: COACH_SITE.GET_WORKOUT,
@@ -29,6 +32,7 @@ export const coachClients = baseAPI.injectEndpoints({
       }),
       providesTags: [TAG],
     }),
+
     deleteWorkoutDay: builder.mutation({
       query: (params: any) => ({
         url: COACH_SITE.DELETE_WORKOUT_DAY,
@@ -37,6 +41,7 @@ export const coachClients = baseAPI.injectEndpoints({
       }),
       invalidatesTags: [TAG],
     }),
+
     deleteWorkoutExercise: builder.mutation({
       query: (params: any) => ({
         url: COACH_SITE.DELETE_WORKOUT_EXERCISE,
@@ -45,6 +50,7 @@ export const coachClients = baseAPI.injectEndpoints({
       }),
       invalidatesTags: [TAG],
     }),
+    // Assign Macro
     postAssignMacro: builder.mutation({
       query: (params: any) => ({
         url: COACH_SITE.ASSIGN_MACRO,
@@ -53,6 +59,7 @@ export const coachClients = baseAPI.injectEndpoints({
       }),
       invalidatesTags: [TAG],
     }),
+
     getAssignMacro: builder.query({
       query: (params: any) => ({
         url: COACH_SITE.GET_MACRO,
@@ -61,9 +68,46 @@ export const coachClients = baseAPI.injectEndpoints({
       }),
       providesTags: [TAG],
     }),
+
     deleteMacro: builder.mutation({
       query: (params: any) => ({
         url: COACH_SITE.DELETE_MACRO,
+        method: "DELETE",
+        params,
+      }),
+      invalidatesTags: [TAG],
+    }),
+    // Assign Diet
+    postAssignDiet: builder.mutation({
+      query: (params: any) => ({
+        url: COACH_SITE.ASSIGN_DIET,
+        method: "PUT",
+        params,
+      }),
+      invalidatesTags: [TAG],
+    }),
+
+    getAssignDiet: builder.query({
+      query: (params: any) => ({
+        url: COACH_SITE.GET_DIET,
+        method: "GET",
+        params,
+      }),
+      providesTags: [TAG],
+    }),
+
+    deleteDietDay: builder.mutation({
+      query: (params: any) => ({
+        url: COACH_SITE.DELETE_DIET_DAY,
+        method: "DELETE",
+        params,
+      }),
+      invalidatesTags: [TAG],
+    }),
+
+    deleteDietMeal: builder.mutation({
+      query: (params: any) => ({
+        url: COACH_SITE.DELETE_DIET_MEAL,
         method: "DELETE",
         params,
       }),
@@ -81,4 +125,8 @@ export const {
   usePostAssignMacroMutation,
   useGetAssignMacroQuery,
   useDeleteMacroMutation,
+  usePostAssignDietMutation,
+  useGetAssignDietQuery,
+  useDeleteDietDayMutation,
+  useDeleteDietMealMutation,
 } = coachClients;

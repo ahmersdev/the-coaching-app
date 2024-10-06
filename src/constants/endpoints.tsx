@@ -24,6 +24,10 @@ export const COACH_SITE = {
   ASSIGN_MACRO: `assignMacro`,
   GET_MACRO: `getMacros`,
   DELETE_MACRO: `deleteMacro`,
+  ASSIGN_DIET: `assignDietPlan`,
+  GET_DIET: `getDietPlan`,
+  DELETE_DIET_DAY: `deleteDietDay`,
+  DELETE_DIET_MEAL: `deleteMeal`,
 };
 
 export const STRIPE = {
