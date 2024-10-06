@@ -96,7 +96,7 @@ export default function useAssignMacroPlans() {
   );
 
   useEffect(() => {
-    if (data) {
+    if (data && data.length > 0) {
       const originalFormData = data.map((macro: any) => ({
         macro_plan_id: macro.macro_plan_id,
         title: macro.title,

@@ -17,6 +17,7 @@ export const getAssignDietDataArray = (dayIndex: number, dietIndex: number) => [
       name: `days[${dayIndex}].meals[${dietIndex}].serving_size`,
       label: "Serving Size",
       placeholder: "Enter Serving Size",
+      type: "number",
     },
     component: RHFTextField,
     md: 5,
