@@ -2,7 +2,7 @@
 
 import { Box, Stack, Typography } from "@mui/material";
 import Client from "./client";
-import { bodyDetailsData, clientDetailsData } from "./overview.data";
+import { getBodyDetailsData, getClientDetailsData } from "./overview.data";
 import Body from "./body";
 import Progress from "./progress";
 import Macro from "./macro";
@@ -24,6 +24,9 @@ export default function Overview() {
     { client_id: clientId },
     { refetchOnMountOrArgChange: true, skip: !clientId }
   );
+
+  const clientDetailsData = getClientDetailsData(data?.client);
+  const bodyDetailsData = getBodyDetailsData(data?.client);
 
   return (
     <Stack direction={"column"} spacing={2}>

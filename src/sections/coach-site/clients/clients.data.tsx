@@ -52,135 +52,75 @@ export const clientsColumns = [
     accessorFn: (row: any) => row?.is_diet_assigned,
     id: "dietPlanStatus",
     header: "Diet Plan Status",
-    cell: (info: any) =>
-      info?.getValue() ? (
-        <Box display={"flex"} alignItems={"end"} gap={1}>
-          <Chip
-            label={"Assigned"}
-            sx={{
-              color: "grey.100",
-              width: 110,
-              backgroundColor: "primary.main",
-            }}
-          />
-          <Link
-            href={{
-              pathname: COACH_SITE?.CLIENTS_ASSIGN_DIET,
-              query: { clientId: info?.row?.original?.client_id },
-            }}
-          >
-            <NextIcon />
-          </Link>
-        </Box>
-      ) : (
-        <Box display={"flex"} alignItems={"end"} gap={1}>
-          <Chip
-            label={"Not Assigned"}
-            sx={{
-              color: "grey.100",
-              width: 110,
-              backgroundColor: "error.700",
-            }}
-          />
-          <Link
-            href={{
-              pathname: COACH_SITE?.CLIENTS_ASSIGN_DIET,
-              query: { clientId: info?.row?.original?.client_id },
-            }}
-          >
-            <NextIcon />
-          </Link>
-        </Box>
-      ),
+    cell: (info: any) => (
+      <Box display={"flex"} alignItems={"end"} gap={1}>
+        <Chip
+          label={info?.getValue() ? "Assigned" : "Not Assigned"}
+          sx={{
+            color: "grey.100",
+            width: 110,
+            backgroundColor: info?.getValue() ? "primary.main" : "error.700",
+          }}
+        />
+        <Link
+          href={{
+            pathname: COACH_SITE?.CLIENTS_ASSIGN_DIET,
+            query: { clientId: info?.row?.original?.client_id },
+          }}
+        >
+          <NextIcon />
+        </Link>
+      </Box>
+    ),
   },
   {
     accessorFn: (row: any) => row?.is_training_assigned,
     id: "workoutPlanStatus",
     header: "Workout Plan Status",
-    cell: (info: any) =>
-      info?.getValue() ? (
-        <Box display={"flex"} alignItems={"end"} gap={1}>
-          <Chip
-            label={"Assigned"}
-            sx={{
-              color: "grey.100",
-              width: 110,
-              backgroundColor: "primary.main",
-            }}
-          />
-          <Link
-            href={{
-              pathname: COACH_SITE?.CLIENTS_ASSIGN_WORKOUT,
-              query: { clientId: info?.row?.original?.client_id },
-            }}
-          >
-            <NextIcon />
-          </Link>
-        </Box>
-      ) : (
-        <Box display={"flex"} alignItems={"end"} gap={1}>
-          <Chip
-            label={"Not Assigned"}
-            sx={{
-              color: "grey.100",
-              width: 110,
-              backgroundColor: "error.700",
-            }}
-          />
-          <Link
-            href={{
-              pathname: COACH_SITE?.CLIENTS_ASSIGN_WORKOUT,
-              query: { clientId: info?.row?.original?.client_id },
-            }}
-          >
-            <NextIcon />
-          </Link>
-        </Box>
-      ),
+    cell: (info: any) => (
+      <Box display={"flex"} alignItems={"end"} gap={1}>
+        <Chip
+          label={info?.getValue() ? "Assigned" : "Not Assigned"}
+          sx={{
+            color: "grey.100",
+            width: 110,
+            backgroundColor: info?.getValue() ? "primary.main" : "error.700",
+          }}
+        />
+        <Link
+          href={{
+            pathname: COACH_SITE?.CLIENTS_ASSIGN_WORKOUT,
+            query: { clientId: info?.row?.original?.client_id },
+          }}
+        >
+          <NextIcon />
+        </Link>
+      </Box>
+    ),
   },
   {
     accessorFn: (row: any) => row?.is_macro_assigned,
     id: "macroPlanStatus",
     header: "Macro Plan Status",
-    cell: (info: any) =>
-      info?.getValue() ? (
-        <Box display={"flex"} alignItems={"end"} gap={1}>
-          <Chip
-            label={"Assigned"}
-            sx={{
-              color: "grey.100",
-              width: 110,
-              backgroundColor: "primary.main",
-            }}
-          />
-          <Link
-            href={{
-              pathname: COACH_SITE?.CLIENTS_ASSIGN_MACRO_PLANS,
-              query: { clientId: info?.row?.original?.client_id },
-            }}
-          >
-            <NextIcon />
-          </Link>
-        </Box>
-      ) : (
-        <Box display={"flex"} alignItems={"end"} gap={1}>
-          <Chip
-            label={"Not Assigned"}
-            sx={{
-              color: "grey.100",
-              width: 110,
-              backgroundColor: "error.700",
-            }}
-          />
-          <Link
-            href={{
-              pathname: COACH_SITE?.CLIENTS_ASSIGN_MACRO_PLANS,
-              query: { clientId: info?.row?.original?.client_id },
-            }}
-          >
-            <NextIcon />
-          </Link>
-        </Box>
-      ),
+    cell: (info: any) => (
+      <Box display={"flex"} alignItems={"end"} gap={1}>
+        <Chip
+          label={info?.getValue() ? "Assigned" : "Not Assigned"}
+          sx={{
+            color: "grey.100",
+            width: 110,
+            backgroundColor: info?.getValue() ? "primary.main" : "error.700",
+          }}
+        />
+        <Link
+          href={{
+            pathname: COACH_SITE?.CLIENTS_ASSIGN_MACRO_PLANS,
+            query: { clientId: info?.row?.original?.client_id },
+          }}
+        >
+          <NextIcon />
+        </Link>
+      </Box>
+    ),
   },
 ];

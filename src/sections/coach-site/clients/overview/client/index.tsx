@@ -18,23 +18,23 @@ export default function Client({ clientDetailsData, clientId }: any) {
       <Divider sx={{ my: 2 }} />
 
       <Grid container spacing={2}>
-        {clientDetailsData?.map((item: any, index: any) => (
-          <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+        {Object.entries(clientDetailsData)?.map(([key, value]: any) => (
+          <Grid item xs={12} sm={6} md={4} lg={3} key={key}>
             <Box borderRight={1} borderColor={"grey.800"}>
               <Typography variant={"body1"} fontWeight={500} color={"grey.400"}>
-                {Object?.keys?.(item)?.[0]}:
+                {key}:
               </Typography>
               <Typography variant={"h6"} color={"grey.100"} mt={0.5}>
-                {Object?.keys(item)?.includes("Registration Date") ? (
-                  dayjs(item["Registration Date"])?.format("MMM DD, YYYY")
-                ) : Object?.keys(item)?.includes("Diet Plan Status") ? (
+                {key === "Registration Date" ? (
+                  dayjs(value)?.format("MMM DD, YYYY")
+                ) : key === "Diet Plan Status" ? (
                   <Box display={"flex"} alignItems={"end"} gap={1}>
                     <Chip
-                      label={"Not Assigned"}
+                      label={value ? "Assigned" : "Not Assigned"}
                       sx={{
                         color: "grey.100",
                         width: 110,
-                        backgroundColor: "error.700",
+                        backgroundColor: value ? "primary.main" : "error.700",
                       }}
                     />
                     <Link
@@ -46,14 +46,14 @@ export default function Client({ clientDetailsData, clientId }: any) {
                       <NextIcon />
                     </Link>
                   </Box>
-                ) : Object?.keys(item)?.includes("Workout Plan Status") ? (
+                ) : key === "Workout Plan Status" ? (
                   <Box display={"flex"} alignItems={"end"} gap={1}>
                     <Chip
-                      label={"Not Assigned"}
+                      label={value ? "Assigned" : "Not Assigned"}
                       sx={{
                         color: "grey.100",
                         width: 110,
-                        backgroundColor: "error.700",
+                        backgroundColor: value ? "primary.main" : "error.700",
                       }}
                     />
                     <Link
@@ -66,7 +66,7 @@ export default function Client({ clientDetailsData, clientId }: any) {
                     </Link>
                   </Box>
                 ) : (
-                  item[Object?.keys?.(item)?.[0]]
+                  value
                 )}
               </Typography>
             </Box>
