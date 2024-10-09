@@ -43,7 +43,15 @@ export default function ClientsImages() {
           <Grid container spacing={2}>
             {sortedData?.map((item: any) => (
               <Grid item xs={12} sm={6} md={3} key={item?.id}>
-                <Box bgcolor={"secondary.main"} p={2} borderRadius={3}>
+                <Box
+                  bgcolor={"secondary.main"}
+                  p={2}
+                  borderRadius={3}
+                  height={"100%"}
+                  display={"flex"}
+                  flexDirection={"column"}
+                  justifyContent={"space-between"}
+                >
                   <Box display={"flex"} alignItems={"center"} gap={1}>
                     <Avatar
                       src={item?.client?.profile_picture}
@@ -63,28 +71,30 @@ export default function ClientsImages() {
                     </Box>
                   </Box>
 
-                  <Divider sx={{ my: 2 }} />
+                  <Box display={"flex"} flexDirection={"column"}>
+                    <Divider sx={{ my: 2 }} />
 
-                  <Button
-                    variant={"contained"}
-                    sx={{
-                      color: "grey.100",
-                      borderRadius: 25,
-                      border: "1px dashed",
-                      borderColor: "grey.100",
-                      background: "transparent",
-                      ":hover": {
-                        backgroundColor: "grey.100",
-                        color: "grey.900",
-                      },
-                    }}
-                    disableElevation
-                    onClick={() =>
-                      setShowDetails({ open: true, details: item })
-                    }
-                  >
-                    Progress Images
-                  </Button>
+                    <Button
+                      variant={"contained"}
+                      sx={{
+                        color: "grey.100",
+                        borderRadius: 25,
+                        border: "1px dashed",
+                        borderColor: "grey.100",
+                        background: "transparent",
+                        ":hover": {
+                          backgroundColor: "grey.100",
+                          color: "grey.900",
+                        },
+                      }}
+                      disableElevation
+                      onClick={() =>
+                        setShowDetails({ open: true, details: item })
+                      }
+                    >
+                      Progress Images
+                    </Button>
+                  </Box>
                 </Box>
               </Grid>
             ))}

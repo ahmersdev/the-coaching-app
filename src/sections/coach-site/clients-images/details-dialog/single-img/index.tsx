@@ -26,7 +26,6 @@ export default function SingleImg({
           padding: 2,
           borderRadius: 5,
           maxWidth: theme.breakpoints.values.md - 100,
-          //   maxHeight: "80vh",
         },
       }}
     >
