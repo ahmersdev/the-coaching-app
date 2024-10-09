@@ -53,7 +53,7 @@ export default function Overview() {
 
           <Body bodyDetailsData={bodyDetailsData} />
 
-          <Progress clientId={clientId} />
+          <Progress checkInDetails={data?.check_in_details} />
 
           <Macro clientId={clientId} />
 

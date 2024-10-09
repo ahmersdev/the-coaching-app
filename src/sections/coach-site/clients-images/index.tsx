@@ -105,7 +105,7 @@ export default function ClientsImages() {
 
           <Grid container spacing={2}>
             {data?.check_in_details?.map((item: any) => (
-              <Grid item key={item?.id}>
+              <Grid item key={item?.details_id}>
                 <Box
                   borderRadius={3}
                   bgcolor={"secondary.900"}
