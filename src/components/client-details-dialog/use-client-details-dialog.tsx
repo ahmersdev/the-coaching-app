@@ -3,15 +3,18 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { errorSnackbar, successSnackbar } from "@/utils/api";
 import {
-  detailsDataArray,
+  getClientDetailsDataArray,
   validationSchema,
   defaultValues,
   getQuestionsList,
-} from "./details-dialog.data";
+} from "./client-details-dialog.data";
 import { useEffect, useState } from "react";
 import { usePostClientImageFeedbackMutation } from "@/services/coach-site/clients-images";
 
-export default function useDetailsDialog({ showDetails, setShowDetails }: any) {
+export default function useClientDetailsDialog({
+  showDetails,
+  setShowDetails,
+}: any) {
   const theme: any = useTheme();
   const [loadingImages, setLoadingImages] = useState<boolean[]>([]);
   const [singleImageView, setSingleImageView] = useState({
@@ -43,7 +46,7 @@ export default function useDetailsDialog({ showDetails, setShowDetails }: any) {
     }
   };
 
-  const detailsData = detailsDataArray(showDetails.details);
+  const detailsData = getClientDetailsDataArray(showDetails.details);
 
   useEffect(() => {
     if (showDetails.details) {

@@ -7,7 +7,7 @@ import ApiErrorState from "@/components/api-error-state";
 import { SkeletonTable } from "@/components/skeletons";
 import useClientsImages from "./use-clients-images";
 import NoData from "@/components/no-data";
-import DetailsDialog from "./details-dialog";
+import ClientDetailsDialog from "@/components/client-details-dialog";
 
 export default function ClientsImages() {
   const {
@@ -153,7 +153,7 @@ export default function ClientsImages() {
       )}
 
       {showDetails?.open && (
-        <DetailsDialog
+        <ClientDetailsDialog
           showDetails={showDetails}
           setShowDetails={setShowDetails}
         />

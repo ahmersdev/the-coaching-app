@@ -8,7 +8,7 @@ export const defaultValues = {
   feedback: "",
 };
 
-export const detailsDataArray = (data: any) => {
+export const getClientDetailsDataArray = (data: any) => {
   return {
     "Chest Size": data?.chest ?? "-",
     "Bicep Size": data?.arms ?? "-",

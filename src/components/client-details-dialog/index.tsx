@@ -18,10 +18,13 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Navigation, Pagination } from "swiper/modules";
 import Image from "next/image";
 import { CarousalBackArrowIcon, CarousalNextArrowIcon } from "@/assets/icons";
-import useDetailsDialog from "./use-details-dialog";
 import SingleImg from "./single-img";
+import useClientDetailsDialog from "./use-client-details-dialog";
 
-export default function DetailsDialog({ showDetails, setShowDetails }: any) {
+export default function ClientDetailsDialog({
+  showDetails,
+  setShowDetails,
+}: any) {
   const {
     theme,
     methods,
@@ -34,7 +37,7 @@ export default function DetailsDialog({ showDetails, setShowDetails }: any) {
     singleImageView,
     setSingleImageView,
     mappedAnswers,
-  } = useDetailsDialog({ showDetails, setShowDetails });
+  } = useClientDetailsDialog({ showDetails, setShowDetails });
 
   return (
     <>
@@ -69,8 +72,8 @@ export default function DetailsDialog({ showDetails, setShowDetails }: any) {
           </Box>
         </DialogTitle>
 
-        <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-          <DialogContent>
+        <DialogContent>
+          <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
             <Grid container spacing={2}>
               {Object?.entries(detailsData)?.map(
                 ([key, value], index, array) => (
@@ -259,45 +262,47 @@ export default function DetailsDialog({ showDetails, setShowDetails }: any) {
                 />
               </Grid>
             </Grid>
-          </DialogContent>
-          <DialogActions sx={{ marginX: 2.4, padding: 0 }}>
-            <Button
-              variant={"contained"}
-              sx={{
-                color: "grey.100",
-                borderRadius: 25,
-                border: "1px dashed",
-                borderColor: "grey.100",
-                background: "transparent",
-                width: 111,
-                ":hover": {
-                  backgroundColor: "grey.100",
-                  color: "grey.900",
-                },
-              }}
-              disableElevation
-              type={"button"}
-              onClick={() => setShowDetails({ open: false, details: null })}
-            >
-              Close
-            </Button>
-            <LoadingButton
-              variant={"contained"}
-              sx={{
-                color: "grey.100",
-                width: 111,
-                borderRadius: 25,
-                border: "1px solid",
-                borderColor: "primary.main",
-              }}
-              disableElevation
-              type={"submit"}
-              loading={updateClientFeedbackStatus?.isLoading}
-            >
-              Submit
-            </LoadingButton>
-          </DialogActions>
-        </FormProvider>
+          </FormProvider>
+        </DialogContent>
+
+        <DialogActions sx={{ marginX: 2.4, padding: 0 }}>
+          <Button
+            variant={"contained"}
+            sx={{
+              color: "grey.100",
+              borderRadius: 25,
+              border: "1px dashed",
+              borderColor: "grey.100",
+              background: "transparent",
+              width: 111,
+              ":hover": {
+                backgroundColor: "grey.100",
+                color: "grey.900",
+              },
+            }}
+            disableElevation
+            type={"button"}
+            onClick={() => setShowDetails({ open: false, details: null })}
+          >
+            Close
+          </Button>
+          <LoadingButton
+            variant={"contained"}
+            sx={{
+              color: "grey.100",
+              width: 111,
+              borderRadius: 25,
+              border: "1px solid",
+              borderColor: "primary.main",
+            }}
+            disableElevation
+            type={"submit"}
+            loading={updateClientFeedbackStatus?.isLoading}
+            onClick={handleSubmit(onSubmit)}
+          >
+            Submit
+          </LoadingButton>
+        </DialogActions>
       </Dialog>
 
       {singleImageView?.openSingle && (
