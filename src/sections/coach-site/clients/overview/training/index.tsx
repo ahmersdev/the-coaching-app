@@ -22,7 +22,7 @@ export default function Training({ clientId }: any) {
         </Box>
         <Link
           href={{
-            pathname: COACH_SITE?.CLIENTS_ASSIGN_DIET,
+            pathname: COACH_SITE.CLIENTS_ASSIGN_WORKOUT,
             query: { clientId },
           }}
         >

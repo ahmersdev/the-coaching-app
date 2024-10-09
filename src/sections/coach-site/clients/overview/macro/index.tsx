@@ -5,7 +5,6 @@ import { Box, Button, Divider, Typography } from "@mui/material";
 import Link from "next/link";
 
 export default function Macro({ clientId }: any) {
-
   return (
     <Box bgcolor={"secondary.main"} p={2.4} borderRadius={3}>
       <Box
@@ -22,7 +21,7 @@ export default function Macro({ clientId }: any) {
         </Box>
         <Link
           href={{
-            pathname: COACH_SITE?.CLIENTS_ASSIGN_DIET,
+            pathname: COACH_SITE.CLIENTS_ASSIGN_MACRO_PLANS,
             query: { clientId },
           }}
         >

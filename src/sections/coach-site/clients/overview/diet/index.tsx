@@ -21,7 +21,7 @@ export default function Diet({ clientId }: any) {
         </Box>
         <Link
           href={{
-            pathname: COACH_SITE?.CLIENTS_ASSIGN_DIET,
+            pathname: COACH_SITE.CLIENTS_ASSIGN_DIET,
             query: { clientId },
           }}
         >
