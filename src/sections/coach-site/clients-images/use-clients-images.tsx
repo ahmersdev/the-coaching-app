@@ -1,6 +1,5 @@
 import { useGetClientImagesQuery } from "@/services/coach-site/clients-images";
 import { useTheme } from "@mui/material";
-import { IDataSorting } from "./clients-images.interface";
 import { useState } from "react";
 
 export default function useClientsImages() {
@@ -18,7 +17,7 @@ export default function useClientsImages() {
 
   const sortedData = [...(data?.check_in_details || [])]
     ?.sort(
-      (a: IDataSorting, b: IDataSorting) =>
+      (a: any, b: any) =>
         new Date(b?.updatedAt)?.getTime() - new Date(a?.updatedAt)?.getTime()
     )
     ?.slice(0, 4);
