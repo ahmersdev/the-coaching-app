@@ -1,4 +1,4 @@
-import { assignDietDefaultValues } from "@/sections/coach-site/coach-site.data";
+import { assignDietDefaultValues } from "@/sections/coach-site/assign-diet.data";
 import { useEffect } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 
@@ -37,5 +37,5 @@ export default function useDiet(dietPlans: any) {
     reset({ days: originalFormData });
   }, [dietPlans, reset]);
 
-  return { daysField };
+  return { methods, control, daysField };
 }

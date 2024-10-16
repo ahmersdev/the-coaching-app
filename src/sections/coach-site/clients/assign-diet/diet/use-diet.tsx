@@ -1,7 +1,7 @@
 import { useFieldArray } from "react-hook-form";
 import { errorSnackbar, successSnackbar } from "@/utils/api";
 import { useDeleteDietMealMutation } from "@/services/coach-site/clients";
-import { mealDefaultValues } from "@/sections/coach-site/coach-site.data";
+import { mealDefaultValues } from "@/sections/coach-site/assign-diet.data";
 
 export default function useDiet({
   control,

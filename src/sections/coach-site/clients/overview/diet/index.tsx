@@ -13,9 +13,11 @@ import {
 import Link from "next/link";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import useDiet from "./use-diet";
+import Fields from "./fields";
+import { FormProvider } from "@/components/react-hook-form";
 
 export default function Diet({ clientId, dietPlans }: any) {
-  const { daysField } = useDiet(dietPlans);
+  const { methods, control, daysField } = useDiet(dietPlans);
 
   return (
     <Box bgcolor={"secondary.main"} p={2.4} borderRadius={3}>
@@ -70,7 +72,7 @@ export default function Diet({ clientId, dietPlans }: any) {
           No Diet Plan Assign Yet
         </Typography>
       ) : (
-        <>
+        <FormProvider methods={methods}>
           {daysField?.map((day: any, dayIndex) => (
             <Box
               bgcolor={"secondary.main"}
@@ -106,18 +108,12 @@ export default function Diet({ clientId, dietPlans }: any) {
 
                 <AccordionDetails>
                   <Divider sx={{ mb: 2 }} />
-                  {/* <Diet
-                    control={control}
-                    dayIndex={dayIndex}
-                    clientId={clientId}
-                    dietPlanId={dietPlanId}
-                    dietDayId={day?.diet_day_id}
-                  /> */}
+                  <Fields control={control} dayIndex={dayIndex} />
                 </AccordionDetails>
               </Accordion>
             </Box>
           ))}
-        </>
+        </FormProvider>
       )}
     </Box>
   );
