@@ -1,18 +1,45 @@
-import { Grid, Skeleton } from "@mui/material";
+import { Box, Skeleton } from "@mui/material";
 
-const SkeletonTable = ({ height = 48 }: any) => {
+const SkeletonTable = ({ length = 5 }: any) => {
   return (
-    <Grid container spacing={2}>
-      {[1, 2, 3, 4, 5]?.map((item: any) => (
-        <Grid item xs={12} key={item}>
+    <Box
+      border={1}
+      borderRadius={4.5}
+      borderColor={"secondary.800"}
+      overflow={"hidden"}
+    >
+      <Skeleton
+        variant={"rounded"}
+        width={"100%"}
+        height={50}
+        sx={{
+          bgcolor: "grey.800",
+          border: 1,
+          borderColor: "secondary.800",
+        }}
+      />
+      {Array.from({ length })?.map((item: any, id: any) => (
+        <Box
+          key={item ?? `skeleton+${id}`}
+          borderBottom={1}
+          borderColor={"secondary.800"}
+          p={2}
+        >
           <Skeleton
-            variant="rectangular"
-            height={height}
-            sx={{ bgcolor: "grey.700", borderRadius: 2 }}
+            animation={"wave"}
+            variant={"rounded"}
+            width={"95%"}
+            height={50}
+            sx={{
+              bgcolor: "grey.700",
+              border: 1,
+              borderColor: "grey.700",
+              margin: "auto",
+            }}
           />
-        </Grid>
+        </Box>
       ))}
-    </Grid>
+    </Box>
   );
 };
 

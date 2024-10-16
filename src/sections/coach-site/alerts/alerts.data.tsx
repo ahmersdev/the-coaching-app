@@ -1,9 +1,20 @@
 import { CLIENT_ALERTS_STATUSES } from "@/constants";
 import { COACH_SITE } from "@/constants/routes";
-import { Avatar, Box, Button, Chip, Typography } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Button,
+  Chip,
+  CircularProgress,
+  Typography,
+} from "@mui/material";
 import Link from "next/link";
 
-export const alertsColumns = [
+export const getAlertsColumns = (
+  onApproveClick: any,
+  onRejectClick: any,
+  postClientAlertsStatusStatus: any
+) => [
   {
     accessorFn: (row: any) => row?.client_id,
     id: "name",
@@ -99,41 +110,51 @@ export const alertsColumns = [
         </Button>
       ) : (
         <>
-          <Button
-            variant={"contained"}
-            sx={{
-              color: "grey.100",
-              borderRadius: 25,
-              border: "1px dashed",
-              borderColor: "grey.100",
-              background: "transparent",
-              mr: 1,
-              ":hover": {
-                backgroundColor: "grey.100",
-                color: "grey.900",
-              },
-            }}
-            disableElevation
-          >
-            Approve
-          </Button>
-          <Button
-            variant={"contained"}
-            sx={{
-              color: "error.700",
-              borderRadius: 25,
-              border: "1px dashed",
-              borderColor: "error.700",
-              background: "transparent",
-              ":hover": {
-                backgroundColor: "error.700",
-                color: "grey.100",
-              },
-            }}
-            disableElevation
-          >
-            Reject
-          </Button>
+          {postClientAlertsStatusStatus?.isLoading &&
+          postClientAlertsStatusStatus?.originalArgs?.client_id ===
+            info?.row?.original?.client_id ? (
+            <CircularProgress size={20} />
+          ) : (
+            <>
+              <Button
+                variant={"contained"}
+                sx={{
+                  color: "grey.100",
+                  borderRadius: 25,
+                  border: "1px dashed",
+                  borderColor: "grey.100",
+                  background: "transparent",
+                  mr: 1,
+                  ":hover": {
+                    backgroundColor: "grey.100",
+                    color: "grey.900",
+                  },
+                }}
+                disableElevation
+                onClick={() => onApproveClick(info?.row?.original?.client_id)}
+              >
+                Approve
+              </Button>
+              <Button
+                variant={"contained"}
+                sx={{
+                  color: "error.700",
+                  borderRadius: 25,
+                  border: "1px dashed",
+                  borderColor: "error.700",
+                  background: "transparent",
+                  ":hover": {
+                    backgroundColor: "error.700",
+                    color: "grey.100",
+                  },
+                }}
+                disableElevation
+                onClick={() => onRejectClick(info?.row?.original?.client_id)}
+              >
+                Reject
+              </Button>
+            </>
+          )}
         </>
       ),
   },

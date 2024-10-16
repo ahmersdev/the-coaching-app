@@ -13,7 +13,17 @@ export const coachClientsAlerts = baseAPI.injectEndpoints({
       }),
       providesTags: [TAG],
     }),
+
+    postClientAlertsStatus: builder.mutation({
+      query: (params: any) => ({
+        url: COACH_SITE.POST_CLIENT_ALERTS_STATUS,
+        method: "POST",
+        params,
+      }),
+      invalidatesTags: [TAG],
+    }),
   }),
 });
 
-export const { useGetClientAlertsQuery } = coachClientsAlerts;
+export const { useGetClientAlertsQuery, usePostClientAlertsStatusMutation } =
+  coachClientsAlerts;

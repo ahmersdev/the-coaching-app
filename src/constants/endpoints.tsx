@@ -30,6 +30,7 @@ export const COACH_SITE = {
   DELETE_DIET_MEAL: `deleteMeal`,
   GET_CLIENT_DETAILS_BY_ID: `getClientDetailsById`,
   GET_CLIENT_ALERTS: `getClientPreferencesForCoach`,
+  POST_CLIENT_ALERTS_STATUS: `updateClientPreferencesForCoach`,
 };
 
 export const STRIPE = {
