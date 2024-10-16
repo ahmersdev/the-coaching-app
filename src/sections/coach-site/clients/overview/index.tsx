@@ -55,7 +55,7 @@ export default function Overview() {
 
           <Progress checkInDetails={data?.check_in_details} />
 
-          <Macro clientId={clientId} />
+          <Macro macroPlans={data?.macro_plans} clientId={clientId} />
 
           <Training workoutPlans={data?.workout_plans} clientId={clientId} />
 
