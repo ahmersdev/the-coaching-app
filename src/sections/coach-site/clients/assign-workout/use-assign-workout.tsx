@@ -1,9 +1,6 @@
 import { useFieldArray, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import {
-  assignWorkoutValidationSchema,
-  assignWorkoutDefaultValues,
-} from "./assign-workout.data";
+import { assignWorkoutValidationSchema } from "./assign-workout.data";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
   useDeleteWorkoutDayMutation,
@@ -13,6 +10,7 @@ import {
 import { errorSnackbar, successSnackbar } from "@/utils/api";
 import { useEffect, useState } from "react";
 import { COACH_SITE } from "@/constants/routes";
+import { assignWorkoutDefaultValues } from "@/sections/coach-site/assign-workout.data";
 
 export default function useAssignWorkout() {
   const searchParams = useSearchParams();

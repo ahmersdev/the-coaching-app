@@ -1,6 +1,6 @@
+import { repsDefaultValues } from "@/sections/coach-site/assign-workout.data";
 import { useEffect } from "react";
 import { useFieldArray } from "react-hook-form";
-import { repsDefaultValues } from "../../assign-workout.data";
 
 export default function useReps({
   control,

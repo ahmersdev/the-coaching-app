@@ -1,10 +1,7 @@
 import { useFieldArray, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { errorSnackbar, successSnackbar } from "@/utils/api";
-import {
-  macroDefaultValues,
-  macroValidationSchema,
-} from "./assign-macro-plans.data";
+import { macroValidationSchema } from "./assign-macro-plans.data";
 import {
   useDeleteMacroMutation,
   useGetAssignMacroQuery,
@@ -13,6 +10,7 @@ import {
 import { useRouter, useSearchParams } from "next/navigation";
 import { COACH_SITE } from "@/constants/routes";
 import { useEffect } from "react";
+import { macroDefaultValues } from "@/sections/coach-site/assign-macro.data";
 
 export default function useAssignMacroPlans() {
   const searchParams = useSearchParams();

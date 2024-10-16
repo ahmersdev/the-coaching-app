@@ -13,10 +13,10 @@ import Link from "next/link";
 import { ArrowBackIcon } from "@/assets/icons";
 import { COACH_SITE } from "@/constants/routes";
 import { LoadingButton } from "@mui/lab";
-import { getMacroPlanOneDataArray } from "./assign-macro-plans.data";
 import { MacroIcon } from "@/assets/icons";
 import useAssignMacroPlans from "./use-assign-macro-plans";
 import ApiErrorState from "@/components/api-error-state";
+import { getMacroPlanOneDataArray } from "@/sections/coach-site/assign-macro.data";
 
 export default function AssignMacroPlans() {
   const {

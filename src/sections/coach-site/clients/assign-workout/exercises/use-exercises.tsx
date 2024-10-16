@@ -1,7 +1,7 @@
 import { useFieldArray } from "react-hook-form";
-import { exerciseDefaultValues } from "../assign-workout.data";
 import { useDeleteWorkoutExerciseMutation } from "@/services/coach-site/clients";
 import { errorSnackbar, successSnackbar } from "@/utils/api";
+import { exerciseDefaultValues } from "@/sections/coach-site/assign-workout.data";
 
 export default function useExercises({
   control,
