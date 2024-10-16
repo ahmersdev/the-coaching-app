@@ -57,7 +57,7 @@ export default function Overview() {
 
           <Macro clientId={clientId} />
 
-          <Training clientId={clientId} />
+          <Training workoutPlans={data?.workout_plans} clientId={clientId} />
 
           <Diet dietPlans={data?.diet_plans} clientId={clientId} />
         </>

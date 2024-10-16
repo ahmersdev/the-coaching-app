@@ -82,7 +82,6 @@ export default function Diet({ clientId, dietPlans }: any) {
             >
               <Accordion
                 elevation={0}
-                defaultExpanded
                 sx={{
                   bgcolor: "secondary.900",
                   p: 1,

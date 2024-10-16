@@ -22,7 +22,6 @@ export default function Fields({ control, dayIndex }: any) {
         <Box bgcolor={"secondary.800"} key={diet.id} borderRadius={3} mt={2}>
           <Accordion
             elevation={0}
-            defaultExpanded
             sx={{
               bgcolor: "transparent",
               p: 1,
@@ -49,6 +48,7 @@ export default function Fields({ control, dayIndex }: any) {
                       <item.component
                         {...item.componentProps}
                         bgcolor={"secondary.800"}
+                        disabled
                       />
                     </Grid>
                   )
