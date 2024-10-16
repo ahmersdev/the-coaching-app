@@ -13,3 +13,8 @@ export const GUARD_ROLES = {
   ADMIN: "admin" as const,
   COACH: "coach" as const,
 };
+
+export const CLIENT_ALERTS_STATUSES = {
+  APPROVED: "Approved",
+  REJECTED: "Rejected",
+};

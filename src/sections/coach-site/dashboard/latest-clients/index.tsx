@@ -21,7 +21,7 @@ const LatestClients = ({ latestClientsArray }: any) => {
         justifyContent={"space-between"}
       >
         <Typography variant={"h5"} fontWeight={700}>
-          New Clients
+          Latest Clients Progressed
         </Typography>
 
         <Link href={COACH_SITE?.CLIENTS}>

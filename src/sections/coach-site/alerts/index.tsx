@@ -2,9 +2,15 @@
 
 import TanstackTable from "@/components/table";
 import { Typography } from "@mui/material";
-import { alertsColumns, alertsDataArray } from "./alerts.data";
+import { alertsColumns } from "./alerts.data";
+import { useGetClientAlertsQuery } from "@/services/coach-site/alerts";
 
 export default function Alerts() {
+  const { data, isLoading, isFetching, isError } = useGetClientAlertsQuery(
+    null,
+    { refetchOnMountOrArgChange: true }
+  );
+
   return (
     <>
       <Typography variant={"h2"} color={"grey.100"}>
@@ -15,8 +21,11 @@ export default function Alerts() {
       </Typography>
 
       <TanstackTable
-        data={alertsDataArray}
+        data={data?.details}
         columns={alertsColumns}
+        isLoading={isLoading}
+        isFetching={isFetching}
+        isError={isError}
         isPagination
       />
     </>

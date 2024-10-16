@@ -1,6 +1,8 @@
 import { COACH_SITE } from "@/constants/endpoints";
 import { baseAPI } from "@/services/base-api";
 
+const TAG = "COACH_CLIENTS_IMAGES";
+
 export const coachClientsImages = baseAPI.injectEndpoints({
   endpoints: (builder) => ({
     getClientImages: builder.query({
@@ -9,6 +11,7 @@ export const coachClientsImages = baseAPI.injectEndpoints({
         method: "GET",
         params,
       }),
+      providesTags: [TAG],
     }),
     postClientImageFeedback: builder.mutation({
       query: (params: any) => ({
@@ -16,6 +19,7 @@ export const coachClientsImages = baseAPI.injectEndpoints({
         method: "POST",
         params,
       }),
+      invalidatesTags: [TAG],
     }),
   }),
 });
