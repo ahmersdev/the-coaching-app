@@ -4,7 +4,7 @@ import { Avatar, Box, Button, Divider, Grid, Typography } from "@mui/material";
 import Image from "next/image";
 import dayjs from "dayjs";
 import ApiErrorState from "@/components/api-error-state";
-import { SkeletonTable } from "@/components/skeletons";
+import { SkeletonCard } from "@/components/skeletons";
 import useClientsImages from "./use-clients-images";
 import NoData from "@/components/no-data";
 import ClientDetailsDialog from "@/components/client-details-dialog";
@@ -28,7 +28,7 @@ export default function ClientsImages() {
           <Typography variant={"h3"} mb={2}>
             Recently Uploaded Progress By Clients
           </Typography>
-          <SkeletonTable />
+          <SkeletonCard gridSize={{ sm: 6, md: 3 }} length={8} />
         </>
       ) : isError ? (
         <ApiErrorState />

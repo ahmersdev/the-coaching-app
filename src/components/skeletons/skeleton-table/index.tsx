@@ -1,4 +1,5 @@
 import { Box, Skeleton } from "@mui/material";
+import { sxStylesOfSkeletons } from "../skeletons.data";
 
 const SkeletonTable = ({ length = 5 }: any) => {
   return (
@@ -31,9 +32,7 @@ const SkeletonTable = ({ length = 5 }: any) => {
             width={"95%"}
             height={50}
             sx={{
-              bgcolor: "grey.700",
-              border: 1,
-              borderColor: "grey.700",
+              ...sxStylesOfSkeletons,
               margin: "auto",
             }}
           />
