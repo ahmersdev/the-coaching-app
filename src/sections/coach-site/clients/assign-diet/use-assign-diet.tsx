@@ -4,15 +4,13 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { errorSnackbar, successSnackbar } from "@/utils/api";
 import { useEffect, useState } from "react";
 import { COACH_SITE } from "@/constants/routes";
-import {
-  assignDietDefaultValues,
-  assignDietValidationSchema,
-} from "./assign-diet.data";
+import { assignDietValidationSchema } from "./assign-diet.data";
 import {
   useDeleteDietDayMutation,
   useGetAssignDietQuery,
   usePostAssignDietMutation,
 } from "@/services/coach-site/clients";
+import { assignDietDefaultValues } from "../../coach-site.data";
 
 export default function useAssignDiet() {
   const searchParams = useSearchParams();

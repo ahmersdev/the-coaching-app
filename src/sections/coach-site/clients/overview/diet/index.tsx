@@ -1,10 +1,22 @@
 import { DietDayIcon } from "@/assets/icons";
 import { COACH_SITE } from "@/constants/routes";
 import { AddCircle } from "@mui/icons-material";
-import { Box, Button, Divider, Typography } from "@mui/material";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Box,
+  Button,
+  Divider,
+  Typography,
+} from "@mui/material";
 import Link from "next/link";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import useDiet from "./use-diet";
 
-export default function Diet({ clientId }: any) {
+export default function Diet({ clientId, dietPlans }: any) {
+  const { daysField } = useDiet(dietPlans);
+
   return (
     <Box bgcolor={"secondary.main"} p={2.4} borderRadius={3}>
       <Box
@@ -48,14 +60,65 @@ export default function Diet({ clientId }: any) {
 
       <Divider sx={{ my: 2 }} />
 
-      <Typography
-        variant={"body1"}
-        textAlign={"center"}
-        color={"grey.500"}
-        py={2}
-      >
-        No Diet Plan Assign Yet
-      </Typography>
+      {!!!dietPlans?.length ? (
+        <Typography
+          variant={"body1"}
+          textAlign={"center"}
+          color={"grey.500"}
+          py={2}
+        >
+          No Diet Plan Assign Yet
+        </Typography>
+      ) : (
+        <>
+          {daysField?.map((day: any, dayIndex) => (
+            <Box
+              bgcolor={"secondary.main"}
+              borderRadius={3}
+              mt={2}
+              key={day.id}
+            >
+              <Accordion
+                elevation={0}
+                defaultExpanded
+                sx={{
+                  bgcolor: "secondary.900",
+                  p: 1,
+                  "&.Mui-expanded": {
+                    margin: 0,
+                  },
+                }}
+              >
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon sx={{ color: "grey.100" }} />}
+                >
+                  <Box display={"flex"} alignItems={"center"} gap={1}>
+                    <DietDayIcon />
+                    <Typography
+                      variant={"h6"}
+                      color={"grey.100"}
+                      fontWeight={700}
+                    >
+                      Day 0{dayIndex + 1}
+                    </Typography>
+                  </Box>
+                </AccordionSummary>
+
+                <AccordionDetails>
+                  <Divider sx={{ mb: 2 }} />
+                  {/* <Diet
+                    control={control}
+                    dayIndex={dayIndex}
+                    clientId={clientId}
+                    dietPlanId={dietPlanId}
+                    dietDayId={day?.diet_day_id}
+                  /> */}
+                </AccordionDetails>
+              </Accordion>
+            </Box>
+          ))}
+        </>
+      )}
     </Box>
   );
 }

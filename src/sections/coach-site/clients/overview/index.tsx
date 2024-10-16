@@ -59,7 +59,7 @@ export default function Overview() {
 
           <Training clientId={clientId} />
 
-          <Diet clientId={clientId} />
+          <Diet dietPlans={data?.diet_plans} clientId={clientId} />
         </>
       )}
     </Stack>
