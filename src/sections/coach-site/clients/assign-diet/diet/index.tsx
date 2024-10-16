@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import useDiet from "./use-diet";
-import { getAssignDietDataArray } from "@/sections/coach-site/assign-diet.data";
+import { getAssignDietDataArray } from "@/sections/coach-site/clients/assign-diet.data";
 
 export default function Diet({
   control,

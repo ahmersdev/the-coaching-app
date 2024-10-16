@@ -10,7 +10,7 @@ import {
   useGetAssignDietQuery,
   usePostAssignDietMutation,
 } from "@/services/coach-site/clients";
-import { assignDietDefaultValues } from "@/sections/coach-site/assign-diet.data";
+import { assignDietDefaultValues } from "@/sections/coach-site/clients/assign-diet.data";
 
 export default function useAssignDiet() {
   const searchParams = useSearchParams();

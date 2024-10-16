@@ -10,7 +10,7 @@ import {
 import { errorSnackbar, successSnackbar } from "@/utils/api";
 import { useEffect, useState } from "react";
 import { COACH_SITE } from "@/constants/routes";
-import { assignWorkoutDefaultValues } from "@/sections/coach-site/assign-workout.data";
+import { assignWorkoutDefaultValues } from "@/sections/coach-site/clients/assign-workout.data";
 
 export default function useAssignWorkout() {
   const searchParams = useSearchParams();

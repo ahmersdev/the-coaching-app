@@ -1,4 +1,4 @@
-import { repsDefaultValues } from "@/sections/coach-site/assign-workout.data";
+import { repsDefaultValues } from "@/sections/coach-site/clients/assign-workout.data";
 import { useEffect } from "react";
 import { useFieldArray } from "react-hook-form";
 

@@ -1,4 +1,4 @@
-import { assignDietDefaultValues } from "@/sections/coach-site/assign-diet.data";
+import { assignDietDefaultValues } from "@/sections/coach-site/clients/assign-diet.data";
 import { useEffect } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 

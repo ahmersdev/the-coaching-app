@@ -16,7 +16,7 @@ import { LoadingButton } from "@mui/lab";
 import { MacroIcon } from "@/assets/icons";
 import useAssignMacroPlans from "./use-assign-macro-plans";
 import ApiErrorState from "@/components/api-error-state";
-import { getMacroPlanOneDataArray } from "@/sections/coach-site/assign-macro.data";
+import { getMacroPlanOneDataArray } from "@/sections/coach-site/clients/assign-macro.data";
 
 export default function AssignMacroPlans() {
   const {
