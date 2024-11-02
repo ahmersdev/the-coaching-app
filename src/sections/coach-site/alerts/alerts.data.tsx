@@ -81,6 +81,7 @@ export const getAlertsColumns = (
             border: "1px dashed",
             borderColor: "grey.100",
             background: "transparent",
+            cursor: "not-allowed",
             ":hover": {
               backgroundColor: "grey.100",
               color: "grey.900",
@@ -88,7 +89,7 @@ export const getAlertsColumns = (
           }}
           disableElevation
         >
-          Approved
+          Accepted
         </Button>
       ) : info?.getValue() === CLIENT_ALERTS_STATUSES.REJECTED ? (
         <Button
@@ -99,6 +100,7 @@ export const getAlertsColumns = (
             border: "1px dashed",
             borderColor: "error.700",
             background: "transparent",
+            cursor: "not-allowed",
             ":hover": {
               backgroundColor: "error.700",
               color: "grey.100",
@@ -133,7 +135,7 @@ export const getAlertsColumns = (
                 disableElevation
                 onClick={() => onApproveClick(info?.row?.original?.client_id)}
               >
-                Approve
+                Accept
               </Button>
               <Button
                 variant={"contained"}

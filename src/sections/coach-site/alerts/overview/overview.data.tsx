@@ -1,12 +1,24 @@
-export const clientDetailsData = [
-  { Name: "Angus MacGyver" },
-  { "User Handle": "a_MacGyver" },
-  { Email: "angusmacGyver@gmail.com" },
-  { "Registration Date": "2023-11-06T10:34:00.891Z" },
-];
+export const getClientDetailsData = (data: any) => ({
+  Name: data?.full_name ?? "---",
+  "User Handle": data?.username ?? "---",
+  Email: data?.email ?? "---",
+  "Registration Date": data?.created_at,
+});
 
-export const bodyDetailsData = [
-  { Height: "5.4 ft" },
-  { Weight: "72kg" },
-  { BMI: "18.5" },
-];
+export const getBodyDetailsData = (data: any) => {
+  const heightInFeet = data?.height ?? 0;
+  const weight = data?.weight ?? 0;
+
+  const heightInMeters = heightInFeet * 0.3048;
+
+  const bmi =
+    heightInMeters > 0
+      ? (weight / (heightInMeters * heightInMeters)).toFixed(2)
+      : "-";
+
+  return {
+    Height: heightInFeet ? `${heightInFeet} ft` : "-",
+    Weight: weight ? `${weight} kg` : "-",
+    BMI: bmi,
+  };
+};

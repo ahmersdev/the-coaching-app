@@ -15,16 +15,16 @@ export default function ClientDetails({ clientDetailsData }: any) {
       <Divider sx={{ my: 2 }} />
 
       <Grid container spacing={2}>
-        {clientDetailsData?.map((item: any, index: any) => (
-          <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+        {Object.entries(clientDetailsData)?.map(([key, value]: any) => (
+          <Grid item xs={12} sm={6} md={4} lg={3} key={key}>
             <Box borderRight={1} borderColor={"grey.800"}>
               <Typography variant={"body1"} fontWeight={500} color={"grey.400"}>
-                {Object?.keys?.(item)?.[0]}:
+                {key}:
               </Typography>
               <Typography variant={"h6"} color={"grey.100"} mt={0.5}>
-                {Object?.keys(item)?.includes("Registration Date")
-                  ? dayjs(item["Registration Date"])?.format("MMM DD, YYYY")
-                  : item[Object?.keys?.(item)?.[0]]}
+                {key === "Registration Date"
+                  ? dayjs(value)?.format("MMM DD, YYYY")
+                  : value}
               </Typography>
             </Box>
           </Grid>
@@ -59,7 +59,7 @@ export default function ClientDetails({ clientDetailsData }: any) {
             }}
             disableElevation
           >
-            Remove
+            Reject
           </Button>
         </Grid>
       </Grid>

@@ -15,6 +15,6 @@ export const GUARD_ROLES = {
 };
 
 export const CLIENT_ALERTS_STATUSES = {
-  APPROVED: "Approved",
-  REJECTED: "Rejected",
+  APPROVED: "accept",
+  REJECTED: "reject",
 };

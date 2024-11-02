@@ -22,8 +22,20 @@ export const coachClientsAlerts = baseAPI.injectEndpoints({
       }),
       invalidatesTags: [TAG],
     }),
+
+    getClientAlertsOverview: builder.query({
+      query: (params: any) => ({
+        url: COACH_SITE.GET_CLIENT_DETAILS_BY_ID,
+        method: "GET",
+        params,
+      }),
+      providesTags: [TAG],
+    }),
   }),
 });
 
-export const { useGetClientAlertsQuery, usePostClientAlertsStatusMutation } =
-  coachClientsAlerts;
+export const {
+  useGetClientAlertsQuery,
+  usePostClientAlertsStatusMutation,
+  useGetClientAlertsOverviewQuery,
+} = coachClientsAlerts;
