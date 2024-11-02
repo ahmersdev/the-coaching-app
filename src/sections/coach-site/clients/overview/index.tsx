@@ -13,7 +13,7 @@ import { ArrowBackIcon } from "@/assets/icons";
 import { COACH_SITE } from "@/constants/routes";
 import { useSearchParams } from "next/navigation";
 import { useGetCoachClientsByIdQuery } from "@/services/coach-site/clients";
-import { SkeletonTable } from "@/components/skeletons";
+import { SkeletonOverview } from "@/components/skeletons";
 import ApiErrorState from "@/components/api-error-state";
 
 export default function Overview() {
@@ -40,9 +40,7 @@ export default function Overview() {
       </Box>
 
       {isLoading || isFetching ? (
-        <Box bgcolor={"secondary.main"} p={2.4} borderRadius={3}>
-          <SkeletonTable height={120} />
-        </Box>
+        <SkeletonOverview />
       ) : isError ? (
         <Box bgcolor={"secondary.main"} borderRadius={3} p={2.4}>
           <ApiErrorState />

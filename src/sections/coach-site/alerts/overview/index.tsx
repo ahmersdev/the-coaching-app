@@ -10,7 +10,7 @@ import { useSearchParams } from "next/navigation";
 import { useGetClientAlertsOverviewQuery } from "@/services/coach-site/alerts";
 import { getBodyDetailsData, getClientDetailsData } from "./overview.data";
 import ApiErrorState from "@/components/api-error-state";
-import { SkeletonTable } from "@/components/skeletons";
+import { SkeletonOverview } from "@/components/skeletons";
 
 export default function Overview() {
   const searchParams = useSearchParams();
@@ -37,9 +37,7 @@ export default function Overview() {
       </Box>
 
       {isLoading || isFetching ? (
-        <Box bgcolor={"secondary.main"} p={2.4} borderRadius={3}>
-          <SkeletonTable height={120} />
-        </Box>
+        <SkeletonOverview />
       ) : isError ? (
         <Box bgcolor={"secondary.main"} borderRadius={3} p={2.4}>
           <ApiErrorState />
