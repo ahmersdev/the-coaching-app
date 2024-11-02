@@ -1,5 +1,5 @@
 import { TwoPersonIcon } from "@/assets/icons";
-import { Box, Button, Divider, Grid, Typography } from "@mui/material";
+import { Box, Divider, Grid, Typography } from "@mui/material";
 import dayjs from "dayjs";
 
 export default function ClientDetails({ clientDetailsData }: any) {
@@ -29,39 +29,6 @@ export default function ClientDetails({ clientDetailsData }: any) {
             </Box>
           </Grid>
         ))}
-
-        <Grid item xs={12}>
-          <Button
-            variant={"contained"}
-            sx={{
-              color: "grey.100",
-              borderRadius: 25,
-              border: "1px solid",
-              borderColor: "primary.main",
-              mr: 2,
-            }}
-            disableElevation
-          >
-            Accept
-          </Button>
-          <Button
-            variant={"contained"}
-            sx={{
-              color: "error.700",
-              borderRadius: 25,
-              border: "1px dashed",
-              borderColor: "error.700",
-              background: "transparent",
-              ":hover": {
-                backgroundColor: "error.700",
-                color: "grey.100",
-              },
-            }}
-            disableElevation
-          >
-            Reject
-          </Button>
-        </Grid>
       </Grid>
     </Box>
   );

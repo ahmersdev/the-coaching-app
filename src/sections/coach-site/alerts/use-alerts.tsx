@@ -5,10 +5,20 @@ import {
 } from "@/services/coach-site/alerts";
 import { errorSnackbar, successSnackbar } from "@/utils/api";
 import { CLIENT_ALERTS_STATUSES } from "@/constants";
+import { useState } from "react";
+import { PAGINATION } from "@/config";
 
 export default function useAlerts() {
+  const [page, setPage] = useState(PAGINATION.CURRENT_PAGE);
+  const [pageLimit, setPageLimit] = useState(PAGINATION.PAGE_LIMIT);
+
+  const params = {
+    page: page,
+    limit: pageLimit,
+  };
+
   const { data, isLoading, isFetching, isError } = useGetClientAlertsQuery(
-    null,
+    params,
     { refetchOnMountOrArgChange: true }
   );
 
@@ -46,5 +56,13 @@ export default function useAlerts() {
     postClientAlertsStatusStatus
   );
 
-  return { data, isLoading, isFetching, isError, alertsColumns };
+  return {
+    data,
+    isLoading,
+    isFetching,
+    isError,
+    alertsColumns,
+    setPageLimit,
+    setPage,
+  };
 }

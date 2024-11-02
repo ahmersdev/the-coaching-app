@@ -1,3 +1,8 @@
 export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 export const ENCRYPTION_KEY = process.env.NEXT_PUBLIC_ENCRYPTION_SECRET_KEY;
 export const STRIPE_PUBLIC_KEY = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
+
+export const PAGINATION = {
+  PAGE_LIMIT: 10,
+  CURRENT_PAGE: 1,
+};
