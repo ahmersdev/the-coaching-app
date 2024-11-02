@@ -1,9 +1,19 @@
 import { useGetClientDetailsQuery } from "@/services/coach-site/clients";
 import { IDataSorting } from "./clients.interface";
+import { useState } from "react";
+import { PAGINATION } from "@/config";
 
 export default function useClients() {
+  const [page, setPage] = useState(PAGINATION.CURRENT_PAGE);
+  const [pageLimit, setPageLimit] = useState(PAGINATION.PAGE_LIMIT);
+
+  const params = {
+    page: page,
+    limit: pageLimit,
+  };
+
   const { data, isLoading, isFetching, isError } = useGetClientDetailsQuery(
-    null,
+    params,
     { refetchOnMountOrArgChange: true }
   );
 
@@ -14,5 +24,13 @@ export default function useClients() {
     )
     ?.slice(0, 4);
 
-  return { data, isLoading, isFetching, isError, sortedData };
+  return {
+    data,
+    isLoading,
+    isFetching,
+    isError,
+    sortedData,
+    setPageLimit,
+    setPage,
+  };
 }

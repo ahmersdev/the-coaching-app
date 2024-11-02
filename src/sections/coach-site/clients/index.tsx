@@ -8,7 +8,15 @@ import TanstackTable from "@/components/table";
 import useClients from "./use-clients";
 
 export default function Clients() {
-  const { data, isLoading, isFetching, isError, sortedData } = useClients();
+  const {
+    data,
+    isLoading,
+    isFetching,
+    isError,
+    sortedData,
+    setPageLimit,
+    setPage,
+  } = useClients();
 
   return (
     <>
@@ -87,6 +95,13 @@ export default function Clients() {
           isFetching={isFetching}
           isError={isError}
           isPagination
+          setPageLimit={setPageLimit}
+          setPage={setPage}
+          currentPage={data?.meta?.page}
+          count={data?.meta?.pages}
+          pageLimit={data?.meta?.limit}
+          totalRecords={data?.meta?.total}
+          onPageChange={(page: number) => setPage(page)}
         />
       </Box>
     </>

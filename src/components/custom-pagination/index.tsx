@@ -68,7 +68,7 @@ const CustomPagination = (props: any) => {
             count={count}
             page={currentPage}
             boundaryCount={1}
-            siblingCount={0}
+            siblingCount={1}
             onChange={(_: any, page) => {
               onPageChange?.(page);
             }}
@@ -81,7 +81,7 @@ const CustomPagination = (props: any) => {
                 borderRadius: 0,
                 fontSize: "14px",
                 color: "grey.400",
-                backgroundColor: `${theme?.palette?.secondary?.main} !important`,
+                backgroundColor: theme?.palette?.secondary?.main,
               },
             }}
           />
