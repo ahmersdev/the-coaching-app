@@ -7,7 +7,7 @@ const useSyncCookiesWithState = () => {
   const dispatch = useDispatch();
 
   const syncCookiesWithState = useCallback(() => {
-    const token = Cookies.get("authentication_token");
+    const token = Cookies.get("authentication_token_coaching_app");
 
     if (!token) {
       dispatch(logOut());

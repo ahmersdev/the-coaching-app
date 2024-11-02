@@ -4,7 +4,7 @@ import { ENCRYPTION_KEY } from "@/config";
 import { decryptToken, validateBase64 } from "./crypto";
 
 export const getTokenFromCookies = () => {
-  const encryptedToken: any = Cookies.get("authentication_token");
+  const encryptedToken: any = Cookies.get("authentication_token_coaching_app");
   if (encryptedToken) {
     return encryptedToken;
   }

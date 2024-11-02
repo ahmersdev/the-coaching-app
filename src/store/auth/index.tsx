@@ -16,7 +16,7 @@ const authSlice = createSlice({
     },
     logOut: (state) => {
       state.token = null;
-      Cookies.remove("authentication_token");
+      Cookies.remove("authentication_token_coaching_app");
     },
   },
 });

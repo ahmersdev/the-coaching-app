@@ -17,7 +17,7 @@ export default function GuestGuard({ children }: IChildrenProps) {
 
   useSyncCookiesWithState();
 
-  const authenticationToken = Cookies.get("authentication_token");
+  const authenticationToken = Cookies.get("authentication_token_coaching_app");
 
   const checkAuth = useCallback(() => {
     if (excludedAuthPaths.includes(pathname)) {

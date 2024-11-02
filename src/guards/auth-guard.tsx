@@ -23,7 +23,7 @@ export default function AuthGuard({ children }: IChildrenProps) {
 
   useSyncCookiesWithState();
 
-  const authenticationToken = Cookies.get("authentication_token");
+  const authenticationToken = Cookies.get("authentication_token_coaching_app");
 
   useEffect(() => {
     const decryptToken = async () => {
@@ -85,7 +85,7 @@ export default function AuthGuard({ children }: IChildrenProps) {
         }
       } catch (error) {
         errorSnackbar();
-        Cookies.remove("authentication_token");
+        Cookies.remove("authentication_token_coaching_app");
         router.push(AUTH.SIGN_IN);
         return false;
       }

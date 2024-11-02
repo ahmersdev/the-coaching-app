@@ -73,7 +73,7 @@ export default function useSignIn() {
           if (
             responseSignIn?.latest_invoice?.status === INVOICE_STATUSES.PAID
           ) {
-            Cookies.set("authentication_token", encryptedToken);
+            Cookies.set("authentication_token_coaching_app", encryptedToken);
             dispatch(logIn(encryptedToken));
             successSnackbar("Sign In Successful!");
             if (responseSignIn?.session?.user_type === USER_ROLES.COACH) {
@@ -94,13 +94,13 @@ export default function useSignIn() {
               "clientSecret",
               responseSignIn?.latest_invoice?.client_secret
             );
-            Cookies.set("authentication_token", encryptedToken);
+            Cookies.set("authentication_token_coaching_app", encryptedToken);
             dispatch(logIn(encryptedToken));
             errorSnackbar("Please Make Payment First");
             router.push(`${STRIPE.PLANS}?email=${data?.email}`);
             return;
           } else {
-            Cookies.set("authentication_token", encryptedToken);
+            Cookies.set("authentication_token_coaching_app", encryptedToken);
             dispatch(logIn(encryptedToken));
             errorSnackbar("Please Make Payment First");
             router.push(`${STRIPE.PLANS}?email=${data?.email}`);

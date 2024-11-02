@@ -14,7 +14,7 @@ export default function useNavbar() {
 
   useSyncCookiesWithState();
 
-  const tokenSelector = Cookies.get("authentication_token");
+  const tokenSelector = Cookies.get("authentication_token_coaching_app");
 
   useEffect(() => {
     const decryptToken = async () => {

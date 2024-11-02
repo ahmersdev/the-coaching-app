@@ -54,7 +54,7 @@ export default function useOtp() {
           ).unwrap();
           if (resOtp) {
             const encryptedToken = resOtp.session.authentication_token;
-            Cookies.set("authentication_token", encryptedToken);
+            Cookies.set("authentication_token_coaching_app", encryptedToken);
             dispatch(logIn(encryptedToken));
             successSnackbar("Verification Successful! Please Buy Plan");
             router.push(`${STRIPE?.PLANS}?email=${email}`);

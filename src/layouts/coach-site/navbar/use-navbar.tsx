@@ -9,7 +9,7 @@ export default function useNavbar() {
   const router = useRouter();
 
   const handleLogout = () => {
-    Cookies.remove("authentication_token");
+    Cookies.remove("authentication_token_coaching_app");
     router.push(SALE_SITE.HOME);
   };
 
