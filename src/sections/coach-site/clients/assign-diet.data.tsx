@@ -1,9 +1,12 @@
-import { RHFTextField } from "@/components/react-hook-form";
+import {
+  RHFAutocompleteAsync,
+  RHFTextField,
+} from "@/components/react-hook-form";
 
 export const mealDefaultValues = {
   meals: [
     {
-      meal_title: "",
+      meal_title: null,
       serving_size: "",
       serving_unit: "g",
       fat: "",
@@ -22,15 +25,22 @@ export const assignDietDefaultValues = {
   days: [mealDefaultValues],
 };
 
-export const getAssignDietDataArray = (dayIndex: number, dietIndex: number) => [
+export const getAssignDietDataArray = (
+  dayIndex: number,
+  dietIndex: number,
+  apiQueryFood: any
+) => [
   {
     id: 1,
     componentProps: {
       name: `days[${dayIndex}].meals[${dietIndex}].meal_title`,
       label: "Meal Name",
       placeholder: "Enter Meal Name",
+      apiQuery: apiQueryFood,
+      queryKey: "search_expression",
+      getOptionLabel: (option: any) => option?.food_name,
     },
-    component: RHFTextField,
+    component: RHFAutocompleteAsync,
     md: 5,
   },
   {

@@ -31,6 +31,7 @@ export const COACH_SITE = {
   GET_CLIENT_DETAILS_BY_ID: `getClientDetailsById`,
   GET_CLIENT_ALERTS: `getClientPreferencesForCoach`,
   POST_CLIENT_ALERTS_STATUS: `updateClientPreferencesForCoach`,
+  SEARCH_FOOD: `searchFood`,
 };
 
 export const STRIPE = {

@@ -1,6 +1,9 @@
 import { useFieldArray } from "react-hook-form";
 import { errorSnackbar, successSnackbar } from "@/utils/api";
-import { useDeleteDietMealMutation } from "@/services/coach-site/clients";
+import {
+  useDeleteDietMealMutation,
+  useLazyGetFoodListSearchQuery,
+} from "@/services/coach-site/clients";
 import { mealDefaultValues } from "@/sections/coach-site/clients/assign-diet.data";
 
 export default function useDiet({
@@ -49,5 +52,7 @@ export default function useDiet({
     }
   };
 
-  return { dietField, handleAddMeal, handleRemoveMeal };
+  const apiQueryFood = useLazyGetFoodListSearchQuery();
+
+  return { dietField, handleAddMeal, handleRemoveMeal, apiQueryFood };
 }

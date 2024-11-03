@@ -5,7 +5,7 @@ export const assignDietValidationSchema: any = Yup.object().shape({
     Yup.object().shape({
       meals: Yup.array().of(
         Yup.object().shape({
-          meal_title: Yup.string().trim().required("Exercise Name is Required"),
+          meal_title: Yup.mixed().required("Meal Name is Required"),
           serving_size: Yup.string()
             .trim()
             .required("Serving Size is Required"),

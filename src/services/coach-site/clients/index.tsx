@@ -123,6 +123,17 @@ export const coachClients = baseAPI.injectEndpoints({
       }),
       providesTags: [TAG],
     }),
+
+    // Food List
+    getFoodListSearch: builder.query({
+      query: ({ params }: any) => ({
+        url: COACH_SITE.SEARCH_FOOD,
+        method: "GET",
+        params,
+      }),
+      transformResponse: (response: any) =>
+        response?.foods_search?.results?.food,
+    }),
   }),
 });
 
@@ -140,4 +151,5 @@ export const {
   useDeleteDietDayMutation,
   useDeleteDietMealMutation,
   useGetCoachClientsByIdQuery,
+  useLazyGetFoodListSearchQuery,
 } = coachClients;

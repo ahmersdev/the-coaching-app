@@ -18,7 +18,7 @@ export default function Diet({
   dietPlanId,
   dietDayId,
 }: any) {
-  const { dietField, handleAddMeal, handleRemoveMeal } = useDiet({
+  const { dietField, handleAddMeal, handleRemoveMeal, apiQueryFood } = useDiet({
     control,
     dayIndex,
     clientId,
@@ -77,7 +77,7 @@ export default function Diet({
 
             <AccordionDetails>
               <Grid container spacing={1}>
-                {getAssignDietDataArray(dayIndex, dietIndex).map(
+                {getAssignDietDataArray(dayIndex, dietIndex, apiQueryFood).map(
                   (item: any) => (
                     <Grid item xs={12} md={item?.md} key={item.id}>
                       <item.component

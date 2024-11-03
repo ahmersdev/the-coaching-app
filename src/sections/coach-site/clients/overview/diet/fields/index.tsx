@@ -9,12 +9,15 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { getAssignDietDataArray } from "@/sections/coach-site/clients/assign-diet.data";
+import { useLazyGetFoodListSearchQuery } from "@/services/coach-site/clients";
 
 export default function Fields({ control, dayIndex }: any) {
   const { fields: dietField } = useFieldArray({
     control,
     name: `days[${dayIndex}].meals`,
   });
+
+  const apiQueryFood = useLazyGetFoodListSearchQuery();
 
   return (
     <>
@@ -42,7 +45,7 @@ export default function Fields({ control, dayIndex }: any) {
 
             <AccordionDetails>
               <Grid container spacing={1}>
-                {getAssignDietDataArray(dayIndex, dietIndex).map(
+                {getAssignDietDataArray(dayIndex, dietIndex, apiQueryFood).map(
                   (item: any) => (
                     <Grid item xs={12} md={item?.md} key={item.id}>
                       <item.component
