@@ -71,7 +71,7 @@ export default function useAssignDiet() {
     const transformedData = data.days.map((day: any, dayIndex: number) => ({
       day: dayIndex + 1,
       meals: day.meals.map((meal: any) => ({
-        meal_title: meal.meal_title,
+        meal_title: meal.meal_title?.food_name,
         serving_size: Number(meal.serving_size),
         serving_unit: meal.serving_unit,
         fat: meal.fat,
