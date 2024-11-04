@@ -70,10 +70,13 @@ const NewClients = ({ newClientsArray }: any) => {
                 }}
                 height={"100%"}
               >
-                <Avatar src={item?.src} sx={{ width: 44, height: 44 }} />
+                <Avatar
+                  src={item?.profile_picture}
+                  sx={{ width: 44, height: 44 }}
+                />
                 <Box textAlign={"center"}>
                   <Typography variant={"h6"} fontWeight={600}>
-                    {item?.title}
+                    {item?.full_name}
                   </Typography>
                   <Typography
                     variant={"body1"}
@@ -86,7 +89,7 @@ const NewClients = ({ newClientsArray }: any) => {
                 <Link
                   href={{
                     pathname: COACH_SITE?.CLIENTS_OVERVIEW,
-                    query: { clientId: item?.id },
+                    query: { clientId: item?.client_id },
                   }}
                 >
                   <Button

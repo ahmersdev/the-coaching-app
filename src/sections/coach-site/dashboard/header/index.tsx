@@ -1,20 +1,63 @@
-import { Box, Chip, Grid, Typography, useTheme } from "@mui/material";
-import { useState } from "react";
+import {
+  Box,
+  Chip,
+  CircularProgress,
+  Grid,
+  Skeleton,
+  Typography,
+} from "@mui/material";
+import useHeader from "./use-header";
 
-const Header = ({ name, headerCardsArray }: any) => {
-  const theme: any = useTheme();
-
-  const [hoverStates, setHoverStates] = useState(
-    Array(headerCardsArray?.length + 1)?.fill(false)
-  );
+const Header = ({
+  clientCount,
+  loadingNewClient,
+  fetchingNewClient,
+  errorNewClient,
+}: any) => {
+  const {
+    theme,
+    hoverStates,
+    setHoverStates,
+    initialLoading,
+    data,
+    isLoading,
+    isFetching,
+    isError,
+  } = useHeader();
 
   return (
     <Box display={"flex"} flexDirection={"column"} gap={2}>
-      <Typography variant={"h2"}>Hi {name}, Welcome Back!</Typography>
+      {isLoading || isFetching || initialLoading ? (
+        <Skeleton
+          height={50}
+          sx={{
+            width: { xs: "100%", md: "50%" },
+            bgcolor: "grey.700",
+            border: 1,
+            borderColor: "grey.700",
+          }}
+        />
+      ) : (
+        <Typography variant={"h2"} textTransform={"capitalize"}>
+          Hi {isError ? "-" : data?.coach?.full_name}, Welcome Back!
+        </Typography>
+      )}
 
-      <Grid container spacing={2}>
-        {headerCardsArray?.map((item: any) => (
-          <Grid item xs={12} md={4} key={item?.id}>
+      {loadingNewClient || fetchingNewClient ? (
+        <Box
+          bgcolor={"secondary.main"}
+          height={"97px"}
+          width={{ xs: "100%", md: "40%" }}
+          borderRadius={6}
+          display={"flex"}
+          justifyContent={"center"}
+          alignItems={"center"}
+        >
+          <CircularProgress />
+        </Box>
+      ) : errorNewClient ? null : (
+        <Grid container spacing={2}>
+          <Grid item xs={12} md={4}>
             <Box
               borderRadius={6}
               border={"0px 0px 0px 6px"}
@@ -26,14 +69,10 @@ const Header = ({ name, headerCardsArray }: any) => {
               justifyContent={"space-between"}
               alignItems={"center"}
               onMouseEnter={() => {
-                const newHoverStates = [...hoverStates];
-                newHoverStates[item?.id] = true;
-                setHoverStates(newHoverStates);
+                setHoverStates(true);
               }}
               onMouseLeave={() => {
-                const newHoverStates = [...hoverStates];
-                newHoverStates[item?.id] = false;
-                setHoverStates(newHoverStates);
+                setHoverStates(false);
               }}
               sx={{
                 ":hover": {
@@ -41,13 +80,13 @@ const Header = ({ name, headerCardsArray }: any) => {
                 },
               }}
             >
-              <Typography variant={"body1"}>{item?.title}</Typography>
+              <Typography variant={"body1"}>Clients</Typography>
               <Chip
-                label={item?.count}
+                label={clientCount}
                 sx={{
                   width: "132px",
                   height: "49px",
-                  bgcolor: hoverStates[item?.id]
+                  bgcolor: hoverStates
                     ? theme?.palette?.primary?.main
                     : theme?.palette?.secondary?.[900],
                   borderRadius: "200px",
@@ -58,8 +97,8 @@ const Header = ({ name, headerCardsArray }: any) => {
               />
             </Box>
           </Grid>
-        ))}
-      </Grid>
+        </Grid>
+      )}
     </Box>
   );
 };

@@ -1,3 +1,4 @@
+import ClientDetailsDialog from "@/components/client-details-dialog";
 import { COACH_SITE } from "@/constants/routes";
 import {
   Avatar,
@@ -9,9 +10,15 @@ import {
   useTheme,
 } from "@mui/material";
 import Link from "next/link";
+import { useState } from "react";
 
 const LatestClients = ({ latestClientsArray }: any) => {
   const theme: any = useTheme();
+
+  const [showDetails, setShowDetails] = useState({
+    open: false,
+    details: null,
+  });
 
   return (
     <Box bgcolor={"secondary.main"} borderRadius={"18px"} padding={"24px 22px"}>
@@ -24,7 +31,7 @@ const LatestClients = ({ latestClientsArray }: any) => {
           Latest Clients Progressed
         </Typography>
 
-        <Link href={COACH_SITE?.CLIENTS}>
+        <Link href={COACH_SITE?.CLIENTS_IMAGES}>
           <Button
             variant={"contained"}
             sx={{
@@ -70,48 +77,53 @@ const LatestClients = ({ latestClientsArray }: any) => {
                 }}
                 height={"100%"}
               >
-                <Avatar src={item?.src} sx={{ width: 44, height: 44 }} />
+                <Avatar
+                  src={item?.client?.profile_picture}
+                  sx={{ width: 44, height: 44 }}
+                />
                 <Box textAlign={"center"}>
                   <Typography variant={"h6"} fontWeight={600}>
-                    {item?.title}
+                    {item?.client?.full_name}
                   </Typography>
                   <Typography
                     variant={"body1"}
                     fontWeight={600}
                     color={"grey.400"}
                   >
-                    @{item?.username}
+                    @{item?.client?.username}
                   </Typography>
                 </Box>
-                <Link
-                  href={{
-                    pathname: COACH_SITE?.CLIENTS_OVERVIEW,
-                    query: { clientId: item?.id },
+
+                <Button
+                  variant={"contained"}
+                  sx={{
+                    color: "grey.100",
+                    borderRadius: 25,
+                    border: "1px dashed",
+                    borderColor: "grey.100",
+                    background: "transparent",
+                    ":hover": {
+                      backgroundColor: "grey.100",
+                      color: "grey.900",
+                    },
                   }}
+                  disableElevation
+                  onClick={() => setShowDetails({ open: true, details: item })}
                 >
-                  <Button
-                    variant={"contained"}
-                    sx={{
-                      color: "grey.100",
-                      borderRadius: 25,
-                      border: "1px dashed",
-                      borderColor: "grey.100",
-                      background: "transparent",
-                      ":hover": {
-                        backgroundColor: "grey.100",
-                        color: "grey.900",
-                      },
-                    }}
-                    disableElevation
-                  >
-                    View Details
-                  </Button>
-                </Link>
+                  View Details
+                </Button>
               </Box>
             </Grid>
           ))
         )}
       </Grid>
+
+      {showDetails?.open && (
+        <ClientDetailsDialog
+          showDetails={showDetails}
+          setShowDetails={setShowDetails}
+        />
+      )}
     </Box>
   );
 };
