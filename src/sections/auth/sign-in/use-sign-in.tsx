@@ -70,6 +70,13 @@ export default function useSignIn() {
         ).unwrap();
         if (responseSignIn) {
           const encryptedToken = responseSignIn.session.authentication_token;
+          if (responseSignIn?.session?.user_type === USER_ROLES.ADMIN) {
+            Cookies.set("authentication_token_coaching_app", encryptedToken);
+            dispatch(logIn(encryptedToken));
+            successSnackbar("Sign In Successful!");
+            router.push(SYSTEM_ADMIN.DASHBOARD);
+            return;
+          }
           if (
             responseSignIn?.latest_invoice?.status === INVOICE_STATUSES.PAID
           ) {
@@ -83,9 +90,6 @@ export default function useSignIn() {
               } else {
                 router.push(COACH_SITE.DASHBOARD);
               }
-            }
-            if (responseSignIn.session.user_type === USER_ROLES.ADMIN) {
-              router.push(SYSTEM_ADMIN.DASHBOARD);
             }
           } else if (
             responseSignIn?.latest_invoice?.status === INVOICE_STATUSES.OPEN
