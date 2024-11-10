@@ -3,7 +3,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { errorSnackbar, successSnackbar } from "@/utils/api";
 import { macroValidationSchema } from "./assign-macro-plans.data";
 import {
-  useDeleteMacroMutation,
   useGetAssignMacroQuery,
   usePostAssignMacroMutation,
 } from "@/services/coach-site/clients";
@@ -24,51 +23,19 @@ export default function useAssignMacroPlans() {
 
   const { handleSubmit, control, reset } = methods;
 
-  const {
-    fields: fieldsMacro,
-    append: appendMacro,
-    remove: removeMacro,
-  } = useFieldArray({
+  const { fields: fieldsMacro } = useFieldArray({
     control,
     name: "macros",
   });
-
-  const handleAddMacro = () => {
-    appendMacro(macroDefaultValues.macros);
-  };
-
-  const [deleteMacroTrigger] = useDeleteMacroMutation();
-
-  const handleRemoveMacro = async (macroIndex: any) => {
-    const macroToRemove: any = fieldsMacro[macroIndex];
-
-    const macroPlanId = macroToRemove?.macro_plan_id;
-
-    if (macroPlanId) {
-      const params = {
-        client_id: clientId,
-        macro_plan_id: macroPlanId,
-      };
-      try {
-        await deleteMacroTrigger(params).unwrap();
-        successSnackbar("Macro removed successfully!");
-      } catch (error: any) {
-        errorSnackbar(error?.data?.error);
-        return;
-      }
-    } else {
-      removeMacro(macroIndex);
-    }
-  };
 
   const [postMacroTrigger, postMacroStatus] = usePostAssignMacroMutation();
 
   const onSubmit = async (data: any) => {
     const transformedData = data.macros.map((macro: any) => ({
       title: macro.title,
-      protein: Number(macro.protein),
-      carbs: Number(macro.carbs),
-      fats: Number(macro.fats),
+      protein: macro.protein ?? "",
+      carbs: macro.carbs ?? "",
+      fats: macro.fats ?? "",
       type: macro.type,
       note: macro.note,
     }));
@@ -114,8 +81,6 @@ export default function useAssignMacroPlans() {
     handleSubmit,
     onSubmit,
     fieldsMacro,
-    handleAddMacro,
-    handleRemoveMacro,
     postMacroStatus,
     isLoading,
     isFetching,

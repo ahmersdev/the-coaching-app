@@ -24,8 +24,6 @@ export default function AssignMacroPlans() {
     handleSubmit,
     onSubmit,
     fieldsMacro,
-    handleAddMacro,
-    handleRemoveMacro,
     postMacroStatus,
     isLoading,
     isFetching,
@@ -94,32 +92,14 @@ export default function AssignMacroPlans() {
                 my={2}
                 key={macro?.id}
               >
-                <Box
-                  display={"flex"}
-                  alignItems={"center"}
-                  justifyContent={"space-between"}
+                <Typography
+                  variant={"h6"}
+                  color={"grey.100"}
+                  fontWeight={700}
+                  mb={2}
                 >
-                  <Typography
-                    variant={"h6"}
-                    color={"grey.100"}
-                    fontWeight={700}
-                    mb={2}
-                  >
-                    Target Nutrition&rsquo;s
-                  </Typography>
-                  {macroIndex !== 0 && (
-                    <Typography
-                      variant={"body1"}
-                      color={"grey.100"}
-                      fontWeight={900}
-                      onClick={() => handleRemoveMacro?.(macroIndex)}
-                      mr={2}
-                      sx={{ cursor: "pointer" }}
-                    >
-                      X
-                    </Typography>
-                  )}
-                </Box>
+                  Target Nutrition&rsquo;s
+                </Typography>
 
                 <Grid container spacing={2}>
                   {getMacroPlanOneDataArray(macroIndex)?.map((item: any) => (
@@ -130,28 +110,6 @@ export default function AssignMacroPlans() {
                 </Grid>
               </Box>
             ))}
-
-            <Button
-              variant={"contained"}
-              fullWidth
-              sx={{
-                color: "grey.100",
-                borderRadius: 25,
-                height: 54,
-                border: "1px dashed",
-                borderColor: "grey.100",
-                background: "transparent",
-                mt: 2,
-                ":hover": {
-                  backgroundColor: "grey.100",
-                  color: "grey.900",
-                },
-              }}
-              disableElevation
-              onClick={handleAddMacro}
-            >
-              Add Other Macros
-            </Button>
           </Box>
 
           <LoadingButton

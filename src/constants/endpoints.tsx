@@ -23,7 +23,6 @@ export const COACH_SITE = {
   DELETE_WORKOUT_EXERCISE: `deleteExercise`,
   ASSIGN_MACRO: `assignMacro`,
   GET_MACRO: `getMacros`,
-  DELETE_MACRO: `deleteMacro`,
   ASSIGN_DIET: `assignDietPlan`,
   GET_DIET: `getDietPlan`,
   DELETE_DIET_DAY: `deleteDietDay`,

@@ -1,16 +1,32 @@
-import { RHFAutocomplete, RHFTextField } from "@/components/react-hook-form";
-
-export const macroFieldsDefaultValues = {
-  title: "",
-  protein: "",
-  carbs: "",
-  fats: "",
-  type: null,
-  note: "",
-};
+import { RHFTextField } from "@/components/react-hook-form";
 
 export const macroDefaultValues = {
-  macros: [macroFieldsDefaultValues],
+  macros: [
+    {
+      title: "",
+      protein: null,
+      carbs: null,
+      fats: null,
+      type: "High",
+      note: "",
+    },
+    {
+      title: "",
+      protein: null,
+      carbs: null,
+      fats: null,
+      type: "Medium",
+      note: "",
+    },
+    {
+      title: "",
+      protein: null,
+      carbs: null,
+      fats: null,
+      type: "Low",
+      note: "",
+    },
+  ],
 };
 
 export const getMacroPlanOneDataArray = (macroIndex: number) => [
@@ -66,14 +82,14 @@ export const getMacroPlanOneDataArray = (macroIndex: number) => [
       name: `macros[${macroIndex}].type`,
       label: "Macro Type",
       bgcolor: "secondary.800",
-      options: ["High", "Medium", "Low"],
       placeholder: "Select type",
+      disabled: true,
     },
-    component: RHFAutocomplete,
+    component: RHFTextField,
     md: 3,
   },
   {
-    id: 5,
+    id: 6,
     componentProps: {
       name: `macros[${macroIndex}].note`,
       label: "Add Note",
