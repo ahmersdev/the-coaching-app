@@ -11,7 +11,7 @@ const AdminLayout = ({ children }: IChildrenProps) => {
   return (
     <main style={{ background: "#23232a", color: "#f9fafb" }}>
       <Provider store={store}>
-        <AuthGuard>
+        {/* <AuthGuard> */}
           <Grid container>
             <Grid item xs={0} md={2} height={"100vh"} overflow={"hidden"}>
               <Navbar />
@@ -21,7 +21,7 @@ const AdminLayout = ({ children }: IChildrenProps) => {
               <Box py={2}>{children}</Box>
             </Grid>
           </Grid>
-        </AuthGuard>
+        {/* </AuthGuard> */}
       </Provider>
     </main>
   );
