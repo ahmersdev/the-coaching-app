@@ -24,22 +24,41 @@ export default function useAssignDiet() {
     defaultValues: assignDietDefaultValues,
   });
 
-  const { handleSubmit, control, reset } = methods;
+  const { handleSubmit, control, reset, setValue } = methods;
 
   const watchedDays = useWatch({ control, name: "days" });
 
   useEffect(() => {
-    if (watchedDays) {
-      watchedDays.forEach((day, dayIndex) => {
-        day.meals.forEach((meal, mealIndex) => {
-          console.log(
-            `Meal title at day ${dayIndex + 1}, meal ${mealIndex + 1}:`,
-            meal.meal_title
-          );
-        });
+    if (!watchedDays) return;
+
+    watchedDays.forEach((day: any, dayIndex: any) => {
+      day.meals.forEach((meal: any, mealIndex: any) => {
+        if (meal.meal_title && typeof meal.meal_title === "object") {
+          const firstServing = meal.meal_title.servings?.serving?.[0] || {};
+
+          const newValues = {
+            serving_size: firstServing.metric_serving_amount || "",
+            fat: firstServing.fat || "",
+            carbohydrates: firstServing.carbohydrate || "",
+            protein: firstServing.protein || "",
+            fibre: firstServing.fiber || "",
+            calories: firstServing.calories || "",
+            sugar: firstServing.sugar || "",
+            sodium: firstServing.sodium || "",
+          };
+
+          Object.entries(newValues).forEach(([key, value]) => {
+            const currentValue = meal[key];
+            if (currentValue !== value) {
+              setValue(`days[${dayIndex}].meals[${mealIndex}].${key}`, value, {
+                shouldDirty: true,
+              });
+            }
+          });
+        }
       });
-    }
-  }, [watchedDays]);
+    });
+  }, [watchedDays, setValue]);
 
   const {
     fields: daysField,

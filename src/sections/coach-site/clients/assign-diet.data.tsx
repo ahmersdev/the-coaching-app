@@ -21,7 +21,7 @@ export const mealDefaultValues = {
   ],
 };
 
-export const assignDietDefaultValues = {
+export const assignDietDefaultValues: any = {
   days: [mealDefaultValues],
 };
 
@@ -72,7 +72,8 @@ export const getAssignDietDataArray = (
     componentProps: {
       name: `days[${dayIndex}].meals[${dietIndex}].fat`,
       label: "Fat",
-      placeholder: "Enter Fat",
+      placeholder: "Fat",
+      disabled: true,
     },
     component: RHFTextField,
     md: 5,
@@ -82,7 +83,8 @@ export const getAssignDietDataArray = (
     componentProps: {
       name: `days[${dayIndex}].meals[${dietIndex}].carbohydrates`,
       label: "Carbohydrates",
-      placeholder: "Enter Carbohydrates",
+      placeholder: "Carbohydrates",
+      disabled: true,
     },
     component: RHFTextField,
     md: 5,
@@ -92,7 +94,8 @@ export const getAssignDietDataArray = (
     componentProps: {
       name: `days[${dayIndex}].meals[${dietIndex}].protein`,
       label: "Protein",
-      placeholder: "Enter Protein",
+      placeholder: "Protein",
+      disabled: true,
     },
     component: RHFTextField,
     md: 5,
@@ -102,7 +105,8 @@ export const getAssignDietDataArray = (
     componentProps: {
       name: `days[${dayIndex}].meals[${dietIndex}].fibre`,
       label: "Fibre",
-      placeholder: "Enter Fibre",
+      placeholder: "Fibre",
+      disabled: true,
     },
     component: RHFTextField,
     md: 5,
@@ -112,7 +116,8 @@ export const getAssignDietDataArray = (
     componentProps: {
       name: `days[${dayIndex}].meals[${dietIndex}].calories`,
       label: "Calories",
-      placeholder: "Enter Calories",
+      placeholder: "Calories",
+      disabled: true,
     },
     component: RHFTextField,
     md: 5,
@@ -122,7 +127,8 @@ export const getAssignDietDataArray = (
     componentProps: {
       name: `days[${dayIndex}].meals[${dietIndex}].sugar`,
       label: "Sugar",
-      placeholder: "Enter Sugar",
+      placeholder: "Sugar",
+      disabled: true,
     },
     component: RHFTextField,
     md: 5,
@@ -132,7 +138,8 @@ export const getAssignDietDataArray = (
     componentProps: {
       name: `days[${dayIndex}].meals[${dietIndex}].sodium`,
       label: "Sodium",
-      placeholder: "Enter Sodium",
+      placeholder: "Sodium",
+      disabled: true,
     },
     component: RHFTextField,
     md: 5,
