@@ -31,11 +31,13 @@ export default function RHFTextField({
               mt: 0.5,
               ".MuiInputBase-root": {
                 borderRadius: borderRadius,
-                border: 1.5,
+                border: 1,
                 bgcolor,
                 borderColor: theme?.palette?.secondary?.[600],
                 "&:hover": {
-                  borderColor: theme?.palette?.primary?.[900],
+                  borderColor: other?.disabled
+                    ? theme?.palette?.secondary?.[600]
+                    : theme?.palette?.primary?.[900],
                 },
               },
             }}

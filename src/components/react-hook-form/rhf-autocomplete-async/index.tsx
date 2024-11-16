@@ -88,7 +88,10 @@ export default function RHFAutocompleteAsync({
             }}
             renderOption={(props, option: any) => {
               return (
-                <li {...props} key={option?._id ?? option?.id}>
+                <li
+                  {...props}
+                  key={option?._id ?? option?.id ?? option?.food_id}
+                >
                   {renderOption ? renderOption(option) : getOptionLabel(option)}
                 </li>
               );
@@ -108,11 +111,13 @@ export default function RHFAutocompleteAsync({
                     mt: 0.5,
                     ".MuiInputBase-root": {
                       borderRadius,
-                      border: 1.5,
+                      border: 1,
                       bgcolor,
                       borderColor: theme?.palette?.secondary?.[600],
                       "&:hover": {
-                        borderColor: theme?.palette?.primary?.[900],
+                        borderColor: other?.disabled
+                          ? theme?.palette?.secondary?.[600]
+                          : theme?.palette?.primary?.[900],
                       },
                     },
                     ".MuiOutlinedInput-notchedOutline": {

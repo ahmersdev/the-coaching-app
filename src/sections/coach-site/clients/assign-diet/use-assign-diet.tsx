@@ -1,4 +1,4 @@
-import { useFieldArray, useForm } from "react-hook-form";
+import { useFieldArray, useForm, useWatch } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter, useSearchParams } from "next/navigation";
 import { errorSnackbar, successSnackbar } from "@/utils/api";
@@ -25,6 +25,21 @@ export default function useAssignDiet() {
   });
 
   const { handleSubmit, control, reset } = methods;
+
+  const watchedDays = useWatch({ control, name: "days" });
+
+  useEffect(() => {
+    if (watchedDays) {
+      watchedDays.forEach((day, dayIndex) => {
+        day.meals.forEach((meal, mealIndex) => {
+          console.log(
+            `Meal title at day ${dayIndex + 1}, meal ${mealIndex + 1}:`,
+            meal.meal_title
+          );
+        });
+      });
+    }
+  }, [watchedDays]);
 
   const {
     fields: daysField,

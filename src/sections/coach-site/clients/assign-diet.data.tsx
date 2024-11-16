@@ -38,7 +38,9 @@ export const getAssignDietDataArray = (
       placeholder: "Enter Meal Name",
       apiQuery: apiQueryFood,
       queryKey: "search_expression",
-      getOptionLabel: (option: any) => option?.food_name,
+      getOptionLabel: (option: any) => option?.food_name ?? option,
+      isOptionEqualToValue: (option: any, newValue: any) =>
+        option?.food_id === newValue?.food_id,
     },
     component: RHFAutocompleteAsync,
     md: 5,
