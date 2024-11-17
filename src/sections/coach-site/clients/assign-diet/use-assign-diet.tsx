@@ -101,9 +101,64 @@ export default function useAssignDiet() {
             }
           });
         }
+
+        if (
+          meal.meal_title &&
+          typeof meal.meal_title === "string" &&
+          data?.details &&
+          data.details.length > 0
+        ) {
+          const backendDataDetails =
+            data?.details[0]?.diet_days?.[dayIndex]?.meals?.[mealIndex];
+          const servingSize = meal.serving_size;
+          if (servingSize !== backendDataDetails?.serving_size) {
+            const newValues = {
+              fat: (
+                ((backendDataDetails.fat || 0) / 100) *
+                servingSize
+              ).toFixed(2),
+              carbohydrates: (
+                ((backendDataDetails.carbohydrates || 0) / 100) *
+                servingSize
+              ).toFixed(2),
+              protein: (
+                ((backendDataDetails.protein || 0) / 100) *
+                servingSize
+              ).toFixed(2),
+              fibre: (
+                ((backendDataDetails.fibre || 0) / 100) *
+                servingSize
+              ).toFixed(2),
+              calories: (
+                ((backendDataDetails.calories || 0) / 100) *
+                servingSize
+              ).toFixed(2),
+              sugar: (
+                ((backendDataDetails.sugar || 0) / 100) *
+                servingSize
+              ).toFixed(2),
+              sodium: (
+                ((backendDataDetails.sodium || 0) / 100) *
+                servingSize
+              ).toFixed(2),
+            };
+            Object.entries(newValues).forEach(([key, value]) => {
+              const currentValue = meal[key];
+              if (currentValue !== value) {
+                setValue(
+                  `days[${dayIndex}].meals[${mealIndex}].${key}`,
+                  value,
+                  {
+                    shouldDirty: true,
+                  }
+                );
+              }
+            });
+          }
+        }
       });
     });
-  }, [watchedDays, setValue]);
+  }, [watchedDays, setValue, data]);
 
   const {
     fields: daysField,
