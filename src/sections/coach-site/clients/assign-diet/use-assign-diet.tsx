@@ -28,23 +28,68 @@ export default function useAssignDiet() {
 
   const watchedDays = useWatch({ control, name: "days" });
 
+  const { data, isLoading, isFetching, isError } = useGetAssignDietQuery(
+    { client_id: clientId },
+    { refetchOnMountOrArgChange: true, skip: !clientId }
+  );
+
+  useEffect(() => {
+    if (data?.details) setDietPlanId(data?.details[0]?.diet_plan_id);
+  }, [data]);
+
+  useEffect(() => {
+    if (data?.details && data.details.length > 0) {
+      const originalFormData = data.details?.[0].diet_days.map((day: any) => ({
+        diet_day_id: day.diet_day_id,
+        day: day.day,
+        meals: day.meals.map((meal: any) => ({
+          meal_id: meal.meal_id,
+          meal_title: meal.meal_title,
+          serving_size: meal.serving_size,
+          serving_unit: meal.serving_unit,
+          fat: meal.fat,
+          carbohydrates: meal.carbohydrates,
+          protein: meal.protein,
+          fibre: meal.fibre,
+          calories: meal.calories,
+          sugar: meal.sugar,
+          sodium: meal.sodium,
+          note: meal.note,
+        })),
+      }));
+
+      reset({ days: originalFormData });
+    }
+  }, [data, reset]);
+
   useEffect(() => {
     if (!watchedDays) return;
 
     watchedDays.forEach((day: any, dayIndex: any) => {
       day.meals.forEach((meal: any, mealIndex: any) => {
         if (meal.meal_title && typeof meal.meal_title === "object") {
+          const servingSize = meal.serving_size;
           const firstServing = meal.meal_title.servings?.serving?.[0] || {};
 
           const newValues = {
-            serving_size: firstServing.metric_serving_amount || 0,
-            fat: firstServing.fat || 0,
-            carbohydrates: firstServing.carbohydrate || 0,
-            protein: firstServing.protein || 0,
-            fibre: firstServing.fiber || 0,
-            calories: firstServing.calories || 0,
-            sugar: firstServing.sugar || 0,
-            sodium: firstServing.sodium || 0,
+            fat: (((firstServing.fat || 0) / 100) * servingSize).toFixed(2),
+            carbohydrates: (
+              ((firstServing.carbohydrates || 0) / 100) *
+              servingSize
+            ).toFixed(2),
+            protein: (
+              ((firstServing.protein || 0) / 100) *
+              servingSize
+            ).toFixed(2),
+            fibre: (((firstServing.fiber || 0) / 100) * servingSize).toFixed(2),
+            calories: (
+              ((firstServing.calories || 0) / 100) *
+              servingSize
+            ).toFixed(2),
+            sugar: (((firstServing.sugar || 0) / 100) * servingSize).toFixed(2),
+            sodium: (((firstServing.sodium || 0) / 100) * servingSize).toFixed(
+              2
+            ),
           };
 
           Object.entries(newValues).forEach(([key, value]) => {
@@ -105,7 +150,7 @@ export default function useAssignDiet() {
     const transformedData = data.days.map((day: any, dayIndex: number) => ({
       day: dayIndex + 1,
       meals: day.meals.map((meal: any) => ({
-        meal_title: meal.meal_title?.food_name,
+        meal_title: meal.meal_title?.food_name ?? meal.meal_title,
         serving_size: meal.serving_size,
         serving_unit: meal.serving_unit,
         fat: meal.fat,
@@ -133,40 +178,6 @@ export default function useAssignDiet() {
       errorSnackbar(error?.data?.error);
     }
   };
-
-  const { data, isLoading, isFetching, isError } = useGetAssignDietQuery(
-    { client_id: clientId },
-    { refetchOnMountOrArgChange: true, skip: !clientId }
-  );
-
-  useEffect(() => {
-    if (data?.details) setDietPlanId(data?.details[0]?.diet_plan_id);
-  }, [data]);
-
-  useEffect(() => {
-    if (data?.details && data.details.length > 0) {
-      const originalFormData = data.details?.[0].diet_days.map((day: any) => ({
-        diet_day_id: day.diet_day_id,
-        day: day.day,
-        meals: day.meals.map((meal: any) => ({
-          meal_id: meal.meal_id,
-          meal_title: meal.meal_title,
-          serving_size: Number(meal.serving_size),
-          serving_unit: meal.serving_unit,
-          fat: meal.fat,
-          carbohydrates: meal.carbohydrates,
-          protein: meal.protein,
-          fibre: meal.fibre,
-          calories: meal.calories,
-          sugar: meal.sugar,
-          sodium: meal.sodium,
-          note: meal.note,
-        })),
-      }));
-
-      reset({ days: originalFormData });
-    }
-  }, [data, reset]);
 
   return {
     methods,
