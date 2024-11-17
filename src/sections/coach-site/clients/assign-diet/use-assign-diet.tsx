@@ -37,14 +37,14 @@ export default function useAssignDiet() {
           const firstServing = meal.meal_title.servings?.serving?.[0] || {};
 
           const newValues = {
-            serving_size: firstServing.metric_serving_amount || "",
-            fat: firstServing.fat || "",
-            carbohydrates: firstServing.carbohydrate || "",
-            protein: firstServing.protein || "",
-            fibre: firstServing.fiber || "",
-            calories: firstServing.calories || "",
-            sugar: firstServing.sugar || "",
-            sodium: firstServing.sodium || "",
+            serving_size: firstServing.metric_serving_amount || 0,
+            fat: firstServing.fat || 0,
+            carbohydrates: firstServing.carbohydrate || 0,
+            protein: firstServing.protein || 0,
+            fibre: firstServing.fiber || 0,
+            calories: firstServing.calories || 0,
+            sugar: firstServing.sugar || 0,
+            sodium: firstServing.sodium || 0,
           };
 
           Object.entries(newValues).forEach(([key, value]) => {
@@ -106,7 +106,7 @@ export default function useAssignDiet() {
       day: dayIndex + 1,
       meals: day.meals.map((meal: any) => ({
         meal_title: meal.meal_title?.food_name,
-        serving_size: Number(meal.serving_size),
+        serving_size: meal.serving_size,
         serving_unit: meal.serving_unit,
         fat: meal.fat,
         carbohydrates: meal.carbohydrates,
