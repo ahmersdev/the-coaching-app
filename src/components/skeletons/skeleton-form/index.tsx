@@ -1,9 +1,11 @@
 import { Grid, Skeleton } from "@mui/material";
 
-function SkeletonForm() {
+function SkeletonForm(props: any) {
+  const { length = 4 } = props;
+
   return (
     <Grid container spacing={2}>
-      {[1, 2, 3, 4]?.map((item: any) => (
+      {Array?.from({ length })?.map((item: any) => (
         <Grid item xs={12} sm={6} key={item}>
           <Skeleton
             variant="rectangular"

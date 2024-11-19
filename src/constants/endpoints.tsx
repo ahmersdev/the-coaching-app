@@ -33,6 +33,11 @@ export const COACH_SITE = {
   SEARCH_FOOD: `searchFood`,
 };
 
+export const ADMIN_SITE = {
+  PROFILE: `fetchCoachDetails`,
+  UPDATE_PASSWORD: `updateCoachPassword`,
+};
+
 export const STRIPE = {
   GET_SECRET: `getClientSecret`,
 };

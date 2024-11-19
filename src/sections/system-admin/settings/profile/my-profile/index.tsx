@@ -2,27 +2,40 @@ import { FormProvider } from "@/components/react-hook-form";
 import { Box, Divider, Grid, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { LoadingButton } from "@mui/lab";
 import {
   myProfileFormValidationSchema,
   myProfileDataArray,
   myProfileFormDefaultValues,
 } from "./my-profile.data";
 import { MyProfileIcon } from "@/assets/icons";
-import { successSnackbar } from "@/utils/api";
+import { SkeletonForm } from "@/components/skeletons";
+import { useCallback, useEffect, useMemo } from "react";
 
-const MyProfile = () => {
+const MyProfile = ({
+  initialValues,
+  isLoading,
+  isFetching,
+  initialLoading,
+}: any) => {
+  const defaultValues = useMemo(
+    () => myProfileFormDefaultValues({ initialValues }),
+    [initialValues]
+  );
+
   const methods: any = useForm({
     resolver: yupResolver(myProfileFormValidationSchema),
-    defaultValues: myProfileFormDefaultValues,
+    defaultValues,
   });
 
-  const { handleSubmit, reset } = methods;
+  const { reset } = methods;
 
-  const onSubmit = async (data: any) => {
-    successSnackbar("Profile Updated Successfully!");
-    reset(myProfileFormDefaultValues);
-  };
+  const resetForm = useCallback(() => {
+    reset(defaultValues);
+  }, [reset, defaultValues]);
+
+  useEffect(() => {
+    resetForm();
+  }, [resetForm]);
 
   return (
     <Box bgcolor={"secondary.main"} p={2.4} borderRadius={3}>
@@ -35,31 +48,23 @@ const MyProfile = () => {
 
       <Divider sx={{ my: 2 }} />
 
-      <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-        <Grid container spacing={2}>
-          {myProfileDataArray?.map((item: any) => (
-            <Grid item xs={12} md={item?.md} key={item?.id}>
-              <item.component {...item?.componentProps} size={"small"} />
-            </Grid>
-          ))}
-          <Grid item xs={12}>
-            <LoadingButton
-              variant={"contained"}
-              sx={{
-                color: "grey.100",
-                width: 132,
-                borderRadius: 25,
-                border: "1px solid",
-                borderColor: "primary.main",
-              }}
-              disableElevation
-              type={"submit"}
-            >
-              Update
-            </LoadingButton>
+      {isLoading || isFetching || initialLoading ? (
+        <SkeletonForm length={3} />
+      ) : (
+        <FormProvider methods={methods}>
+          <Grid container spacing={2}>
+            {myProfileDataArray?.map((item: any) => (
+              <Grid item xs={12} md={item?.md} key={item?.id}>
+                <item.component
+                  {...item?.componentProps}
+                  size={"small"}
+                  disabled
+                />
+              </Grid>
+            ))}
           </Grid>
-        </Grid>
-      </FormProvider>
+        </FormProvider>
+      )}
     </Box>
   );
 };

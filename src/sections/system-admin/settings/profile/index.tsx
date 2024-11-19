@@ -1,16 +1,31 @@
 import { Stack } from "@mui/material";
 import MyProfile from "./my-profile";
 import Password from "./password";
-import Address from "./address";
+import ErrorScreen from "@/components/error-screen";
 
-const Profile = () => {
+const Profile = ({
+  data,
+  isError,
+  isLoading,
+  isFetching,
+  initialLoading,
+}: any) => {
   return (
     <Stack direction={"column"} spacing={2}>
-      <MyProfile />
+      {isError ? (
+        <ErrorScreen />
+      ) : (
+        <>
+          <MyProfile
+            initialValues={data?.coach}
+            isLoading={isLoading}
+            isFetching={isFetching}
+            initialLoading={initialLoading}
+          />
 
-      <Password />
-
-      <Address />
+          <Password initialValues={data?.coach} />
+        </>
+      )}
     </Stack>
   );
 };
