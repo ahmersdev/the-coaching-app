@@ -1,62 +1,17 @@
 import { FormProvider } from "@/components/react-hook-form";
 import { Box, Divider, Grid, Typography } from "@mui/material";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { LoadingButton } from "@mui/lab";
-import {
-  getPasswordDataArray,
-  passwordFormDefaultValues,
-  passwordFormValidationSchema,
-} from "./password.data";
-import { useState } from "react";
 import { PasswordIcon } from "@/assets/icons";
-import { errorSnackbar, successSnackbar } from "@/utils/api";
-import { useUpdateAdminPasswordMutation } from "@/services/admin/settings";
+import usePassword from "./use-password";
 
 const Password = ({ initialValues }: any) => {
-  const [passwordVisibility, setPasswordVisibility] = useState({
-    currentPassword: false,
-    newPassword: false,
-    confirmPassword: false,
-  });
-
-  const methods: any = useForm({
-    resolver: yupResolver(passwordFormValidationSchema),
-    defaultValues: passwordFormDefaultValues,
-  });
-
-  const togglePasswordVisibility = (field: any) => {
-    setPasswordVisibility((prev: any) => ({
-      ...prev,
-      [field]: !prev[field],
-    }));
-  };
-
-  const passwordDataArray = getPasswordDataArray(
-    togglePasswordVisibility,
-    passwordVisibility
-  );
-
-  const { handleSubmit, reset } = methods;
-
-  const [updateAdminPasswordTrigger, updateAdminPasswordStatus] =
-    useUpdateAdminPasswordMutation();
-
-  const onSubmit = async (data: any) => {
-    const updatedData = {
-      coach_id: String(initialValues?.coach_id),
-      current_password: data?.currentPassword,
-      new_password: data?.newPassword,
-    };
-
-    try {
-      await updateAdminPasswordTrigger(updatedData).unwrap();
-      successSnackbar("Password Updated Successfully!");
-      reset(passwordFormDefaultValues);
-    } catch (error: any) {
-      errorSnackbar(error?.data?.message);
-    }
-  };
+  const {
+    methods,
+    handleSubmit,
+    onSubmit,
+    passwordDataArray,
+    updateAdminPasswordStatus,
+  } = usePassword({ initialValues });
 
   return (
     <Box bgcolor={"secondary.main"} p={2.4} borderRadius={3}>
