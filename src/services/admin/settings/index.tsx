@@ -1,8 +1,6 @@
 import { ADMIN_SITE } from "@/constants/endpoints";
 import { baseAPI } from "@/services/base-api";
 
-const TAG = "ADMIN_SETTINGS";
-
 export const adminSettings = baseAPI.injectEndpoints({
   endpoints: (builder) => ({
     getAdminDetails: builder.query({
@@ -11,15 +9,13 @@ export const adminSettings = baseAPI.injectEndpoints({
         method: "GET",
         params,
       }),
-      providesTags: [TAG],
     }),
     updateAdminPassword: builder.mutation({
-      query: (body: any) => ({
+      query: (params: any) => ({
         url: ADMIN_SITE.UPDATE_PASSWORD,
         method: "POST",
-        body,
+        params,
       }),
-      invalidatesTags: [TAG],
     }),
   }),
 });

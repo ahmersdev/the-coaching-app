@@ -8,7 +8,7 @@ export const TAGS = [
   "COACH_CLIENTS",
   "COACH_CLIENTS_IMAGES",
   "COACH_CLIENTS_ALERTS",
-  "ADMIN_SETTINGS",
+  "ADMIN_COMPLAINTS",
 ];
 
 const baseQuery = fetchBaseQuery({

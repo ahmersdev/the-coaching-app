@@ -36,6 +36,8 @@ export const COACH_SITE = {
 export const ADMIN_SITE = {
   PROFILE: `fetchCoachDetails`,
   UPDATE_PASSWORD: `updateCoachPassword`,
+  GET_ALL_COMPLAINTS: `getAllComplaints`,
+  REPLY_COMPLAINT: `replyComplaint`,
 };
 
 export const STRIPE = {

@@ -1,6 +1,5 @@
 import {
   Box,
-  Button,
   Dialog,
   DialogActions,
   DialogContent,
@@ -9,34 +8,24 @@ import {
   Typography,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { FormProvider } from "@/components/react-hook-form";
-import {
-  replyDataArray,
-  replyFormDefaultValues,
-  replyFormValidationSchema,
-} from "./reply.data";
-import { successSnackbar } from "@/utils/api";
+import { RHFTextField } from "@/components/react-hook-form";
+import { LoadingButton } from "@mui/lab";
+import useReply from "./use-reply";
 
 const Reply = ({ reply, setReply }: any) => {
-  const methods: any = useForm({
-    resolver: yupResolver(replyFormValidationSchema),
-    defaultValues: replyFormDefaultValues,
-  });
-
-  const { handleSubmit, reset } = methods;
-
-  const onSubmit = async (data: any) => {
-    successSnackbar("Reply Sent Successfully!");
-    reset(replyFormDefaultValues);
-    setReply(false);
-  };
+  const {
+    onReplyCloseHandler,
+    methods,
+    handleSubmit,
+    onSubmit,
+    updateAdminComplaintsReplyStatus,
+  } = useReply({ reply, setReply });
 
   return (
     <Dialog
-      open={reply}
-      onClose={() => setReply(false)}
+      open={reply.open}
+      onClose={onReplyCloseHandler}
       fullWidth
       maxWidth={"sm"}
       sx={{
@@ -59,7 +48,7 @@ const Reply = ({ reply, setReply }: any) => {
           </Typography>
           <CloseIcon
             sx={{ cursor: "pointer", color: "grey.100" }}
-            onClick={() => setReply(false)}
+            onClick={onReplyCloseHandler}
           />
         </Box>
       </DialogTitle>
@@ -67,31 +56,41 @@ const Reply = ({ reply, setReply }: any) => {
       <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
         <DialogContent sx={{ pt: 0 }}>
           <Grid container>
-            {replyDataArray?.map((item: any) => (
-              <Grid item xs={12} key={item?.id}>
-                <item.component {...item?.componentProps} size={"small"} />
-              </Grid>
-            ))}
+            <Grid item xs={12}>
+              <RHFTextField
+                name={"reply"}
+                label={"Add Reply"}
+                placeholder={"Enter your reply"}
+                multiline
+                minRows={3}
+                disabled={reply?.data?.reply}
+              />
+            </Grid>
           </Grid>
         </DialogContent>
 
-        <DialogActions sx={{ marginX: 2.4, padding: 0 }}>
-          <Button
-            variant={"contained"}
-            type={"submit"}
-            sx={{
-              color: "grey.100",
-              borderRadius: 25,
-              background: "primary.100",
-              ":hover": {
-                background: "primary.100",
-              },
-            }}
-            disableElevation
-          >
-            Add
-          </Button>
-        </DialogActions>
+        {!!!reply?.data?.reply && (
+          <DialogActions sx={{ marginX: 2.4, padding: 0 }}>
+            <LoadingButton
+              variant={"contained"}
+              type={"submit"}
+              sx={{
+                color: "grey.100",
+                width: 132,
+                borderRadius: 25,
+                border: "1px solid",
+                borderColor: "primary.main",
+                "&.Mui-disabled": {
+                  bgcolor: "primary.main",
+                },
+              }}
+              disableElevation
+              loading={updateAdminComplaintsReplyStatus?.isLoading}
+            >
+              Reply
+            </LoadingButton>
+          </DialogActions>
+        )}
       </FormProvider>
     </Dialog>
   );

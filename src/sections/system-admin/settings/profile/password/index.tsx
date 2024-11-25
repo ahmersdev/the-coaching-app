@@ -40,6 +40,9 @@ const Password = ({ initialValues }: any) => {
                 borderRadius: 25,
                 border: "1px solid",
                 borderColor: "primary.main",
+                "&.Mui-disabled": {
+                  bgcolor: "primary.main",
+                },
               }}
               disableElevation
               type={"submit"}

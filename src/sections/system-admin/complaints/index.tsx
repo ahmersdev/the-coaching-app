@@ -2,11 +2,21 @@
 
 import { Avatar, Box, Button, Typography } from "@mui/material";
 import { useState } from "react";
-import { complaintsDataArray } from "./complaints.data";
 import Reply from "./reply";
+import { useGetAdminComplaintsQuery } from "@/services/admin/complaints";
+import ApiErrorState from "@/components/api-error-state";
+import { SkeletonTable } from "@/components/skeletons";
 
 const Complaints = () => {
-  const [reply, setReply] = useState(false);
+  const [reply, setReply] = useState({ open: false, data: null });
+  const { data, isLoading, isFetching, isError } = useGetAdminComplaintsQuery(
+    null,
+    { refetchOnMountOrArgChange: true }
+  );
+
+  if (isError) return <ApiErrorState />;
+
+  if (isLoading || isFetching) return <SkeletonTable />;
 
   return (
     <>
@@ -14,7 +24,7 @@ const Complaints = () => {
         All complaints from different clients
       </Typography>
 
-      {complaintsDataArray?.map((item: any, index: any) => (
+      {data?.map((item: any, index: any) => (
         <Box
           key={index}
           bgcolor={"secondary.main"}
@@ -34,14 +44,20 @@ const Complaints = () => {
             justifyContent={"center"}
             gap={2}
           >
-            <Avatar src={item?.src} variant="rounded" />
+            <Avatar
+              src={item?.src}
+              variant={"rounded"}
+              sx={{
+                bgcolor: "primary.main",
+              }}
+            />
             <Typography variant={"h5"} fontWeight={400}>
-              {item?.message}
+              {item?.complaint ?? "---"}
             </Typography>
           </Box>
           <Button
             variant={"contained"}
-            onClick={() => setReply(true)}
+            onClick={() => setReply({ open: true, data: item })}
             sx={{
               color: "grey.100",
               borderRadius: 25,
