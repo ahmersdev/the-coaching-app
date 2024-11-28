@@ -2,21 +2,30 @@
 
 import CustomAccordion from "@/components/custom-accordion";
 import { Box, Button, Typography } from "@mui/material";
-import { FaqsArray } from "./faqs.data";
-import { useState } from "react";
 import AddFaq from "./add-faq";
 import { DeleteIcon } from "@/assets/icons";
 import AlertDialog from "@/components/alert-dialog";
-import { successSnackbar } from "@/utils/api";
+import ApiErrorState from "@/components/api-error-state";
+import { SkeletonTable } from "@/components/skeletons";
+import useFaqs from "./use-faqs";
 
 const Faqs = () => {
-  const [addFaq, setAddFaq] = useState(false);
-  const [deleteFaq, setDeleteFaq] = useState<any>(null);
+  const {
+    transformedData,
+    isLoading,
+    isFetching,
+    isError,
+    addFaq,
+    setAddFaq,
+    deleteFaq,
+    setDeleteFaq,
+    handleDelete,
+    deleteAdminFaqStatus,
+  } = useFaqs();
 
-  const handleDelete = (faq: any) => {
-    successSnackbar("FAQ Deleted Successfully!");
-    setDeleteFaq(false);
-  };
+  if (isError) return <ApiErrorState />;
+
+  if (isLoading || isFetching) return <SkeletonTable />;
 
   return (
     <>
@@ -48,7 +57,7 @@ const Faqs = () => {
       </Box>
       <Box bgcolor={"secondary.main"} borderRadius={3} padding={1}>
         <CustomAccordion
-          accordions={FaqsArray}
+          accordions={transformedData}
           CustomIcon={DeleteIcon}
           customIconClick={(faq: any) => setDeleteFaq(faq)}
         />
@@ -63,6 +72,7 @@ const Faqs = () => {
           open={Boolean(deleteFaq)}
           handleClose={() => setDeleteFaq(null)}
           handleSubmitBtn={() => handleDelete(deleteFaq)}
+          loading={deleteAdminFaqStatus?.isLoading}
         />
       )}
     </>

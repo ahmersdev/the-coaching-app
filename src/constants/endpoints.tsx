@@ -38,6 +38,9 @@ export const ADMIN_SITE = {
   UPDATE_PASSWORD: `updateCoachPassword`,
   GET_ALL_COMPLAINTS: `getAllComplaints`,
   REPLY_COMPLAINT: `replyComplaint`,
+  GET_ALL_FAQS: `getAllFAQ`,
+  POST_FAQ: `addFAQ`,
+  DELETE_FAQ: `deleteFAQ`,
 };
 
 export const STRIPE = {

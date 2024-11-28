@@ -17,7 +17,9 @@ import {
   addFaqFormDefaultValues,
   addFaqFormValidationSchema,
 } from "./add-faq.data";
-import { successSnackbar } from "@/utils/api";
+import { errorSnackbar, successSnackbar } from "@/utils/api";
+import { usePostAdminFaqsMutation } from "@/services/admin/faqs";
+import { LoadingButton } from "@mui/lab";
 
 const AddFaq = ({ addFaq, setAddFaq }: any) => {
   const methods: any = useForm({
@@ -27,10 +29,17 @@ const AddFaq = ({ addFaq, setAddFaq }: any) => {
 
   const { handleSubmit, reset } = methods;
 
+  const [addAdminFaqTrigger, addAdminFaqStatus] = usePostAdminFaqsMutation();
+
   const onSubmit = async (data: any) => {
-    successSnackbar("FAQ Added in List Successfully!");
-    reset(addFaqFormDefaultValues);
-    setAddFaq(false);
+    try {
+      await addAdminFaqTrigger(data).unwrap();
+      successSnackbar("FAQ Added in List Successfully!");
+      reset(addFaqFormDefaultValues);
+      setAddFaq(false);
+    } catch (error: any) {
+      errorSnackbar(error?.data?.message);
+    }
   };
 
   return (
@@ -76,21 +85,24 @@ const AddFaq = ({ addFaq, setAddFaq }: any) => {
         </DialogContent>
 
         <DialogActions sx={{ marginX: 2.4, padding: 0 }}>
-          <Button
+          <LoadingButton
             variant={"contained"}
             type={"submit"}
             sx={{
               color: "grey.100",
               borderRadius: 25,
               background: "primary.100",
-              ":hover": {
-                background: "primary.100",
+              border: 1,
+              borderColor: "primary.main",
+              "&.Mui-disabled": {
+                bgcolor: "primary.main",
               },
             }}
             disableElevation
+            loading={addAdminFaqStatus?.isLoading}
           >
             Add
-          </Button>
+          </LoadingButton>
         </DialogActions>
       </FormProvider>
     </Dialog>

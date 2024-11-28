@@ -77,6 +77,14 @@ const AlertDialog = ({
           loading={loading}
           variant="contained"
           onClick={handleSubmitBtn}
+          sx={{
+            color: "grey.100",
+            border: 1,
+            borderColor: "primary.main",
+            "&.Mui-disabled": {
+              bgcolor: "primary.main",
+            },
+          }}
         >
           {submitBtnText}
         </LoadingButton>
