@@ -18,48 +18,58 @@ export default function Progress({ checkInDetails }: any) {
       <Box display={"flex"} alignItems={"center"} gap={1} mb={2}>
         <ProgressIcon />
         <Typography variant={"h6"} fontWeight={700}>
-          Body Details
+          Progress Images
         </Typography>
       </Box>
 
       <Divider sx={{ my: 2 }} />
 
       <Grid container spacing={2}>
-        {checkInDetails?.map((item: any) => (
-          <Grid item key={item?.details_id}>
-            <Box
-              borderRadius={3}
-              bgcolor={"secondary.900"}
-              boxShadow={theme?.CustomShadows?.()?.secondary}
-              overflow={"hidden"}
-            >
-              <Image
-                src={item?.check_in_pictures?.[0]?.picture}
-                width={212}
-                height={198}
-                alt={item?.name}
-                style={{ width: "100%", height: "100%" }}
-              />
+        {!!!checkInDetails.length ? (
+          <Grid item xs={12}>
+            <Typography variant={"h6"} fontWeight={700} textAlign={"center"}>
+              No Progress Images Found
+            </Typography>
+          </Grid>
+        ) : (
+          checkInDetails?.map((item: any) => (
+            <Grid item key={item?.details_id}>
               <Box
-                p={1}
-                display={"flex"}
-                alignItems={"center"}
-                justifyContent={"space-between"}
+                borderRadius={3}
+                bgcolor={"secondary.900"}
+                boxShadow={theme?.CustomShadows?.()?.secondary}
+                overflow={"hidden"}
               >
-                <Typography variant={"h6"} fontWeight={700} mb={1}>
-                  {dayjs(item?.updated_at)?.format("MMM DD, YYYY")}
-                </Typography>
-
+                <Image
+                  src={item?.check_in_pictures?.[0]?.picture}
+                  width={212}
+                  height={198}
+                  alt={item?.name}
+                  style={{ width: "100%", height: "100%" }}
+                />
                 <Box
-                  sx={{ cursor: "pointer" }}
-                  onClick={() => setShowDetails({ open: true, details: item })}
+                  p={1}
+                  display={"flex"}
+                  alignItems={"center"}
+                  justifyContent={"space-between"}
                 >
-                  <NextIcon />
+                  <Typography variant={"h6"} fontWeight={700} mb={1}>
+                    {dayjs(item?.updated_at)?.format("MMM DD, YYYY")}
+                  </Typography>
+
+                  <Box
+                    sx={{ cursor: "pointer" }}
+                    onClick={() =>
+                      setShowDetails({ open: true, details: item })
+                    }
+                  >
+                    <NextIcon />
+                  </Box>
                 </Box>
               </Box>
-            </Box>
-          </Grid>
-        ))}
+            </Grid>
+          ))
+        )}
       </Grid>
 
       {showDetails?.open && (
