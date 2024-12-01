@@ -52,6 +52,12 @@ export default function FaqsSaleSite() {
         <ApiErrorState />
       ) : isLoading || isFetching ? (
         <SkeletonTable />
+      ) : !!!transformedData.length ? (
+        <Box bgcolor={"secondary.main"} borderRadius={3} padding={2.4}>
+          <Typography variant={"h6"} fontWeight={700} textAlign={"center"}>
+            No FAQs Found!
+          </Typography>
+        </Box>
       ) : (
         <CustomAccordion
           accordions={transformedData}

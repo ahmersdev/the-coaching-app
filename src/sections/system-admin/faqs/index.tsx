@@ -55,13 +55,21 @@ const Faqs = () => {
           Add FAQ’s
         </Button>
       </Box>
-      <Box bgcolor={"secondary.main"} borderRadius={3} padding={1}>
-        <CustomAccordion
-          accordions={transformedData}
-          CustomIcon={DeleteIcon}
-          customIconClick={(faq: any) => setDeleteFaq(faq)}
-        />
-      </Box>
+      {!!!transformedData.length ? (
+        <Box bgcolor={"secondary.main"} borderRadius={3} padding={2.4}>
+          <Typography variant={"h6"} fontWeight={700} textAlign={"center"}>
+            No FAQs Found!
+          </Typography>
+        </Box>
+      ) : (
+        <Box bgcolor={"secondary.main"} borderRadius={3} padding={1}>
+          <CustomAccordion
+            accordions={transformedData}
+            CustomIcon={DeleteIcon}
+            customIconClick={(faq: any) => setDeleteFaq(faq)}
+          />
+        </Box>
+      )}
 
       {addFaq && <AddFaq addFaq={addFaq} setAddFaq={setAddFaq} />}
 
