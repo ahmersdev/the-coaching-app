@@ -2,11 +2,19 @@ import { Box, Typography } from "@mui/material";
 import useFaqsSaleSite from "./use-faqs-sale-site";
 import { animated } from "react-spring";
 import CustomAccordion from "../custom-accordion";
-import { FaqsArray } from "./faqs-sale-site.data";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ApiErrorState from "../api-error-state";
+import { SkeletonTable } from "../skeletons";
 
 export default function FaqsSaleSite() {
-  const { fadeInBottomToTop, refHead } = useFaqsSaleSite();
+  const {
+    fadeInBottomToTop,
+    refHead,
+    transformedData,
+    isLoading,
+    isFetching,
+    isError,
+  } = useFaqsSaleSite();
 
   return (
     <Box
@@ -40,12 +48,18 @@ export default function FaqsSaleSite() {
         </Typography>
       </animated.div>
 
-      <CustomAccordion
-        accordions={FaqsArray}
-        bgcolor={"secondary.main"}
-        CloseIcon={<ExpandMoreIcon color={"primary"} />}
-        ExpandIcon={<ExpandMoreIcon color={"primary"} />}
-      />
+      {isError ? (
+        <ApiErrorState />
+      ) : isLoading || isFetching ? (
+        <SkeletonTable />
+      ) : (
+        <CustomAccordion
+          accordions={transformedData}
+          bgcolor={"secondary.main"}
+          CloseIcon={<ExpandMoreIcon color={"primary"} />}
+          ExpandIcon={<ExpandMoreIcon color={"primary"} />}
+        />
+      )}
     </Box>
   );
 }

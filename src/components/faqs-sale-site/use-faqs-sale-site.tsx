@@ -1,3 +1,4 @@
+import { useGetAdminFaqsQuery } from "@/services/admin/faqs";
 import { useInView, useSpring } from "react-spring";
 
 export default function useFaqsSaleSite() {
@@ -14,5 +15,24 @@ export default function useFaqsSaleSite() {
     config: { duration: 800, delay: 300 },
   });
 
-  return { fadeInBottomToTop, refHead };
+  const { data, isLoading, isFetching, isError } = useGetAdminFaqsQuery(null, {
+    refetchOnMountOrArgChange: true,
+  });
+
+  const transformedData = Array.isArray(data)
+    ? data.map(({ question, answer, ...rest }: any) => ({
+        summary: question,
+        details: answer,
+        ...rest,
+      }))
+    : [];
+
+  return {
+    fadeInBottomToTop,
+    refHead,
+    transformedData,
+    isLoading,
+    isFetching,
+    isError,
+  };
 }
