@@ -41,6 +41,7 @@ export const ADMIN_SITE = {
   GET_ALL_FAQS: `getAllFAQ`,
   POST_FAQ: `addFAQ`,
   DELETE_FAQ: `deleteFAQ`,
+  GET_ALL_CLIENTS: `getAllClients`,
 };
 
 export const STRIPE = {
