@@ -16,17 +16,17 @@ const Settings = () => {
   ];
 
   return (
-    <HorizontalTabs tabsDataArray={tabsDataArray}>
-      <Profile
-        data={data}
-        isError={isError}
-        isLoading={isLoading}
-        isFetching={isFetching}
-        initialLoading={initialLoading}
-      />
+    // <HorizontalTabs tabsDataArray={tabsDataArray}>
+    <Profile
+      data={data}
+      isError={isError}
+      isLoading={isLoading}
+      isFetching={isFetching}
+      initialLoading={initialLoading}
+    />
 
-      <Payments />
-    </HorizontalTabs>
+    //   <Payments />
+    // </HorizontalTabs>
   );
 };
 
