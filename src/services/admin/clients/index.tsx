@@ -1,8 +1,6 @@
 import { ADMIN_SITE } from "@/constants/endpoints";
 import { baseAPI } from "@/services/base-api";
 
-const TAG = "ADMIN_CLIENTS";
-
 export const adminClients = baseAPI.injectEndpoints({
   endpoints: (builder) => ({
     getAdminClientDetails: builder.query({
@@ -11,9 +9,18 @@ export const adminClients = baseAPI.injectEndpoints({
         method: "GET",
         params,
       }),
-      providesTags: [TAG],
+    }),
+    getAdminCoachClientsById: builder.query({
+      query: (params: any) => ({
+        url: ADMIN_SITE.GET_CLIENT_DETAILS_BY_ID,
+        method: "GET",
+        params,
+      }),
     }),
   }),
 });
 
-export const { useGetAdminClientDetailsQuery } = adminClients;
+export const {
+  useGetAdminClientDetailsQuery,
+  useGetAdminCoachClientsByIdQuery,
+} = adminClients;

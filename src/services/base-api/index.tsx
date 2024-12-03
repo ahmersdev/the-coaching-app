@@ -10,7 +10,6 @@ export const TAGS = [
   "COACH_CLIENTS_ALERTS",
   "ADMIN_COMPLAINTS",
   "ADMIN_FAQS",
-  "ADMIN_CLIENTS",
 ];
 
 const baseQuery = fetchBaseQuery({

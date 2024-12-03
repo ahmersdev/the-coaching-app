@@ -2,7 +2,7 @@
 
 import { Box, Stack, Typography } from "@mui/material";
 import Client from "./client";
-import { getBodyDetailsData, getClientDetailsData } from "./overview.data";
+import { getClientDetailsData } from "./overview.data";
 import Body from "./body";
 import Progress from "./progress";
 import Macro from "./macro";
@@ -15,6 +15,7 @@ import { useSearchParams } from "next/navigation";
 import { useGetCoachClientsByIdQuery } from "@/services/coach-site/clients";
 import { SkeletonOverview } from "@/components/skeletons";
 import ApiErrorState from "@/components/api-error-state";
+import { getBodyDetailsData } from "@/utils";
 
 export default function Overview() {
   const searchParams = useSearchParams();
