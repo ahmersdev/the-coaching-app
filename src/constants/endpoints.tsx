@@ -43,6 +43,8 @@ export const ADMIN_SITE = {
   DELETE_FAQ: `deleteFAQ`,
   GET_ALL_CLIENTS: `getAllClients`,
   GET_CLIENT_DETAILS_BY_ID: `getClientDetailsById`,
+  GET_ALL_COACHES: `getAllCoaches`,
+  GET_COACH_DETAILS_BY_ID: `getCoachDetailsWithClients`,
 };
 
 export const STRIPE = {

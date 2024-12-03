@@ -19,7 +19,7 @@ export const clientsColumns = [
         <Box display={"flex"} alignItems={"center"} gap={1}>
           <Avatar
             src={info?.row?.original?.profile_picture}
-            sx={{ width: 36, height: 36 }}
+            sx={{ width: 36, height: 36, bgcolor: "primary.main" }}
           />
           <Box color={"grey.100"}>
             <Typography variant={"body2"}>
