@@ -48,10 +48,14 @@ export const clientsColumns = [
     cell: (info: any) => dayjs(info?.getValue()).format("MMM DD, YYYY"),
   },
   {
-    accessorFn: (row: any) => row?.trainerName,
-    id: "trainerName",
+    accessorFn: (row: any) => row?.coach_name,
+    id: "coach_name",
     isSortable: true,
     header: "Trainer Name",
-    cell: (info: any) => info?.getValue(),
+    cell: (info: any) => (
+      <Typography variant={"body2"} textTransform={"capitalize"}>
+        {info?.getValue()}
+      </Typography>
+    ),
   },
 ];

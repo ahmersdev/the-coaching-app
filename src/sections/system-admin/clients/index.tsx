@@ -20,7 +20,7 @@ const Clients = () => {
 
   return (
     <TanstackTable
-      data={data}
+      data={data?.clients}
       columns={clientsColumns}
       isLoading={isLoading}
       isFetching={isFetching}

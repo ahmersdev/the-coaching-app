@@ -82,6 +82,10 @@ const CustomPagination = (props: any) => {
                 fontSize: "14px",
                 color: "grey.400",
                 backgroundColor: theme?.palette?.secondary?.main,
+                "&:hover": {
+                  color: "grey.400",
+                  backgroundColor: theme?.palette?.secondary?.main,
+                },
               },
             }}
           />
