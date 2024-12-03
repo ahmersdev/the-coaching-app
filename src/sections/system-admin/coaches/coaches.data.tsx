@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export const coachesColumns = [
   {
-    accessorFn: (row: any) => row?.id,
+    accessorFn: (row: any) => row?.coach_id,
     id: "name",
     isSortable: true,
     header: "Name",
