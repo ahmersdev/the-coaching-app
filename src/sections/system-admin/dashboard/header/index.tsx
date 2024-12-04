@@ -1,64 +1,74 @@
-import { Box, Chip, Grid, Typography, useTheme } from "@mui/material";
-import { useState } from "react";
+import {
+  Box,
+  Chip,
+  CircularProgress,
+  Grid,
+  LinearProgress,
+  Typography,
+  useTheme,
+} from "@mui/material";
+import { boxStyles, chipStyles } from "./header.styles";
 
-const Header = ({ name, headerCardsArray }: any) => {
+const Header = ({
+  data,
+  isLoading,
+  isFetching,
+  isError,
+  initialLoading,
+  coachCount,
+  coachLoading,
+  coachFetching,
+  coachError,
+  clientCount,
+  clientLoading,
+  clientFetching,
+  clientError,
+}: any) => {
   const theme: any = useTheme();
-
-  const [hoverStates, setHoverStates] = useState(
-    Array(headerCardsArray?.length + 1)?.fill(false)
-  );
 
   return (
     <Box display={"flex"} flexDirection={"column"} gap={2}>
-      <Typography variant={"h2"}>Hi {name}, Welcome Back!</Typography>
+      <Box display={"flex"} alignItems={"center"}>
+        <Typography variant={"h2"}>Hi&nbsp;</Typography>
+        {isLoading || isFetching || initialLoading ? (
+          <LinearProgress sx={{ width: 50 }} />
+        ) : isError ? (
+          "---"
+        ) : (
+          <Typography variant={"h2"}>{data?.coach?.full_name}</Typography>
+        )}
+        <Typography variant={"h2"}>, Welcome Back!</Typography>
+      </Box>
 
       <Grid container spacing={2}>
-        {headerCardsArray?.map((item: any) => (
-          <Grid item xs={12} md={4} key={item?.id}>
-            <Box
-              borderRadius={6}
-              border={"0px 0px 0px 6px"}
-              padding={"24px 16px"}
-              borderLeft={`6px solid ${theme?.palette?.primary?.main}`}
-              bgcolor={"secondary.main"}
-              height={"97px"}
-              display={"flex"}
-              justifyContent={"space-between"}
-              alignItems={"center"}
-              onMouseEnter={() => {
-                const newHoverStates = [...hoverStates];
-                newHoverStates[item?.id] = true;
-                setHoverStates(newHoverStates);
-              }}
-              onMouseLeave={() => {
-                const newHoverStates = [...hoverStates];
-                newHoverStates[item?.id] = false;
-                setHoverStates(newHoverStates);
-              }}
-              sx={{
-                ":hover": {
-                  boxShadow: theme?.CustomShadows?.()?.primary,
-                },
-              }}
-            >
-              <Typography variant={"body1"}>{item?.title}</Typography>
+        <Grid item xs={12} md={4}>
+          <Box sx={{ ...boxStyles(theme) }}>
+            <Typography variant={"body1"}>Coaches</Typography>
+            {coachLoading || coachFetching ? (
+              <CircularProgress size={30} />
+            ) : (
               <Chip
-                label={item?.count}
-                sx={{
-                  width: "132px",
-                  height: "49px",
-                  bgcolor: hoverStates[item?.id]
-                    ? theme?.palette?.primary?.main
-                    : theme?.palette?.secondary?.[900],
-                  borderRadius: "200px",
-                  color: `${theme?.palette?.grey?.[400]}`,
-                  fontWeight: 600,
-                  fontSize: "24px",
-                }}
+                className="chip-hover"
+                label={coachError ? 0 : coachCount}
+                sx={{ ...chipStyles(theme) }}
               />
-            </Box>
-          </Grid>
-        ))}
+            )}
+          </Box>
+        </Grid>
+        <Grid item xs={12} md={4}>
+          <Box sx={{ ...boxStyles(theme) }}>
+            <Typography variant={"body1"}>Clients</Typography>
+            {clientLoading || clientFetching ? (
+              <CircularProgress size={30} />
+            ) : (
+              <Chip
+                className="chip-hover"
+                label={clientError ? 0 : clientCount}
+                sx={{ ...chipStyles(theme) }}
+              />
+            )}
+          </Box>
+        </Grid>
       </Grid>
     </Box>
   );
