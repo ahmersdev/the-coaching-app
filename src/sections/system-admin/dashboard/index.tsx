@@ -41,9 +41,19 @@ const Dashboard = () => {
         clientError={clientError}
       />
 
-      {/* <Coaches coachesArray={coachesArray} />
+      <Coaches
+        coachesArray={coachData?.coaches}
+        coachLoading={coachLoading}
+        coachFetching={coachFetching}
+        coachError={coachError}
+      />
 
-      <Clients clientsArray={clientsArray} /> */}
+      <Clients
+        clientsArray={clientData?.clients}
+        clientLoading={clientLoading}
+        clientFetching={clientFetching}
+        clientError={clientError}
+      />
     </Stack>
   );
 };
