@@ -5,7 +5,6 @@ export const getCoachDetailsData = (data: any) => ({
   Name: data?.full_name ?? "---",
   "User Handle": data?.username ?? "---",
   Email: data?.email ?? "---",
-  "Gym Name": "---",
   "Registration Date": data?.created_at,
   "Subscription Status": "---",
 });

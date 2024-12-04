@@ -42,13 +42,6 @@ export const coachesColumns = [
     cell: (info: any) => info?.getValue(),
   },
   {
-    accessorFn: (row: any) => row?.gymName,
-    id: "gymName",
-    isSortable: true,
-    header: "Gym Name",
-    cell: (info: any) => info?.getValue(),
-  },
-  {
     accessorFn: (row: any) => row?.created_at,
     id: "registrationDate",
     isSortable: true,
