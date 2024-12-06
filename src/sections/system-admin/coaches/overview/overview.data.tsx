@@ -6,7 +6,7 @@ export const getCoachDetailsData = (data: any) => ({
   "User Handle": data?.username ?? "---",
   Email: data?.email ?? "---",
   "Registration Date": data?.created_at,
-  "Subscription Status": "---",
+  "Subscription Status": data?.subscription_status ?? "---",
 });
 
 export const coachOverviewColumns = [

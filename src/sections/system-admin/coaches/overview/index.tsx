@@ -68,11 +68,15 @@ const Overview = () => {
                         dayjs(value)?.format("MMM DD, YYYY")
                       ) : key === "Subscription Status" ? (
                         <Chip
-                          label={value}
+                          label={
+                            value.toLowerCase() === "active" ? "Paid" : "Unpaid"
+                          }
                           sx={{
                             color: "grey.100",
                             bgcolor:
-                              value === "Paid" ? "primary.main" : "error.700",
+                              value.toLowerCase() === "active"
+                                ? "primary.main"
+                                : "error.700",
                             width: "73px",
                             height: "22px",
                             fontSize: "12px",
