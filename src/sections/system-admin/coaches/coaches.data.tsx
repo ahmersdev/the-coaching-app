@@ -1,4 +1,3 @@
-import { RotateLeftIcon } from "@/assets/icons";
 import { SYSTEM_ADMIN } from "@/constants/routes";
 import { Avatar, Box, Chip, Typography } from "@mui/material";
 import dayjs from "dayjs";
@@ -49,27 +48,27 @@ export const coachesColumns = [
     cell: (info: any) => dayjs(info?.getValue()).format("MMM DD, YYYY"),
   },
   {
-    accessorFn: (row: any) => row?.status,
-    id: "status",
+    accessorFn: (row: any) => row?.subscription_status,
+    id: "subscription_status",
     header: "Subscription Status",
     isSortable: true,
     cell: (info: any) => (
       <Box display={"flex"} alignItems={"center"} gap={1}>
         <Chip
-          label={info?.getValue()}
+          label={
+            info?.getValue().toLowerCase() === "active" ? "Paid" : "Unpaid"
+          }
           sx={{
             color: "grey.100",
-            bgcolor: info?.getValue() === "Paid" ? "primary.main" : "error.700",
+            bgcolor:
+              info?.getValue().toLowerCase() === "active"
+                ? "primary.main"
+                : "error.700",
             width: "73px",
             height: "22px",
             fontSize: "12px",
           }}
         />
-        {info?.getValue() === "Unpaid" && (
-          <Box sx={{ cursor: "pointer" }}>
-            <RotateLeftIcon />
-          </Box>
-        )}
       </Box>
     ),
   },
