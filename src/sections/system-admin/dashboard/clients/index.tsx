@@ -101,7 +101,10 @@ const Clients = ({
                   <Link
                     href={{
                       pathname: SYSTEM_ADMIN?.CLIENTS_OVERVIEW,
-                      query: { clientId: item?.client_id },
+                      query: {
+                        clientId: item?.client_id,
+                        coachId: item?.coach_id,
+                      },
                     }}
                   >
                     <Button
