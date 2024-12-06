@@ -15,11 +15,12 @@ import ApiErrorState from "@/components/api-error-state";
 const Overview = () => {
   const searchParams = useSearchParams();
   const clientId = searchParams.get("clientId");
+  const coachId = searchParams.get("coachId");
 
   const { data, isLoading, isFetching, isError } =
     useGetAdminCoachClientsByIdQuery(
-      { client_id: clientId },
-      { refetchOnMountOrArgChange: true, skip: !clientId }
+      { client_id: clientId, coach_id: coachId },
+      { refetchOnMountOrArgChange: true, skip: !clientId || !coachId }
     );
 
   const clientDetailsData = getClientDetailsData(data?.client);

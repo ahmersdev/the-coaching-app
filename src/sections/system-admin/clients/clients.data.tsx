@@ -13,7 +13,10 @@ export const clientsColumns = [
       <Link
         href={{
           pathname: SYSTEM_ADMIN?.CLIENTS_OVERVIEW,
-          query: { clientId: info?.getValue() },
+          query: {
+            clientId: info?.getValue(),
+            coachId: info?.row?.original?.coach_id,
+          },
         }}
       >
         <Box display={"flex"} alignItems={"center"} gap={1}>

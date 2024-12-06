@@ -42,7 +42,7 @@ export const ADMIN_SITE = {
   POST_FAQ: `addFAQ`,
   DELETE_FAQ: `deleteFAQ`,
   GET_ALL_CLIENTS: `getAllClients`,
-  GET_CLIENT_DETAILS_BY_ID: `getClientDetailsById`,
+  GET_CLIENT_DETAILS_BY_ID: `getClientDetailsByIdForAdmin`,
   GET_ALL_COACHES: `getAllCoaches`,
   GET_COACH_DETAILS_BY_ID: `getCoachDetailsWithClients`,
 };
