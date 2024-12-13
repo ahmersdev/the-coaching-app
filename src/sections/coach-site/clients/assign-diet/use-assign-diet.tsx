@@ -37,6 +37,7 @@ export default function useAssignDiet() {
     if (data?.details) setDietPlanId(data?.details[0]?.diet_plan_id);
   }, [data]);
 
+  // Reset to populate backend values
   useEffect(() => {
     if (data?.details && data.details.length > 0) {
       const originalFormData = data.details?.[0].diet_days.map((day: any) => ({
@@ -62,34 +63,49 @@ export default function useAssignDiet() {
     }
   }, [data, reset]);
 
+  // Make the calculations when the meal_title changes
   useEffect(() => {
     if (!watchedDays) return;
 
-    watchedDays.forEach((day: any, dayIndex: any) => {
-      day.meals.forEach((meal: any, mealIndex: any) => {
+    watchedDays.forEach((day: any, dayIndex: number) => {
+      day.meals.forEach((meal: any, mealIndex: number) => {
         if (meal.meal_title && typeof meal.meal_title === "object") {
           const servingSize = meal.serving_size;
           const firstServing = meal.meal_title.servings?.serving?.[0] || {};
 
           const newValues = {
-            fat: (((firstServing.fat || 0) / 100) * servingSize).toFixed(2),
+            fat: (
+              ((firstServing.fat || 0) / firstServing.metric_serving_amount) *
+              servingSize
+            ).toFixed(2),
             carbohydrates: (
-              ((firstServing.carbohydrates || 0) / 100) *
+              ((firstServing.carbohydrates || 0) /
+                firstServing.metric_serving_amount) *
               servingSize
             ).toFixed(2),
             protein: (
-              ((firstServing.protein || 0) / 100) *
+              ((firstServing.protein || 0) /
+                firstServing.metric_serving_amount) *
               servingSize
             ).toFixed(2),
-            fibre: (((firstServing.fiber || 0) / 100) * servingSize).toFixed(2),
+            fibre: (
+              ((firstServing.fiber || 0) / firstServing.metric_serving_amount) *
+              servingSize
+            ).toFixed(2),
             calories: (
-              ((firstServing.calories || 0) / 100) *
+              ((firstServing.calories || 0) /
+                firstServing.metric_serving_amount) *
               servingSize
             ).toFixed(2),
-            sugar: (((firstServing.sugar || 0) / 100) * servingSize).toFixed(2),
-            sodium: (((firstServing.sodium || 0) / 100) * servingSize).toFixed(
-              2
-            ),
+            sugar: (
+              ((firstServing.sugar || 0) / firstServing.metric_serving_amount) *
+              servingSize
+            ).toFixed(2),
+            sodium: (
+              ((firstServing.sodium || 0) /
+                firstServing.metric_serving_amount) *
+              servingSize
+            ).toFixed(2),
           };
 
           Object.entries(newValues).forEach(([key, value]) => {
@@ -101,47 +117,60 @@ export default function useAssignDiet() {
             }
           });
         }
+      });
+    });
+  }, [watchedDays, setValue]);
 
-        if (
-          meal.meal_title &&
-          typeof meal.meal_title === "string" &&
-          data?.details &&
-          data.details.length > 0
-        ) {
+  // Make the calculations when the backend meal_title changes
+  useEffect(() => {
+    if (!watchedDays || !data?.details) return;
+
+    watchedDays.forEach((day: any, dayIndex: number) => {
+      day.meals.forEach((meal: any, mealIndex: number) => {
+        if (meal.meal_title && typeof meal.meal_title === "string") {
           const backendDataDetails =
             data?.details[0]?.diet_days?.[dayIndex]?.meals?.[mealIndex];
           const servingSize = meal.serving_size;
+
           if (servingSize !== backendDataDetails?.serving_size) {
             const newValues = {
               fat: (
-                ((backendDataDetails.fat || 0) / 100) *
+                ((backendDataDetails.fat || 0) /
+                  backendDataDetails?.serving_size) *
                 servingSize
               ).toFixed(2),
               carbohydrates: (
-                ((backendDataDetails.carbohydrates || 0) / 100) *
+                ((backendDataDetails.carbohydrates || 0) /
+                  backendDataDetails?.serving_size) *
                 servingSize
               ).toFixed(2),
               protein: (
-                ((backendDataDetails.protein || 0) / 100) *
+                ((backendDataDetails.protein || 0) /
+                  backendDataDetails?.serving_size) *
                 servingSize
               ).toFixed(2),
               fibre: (
-                ((backendDataDetails.fibre || 0) / 100) *
+                ((backendDataDetails.fibre || 0) /
+                  backendDataDetails?.serving_size) *
                 servingSize
               ).toFixed(2),
               calories: (
-                ((backendDataDetails.calories || 0) / 100) *
+                ((backendDataDetails.calories || 0) /
+                  backendDataDetails?.serving_size) *
                 servingSize
               ).toFixed(2),
               sugar: (
-                ((backendDataDetails.sugar || 0) / 100) *
+                ((backendDataDetails.sugar || 0) /
+                  backendDataDetails?.serving_size) *
                 servingSize
               ).toFixed(2),
               sodium: (
-                ((backendDataDetails.sodium || 0) / 100) *
+                ((backendDataDetails.sodium || 0) /
+                  backendDataDetails?.serving_size) *
                 servingSize
               ).toFixed(2),
             };
+
             Object.entries(newValues).forEach(([key, value]) => {
               const currentValue = meal[key];
               if (currentValue !== value) {
