@@ -79,7 +79,7 @@ export default function useAssignDiet() {
               servingSize
             ).toFixed(2),
             carbohydrates: (
-              ((firstServing.carbohydrates || 0) /
+              ((firstServing.carbohydrate || 0) /
                 firstServing.metric_serving_amount) *
               servingSize
             ).toFixed(2),
