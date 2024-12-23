@@ -27,6 +27,7 @@ export const COACH_SITE = {
   GET_DIET: `getDietPlan`,
   DELETE_DIET_DAY: `deleteDietDay`,
   DELETE_DIET_MEAL: `deleteMeal`,
+  DELETE_DIET_MEAL_ITEM: `deleteMealItem`,
   GET_CLIENT_DETAILS_BY_ID: `getClientDetailsById`,
   GET_CLIENT_ALERTS: `getClientPreferencesForCoach`,
   POST_CLIENT_ALERTS_STATUS: `updateClientPreferencesForCoach`,

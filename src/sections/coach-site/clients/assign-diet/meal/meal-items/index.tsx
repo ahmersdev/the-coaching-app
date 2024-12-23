@@ -8,28 +8,38 @@ import {
   Typography,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import useDiet from "./use-diet";
 import { getAssignDietDataArray } from "@/sections/coach-site/clients/assign-diet.data";
+import useMealItems from "./use-meal-items";
 
-export default function Diet({
+export default function MealItems({
   control,
   dayIndex,
   clientId,
   dietPlanId,
   dietDayId,
+  mealIndex,
+  mealId,
 }: any) {
-  const { dietField, handleAddMeal, handleRemoveMeal, apiQueryFood } = useDiet({
-    control,
-    dayIndex,
-    clientId,
-    dietPlanId,
-    dietDayId,
-  });
+  const { mealItemField, handleRemoveMeal, handleAddMeal, apiQueryFood } =
+    useMealItems({
+      control,
+      dayIndex,
+      clientId,
+      dietPlanId,
+      dietDayId,
+      mealIndex,
+      mealId,
+    });
 
   return (
     <>
-      {dietField.map((diet, dietIndex) => (
-        <Box bgcolor={"secondary.900"} key={diet.id} borderRadius={3} mt={2}>
+      {mealItemField.map((mealItem, mealItemIndex) => (
+        <Box
+          bgcolor={"secondary.800"}
+          key={mealItem.id}
+          borderRadius={3}
+          mt={2}
+        >
           <Accordion
             elevation={0}
             defaultExpanded
@@ -57,15 +67,15 @@ export default function Diet({
                     color={"grey.100"}
                     fontWeight={700}
                   >
-                    Meal 0{dietIndex + 1}
+                    Meal Item {mealItemIndex + 1}
                   </Typography>
                 </Box>
-                {dietIndex !== 0 && (
+                {mealItemIndex !== 0 && (
                   <Typography
                     variant={"body1"}
                     color={"grey.100"}
                     fontWeight={900}
-                    onClick={() => handleRemoveMeal?.(dietIndex)}
+                    onClick={() => handleRemoveMeal?.(mealItemIndex)}
                     mr={2}
                     sx={{ cursor: "pointer" }}
                   >
@@ -77,16 +87,19 @@ export default function Diet({
 
             <AccordionDetails>
               <Grid container spacing={1}>
-                {getAssignDietDataArray(dayIndex, dietIndex, apiQueryFood).map(
-                  (item: any) => (
-                    <Grid item xs={12} md={item?.md} key={item.id}>
-                      <item.component
-                        {...item.componentProps}
-                        bgcolor={"secondary.800"}
-                      />
-                    </Grid>
-                  )
-                )}
+                {getAssignDietDataArray(
+                  dayIndex,
+                  mealIndex,
+                  mealItemIndex,
+                  apiQueryFood
+                ).map((item: any) => (
+                  <Grid item xs={12} md={item?.md} key={item.id}>
+                    <item.component
+                      {...item.componentProps}
+                      bgcolor={"secondary.800"}
+                    />
+                  </Grid>
+                ))}
 
                 <Grid item xs={12}>
                   <Button
@@ -108,7 +121,7 @@ export default function Diet({
                     disableElevation
                     onClick={handleAddMeal}
                   >
-                    Add Another Exercise
+                    Add Another Meal Item
                   </Button>
                 </Grid>
               </Grid>

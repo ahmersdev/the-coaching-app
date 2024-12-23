@@ -18,8 +18,8 @@ import { ArrowBackIcon, DietDayIcon } from "@/assets/icons";
 import { LoadingButton } from "@mui/lab";
 import useAssignDiet from "./use-assign-diet";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import Diet from "./diet";
 import ApiErrorState from "@/components/api-error-state";
+import Meal from "./meal";
 
 export default function AssignDiet() {
   const {
@@ -118,7 +118,7 @@ export default function AssignDiet() {
                         color={"grey.100"}
                         fontWeight={700}
                       >
-                        Day 0{dayIndex + 1}
+                        Day {dayIndex + 1}
                       </Typography>
                     </Box>
                     {dayIndex !== 0 && (
@@ -138,7 +138,7 @@ export default function AssignDiet() {
 
                 <AccordionDetails>
                   <Divider sx={{ mb: 2 }} />
-                  <Diet
+                  <Meal
                     control={control}
                     dayIndex={dayIndex}
                     clientId={clientId}

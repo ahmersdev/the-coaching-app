@@ -59,7 +59,7 @@ export default function Exercises({
                     color={"grey.100"}
                     fontWeight={700}
                   >
-                    Exercise 0{exerciseIndex + 1}
+                    Exercise {exerciseIndex + 1}
                   </Typography>
                 </Box>
                 {exerciseIndex !== 0 && (

@@ -106,6 +106,15 @@ export const coachClients = baseAPI.injectEndpoints({
       invalidatesTags: [TAG],
     }),
 
+    deleteDietMealItem: builder.mutation({
+      query: (params: any) => ({
+        url: COACH_SITE.DELETE_DIET_MEAL_ITEM,
+        method: "DELETE",
+        params,
+      }),
+      invalidatesTags: [TAG],
+    }),
+
     // Overview
     getCoachClientsById: builder.query({
       query: (params: any) => ({
@@ -141,6 +150,7 @@ export const {
   useGetAssignDietQuery,
   useDeleteDietDayMutation,
   useDeleteDietMealMutation,
+  useDeleteDietMealItemMutation,
   useGetCoachClientsByIdQuery,
   useLazyGetFoodListSearchQuery,
 } = coachClients;

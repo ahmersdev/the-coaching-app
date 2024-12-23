@@ -1,12 +1,9 @@
 import { useFieldArray } from "react-hook-form";
+import { mealItemsDefaultValues } from "../../assign-diet.data";
+import { useDeleteDietMealMutation } from "@/services/coach-site/clients";
 import { errorSnackbar, successSnackbar } from "@/utils/api";
-import {
-  useDeleteDietMealMutation,
-  useLazyGetFoodListSearchQuery,
-} from "@/services/coach-site/clients";
-import { mealDefaultValues } from "@/sections/coach-site/clients/assign-diet.data";
 
-export default function useDiet({
+export default function useMeal({
   control,
   dayIndex,
   clientId,
@@ -14,22 +11,26 @@ export default function useDiet({
   dietDayId,
 }: any) {
   const {
-    fields: dietField,
-    append: dietAppend,
-    remove: dietRemove,
+    fields: mealsField,
+    append: mealsAppend,
+    remove: mealsRemove,
   } = useFieldArray({
     control,
     name: `days[${dayIndex}].meals`,
   });
 
   const handleAddMeal = () => {
-    dietAppend(mealDefaultValues.meals);
+    const nextMealIndex = mealsField.length + 1;
+    mealsAppend({
+      items: [mealItemsDefaultValues],
+      meal_title: `Meal ${nextMealIndex}`,
+    });
   };
 
   const [deleteDietMealTrigger] = useDeleteDietMealMutation();
 
   const handleRemoveMeal = async (mealIndex: any) => {
-    const mealToRemove: any = dietField[mealIndex];
+    const mealToRemove: any = mealsField[mealIndex];
 
     const dietMealId = mealToRemove?.meal_id;
 
@@ -48,11 +49,9 @@ export default function useDiet({
         return;
       }
     } else {
-      dietRemove(mealIndex);
+      mealsRemove(mealIndex);
     }
   };
 
-  const apiQueryFood = useLazyGetFoodListSearchQuery();
-
-  return { dietField, handleAddMeal, handleRemoveMeal, apiQueryFood };
+  return { mealsField, handleRemoveMeal, handleAddMeal };
 }

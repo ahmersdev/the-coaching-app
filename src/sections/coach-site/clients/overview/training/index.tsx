@@ -100,7 +100,7 @@ export default function Training({ workoutPlans, clientId }: any) {
                       color={"grey.100"}
                       fontWeight={700}
                     >
-                      Day 0{dayIndex + 1}
+                      Day {dayIndex + 1}
                     </Typography>
                   </Box>
                 </AccordionSummary>

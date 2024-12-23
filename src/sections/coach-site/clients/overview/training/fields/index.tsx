@@ -41,7 +41,7 @@ export default function Fields({ control, dayIndex }: any) {
             >
               <Box display={"flex"} alignItems={"center"} gap={1}>
                 <Typography variant={"h6"} color={"grey.100"} fontWeight={700}>
-                  Exercise 0{exerciseIndex + 1}
+                  Exercise {exerciseIndex + 1}
                 </Typography>
               </Box>
             </AccordionSummary>

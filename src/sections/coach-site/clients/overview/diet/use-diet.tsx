@@ -21,20 +21,24 @@ export default function useDiet(dietPlans: any) {
       meals: day.meals.map((meal: any) => ({
         meal_id: meal.meal_id,
         meal_title: meal.meal_title,
-        serving_size: Number(meal.serving_size),
-        serving_unit: meal.serving_unit,
-        fat: meal.fat,
-        carbohydrates: meal.carbohydrates,
-        protein: meal.protein,
-        fibre: meal.fibre,
-        calories: meal.calories,
-        sugar: meal.sugar,
-        sodium: meal.sodium,
-        note: meal.note,
+        items: meal.meal_items.map((mealItem: any) => ({
+          item_id: mealItem.item_id,
+          item_title: mealItem.item_title,
+          serving_size: mealItem.serving_size,
+          serving_unit: mealItem.serving_unit,
+          fat: mealItem.fat,
+          carbohydrates: mealItem.carbohydrates,
+          protein: mealItem.protein,
+          fibre: mealItem.fibre,
+          calories: mealItem.calories,
+          sugar: mealItem.sugar,
+          sodium: mealItem.sodium,
+          note: mealItem.note,
+        })),
       })),
     }));
 
-    reset({ days: originalFormData });
+    setTimeout(() => reset({ days: originalFormData }), 0);
   }, [dietPlans, reset]);
 
   return { methods, control, daysField };

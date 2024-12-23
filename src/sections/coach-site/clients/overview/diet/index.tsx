@@ -13,8 +13,8 @@ import {
 import Link from "next/link";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import useDiet from "./use-diet";
-import Fields from "./fields";
 import { FormProvider } from "@/components/react-hook-form";
+import MealFields from "./meal-fields";
 
 export default function Diet({ clientId, dietPlans }: any) {
   const { methods, control, daysField } = useDiet(dietPlans);
@@ -100,14 +100,14 @@ export default function Diet({ clientId, dietPlans }: any) {
                       color={"grey.100"}
                       fontWeight={700}
                     >
-                      Day 0{dayIndex + 1}
+                      Day {dayIndex + 1}
                     </Typography>
                   </Box>
                 </AccordionSummary>
 
                 <AccordionDetails>
                   <Divider sx={{ mb: 2 }} />
-                  <Fields control={control} dayIndex={dayIndex} />
+                  <MealFields control={control} dayIndex={dayIndex} />
                 </AccordionDetails>
               </Accordion>
             </Box>

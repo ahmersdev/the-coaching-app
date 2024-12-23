@@ -11,18 +11,23 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { getAssignDietDataArray } from "@/sections/coach-site/clients/assign-diet.data";
 import { useLazyGetFoodListSearchQuery } from "@/services/coach-site/clients";
 
-export default function Fields({ control, dayIndex }: any) {
-  const { fields: dietField } = useFieldArray({
+export default function MealItemFields({ control, dayIndex, mealIndex }: any) {
+  const { fields: mealItemField } = useFieldArray({
     control,
-    name: `days[${dayIndex}].meals`,
+    name: `days[${dayIndex}].meals[${mealIndex}].items`,
   });
 
   const apiQueryFood = useLazyGetFoodListSearchQuery();
 
   return (
     <>
-      {dietField.map((diet, dietIndex) => (
-        <Box bgcolor={"secondary.800"} key={diet.id} borderRadius={3} mt={2}>
+      {mealItemField.map((mealItem, mealItemIndex) => (
+        <Box
+          bgcolor={"secondary.700"}
+          key={mealItem.id}
+          borderRadius={3}
+          mt={2}
+        >
           <Accordion
             elevation={0}
             sx={{
@@ -38,24 +43,27 @@ export default function Fields({ control, dayIndex }: any) {
             >
               <Box display={"flex"} alignItems={"center"} gap={1}>
                 <Typography variant={"h6"} color={"grey.100"} fontWeight={700}>
-                  Meal 0{dietIndex + 1}
+                  Meal Item {mealItemIndex + 1}
                 </Typography>
               </Box>
             </AccordionSummary>
 
             <AccordionDetails>
               <Grid container spacing={1}>
-                {getAssignDietDataArray(dayIndex, dietIndex, apiQueryFood).map(
-                  (item: any) => (
-                    <Grid item xs={12} md={item?.md} key={item.id}>
-                      <item.component
-                        {...item.componentProps}
-                        bgcolor={"secondary.800"}
-                        disabled
-                      />
-                    </Grid>
-                  )
-                )}
+                {getAssignDietDataArray(
+                  dayIndex,
+                  mealIndex,
+                  mealItemIndex,
+                  apiQueryFood
+                ).map((item: any) => (
+                  <Grid item xs={12} md={item?.md} key={item.id}>
+                    <item.component
+                      {...item.componentProps}
+                      bgcolor={"secondary.800"}
+                      disabled
+                    />
+                  </Grid>
+                ))}
               </Grid>
             </AccordionDetails>
           </Accordion>

@@ -39,29 +39,34 @@ export default function useAssignDiet() {
 
   // Reset to populate backend values
   useEffect(() => {
-    if (data?.details && data.details.length > 0) {
-      const originalFormData = data.details?.[0].diet_days.map((day: any) => ({
+    if (data?.details?.length > 0) {
+      const originalFormData = data.details[0]?.diet_days?.map((day: any) => ({
         diet_day_id: day.diet_day_id,
         day: day.day,
         meals: day.meals.map((meal: any) => ({
           meal_id: meal.meal_id,
           meal_title: meal.meal_title,
-          serving_size: meal.serving_size,
-          serving_unit: meal.serving_unit,
-          fat: meal.fat,
-          carbohydrates: meal.carbohydrates,
-          protein: meal.protein,
-          fibre: meal.fibre,
-          calories: meal.calories,
-          sugar: meal.sugar,
-          sodium: meal.sodium,
-          note: meal.note,
+          items: meal.meal_items.map((mealItem: any) => ({
+            item_id: mealItem.item_id,
+            item_title: mealItem.item_title,
+            serving_size: mealItem.serving_size,
+            serving_unit: mealItem.serving_unit,
+            fat: mealItem.fat,
+            carbohydrates: mealItem.carbohydrates,
+            protein: mealItem.protein,
+            fibre: mealItem.fibre,
+            calories: mealItem.calories,
+            sugar: mealItem.sugar,
+            sodium: mealItem.sodium,
+            note: mealItem.note,
+          })),
         })),
       }));
 
-      reset({ days: originalFormData });
+      // Delay reset to ensure proper rendering
+      setTimeout(() => reset({ days: originalFormData }), 0);
     }
-  }, [data, reset]);
+  }, [data?.details, reset]);
 
   // Make the calculations when the meal_title changes
   useEffect(() => {
@@ -69,54 +74,63 @@ export default function useAssignDiet() {
 
     watchedDays.forEach((day: any, dayIndex: number) => {
       day.meals.forEach((meal: any, mealIndex: number) => {
-        if (meal.meal_title && typeof meal.meal_title === "object") {
-          const servingSize = meal.serving_size;
-          const firstServing = meal.meal_title.servings?.serving?.[0] || {};
+        meal.items.forEach((mealItem: any, mealItemIndex: number) => {
+          if (mealItem.item_title && typeof mealItem.item_title === "object") {
+            const servingSize = mealItem.serving_size;
+            const firstServing =
+              mealItem.item_title.servings?.serving?.[0] || {};
 
-          const newValues = {
-            fat: (
-              ((firstServing.fat || 0) / firstServing.metric_serving_amount) *
-              servingSize
-            ).toFixed(2),
-            carbohydrates: (
-              ((firstServing.carbohydrate || 0) /
-                firstServing.metric_serving_amount) *
-              servingSize
-            ).toFixed(2),
-            protein: (
-              ((firstServing.protein || 0) /
-                firstServing.metric_serving_amount) *
-              servingSize
-            ).toFixed(2),
-            fibre: (
-              ((firstServing.fiber || 0) / firstServing.metric_serving_amount) *
-              servingSize
-            ).toFixed(2),
-            calories: (
-              ((firstServing.calories || 0) /
-                firstServing.metric_serving_amount) *
-              servingSize
-            ).toFixed(2),
-            sugar: (
-              ((firstServing.sugar || 0) / firstServing.metric_serving_amount) *
-              servingSize
-            ).toFixed(2),
-            sodium: (
-              ((firstServing.sodium || 0) /
-                firstServing.metric_serving_amount) *
-              servingSize
-            ).toFixed(2),
-          };
+            const newValues = {
+              fat: (
+                ((firstServing.fat || 0) / firstServing.metric_serving_amount) *
+                servingSize
+              ).toFixed(2),
+              carbohydrates: (
+                ((firstServing.carbohydrate || 0) /
+                  firstServing.metric_serving_amount) *
+                servingSize
+              ).toFixed(2),
+              protein: (
+                ((firstServing.protein || 0) /
+                  firstServing.metric_serving_amount) *
+                servingSize
+              ).toFixed(2),
+              fibre: (
+                ((firstServing.fiber || 0) /
+                  firstServing.metric_serving_amount) *
+                servingSize
+              ).toFixed(2),
+              calories: (
+                ((firstServing.calories || 0) /
+                  firstServing.metric_serving_amount) *
+                servingSize
+              ).toFixed(2),
+              sugar: (
+                ((firstServing.sugar || 0) /
+                  firstServing.metric_serving_amount) *
+                servingSize
+              ).toFixed(2),
+              sodium: (
+                ((firstServing.sodium || 0) /
+                  firstServing.metric_serving_amount) *
+                servingSize
+              ).toFixed(2),
+            };
 
-          Object.entries(newValues).forEach(([key, value]) => {
-            const currentValue = meal[key];
-            if (currentValue !== value) {
-              setValue(`days[${dayIndex}].meals[${mealIndex}].${key}`, value, {
-                shouldDirty: true,
-              });
-            }
-          });
-        }
+            Object.entries(newValues).forEach(([key, value]) => {
+              const currentValue = mealItem[key];
+              if (currentValue !== value) {
+                setValue(
+                  `days[${dayIndex}].meals[${mealIndex}].items[${mealItemIndex}].${key}`,
+                  value,
+                  {
+                    shouldDirty: true,
+                  }
+                );
+              }
+            });
+          }
+        });
       });
     });
   }, [watchedDays, setValue]);
@@ -127,64 +141,67 @@ export default function useAssignDiet() {
 
     watchedDays.forEach((day: any, dayIndex: number) => {
       day.meals.forEach((meal: any, mealIndex: number) => {
-        if (meal.meal_title && typeof meal.meal_title === "string") {
-          const backendDataDetails =
-            data?.details[0]?.diet_days?.[dayIndex]?.meals?.[mealIndex];
-          const servingSize = meal.serving_size;
+        meal.items.forEach((mealItem: any, mealItemIndex: number) => {
+          if (mealItem.item_title && typeof mealItem.item_title === "string") {
+            const backendDataDetails =
+              data?.details[0]?.diet_days?.[dayIndex]?.meals?.[mealIndex]
+                ?.meal_items[mealItemIndex];
+            const servingSize = mealItem.serving_size;
 
-          if (servingSize !== backendDataDetails?.serving_size) {
-            const newValues = {
-              fat: (
-                ((backendDataDetails.fat || 0) /
-                  backendDataDetails?.serving_size) *
-                servingSize
-              ).toFixed(2),
-              carbohydrates: (
-                ((backendDataDetails.carbohydrates || 0) /
-                  backendDataDetails?.serving_size) *
-                servingSize
-              ).toFixed(2),
-              protein: (
-                ((backendDataDetails.protein || 0) /
-                  backendDataDetails?.serving_size) *
-                servingSize
-              ).toFixed(2),
-              fibre: (
-                ((backendDataDetails.fibre || 0) /
-                  backendDataDetails?.serving_size) *
-                servingSize
-              ).toFixed(2),
-              calories: (
-                ((backendDataDetails.calories || 0) /
-                  backendDataDetails?.serving_size) *
-                servingSize
-              ).toFixed(2),
-              sugar: (
-                ((backendDataDetails.sugar || 0) /
-                  backendDataDetails?.serving_size) *
-                servingSize
-              ).toFixed(2),
-              sodium: (
-                ((backendDataDetails.sodium || 0) /
-                  backendDataDetails?.serving_size) *
-                servingSize
-              ).toFixed(2),
-            };
+            if (servingSize !== backendDataDetails?.serving_size) {
+              const newValues = {
+                fat: (
+                  ((backendDataDetails?.fat || 0) /
+                    backendDataDetails?.serving_size) *
+                  servingSize
+                ).toFixed(2),
+                carbohydrates: (
+                  ((backendDataDetails?.carbohydrates || 0) /
+                    backendDataDetails?.serving_size) *
+                  servingSize
+                ).toFixed(2),
+                protein: (
+                  ((backendDataDetails?.protein || 0) /
+                    backendDataDetails?.serving_size) *
+                  servingSize
+                ).toFixed(2),
+                fibre: (
+                  ((backendDataDetails?.fibre || 0) /
+                    backendDataDetails?.serving_size) *
+                  servingSize
+                ).toFixed(2),
+                calories: (
+                  ((backendDataDetails?.calories || 0) /
+                    backendDataDetails?.serving_size) *
+                  servingSize
+                ).toFixed(2),
+                sugar: (
+                  ((backendDataDetails?.sugar || 0) /
+                    backendDataDetails?.serving_size) *
+                  servingSize
+                ).toFixed(2),
+                sodium: (
+                  ((backendDataDetails?.sodium || 0) /
+                    backendDataDetails?.serving_size) *
+                  servingSize
+                ).toFixed(2),
+              };
 
-            Object.entries(newValues).forEach(([key, value]) => {
-              const currentValue = meal[key];
-              if (currentValue !== value) {
-                setValue(
-                  `days[${dayIndex}].meals[${mealIndex}].${key}`,
-                  value,
-                  {
-                    shouldDirty: true,
-                  }
-                );
-              }
-            });
+              Object.entries(newValues).forEach(([key, value]) => {
+                const currentValue = mealItem[key];
+                if (currentValue !== value) {
+                  setValue(
+                    `days[${dayIndex}].meals[${mealIndex}].items[${mealItemIndex}].${key}`,
+                    value,
+                    {
+                      shouldDirty: true,
+                    }
+                  );
+                }
+              });
+            }
           }
-        }
+        });
       });
     });
   }, [watchedDays, setValue, data]);
@@ -234,17 +251,20 @@ export default function useAssignDiet() {
     const transformedData = data.days.map((day: any, dayIndex: number) => ({
       day: dayIndex + 1,
       meals: day.meals.map((meal: any) => ({
-        meal_title: meal.meal_title?.food_name ?? meal.meal_title,
-        serving_size: meal.serving_size,
-        serving_unit: meal.serving_unit,
-        fat: meal.fat,
-        carbohydrates: meal.carbohydrates,
-        protein: meal.protein,
-        fibre: meal.fibre,
-        calories: meal.calories,
-        sugar: meal.sugar,
-        sodium: meal.sodium,
-        note: meal.note,
+        meal_title: meal.meal_title,
+        items: meal.items.map((mealItem: any) => ({
+          item_title: mealItem.item_title?.food_name ?? mealItem.item_title,
+          serving_size: mealItem.serving_size,
+          serving_unit: mealItem.serving_unit,
+          fat: mealItem.fat,
+          carbohydrates: mealItem.carbohydrates,
+          protein: mealItem.protein,
+          fibre: mealItem.fibre,
+          calories: mealItem.calories,
+          sugar: mealItem.sugar,
+          sodium: mealItem.sodium,
+          note: mealItem.note,
+        })),
       })),
     }));
 
